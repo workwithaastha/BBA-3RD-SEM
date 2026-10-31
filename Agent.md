@@ -43,7 +43,7 @@ Each folder holds the source PDFs (notes, assignments, MCQs, formula sheets) for
 | 6 | Subject 5 content |
 | 7 | Polish: search, bookmarks, formula sheet, final test |
 
-Subject order decided with user (update here): _pending_
+Subject order decided with user (update here): 1 Finance → (rest TBD by user). MCQ: PDF MCQs + generated ones marked `generated:true`. Language: English.
 
 ## Layout
 ```
