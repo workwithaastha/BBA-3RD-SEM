@@ -49,11 +49,32 @@ function quiz(id) {
   if (!s || !s.mcqs.length) return subject(id);
   const units = [...new Set(s.mcqs.map((m) => m.u))];
   $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${esc(s.title)}</a></div><h1>Quiz</h1>
-     <div class="row"><select id="qu"><option value="">All units</option>${units.map((u) => `<option>${esc(u)}</option>`).join('')}</select>
-     <button class="btn primary" id="go">Start</button></div><div id="qa"></div>`);
-  document.getElementById('go').onclick = () => {
+     <div class="row">
+       <select id="qu" aria-label="Unit"><option value="">All units</option>${units.map((u) => `<option>${esc(u)}</option>`).join('')}</select>
+       <select id="qt" aria-label="Topic"><option value="">All topics</option></select>
+       <select id="qn" aria-label="Number of questions"><option value="10">10 Qs</option><option value="25">25 Qs</option><option value="50">50 Qs</option><option value="0">All</option></select>
+       <label><input type="checkbox" id="qs" checked> Shuffle</label>
+       <button class="btn primary" id="go">Start</button>
+     </div><p class="expl" id="qc"></p><div id="qa"></div>`);
+  const pool = () => {
     const u = document.getElementById('qu').value;
-    run(s.mcqs.filter((m) => !u || m.u === u).sort(() => Math.random() - 0.5));
+    const t = document.getElementById('qt').value;
+    return s.mcqs.filter((m) => (!u || m.u === u) && (!t || m.t === t));
+  };
+  const refresh = () => {
+    const u = document.getElementById('qu').value;
+    const topics = [...new Set(s.mcqs.filter((m) => !u || m.u === u).map((m) => m.t).filter(Boolean))];
+    document.getElementById('qt').innerHTML = '<option value="">All topics</option>' + topics.map((t) => `<option>${esc(t)}</option>`).join('');
+    document.getElementById('qc').textContent = pool().length + ' questions available';
+  };
+  document.getElementById('qu').onchange = refresh;
+  document.getElementById('qt').onchange = () => { document.getElementById('qc').textContent = pool().length + ' questions available'; };
+  refresh();
+  document.getElementById('go').onclick = () => {
+    let qs = pool();
+    if (document.getElementById('qs').checked) qs = qs.slice().sort(() => Math.random() - 0.5);
+    const n = +document.getElementById('qn').value;
+    run(n ? qs.slice(0, n) : qs);
   };
 }
 
@@ -61,16 +82,21 @@ function run(qs) {
   const box = document.getElementById('qa');
   let i = 0;
   let score = 0;
-  const wrong = [];
+  let wrong = [];
   const show = () => {
     if (i >= qs.length) {
-      box.innerHTML = `<h2>Score: ${score}/${qs.length}</h2>${wrong.map((m) =>
-        `<div class="q"><b>${esc(m.q)}</b><div>Answer: ${esc(m.o[m.a])}</div><div class="expl">${esc(m.e || '')}</div></div>`).join('')}`;
+      const again = wrong.length ? '<button class="btn primary" id="rw">Retry wrong ones</button>' : '';
+      box.innerHTML = `<h2>Score: ${score}/${qs.length} (${Math.round((score / qs.length) * 100)}%)</h2><div class="row">${again}</div>${wrong.map((m) =>
+        `<div class="q">${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}<b>${esc(m.q)}</b><div>Answer: <b>${esc(m.o[m.a])}</b></div><div class="expl">${esc(m.e || '')}</div></div>`).join('')}`;
+      const rw = document.getElementById('rw');
+      if (rw) rw.onclick = () => run(wrong);
       return;
     }
     const m = qs[i];
     box.innerHTML = `<div class="bar"><i style="width:${(i / qs.length) * 100}%"></i></div>
-      <div class="q"><b>${i + 1}/${qs.length}. ${esc(m.q)}</b>${m.o.map((o, k) => `<button class="opt" data-k="${k}">${esc(o)}</button>`).join('')}<div class="expl" id="ex"></div></div>`;
+      <div class="q">${m.t ? `<span class="tag">${esc(m.u)} · ${esc(m.t)}</span>` : ''}${m.g ? ' <span class="tag gen">generated</span>' : ''}
+      ${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}
+      <p><b>${i + 1}/${qs.length}. ${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt" data-k="${k}">${'ABCD'[k]}. ${esc(o)}</button>`).join('')}<div class="expl" id="ex"></div></div>`;
     box.querySelectorAll('.opt').forEach((b) => {
       b.onclick = () => {
         const k = +b.dataset.k;
@@ -79,7 +105,7 @@ function run(qs) {
         document.getElementById('ex').textContent = m.e || '';
         const n = document.createElement('button');
         n.className = 'btn primary';
-        n.textContent = 'Next';
+        n.textContent = i + 1 < qs.length ? 'Next' : 'Finish';
         n.onclick = () => { i++; show(); };
         box.appendChild(n);
       };

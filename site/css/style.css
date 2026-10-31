@@ -30,3 +30,5 @@ mark{background:#ffe066;color:#000}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
 select{padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink)}
 @media print{.top,.row{display:none}}
+.tag.gen{background:var(--mute)}
+label{display:inline-flex;gap:6px;align-items:center}
