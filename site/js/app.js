@@ -94,7 +94,8 @@ function run(qs) {
     }
     const m = qs[i];
     box.innerHTML = `<div class="bar"><i style="width:${(i / qs.length) * 100}%"></i></div>
-      <div class="q">${m.t ? `<span class="tag">${esc(m.u)} · ${esc(m.t)}</span>` : ''}${m.g ? ' <span class="tag gen">generated</span>' : ''}
+      <div class="q">${m.t ? `<span class="tag">${esc(m.u)} · ${esc(m.t)}</span>` : ''}${m.x ? ' <span class="tag gen">extra: not in PDFs</span>' : m.g ? ' <span class="tag gen">generated from PDF notes</span>' : ''}
+      ${m.t || m.g ? '' : ''}
       ${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}
       <p><b>${i + 1}/${qs.length}. ${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt" data-k="${k}">${'ABCD'[k]}. ${esc(o)}</button>`).join('')}<div class="expl" id="ex"></div></div>`;
     box.querySelectorAll('.opt').forEach((b) => {
@@ -114,12 +115,18 @@ function run(qs) {
   show();
 }
 
+function plain(html) {
+  const d = document.createElement('div');
+  d.innerHTML = html;
+  return d.textContent.replace(/\s+/g, ' ');
+}
+
 function search(q) {
   const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
   const out = [];
   for (const [id, s] of Object.entries(S)) {
     for (const u of s.units) {
-      const text = u.html.replace(/<[^>]+>/g, ' ');
+      const text = plain(u.html);
       const m = re.exec(text);
       if (m) {
         const snip = esc(text.slice(Math.max(0, m.index - 60), m.index + 100));
