@@ -26,6 +26,7 @@ Each folder holds the source PDFs (notes, assignments, MCQs, formula sheets) for
 7. **MCQ subjects (BE, HRM, OM)**: question bank in the exam style — 4 options, correct answer, short explanation, unit tag. Quiz mode with score, shuffle, unit filter, wrong-answer review.
 8. **Tech**: HTML + CSS + vanilla JS only. Content as JS/JSON data files under `site/data/`. Must work by opening `index.html` (no server needed). Mobile friendly. Light/dark.
 9. **Git**: commit + push to `origin main` after every major change (rename, each phase, each subject).
+    Hosting: GitHub Pages via `.github/workflows/pages.yml` (deploys `site/`). Use relative paths only (no leading `/`). URL: https://workwithaastha.github.io/BBA-3RD-SEM/
 10. **Every commit** ends with the co-author trailer:
     `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>`
 11. Commit messages: short, conventional (`feat:`, `docs:`, `chore:`).
