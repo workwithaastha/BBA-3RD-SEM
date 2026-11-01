@@ -9,6 +9,7 @@
 | 4 Business Environment (MCQ) | done - 800 MCQs parsed from the PDFs with answer key |
 | 5 HRM (MCQ) | done - 202 MCQs (80 flagged extra, list in REVIEW_EXTRA_QUESTIONS.md) generated from PDF notes (Units 1-2 flagged "extra", no PDFs) |
 | 6 Office Management (MCQ) | done - 235 MCQs (28 flagged extra) |
+| 16 Formula pop-up on every formula (notes, revision, Q&A, sheets) + Q&A batch 4: every topic has short, medium and long answers (Finance 117, Marketing 112) | done |
 | 15 Last-night sheet (#/sheet/<subject>) + custom mock-paper pattern | done |
 | 14 Written-exam Q&A banks for Finance (100) and Marketing (96): marks-wise, model answers, predicted, mock paper | done |
 | 13 Concept cards for Marketing (17), HRM (17), Office Mgmt (15), Business Env (10) + Finance "Formula Finder" quiz (25 scenarios) | done |

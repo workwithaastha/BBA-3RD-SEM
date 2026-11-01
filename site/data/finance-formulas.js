@@ -157,7 +157,7 @@
   const card = (c, i) => `
     <article class="fcard" data-g="${c.g}" data-s="${(c.n + ' ' + c.g).toLowerCase()}" id="f${i}">
       <header><span class="fno">${i + 1}</span><div><h3>${c.n}</h3><span class="fgrp">${GICON[c.g] || ''} ${c.g}</span></div>
-        <a class="fread" href="#/finance/${c.u}">📖 Read notes</a></header>
+        <a class="fread" href="#/${c.s || 'finance'}/${c.u}">📖 Read notes</a></header>
       <div class="fformula">${c.f}</div>
       ${c.sym && c.sym.length ? `<ul class="fsym">${c.sym.map((s) => `<li>${s}</li>`).join('')}</ul>` : ''}
       <p class="fwhat">${c.what}</p>
@@ -212,4 +212,18 @@
       run();
     });
   };
+
+  // ---- shared library for the formula pop-up (any .formula on any page) ----
+  function bindCalc(root) {
+    root.querySelectorAll('.fcalc').forEach((box) => {
+      const run = () => {
+        const v = {};
+        box.querySelectorAll('input').forEach((i) => { v[i.dataset.k] = parseFloat(i.value) || 0; });
+        box.querySelector('.cout').textContent = CALC[box.dataset.calc].run(v);
+      };
+      box.addEventListener('input', run);
+      run();
+    });
+  }
+  window.FormulaLib = { cards: CARDS, CALC, cardHtml: card, bindCalc };
 })();

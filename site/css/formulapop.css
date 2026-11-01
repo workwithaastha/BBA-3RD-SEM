@@ -1,0 +1,22 @@
+/* Formula pop-up + clickable formula hint */
+.formula,.fformula.kidea{cursor:pointer;position:relative;transition:box-shadow .2s,transform .15s}
+.notes .formula:hover,.ans .formula:hover,.rev .formula:hover,.sheet .formula:hover{box-shadow:0 0 0 2px var(--a1);transform:translateY(-1px)}
+.notes .formula::after,.ans .formula::after,.rev .formula::after,.sheet .formula::after{content:"ⓘ";position:absolute;right:8px;top:4px;font-size:.75em;color:var(--a1);opacity:.7}
+.formula.nodetail{animation:shakex .35s}
+@keyframes shakex{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+#fpop{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:14px;overflow:auto;background:rgba(10,12,32,.62);backdrop-filter:blur(5px);animation:fadein .2s both}
+#fpop.out{animation:fadeout .2s both}
+.fpbox{position:relative;width:min(760px,100%);max-height:92vh;overflow:auto;border-radius:22px;background:var(--bg);border:1px solid var(--line);box-shadow:0 30px 70px -20px rgba(0,0,0,.6);padding:14px;animation:pop-in .35s cubic-bezier(.2,.9,.25,1.25) both}
+@keyframes pop-in{from{opacity:0;transform:perspective(900px) rotateX(18deg) scale(.92)}}
+.fphead{font-weight:800;color:var(--a1);margin:0 36px 8px 4px}
+.fpx{position:absolute;right:12px;top:10px;border:0;width:32px;height:32px;border-radius:50%;background:var(--card);color:var(--ink);font-size:20px;cursor:pointer;box-shadow:var(--shadow)}
+.fpx:hover{background:var(--a1);color:#fff}
+.fpbox .fcard{animation:none;box-shadow:none}
+.fpbox .fcard:hover{transform:none;box-shadow:none}
+.fpfoot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px;color:var(--mute);font-size:.85em}
+@media print{#fpop{display:none!important}.formula::after{display:none}}
+
+.fptabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 36px 8px 4px}
+.fptabs button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:5px 12px;border-radius:99px;font:inherit;font-size:.82em;cursor:pointer}
+.fptabs button.on{background:var(--grad);color:#fff;border-color:transparent}
+#fbub{position:absolute;z-index:130;max-width:290px;padding:8px 12px;border-radius:12px;background:#1f2937;color:#fff;font-size:.85em;box-shadow:0 12px 26px -10px rgba(0,0,0,.6);animation:rise .25s both}
