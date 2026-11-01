@@ -11,6 +11,10 @@ from data_om import OM
 from data_om_more import OM_MORE
 from overrides_hrm import HRM_OVR
 from overrides_om import OM_OVR
+from overrides_hrm2 import HRM_OVR2
+from overrides_om2 import OM_OVR2
+HRM_OVR.update(HRM_OVR2)
+OM_OVR.update(OM_OVR2)
 
 
 def apply(rows, ovr):

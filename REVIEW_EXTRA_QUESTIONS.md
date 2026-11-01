@@ -50,9 +50,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **6. The importance of HRM in the emerging scenario is mainly due to**
   - A. competition, technology and the need for skilled talent  ✅
-  - B. decline in the need for employees
-  - C. ban on training
-  - D. end of all regulation
+  - B. reduction of competition and the decline in use of technology in business
+  - C. decrease in the need for trained employees in modern organisations
+  - D. the abolition of labour laws governing the employment relationship
   - _Competitive pressure makes human capital a key asset._
 
 ### Unit 1 - Introduction to HRM
@@ -87,9 +87,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **11. Societal objectives of HRM mean**
   - A. being ethically and socially responsible to society  ✅
-  - B. increasing executive salaries only
-  - C. avoiding all legal rules
-  - D. maximising overtime
+  - B. helping every employee to fulfil his own personal ambitions at work
+  - C. increasing the profits of the firm by cutting the wages of the workers
+  - D. keeping the HR department's costs at the lowest possible level
   - _Societal objectives include compliance with laws, ethics and reducing negative societal impact._
 
 - [ ] **12. A key difference between HRM and Personnel Management is that HRM**
@@ -133,9 +133,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **17. Which of the following is included in the scope of HRM?**
   - A. Recruitment, training, compensation and industrial relations  ✅
-  - B. Only manufacturing of goods
-  - C. Only advertisement design
-  - D. Only stock market trading
+  - B. Product design, advertising, branding and sales promotion
+  - C. Preparation of the balance sheet, audit and tax planning
+  - D. Purchase of raw materials, storage and production scheduling
   - _Scope covers the entire employee life cycle._
 
 ### Unit 2 - Human Resource Planning
@@ -149,9 +149,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **19. Which is the first step in the HRP process?**
   - A. Analysing organisational objectives / plans  ✅
-  - B. Retrenching employees
-  - C. Conducting exit interviews
-  - D. Paying bonus
+  - B. Estimating the compensation payable to the employees in the next year
+  - C. Conducting exit interviews with employees who have resigned
+  - D. Retrenching the surplus employees from various departments
   - _HR plans flow from organisational objectives and plans._
 
 - [ ] **20. Which of the following is a technique of forecasting demand for human resources?**
@@ -244,9 +244,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **32. Recruitment through employee referral is a source that**
   - A. uses the firm's own employees to recommend candidates  ✅
-  - B. uses newspaper advertisements only
-  - C. is campus recruitment
-  - D. is a strike source
+  - B. advertisements published in newspapers and professional magazines
+  - C. campus placement at colleges and universities
+  - D. private employment agencies that supply candidates to firms
   - _Referral is considered a cheap and reliable source._
 
 ### Unit 2 - Selection
@@ -288,9 +288,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **38. A situational test asks the candidate to**
   - A. respond to a realistic work scenario  ✅
-  - B. fill his date of birth
-  - C. pay a fee
-  - D. submit documents
+  - B. write an essay on any topic of his choice about his hobbies
+  - C. submit his educational certificates and testimonials to the HR office
+  - D. fill an application form giving his personal details
   - _It tests judgement and decision-making in job-like situations._
 
 - [ ] **39. An interview with predetermined questions asked in the same order is a**
@@ -327,16 +327,16 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **43. Training is mainly aimed at**
   - A. improving employees' skills for their present jobs  ✅
-  - B. reducing the number of employees
-  - C. increasing dividends
-  - D. cutting advertising
+  - B. preparing employees for senior positions they may hold in the distant future
+  - C. reducing the number of employees on the rolls of the company
+  - D. increasing the dividend paid to the shareholders of the firm
   - _Training is short-term and job-focused; development is long-term and career-focused._
 
 - [ ] **44. Training needs are identified through analysis at three levels. These are**
   - A. organisational, task (job) and person (individual)  ✅
-  - B. marketing, finance and production
-  - C. legal, social and political
-  - D. short, medium and long
+  - B. marketing, finance and production levels of the firm
+  - C. short-term, medium-term and long-term levels of the plan
+  - D. legal, social and political levels of the business environment
   - _Unit 3 Q2 asks for three levels of analysis (levels themselves are not detailed in the PDFs)._
 
 - [ ] **45. Which is an on-the-job training method?**
@@ -376,9 +376,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **50. Training needs analysis at the 'task' level examines**
   - A. the knowledge and skills required to perform the job  ✅
-  - B. the profit of the company
-  - C. the employee's religion
-  - D. the number of competitors
+  - B. the goals, resources and the climate of the whole organisation
+  - C. the performance gaps of the individual employees
+  - D. the age and family background of the trainees
   - _Organisational analysis looks at goals; person analysis looks at individual deficiencies._
 
 - [ ] **51. Organisational analysis of training needs looks at**
@@ -485,9 +485,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **65. Adjudication of industrial disputes is done by**
   - A. labour courts and industrial tribunals  ✅
-  - B. the company secretary
-  - C. the trade union
-  - D. the HR manager
+  - B. the personnel manager of the company, in consultation with the workers
+  - C. the trade union and the employers' association jointly
+  - D. the board of directors of the company by a majority vote
   - _It is a compulsory, binding process._
 
 - [ ] **66. Trade unions in India are registered under the**
@@ -538,9 +538,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **72. A fair wage lies**
   - A. between the minimum wage and the living wage  ✅
-  - B. below the minimum wage
-  - C. above the living wage always
-  - D. at zero
+  - B. below the minimum wage fixed by the law for the industry
+  - C. above the living wage in every industry and region
+  - D. at the level of the profit earned by the employer
   - _It depends on productivity, prevailing rates and the employer's capacity to pay._
 
 - [ ] **73. Arrange the three wage levels from lowest to highest.**
@@ -582,9 +582,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **78. Wage determination is the process of**
   - A. fixing the wage rates for different jobs  ✅
-  - B. recruiting employees
-  - C. training employees
-  - D. dismissing employees
+  - B. selecting candidates for various jobs in the organisation
+  - C. training the employees to improve their skills on the job
+  - D. settling the disputes between the employees and the management
   - _It uses job evaluation, market surveys and the organisation's ability to pay._
 
 - [ ] **79. A wage survey is conducted to**
@@ -625,18 +625,18 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **3. An auditor of a company cannot**
   - A. be a director or an employee of the same company  ✅
-  - B. be a Chartered Accountant
-  - C. report to shareholders
-  - D. inspect books of accounts
+  - B. be a Chartered Accountant holding a valid certificate of practice
+  - C. inspect the books of accounts of the company
+  - D. report to the shareholders on the financial statements
   - _Independence is essential to the audit function._
 
 ### Unit 4 - Company Secretary
 
 - [ ] **4. The Company Secretary is a Key Managerial Personnel (KMP) under**
   - A. Section 203 of the Companies Act, 2013  ✅
-  - B. the Sale of Goods Act
-  - C. the Contract Act
-  - D. the Partnership Act
+  - B. Section 143 of the Companies Act, 2013
+  - C. Section 100 of the Companies Act, 2013
+  - D. Section 2 of the Sale of Goods Act, 1930
   - _KMP includes MD/CEO/manager, whole-time director, CS and CFO._
 
 - [ ] **5. Which professional body conducts the Company Secretary course in India?**
@@ -648,25 +648,25 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **6. Filing annual returns and statutory forms with the Registrar of Companies (ROC) is a**
   - A. statutory duty of the secretary  ✅
-  - B. marketing duty
-  - C. production duty
-  - D. sales duty
+  - B. marketing duty of the secretary relating to promotion of the products
+  - C. production duty of the secretary in the factory
+  - D. sales duty of the secretary to the customers of the company
   - _Statutory duties include maintaining registers and filing returns._
 
 - [ ] **7. Secretarial Standards SS-1 and SS-2 issued by ICSI relate to**
   - A. Board meetings and general meetings  ✅
-  - B. accounting standards
-  - C. audit standards
-  - D. tax rules
+  - B. accounting and auditing of the financial statements
+  - C. income tax and the filing of returns by the company
+  - D. the issue of shares and debentures by the company
   - _SS-1 covers Board meetings; SS-2 covers general meetings._
 
 ### Unit 4 - Directors
 
 - [ ] **8. A Director Identification Number (DIN) is**
   - A. a unique number allotted to every director  ✅
-  - B. a type of share
-  - C. a tax number for companies
-  - D. a bank account number
+  - B. tax number allotted to every company by the income tax department
+  - C. bank account number given to the directors for salary
+  - D. type of share issued to the directors of the company
   - _DIN is required for every person appointed as a director._
 
 - [ ] **9. An independent director is one who**
@@ -752,9 +752,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **20. Who prepares the agenda of a Board meeting in consultation with the Chairman?**
   - A. Company Secretary  ✅
-  - B. Customer
-  - C. Bank manager
-  - D. Peon
+  - B. The statutory auditor of the company
+  - C. The bank manager of the company
+  - D. The peon of the company
   - _The agenda is circulated with the notice._
 
 ### Unit 4 - Minutes
