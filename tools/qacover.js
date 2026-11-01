@@ -3,7 +3,7 @@ const fs = require('fs'), path = require('path');
 global.window = {};
 const dir = path.join(__dirname, '..', 'site');
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
-for (const m of html.matchAll(/<script src="((?:data|js)\/[^"]+)"/g)) { if (['js/app.js', 'js/welcome.js', 'js/rewards.js'].includes(m[1])) continue; require(path.join(dir, m[1])); }
+for (const m of html.matchAll(/<script src="((?:data|js)\/[^"]+)"/g)) { if (!(m[1].startsWith('data/') || m[1] === 'js/examqa.js')) continue; require(path.join(dir, m[1])); }
 for (const [id, list] of Object.entries(window.ExamQA.data)) {
   console.log('\n== ' + id + ' (' + list.length + ')');
   const g = {};
