@@ -19,34 +19,85 @@ document.getElementById('search').addEventListener('input', (e) => {
   location.hash = q.length > 1 ? '#/search/' + encodeURIComponent(q) : '#/';
 });
 
+const ICON = { finance: '💰', marketing: '📣', 'business-env': '🌍', hrm: '👥', 'office-mgmt': '🗂️' };
+const BLURB = {
+  finance: 'TVM, bonds & stocks, capital budgeting, leverage',
+  marketing: 'Core concepts, consumer behaviour, research, STP',
+  'business-env': 'PESTLE, LPG, ethics, CSR, case-based questions',
+  hrm: 'HRP, appraisal, compensation, industrial relations',
+  'office-mgmt': 'Filing, secretarial practice, forms, meetings',
+};
+
+function setTheme(id) {
+  document.body.className = id ? 't-' + id : '';
+}
+
+function count(s) {
+  return s.type === 'notes' ? s.units.length + ' topics' : s.mcqs.length + ' MCQs';
+}
+
 function home() {
-  $(`<h1>Subjects</h1><div class="grid">${Object.entries(S).map(([id, s]) =>
-    `<a class="card" href="#/${id}"><span class="tag">${s.type === 'notes' ? 'Notes' : 'MCQ'}</span>
-     <h3>${esc(s.title)}</h3><div>${s.type === 'notes'
-    ? (s.units.length ? s.units.length + ' units' : 'Coming soon')
-    : (s.mcqs.length ? s.mcqs.length + ' questions' : 'Coming soon')}</div></a>`).join('')}</div>`);
+  setTheme('');
+  const subs = Object.entries(S);
+  const notes = subs.reduce((n, [, s]) => n + s.units.length, 0);
+  const mcqs = subs.reduce((n, [, s]) => n + s.mcqs.length, 0);
+  $(`<section class="hero">
+      <div class="hero-text">
+        <span class="pill">BBA · 3rd Semester</span>
+        <h1>Crack your exams<br><span class="grad">with notes, MCQs &amp; mock tests</span></h1>
+        <p>Everything from your own study material, organised unit by unit.</p>
+        <div class="stats">
+          <div><b>${subs.length}</b><span>Subjects</span></div>
+          <div><b>${notes}</b><span>Note pages</span></div>
+          <div><b>${mcqs}</b><span>MCQs</span></div>
+        </div>
+      </div>
+      <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+    </section>
+    <h2 class="sec">Pick a subject</h2>
+    <div class="grid">${subs.map(([id, s], i) =>
+    `<a class="scard t-${id}" style="--d:${i * 70}ms" href="#/${id}">
+       <span class="ico">${ICON[id] || '📘'}</span>
+       <span class="badge">${s.type === 'notes' ? 'Notes' : 'MCQ'}</span>
+       <h3>${esc(s.title)}</h3>
+       <p>${esc(BLURB[id] || '')}</p>
+       <div class="meta">${count(s)} <span class="go">Open →</span></div>
+     </a>`).join('')}</div>`);
 }
 
 function subject(id) {
   const s = S[id];
   if (!s) return home();
-  const links = s.units.map((u) => `<a class="card" href="#/${id}/${u.id}"><h3>${esc(u.title)}</h3></a>`).join('');
-  const quizBtn = s.mcqs.length ? `<a class="btn primary" href="#/${id}/quiz">Start quiz (${s.mcqs.length} Qs)</a>` : '';
-  $(`<div class="crumb"><a href="#/">Home</a></div><h1>${esc(s.title)}</h1><div class="row">${quizBtn}</div>
-     <div class="grid">${links}</div>${!links && !quizBtn ? '<p>Content coming soon.</p>' : ''}`);
+  setTheme(id);
+  const quizBtn = s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a>` : '';
+  const links = s.units.map((u, i) => `<a class="ucard" style="--d:${i * 45}ms" href="#/${id}/${u.id}">
+      <span class="num">${i + 1}</span><span class="ut">${esc(u.title)}</span><span class="arr">→</span></a>`).join('');
+  $(`<div class="crumb"><a href="#/">Home</a> / ${esc(s.title)}</div>
+     <section class="banner"><span class="bico">${ICON[id] || '📘'}</span>
+       <div><h1>${esc(s.title)}</h1><p>${esc(BLURB[id] || '')} · ${count(s)}</p></div>
+       <div class="bact">${quizBtn}</div></section>
+     ${links ? `<h2 class="sec">Notes</h2><div class="ugrid">${links}</div>` : ''}
+     ${!links && !quizBtn ? '<p>Content coming soon.</p>' : ''}`);
 }
 
 function unit(id, uid) {
   const s = S[id];
-  const u = s && s.units.find((x) => x.id === uid);
-  if (!u) return subject(id);
-  $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${esc(s.title)}</a></div>
-     <article class="notes"><h1>${esc(u.title)}</h1>${u.html}</article>`);
+  const idx = s ? s.units.findIndex((x) => x.id === uid) : -1;
+  if (idx < 0) return subject(id);
+  const u = s.units[idx];
+  setTheme(id);
+  const prev = s.units[idx - 1];
+  const next = s.units[idx + 1];
+  $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${esc(s.title)}</a> / ${idx + 1}/${s.units.length}</div>
+     <article class="notes"><header class="uhead"><span class="num">${idx + 1}</span><h1>${esc(u.title)}</h1></header>${u.html}</article>
+     <nav class="pn">${prev ? `<a class="btn" href="#/${id}/${prev.id}">← ${esc(prev.title)}</a>` : '<span></span>'}
+     ${next ? `<a class="btn solid" href="#/${id}/${next.id}">${esc(next.title)} →</a>` : `<a class="btn solid" href="#/${id}">Back to ${esc(s.title)}</a>`}</nav>`);
 }
 
 function quiz(id) {
   const s = S[id];
   if (!s || !s.mcqs.length) return subject(id);
+  setTheme(id);
   const units = [...new Set(s.mcqs.map((m) => m.u))];
   $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${esc(s.title)}</a></div><h1>Quiz</h1>
      <div class="row">
@@ -209,6 +260,7 @@ function plain(html) {
 }
 
 function search(q) {
+  setTheme('');
   const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
   const out = [];
   for (const [id, s] of Object.entries(S)) {
@@ -236,3 +288,19 @@ function route() {
 }
 addEventListener('hashchange', route);
 route();
+
+const prog = document.createElement('div');
+prog.id = 'prog';
+document.body.appendChild(prog);
+const topBtn = document.createElement('button');
+topBtn.id = 'totop';
+topBtn.textContent = '↑';
+topBtn.setAttribute('aria-label', 'Back to top');
+topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+document.body.appendChild(topBtn);
+addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const p = h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight);
+  prog.style.transform = 'scaleX(' + p + ')';
+  topBtn.classList.toggle('show', h.scrollTop > 500);
+}, { passive: true });
