@@ -1,119 +1,48 @@
 # Agent.md — Rules & Working
 
-Single source of truth for how Claude works in this repo. **Read first every session.** Update whenever rules, features or data change.
+Short rulebook for Claude in this repo. **Read this first, then [PROGRESS.md](PROGRESS.md)** for architecture, routes, data shapes, tools, PDFs read, decisions and open items. Update both when things change.
 
-## 1. Goal
-Exam-prep website for BBA 3rd Sem (CSJMU / Allenhouse), **pure HTML + CSS + vanilla JS** — no frameworks, no build step, works by opening `site/index.html`, hosted on GitHub Pages.
-Student: Astha. The user is writing the **written exams for Finance and Marketing**; Business Environment, HRM and Office Management are **MCQ exams**.
+## Goal
+Exam-prep website for BBA 3rd Sem, **pure HTML + CSS + vanilla JS** (no frameworks, no build step), hosted on GitHub Pages. Student: Astha.
+Written exams: **Finance, Marketing**. MCQ exams: **Business Environment, HRM, Office Management**.
 
-## 2. Subjects & folders
-| Folder | Subject | Exam type | Site content |
-|---|---|---|---|
-| `FINANCE/` | Business Finance | Written | Notes, formula explorer, MCQs (99), written Q&A (117), concept/formula popups |
-| `MARKETING/` | Marketing Management | Written | Notes, MCQs (116), written Q&A (112), concept cards |
-| `BUSINESS ENV/` | Business Environment & Ethics | MCQ | 800 MCQs parsed from PDFs, concept cards (10) |
-| `HRM/` | Human Resource Management | MCQ | 202 generated MCQs, concept cards (17) |
-| `OFFICE MANG/` | Office Management | MCQ | 235 generated MCQs, concept cards (15) |
+## Subjects & folders
+| Folder | Subject | Exam |
+|---|---|---|
+| `FINANCE/` | Business Finance | Written |
+| `MARKETING/` | Marketing Management | Written |
+| `BUSINESS ENV/` | Business Environment & Ethics | MCQ |
+| `HRM/` | Human Resource Management | MCQ |
+| `OFFICE MANG/` | Office Management | MCQ |
 
-Source PDFs stay untouched in those folders. `tools/` holds generators; `site/` is the deployable app.
+Source PDFs stay untouched. `tools/` = generators and checkers, `site/` = deployable app.
 
-## 3. Rules (do not break)
-1. **Folder names** spelled correctly (`BUSINESS ENV`, fixed from `BUSNIESS ENV`).
-2. **One subject / feature at a time**, commit + push after every major change.
-3. **Analyse every PDF** in a subject folder (`pdftotext -layout`; image-only PDFs: render pages with PyMuPDF, view as contact sheets). Log files read in `PROGRESS.md`.
-4. **Ask the user** when unclear (unit numbering, paper pattern, missing content). Do not guess silently.
-5. **Never invent facts.** Content comes from the PDFs. Anything beyond them is marked `[extra]` (notes) or tagged `x:1` "extra: not in PDFs" (MCQs). `REVIEW_EXTRA_QUESTIONS.md` lists all extra MCQs for the user to verify.
-6. **Tech**: HTML + CSS + vanilla JS only; Tailwind/frameworks not allowed. Relative paths only (GitHub Pages). Light/dark theme, mobile friendly, container max-width **1450px**, mobile breakpoint 640px, respects `prefers-reduced-motion`.
-7. **Git**: commit + push to `origin main` after every major change. **Every commit ends with**
-   `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>`. Messages short, conventional (`feat:`, `fix:`, `docs:`, `chore:`).
-8. Never commit secrets. `.gitignore` has `__pycache__/`.
-9. **Before pushing run** `node tools/qa.js` (must say `issues: 0`). After editing MCQ source data run `python -I tools/build_mcq.py` first.
-10. MCQ options: 4 options, exactly one correct, no "all/none of the above", correct answer should not be clearly the longest (check `node tools/lenbias.js <subject> 1.8`).
+## Rules (do not break)
+1. Folder names spelled correctly (`BUSINESS ENV`).
+2. One subject / feature at a time; **commit + push to `origin main` after every major change**.
+3. **Every commit ends with** `Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>`. Messages short, conventional (`feat:`, `fix:`, `docs:`, `chore:`).
+4. Analyse **every PDF** (`pdftotext -layout`; image-only PDFs → render with PyMuPDF). Log files read in PROGRESS.md.
+5. **Never invent facts.** Content comes from the PDFs; anything else is marked `[extra]` (notes) or tagged "extra: not in PDFs" (MCQs). Ask the user when unclear.
+6. Tech: relative paths only, light/dark, mobile friendly, container max-width **1450px**, mobile breakpoint 640px, `prefers-reduced-motion` respected, works when localStorage is blocked.
+7. MCQs: exactly 4 options, one correct, no "all/none of the above", correct answer not clearly the longest (`node tools/lenbias.js <subject> 1.8`).
+8. Never commit secrets. Keep `.gitignore` (`__pycache__/`).
 
-## 4. Hosting
-GitHub Pages, **legacy mode** (branch `main`, path `/`). Root `index.html` redirects to `site/`. No admin rights to change Pages settings, so no Actions workflow. Live: https://workwithaastha.github.io/BBA-3RD-SEM/ (new builds take a few minutes).
+## Workflow
+1. Edit sources: MCQs → `tools/data_*.py` (+ `overrides_*.py`); notes / Q&A / cards → `site/data/*.js`; UI → `site/js|css`.
+2. If MCQs changed: `python -I tools/build_mcq.py`.
+3. Check: `node --check <file>` · `node tools/qa.js` (**must be `issues: 0`**) · `node tools/topicmatrix.js` (no `⚠`).
+4. Test behaviour with jsdom installed in the scratchpad (not the repo). jsdom fires `hashchange` itself: don't dispatch it manually, wait ~80 ms after setting `location.hash`.
+5. Update PROGRESS.md, commit with the trailer, push. Pages rebuild takes a few minutes.
 
-## 5. Site architecture (`site/`)
-```
-site/
-├── index.html            # loads css, data files, then js (ORDER MATTERS, see below)
-├── css/  style.css (base) · theme.css (per-subject colours .t-<id>, hero, cards)
-│         welcome.css (welcome modal, 3D cube, toasts, badges, weekly chart)
-│         formulas.css (formula/concept cards) · examqa.css (Q&A bank, mock paper, last-night sheet)
-│         formulapop.css (formula pop-up)
-├── js/   app.js        hash router, quizzes, progress, daily 20, revision, expected, search, store helper
-│         examqa.js     written Q&A bank builder + mock paper + last-night sheet (ExamQA API)
-│         formulapop.js click any .formula -> pop-up (uses window.FormulaLib)
-│         rewards.js    confetti, sound, badges, weekly summary, reset
-│         welcome.js    "Hi Astha" modal, resume-last, streak, 3D tilt
-└── data/ finance.js (notes) · finance-mcq.js · finance-formulas.js (40 cards + calculators, exposes FormulaLib)
-          formulalib-extra.js (Marketing + extra Finance formula cards)
-          marketing.js + marketing-u2.js + marketing-u3.js (notes) · marketing-mcq.js
-          business-env.js · hrm.js · office-mgmt.js (MCQ, generated by tools)
-          concepts.js (concept-card decks for 4 subjects) · expected.js (expected-question lists)
-          examqa-finance.js … -finance4.js · examqa-marketing.js … -marketing4.js (written Q&A)
-```
-**Script order in `index.html`:** subject data → `finance-mcq` → `finance-formulas` → `formulalib-extra` → `marketing*` → `marketing-mcq` → `business-env`, `hrm`, `office-mgmt` → `concepts` → `js/examqa.js` → `examqa-*` data → `expected` → `js/app.js` → `rewards.js` → `formulapop.js` → `welcome.js`.
-`app.js` exposes `window.App = { S, store, esc, ICON, cubeHtml, $, setTheme }` for the other scripts (separate script files do not share top-level `const`).
+## Hosting
+GitHub Pages, legacy mode (branch `main`, path `/`); root `index.html` redirects to `site/`. No admin rights, so no Actions workflow. Live: https://workwithaastha.github.io/BBA-3RD-SEM/
 
-### Data shapes
-- Subject: `window.SUBJECTS[id] = { title, type:'notes'|'mcq', units:[{id,title,html,after?}], mcqs:[{u,t,n,q,o[4],a,e?,g?,x?,c?}] }` (`a` = index of correct option, `g` generated, `x` extra, `c` case text).
-- Unit with `after()` runs JS after render (formula page, concept cards, Q&A bank).
-- Written Q&A: `ExamQA.add(id,[{m,u,t,q,a,ms,src,p}])` — `m` marks (2/3/5/6/10), `p` likelihood 1–3 (★★★ = asked in PDFs), `a` HTML built with helpers `L O F E T D`, `ms` marking scheme, `src` where asked.
-- Concept card: `{g,n,key,pts,what,ex[],when[],where[],mistake,ref,topic}`. Formula card: `{g,n,f,sym,what,ex,when,where,mistake,u,s?,calc?}`.
+## Environment lessons
+- Windows + Git Bash. **Long heredocs with many quotes can fail** → create files with the Write tool and run Python patch scripts from the scratchpad.
+- `pdftotext` exists; `pdftoppm` does not. Use PyMuPDF + Pillow for scanned PDFs.
+- Separate script files do not share top-level `const`; use `window.App` / `window.FormulaLib` / `window.ExamQA`.
+- `animation-fill-mode: both` blocks hover transforms; use `backwards`.
+- Script order in `site/index.html` matters (listed in PROGRESS.md §3).
 
-### Routes (hash)
-`#/` home · `#/<id>` subject · `#/<id>/<unit>` notes · `#/<id>/quiz[/<topic>]` quiz & mock exam · `#/<id>/qa` written Q&A · `#/<id>/concepts` · `#/finance/formulas` · `#/revision/<id>` · `#/expected/<id>` · `#/sheet/<id>` (last-night sheet) · `#/progress` · `#/badges` · `#/daily` · `#/search/<q>`.
-
-### Features (all built)
-- Notes viewer with prev/next, search, reading-progress bar, per-subject colour themes, hero + 3D cube, tilt cards.
-- **Quiz**: unit/topic filter, count, shuffle, instant answers, retry-wrong; **Mock exam** (timer 30–90 s/Q, question navigator, flag, review); **Daily 20** (weak topics first); topic-filtered links from concept/expected pages.
-- **Progress tracker** (accuracy per topic, weak topics, practise wrong answers), **weekly summary**, **15 badges**, confetti + sound (toggle 🔊), streak, reset-all.
-- **Welcome pop-up**: "Hi Astha 👋 What's up? Let's learn!", remembers last page/quiz, streak stats, weekly chart.
-- **Revision sheets** (printable), **expected questions**, **last-night sheet** (★★/★★★ only), **concept cards** (4 subjects), **formula explorer** (Finance, 40 cards, 11 live calculators), **Formula Finder** quiz (25 scenarios, topic `Which formula?`).
-- **Click-any-formula pop-up** everywhere (`.formula/.fformula/.kidea`): meaning, symbols, example, when/where, mistake, calculator; multi-line formulas get tabs; worked-calculation lines show a hint bubble.
-- **Written Q&A bank** (Finance 117, Marketing 112): marks filter, unit filter, "most predicted", search, revised tick, mock paper (presets + **custom pattern**), model answers with marking scheme.
-
-### Browser storage (localStorage only, per browser)
-`theme, name, visited, last, stats, wrong, hist, days, log, badges, flags, fixed, pages, sound, qa_<id>`. Never store anything sensitive. The site must still render when storage is blocked.
-
-## 6. Tools (`tools/`)
-| Tool | Purpose |
-|---|---|
-| `parse_be.py` | Parse the 4 Business Env MCQ PDFs (via pdftotext) → `site/data/business-env.js` (800 Qs, answer key validated) |
-| `data_hrm.py` `data_hrm_more.py` `data_om.py` `data_om_more.py` `data_fin.py` `data_fin_more.py` `data_mkt.py` | Source MCQ rows `(unit, topic, q, CORRECT, w1, w2, w3, explanation, extra)` — correct answer listed first |
-| `overrides_*.py` | Replacement distractors (fix correct-is-longest bias); key = question number `n` |
-| `build_mcq.py` | Shuffles options (fixed seed), applies overrides, writes `hrm.js`, `office-mgmt.js`, `finance-mcq.js`, `marketing-mcq.js` |
-| `export_review.py` | Writes `REVIEW_EXTRA_QUESTIONS.md` (all non-PDF questions) |
-| `qa.js` | Automated QA: options, answers, duplicates, encoding, tag balance in notes and Q&A answers |
-| `lenbias.js` | Lists questions where the correct option is much longer than the others |
-| `qacover.js` / `topicmatrix.js` | Coverage of written Q&A per unit/topic and topic × marks (short/medium/long gaps) |
-
-## 7. Workflow for any change
-1. Edit source (`tools/data_*.py` for MCQs, `site/data/*.js` for notes/Q&A/cards, `site/js|css` for UI).
-2. Rebuild if MCQs changed: `python -I tools/build_mcq.py`.
-3. Syntax check: `node --check <file>`; QA: `node tools/qa.js` → `issues: 0`; `node tools/topicmatrix.js` → no `⚠`.
-4. Browser-behaviour test with jsdom (install in the scratchpad dir, **not** in the repo). jsdom fires `hashchange` itself — do **not** dispatch it manually and wait ~80 ms after setting `location.hash`.
-5. Update `PROGRESS.md`, commit with the co-author trailer, push.
-
-## 8. Environment lessons (this machine)
-- Windows + Git Bash/PowerShell. **Long heredocs containing many quotes can fail in Bash** → write files with the Write tool, run Python patch scripts from the scratchpad directory.
-- `pdftotext` available; `pdftoppm` is not → use PyMuPDF (`pip install pymupdf pillow`) to render image-only PDFs.
-- Python `-I` flag for scripts reading untrusted data; keep scratch files in the session scratchpad, not the repo.
-- Animations with `animation-fill-mode: both` keep `transform:none` and block hover transforms → use `backwards` (already fixed).
-
-## 9. Content decisions made with the user
-- Finance & Marketing: notes first (no quiz originally), later MCQs + written Q&A added on request.
-- Business Env: 800 MCQs straight from PDFs. HRM and Office Mgmt PDFs are notes → MCQs are **generated** (tag "generated from PDF notes"); HRM Unit 1–2 and some Unit 3–4 topics have no PDF → tagged **extra**.
-- Language: English. Pop-up name: **Astha**.
-- Assumed unit numbering (confirm with user): Marketing — Unit I intro/orientations/green/digital, Unit II consumer behaviour + MIS + research, Unit III STP + value proposition. Office Mgmt — 1 basics/filing, 2 automation & secretarial, 3 forms & records, 4 company office procedures & meetings.
-- Known source gaps: Finance cost-of-capital PDF has formulas only; leverage Q23–28, Q33 partly cut off; HRM Unit 4 lacks minimum/fair/living wage; Marketing PDFs lack 7Ps and detailed 4Ps; Profitability Index and retained-earnings formula are `[extra]`.
-
-## 10. Open items / ask the user
-- Real **paper pattern and marks** for the two written subjects (to add as mock-paper presets; custom pattern works today).
-- Real **exam dates** (idea: countdown + day-wise revision plan on the welcome pop-up).
-- Which topics still feel weak (add more Q&A / MCQs there).
-- User to review `REVIEW_EXTRA_QUESTIONS.md` (80 HRM + 28 Office Mgmt extra questions) and tick/correct them.
-
-## 11. Status
-Phases 0–16 done (see `PROGRESS.md`): setup → skeleton → Finance → Marketing → BE/HRM/OM MCQs → UI themes → mock exam → tracker → revision/expected/last-night → concept & formula cards → welcome/rewards → written Q&A (all topics covered) → click-any-formula pop-up. `node tools/qa.js` = 0 issues; topic matrix = no gaps.
+## Where things are
+Architecture, routes, data shapes, storage keys, tools, PDFs read, assumptions and open questions: **PROGRESS.md**. Extra MCQs for the user to verify: `REVIEW_EXTRA_QUESTIONS.md`.
