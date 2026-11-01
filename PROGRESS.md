@@ -31,5 +31,6 @@ Unit numbering assumed: 1 office basics/filing, 2 automation & secretarial, 3 fo
 ## Rebuild
 - Finance MCQs: tools/data_fin.py; Marketing MCQs: tools/data_mkt.py (then build_mcq.py)
 - QA: `node tools/qa.js` (options, answers, duplicates, tag balance)
+- Length-bias check: `node tools/lenbias.js <subject> 1.8 show`; fixes live in tools/overrides_*.py
 - BE: `python tools/parse_be.py`
 - HRM + OM: edit `tools/data_hrm.py` / `tools/data_om.py`, then `python tools/build_mcq.py`

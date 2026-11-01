@@ -12,10 +12,28 @@ from data_om import OM
 from data_om_more import OM_MORE
 from data_fin import FIN
 from data_mkt import MKT
+from overrides_hrm import HRM_OVR
+from overrides_om import OM_OVR
+try:
+    from overrides_fm import FIN_OVR, MKT_OVR
+except ImportError:
+    FIN_OVR, MKT_OVR = {}, {}
 
 OUT = Path(__file__).resolve().parent.parent / "site" / "data"
 
-def build(rows, sid, title, seed, append=False):
+def apply_overrides(rows, ovr, sid):
+    rows = [list(r) for r in rows]
+    for n, (prefix, wrongs) in ovr.items():
+        r = rows[n - 1]
+        assert r[2].replace("'", "").startswith(prefix.replace("'", "")[:20]), f"{sid} override {n} mismatch: {r[2][:40]} vs {prefix}"
+        assert len(wrongs) == 3
+        r[4:7] = wrongs
+    return [tuple(r) for r in rows]
+
+
+def build(rows, sid, title, seed, append=False, ovr=None):
+    if ovr:
+        rows = apply_overrides(rows, ovr, sid)
     rnd = random.Random(seed)
     qs, seen = [], set()
     for i, (u, t, q, c, w1, w2, w3, e, x) in enumerate(rows, 1):
@@ -41,7 +59,7 @@ def build(rows, sid, title, seed, append=False):
     for q in qs: per[q["u"]] = per.get(q["u"], 0) + 1
     print(sid, len(qs), per, "answer spread", [sum(1 for q in qs if q["a"] == k) for k in range(4)])
 
-build(HRM + HRM_MORE, "hrm", "Human Resource Management", 11)
-build(OM + OM_MORE, "office-mgmt", "Office Management", 22)
-build(FIN, "finance", "Business Finance", 33, append=True)
-build(MKT, "marketing", "Marketing Management", 44, append=True)
+build(HRM + HRM_MORE, "hrm", "Human Resource Management", 11, ovr=HRM_OVR)
+build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR)
+build(FIN, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR)
+build(MKT, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR)

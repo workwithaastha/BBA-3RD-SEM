@@ -9,6 +9,16 @@ from data_hrm import HRM
 from data_hrm_more import HRM_MORE
 from data_om import OM
 from data_om_more import OM_MORE
+from overrides_hrm import HRM_OVR
+from overrides_om import OM_OVR
+
+
+def apply(rows, ovr):
+    rows = [list(r) for r in rows]
+    for n, (_, w) in ovr.items():
+        rows[n - 1][4:7] = w
+    return [tuple(r) for r in rows]
+
 
 OUT = Path(__file__).resolve().parent.parent / "REVIEW_EXTRA_QUESTIONS.md"
 
@@ -32,8 +42,8 @@ def section(title, rows):
     return out, n
 
 
-hrm, nh = section("HRM - questions NOT in your PDFs (standard knowledge)", HRM + HRM_MORE)
-om, no = section("Office Management - questions NOT in your PDFs", OM + OM_MORE)
+hrm, nh = section("HRM - questions NOT in your PDFs (standard knowledge)", apply(HRM + HRM_MORE, HRM_OVR))
+om, no = section("Office Management - questions NOT in your PDFs", apply(OM + OM_MORE, OM_OVR))
 head = [
     "# Review list: questions not taken from your PDFs", "",
     "Tick each box if it matches your syllabus / teacher. Tell me which to change or delete.",

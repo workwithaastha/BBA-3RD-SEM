@@ -11,9 +11,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **1. The evolution of HRM is generally traced from**
   - A. welfare and personnel management to strategic human resource management  ✅
-  - B. strategic HRM back to clerical work
-  - C. marketing to finance
-  - D. production to sales
+  - B. industrial engineering and production planning to financial management
+  - C. marketing management and sales promotion to strategic marketing
+  - D. scientific management and time study to office automation
   - _Welfare work led to personnel management, then HRM, then strategic HRM._
 
 ### Unit 1 - Functions of HRM
@@ -59,9 +59,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **7. Human Resource Management is best described as**
   - A. the process of acquiring, developing, motivating and maintaining a workforce to achieve organisational goals  ✅
-  - B. only the maintenance of payroll records
-  - C. only the recruitment of employees
-  - D. a department that handles legal disputes alone
+  - B. the process of recording employee attendance and preparing the monthly payroll
+  - C. the activity of selecting and installing machinery for production departments
+  - D. the legal process of settling disputes between a company and its customers
   - _HRM covers all people-related functions from procurement to maintenance._
 
 - [ ] **8. Which of the following is NOT an objective of HRM under the organisational objectives?**
@@ -101,18 +101,18 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **13. 'Functional objectives' of HRM aim to**
   - A. keep the HR department's contribution at a level suitable to the organisation's needs  ✅
-  - B. increase production only
-  - C. reduce sales
-  - D. avoid training
+  - B. maximise the dividend paid to shareholders in every financial year
+  - C. ensure the firm complies with all environmental and pollution control laws
+  - D. help employees fulfil their personal ambitions outside the organisation
   - _Functional objectives ensure HR services are in proportion to the organisation's needs._
 
 ### Unit 1 - Role of HR Manager
 
 - [ ] **14. Which role of the HR manager involves linking management and employees and handling grievances?**
   - A. Conciliator / mediator  ✅
-  - B. Auditor
-  - C. Salesperson
-  - D. Cashier
+  - B. Statutory auditor
+  - C. Financial controller
+  - D. Marketing coordinator
   - _HR managers act as a link between employees and management._
 
 - [ ] **15. In the era of globalisation and digital transformation, the HR manager's role is shifting towards**
@@ -142,9 +142,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **18. Human Resource Planning (HRP) is the process of**
   - A. forecasting an organisation's future demand for and supply of employees  ✅
-  - B. calculating taxes on wages
-  - C. designing office furniture
-  - D. preparing balance sheets
+  - B. determining the compensation and fringe benefits to be paid to all employees
+  - C. analysing the duties and responsibilities attached to each job in the firm
+  - D. evaluating the past performance of employees against fixed standards
   - _HRP matches the number and type of employees with organisational needs._
 
 - [ ] **19. Which is the first step in the HRP process?**
@@ -193,9 +193,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **25. Job analysis is the process of**
   - A. collecting and analysing information about the tasks and requirements of a job  ✅
-  - B. evaluating an employee's character
-  - C. calculating production cost
-  - D. advertising a vacancy
+  - B. fixing the wage rate for a job after comparing it with other jobs
+  - C. appraising an employee's performance and potential for promotion
+  - D. estimating the number of employees required in the coming year
   - _It is the foundation for HR activities such as recruitment and appraisal._
 
 - [ ] **26. A statement of tasks, duties and responsibilities of a job is called**
@@ -216,9 +216,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **28. Recruitment is best defined as**
   - A. the process of searching for and attracting potential candidates to apply for jobs  ✅
-  - B. choosing the best applicant
-  - C. training the new employee
-  - D. terminating employees
+  - B. the process of choosing the best candidate from the applicants through tests and interviews
+  - C. the process of orienting a new employee to the company's rules and culture
+  - D. the process of transferring an employee to a higher post in the same firm
   - _Recruitment generates a pool; selection chooses from the pool._
 
 - [ ] **29. Which is an INTERNAL source of recruitment?**
@@ -253,9 +253,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **33. Selection is the process of**
   - A. choosing the most suitable candidate from the pool of applicants  ✅
-  - B. attracting candidates
-  - C. paying wages
-  - D. retrenchment
+  - B. searching for and attracting a large pool of candidates to apply for vacancies
+  - C. preparing a list of the tasks and duties attached to a vacant position
+  - D. training newly appointed employees to perform their duties efficiently
   - _Selection follows recruitment._
 
 - [ ] **34. Which of the following is generally the first stage in the selection process?**
@@ -304,23 +304,23 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **40. The objectives of career planning include**
   - A. matching individual aspirations with organisational opportunities  ✅
-  - B. increasing turnover
-  - C. reducing training
-  - D. avoiding promotions
+  - B. reducing the number of promotions to control the wage bill
+  - C. increasing employee turnover so that fresh talent can be hired
+  - D. avoiding any link between employee goals and the firm's needs
   - _It helps retention and development of talent._
 
 - [ ] **41. In career management, the individual is mainly responsible for**
   - A. self-assessment and setting career goals  ✅
-  - B. making company policy
-  - C. auditing accounts
-  - D. fixing wages
+  - B. deciding the organisation's manpower plan for the next year
+  - C. approving the training budget of the whole department
+  - D. fixing the pay structure for all jobs in the company
   - _The manager gives feedback and coaching; the organisation provides opportunities._
 
 - [ ] **42. Organisational career management focuses on**
   - A. meeting the organisation's workforce needs through planned career moves  ✅
-  - B. only the employee's hobbies
-  - C. only retirement
-  - D. only recruitment
+  - B. fulfilling the personal hobbies and interests of employees outside work
+  - C. deciding the career path of each employee without consulting him
+  - D. reducing the number of positions available for promotion
   - _Individual career management focuses on the person's own goals._
 
 ### Unit 3 - Training & Development
@@ -355,9 +355,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **47. Evaluating the effectiveness of training is done to**
   - A. measure whether training achieved its objectives  ✅
-  - B. increase production cost
-  - C. hire new workers
-  - D. reduce wages
+  - B. decide the compensation and fringe benefits of the trainers
+  - C. identify the number of new employees to be recruited next year
+  - D. determine the wage structure for employees who have completed training
   - _Training evaluation models measure reactions, learning, behaviour and results._
 
 - [ ] **48. Development differs from training in that development is**
@@ -369,9 +369,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **49. The need for training arises from**
   - A. changes in technology, job requirements and performance gaps  ✅
-  - B. decline in competition
-  - C. absence of change
-  - D. reduction in work
+  - B. fall in the demand for the company's products in the market
+  - C. the shortage of finance for expansion of the business
+  - D. the increase in the dividend paid to the shareholders
   - _A training need is the gap between required and actual performance._
 
 - [ ] **50. Training needs analysis at the 'task' level examines**
@@ -383,16 +383,16 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **51. Organisational analysis of training needs looks at**
   - A. the organisation's goals, resources and climate  ✅
-  - B. a single job only
-  - C. a single employee only
-  - D. family background
+  - B. the skills of one employee compared with the job standard
+  - C. the steps involved in performing a single task in the job
+  - D. the age, qualification and family background of employees
   - _It asks where training is needed in the organisation._
 
 - [ ] **52. Person analysis of training needs identifies**
   - A. which employees need training and what type  ✅
-  - B. the best machine
-  - C. market demand
-  - D. taxes payable
+  - B. the goals and strategies of the organisation for the next five years
+  - C. the duties and tasks to be performed in a particular job
+  - D. the equipment and budget available for the training programme
   - _It is based on performance appraisal results._
 
 - [ ] **53. Learning while working under a supervisor or mentor at the workplace is known as**
@@ -425,16 +425,16 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **57. A merit of on-the-job training is that it**
   - A. is practical and low cost as learning happens at the actual workplace  ✅
-  - B. needs separate buildings
-  - C. takes place away from work
-  - D. never disturbs production
+  - B. conducted in a classroom away from the work, with no disturbance to production
+  - C. free from any risk of errors or damage to machines by the trainee
+  - D. particularly suited for theoretical and conceptual knowledge only
   - _A demerit is that a poor trainer or disturbance to production may affect learning._
 
 - [ ] **58. A demerit of off-the-job training is that it**
   - A. may be costly and lacks real work conditions  ✅
-  - B. needs no trainers
-  - C. is always free
-  - D. does not teach theory
+  - B. the trainee learns while doing the actual work with the machines
+  - C. it can be given only to employees who are about to retire
+  - D. it does not allow the trainee to learn from the instructor
   - _Its merit is a controlled learning environment._
 
 ### Unit 3 - Training Evaluation
@@ -471,16 +471,16 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **63. In conciliation, a third party**
   - A. helps the parties reach a settlement but cannot impose a decision  ✅
-  - B. imposes a binding decision
-  - C. closes the factory
-  - D. dismisses the union
+  - B. gives a binding award that both employer and union must accept
+  - C. decides the dispute after a formal hearing in a labour court
+  - D. closes the factory until the workers give up their demands
   - _Conciliation is a persuasive process._
 
 - [ ] **64. In arbitration, the dispute is referred to**
   - A. a neutral arbitrator whose award is binding  ✅
-  - B. the strike committee
-  - C. the shareholders
-  - D. the customers
+  - B. the trade union's executive committee, which decides on the issue
+  - C. the Registrar of Trade Unions, who fixes the settlement terms
+  - D. the Board of Directors, who gives a final decision
   - _Voluntary arbitration is by mutual consent._
 
 - [ ] **65. Adjudication of industrial disputes is done by**
@@ -499,41 +499,41 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **67. Which is a common cause of industrial disputes?**
   - A. Wages and allowances, bonus and working conditions  ✅
-  - B. Colour of uniforms only
-  - C. Weather only
-  - D. Brand name
+  - B. Change in the colour scheme of the company's products
+  - C. Opening of a new branch in a different city by the firm
+  - D. Introduction of a new advertising campaign for the brand
   - _Other causes: retrenchment, lay-off, victimisation and indiscipline._
 
 ### Unit 4 - Wage Boards
 
 - [ ] **68. A Wage Board in India is typically a**
   - A. tripartite body of employer, employee and independent members  ✅
-  - B. body of only employers
-  - C. body of only workers
-  - D. court of law
+  - B. body of government officials appointed to inspect factories
+  - C. court that decides disputes between workers and employers
+  - D. committee of shareholders that fixes the salary of directors
   - _It recommends wages for an industry._
 
 - [ ] **69. The role of a Wage Board is to**
   - A. recommend wage structure and related benefits for an industry  ✅
-  - B. dismiss workers
-  - C. run factories
-  - D. conduct elections
+  - B. decide the profit that an industry may distribute as dividend
+  - C. settle individual grievances of workers about promotion
+  - D. inspect factories for compliance with safety rules
   - _Its recommendations guide wage determination in the industry._
 
 ### Unit 4 - Wage Concepts
 
 - [ ] **70. The minimum wage is the wage that**
   - A. meets the basic needs of a worker and his family at the lowest acceptable level  ✅
-  - B. gives the worker luxuries and savings
-  - C. equals the profit of the firm
-  - D. is fixed by the worker alone
+  - B. gives a worker a comfortable life with savings, insurance and recreation
+  - C. is fixed by each employer according to the profit of the firm
+  - D. is equal to the average wage paid in the industry in the region
   - _It is the floor below which wages cannot legally fall._
 
 - [ ] **71. A living wage is one that**
   - A. provides a decent standard of living including education, health and some savings  ✅
-  - B. covers only food
-  - C. is below the minimum wage
-  - D. depends only on company profit
+  - B. covers only the bare food needs of the worker and not his family
+  - C. is fixed at the lowest rate that the law permits the employer to pay
+  - D. depends entirely on the profits earned by the company in the year
   - _A living wage is higher than the fair wage and minimum wage._
 
 - [ ] **72. A fair wage lies**
@@ -552,9 +552,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **74. Which factor does a fair wage consider?**
   - A. Productivity of labour and capacity of the industry to pay  ✅
-  - B. Only the worker's age
-  - C. Only caste
-  - D. Only the worker's wishes
+  - B. Only the wishes of the trade union leaders in the industry
+  - C. Only the minimum amount fixed under the law for the job
+  - D. Only the profit that the employer has earned in the last year
   - _Fair wage balances worker needs with the industry's ability._
 
 - [ ] **75. In India, minimum wages are legally fixed under the**
@@ -575,9 +575,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **77. A sound wage policy should be**
   - A. fair to both employers and employees and consistent with law  ✅
-  - B. secret and arbitrary
-  - C. unrelated to cost of living
-  - D. changed daily
+  - B. decided by the employer alone, without regard to the law
+  - C. framed to pay the lowest possible wage to reduce costs
+  - D. kept secret from employees so that no one can compare pay
   - _Principles include equity, adequacy, incentive and ability to pay._
 
 - [ ] **78. Wage determination is the process of**
@@ -589,16 +589,16 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **79. A wage survey is conducted to**
   - A. compare the organisation's pay with pay in the labour market  ✅
-  - B. advertise a job
-  - C. audit accounts
-  - D. select a union leader
+  - B. find out how many employees are absent from work every month
+  - C. decide the number of vacancies to be filled in the next year
+  - D. study the working conditions in the factory canteen
   - _It supports competitive pay structures._
 
 - [ ] **80. Compared with wages, salary usually refers to**
   - A. monthly pay of clerical, managerial and professional staff  ✅
-  - B. hourly pay of casual workers only
-  - C. bonus only
-  - D. fringe benefits only
+  - B. hourly or daily pay of manual and unskilled workers
+  - C. bonus paid to workers at the time of festivals
+  - D. payment made to a worker for the number of units produced
   - _Wages are generally paid to workers on a daily or weekly basis._
 
 ## Office Management - questions NOT in your PDFs
@@ -607,9 +607,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **1. Which is a smart-office task that AI tools can assist with?**
   - A. Scheduling, email writing and meeting summaries  ✅
-  - B. Manufacturing steel
-  - C. Farming
-  - D. Printing currency
+  - B. Manufacturing steel, packing it and loading it on trucks
+  - C. Cultivating crops, harvesting them and storing the grain
+  - D. Printing currency notes and distributing them to banks
   - _AI supports communication, scheduling, document and data analysis._
 
 ### Unit 4 - Agenda
@@ -671,16 +671,16 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **9. An independent director is one who**
   - A. has no material pecuniary relationship with the company and can judge independently  ✅
-  - B. is the founder of the company
-  - C. is the largest shareholder
-  - D. is a close relative of the managing director
+  - B. is the founder and the largest shareholder of the company
+  - C. is a close relative of the managing director of the company
+  - D. is an employee of the company holding a senior post
   - _Independent directors protect minority shareholders' interests._
 
 - [ ] **10. A Managing Director is a director who**
   - A. is entrusted with substantial powers of management of the company's affairs  ✅
-  - B. is only a shareholder
-  - C. audits the books
-  - D. keeps the minutes
+  - B. only a shareholder with no role in the management of the company
+  - C. an outside professional who audits the books of the company
+  - D. an officer who keeps the minutes and the statutory registers
   - _He works subject to the superintendence of the Board._
 
 - [ ] **11. Directors act collectively as the**
@@ -701,9 +701,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **13. Ordinary business at an AGM includes**
   - A. consideration of financial statements, declaration of dividend, appointment of directors and auditors  ✅
-  - B. alteration of the Memorandum
-  - C. sale of the whole undertaking
-  - D. winding up of the company
+  - B. alteration of the Memorandum and the sale of the whole undertaking
+  - C. winding up of the company and the appointment of a liquidator
+  - D. issue of new shares at a premium and the change of the registered office
   - _All other business is special business._
 
 - [ ] **14. All business other than ordinary business at an AGM, and all business at an EGM, is called**
@@ -715,23 +715,23 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **15. An EGM can be requisitioned by members holding at least**
   - A. 10% of the voting power / paid-up capital  ✅
-  - B. 1% of shares
-  - C. 50% of shares
-  - D. 75% of shares
+  - B. 1% of the voting power or paid-up capital of the company
+  - C. 50% of the voting power or paid-up capital of the company
+  - D. 75% of the voting power or paid-up capital of the company
   - _Section 100 permits a requisition by members holding not less than 10%._
 
 - [ ] **16. A general meeting can be called at shorter notice if consent is given by**
   - A. at least 95% of the members entitled to vote  ✅
-  - B. 50% of the members
-  - C. the Chairman alone
-  - D. any one director
+  - B. at least 50% of the members entitled to vote at the meeting
+  - C. the chairman of the board alone, in the interest of the company
+  - D. any one director of the company in case of an emergency
   - _The 21 clear days rule can be relaxed with consent of 95% of members._
 
 - [ ] **17. If quorum is not present within half an hour of the scheduled time, a general meeting is generally**
   - A. adjourned to the same day in the next week  ✅
-  - B. held without quorum
-  - C. cancelled forever
-  - D. held next year
+  - B. held without the quorum, since the business is urgent
+  - C. cancelled forever and the business is dropped from the agenda
+  - D. held after one year when the quorum can be formed
   - _Section 103 provides for adjournment._
 
 - [ ] **18. To adjourn a meeting without fixing a date for the next meeting is to adjourn**
@@ -745,9 +745,9 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **19. The attendance register of a Board meeting is signed by**
   - A. directors present at the meeting  ✅
-  - B. customers
-  - C. the auditor only
-  - D. the public
+  - B. customers who have business dealings with the company
+  - C. the auditor and the public who observe the meeting
+  - D. the shareholders who are not directors of the company
   - _It is kept as part of the meeting record._
 
 - [ ] **20. Who prepares the agenda of a Board meeting in consultation with the Chairman?**
@@ -761,48 +761,48 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **21. As per the secretarial standards, signed minutes of a Board meeting should be entered in the minutes book within**
   - A. 30 days of the meeting  ✅
-  - B. 1 day
-  - C. 1 year
-  - D. 5 years
+  - B. 1 day of the meeting, without the signature of the chairman
+  - C. 1 year of the meeting, after the audit of the accounts
+  - D. 5 years of the meeting, along with the annual return
   - _Draft minutes are circulated within 15 days._
 
 - [ ] **22. Minutes are written in**
   - A. the past tense and in a concise and impartial manner  ✅
-  - B. the future tense
-  - C. the first person with opinions
-  - D. slang
+  - B. the future tense with the personal opinions of the secretary
+  - C. the first person with a word for word record of all speeches
+  - D. an informal style with the slang used by the members
   - _Minutes record what was done and decided, not what was said verbatim._
 
 - [ ] **23. Minutes of a meeting, once signed by the Chairman, are**
   - A. prima facie evidence of the proceedings  ✅
-  - B. invalid
-  - C. only a draft forever
-  - D. private opinions
+  - B. invalid until they are approved by the court of law
+  - C. a draft which can be changed by any member at any time
+  - D. private opinions of the chairman, not binding on the company
   - _They are legal proof of decisions._
 
 ### Unit 4 - Motion & Resolution
 
 - [ ] **24. A special resolution requires votes in favour to be at least**
   - A. three times the votes against (75% of votes cast)  ✅
-  - B. equal to votes against
-  - C. half of votes cast
-  - D. unanimity only
+  - B. equal to the number of votes cast against the resolution
+  - C. more than one-half of the votes cast at the meeting
+  - D. unanimous support from all the members of the company
   - _Ordinary resolution: simple majority._
 
 ### Unit 4 - Voting
 
 - [ ] **25. A proxy is a person who**
   - A. attends and votes on behalf of a member who cannot attend  ✅
-  - B. audits the meeting
-  - C. chairs the meeting
-  - D. takes the minutes
+  - B. audits the proceedings of the meeting and certifies them
+  - C. presides over the meeting and signs the minutes
+  - D. keeps the notes of the meeting and drafts the minutes
   - _The proxy form must be deposited with the company before the meeting (generally 48 hours)._
 
 - [ ] **26. A proxy generally cannot**
   - A. speak at the meeting or vote on a show of hands  ✅
-  - B. vote on a poll
-  - C. be appointed by a member
-  - D. hold a proxy form
+  - B. vote on a poll on behalf of the member who appointed him
+  - C. be appointed by a member who is unable to attend the meeting
+  - D. hold a proxy form deposited with the company before the meeting
   - _A proxy can vote only on a poll._
 
 - [ ] **27. Voting on a show of hands is on the principle of**
@@ -814,7 +814,7 @@ Counts: HRM 80, Office Management 28.
 
 - [ ] **28. The casting vote is exercised by the Chairman**
   - A. only when the votes are equally divided  ✅
-  - B. always
-  - C. never
-  - D. only at AGM for dividend
+  - B. always, in addition to his ordinary vote, on every resolution
+  - C. never, because the chairman has no right to vote in any case
+  - D. only at the AGM when the dividend is to be declared
   - _He does not have a second vote otherwise._
