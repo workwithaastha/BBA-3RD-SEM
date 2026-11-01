@@ -25,6 +25,7 @@ Each folder holds the source PDFs (notes, assignments, MCQs, formula sheets) for
 6. **Notes subjects (Finance, Marketing)**: unit-wise structured notes — definitions, key points, formulas, diagrams-as-text, solved examples, quick-revision box, important Qs.
 7. **MCQ subjects (BE, HRM, OM)**: question bank in the exam style — 4 options, correct answer, short explanation, unit tag. Quiz mode with score, shuffle, unit filter, wrong-answer review.
 8. **Tech**: HTML + CSS + vanilla JS only. Content as JS/JSON data files under `site/data/`. Must work by opening `index.html` (no server needed). Mobile friendly. Light/dark.
+    Layout: container max-width 1450px, fluid below that, mobile breakpoint at 640px.
 9. **Git**: commit + push to `origin main` after every major change (rename, each phase, each subject).
     Hosting: GitHub Pages, legacy mode (branch `main`, path `/`). Root `index.html` redirects to `site/`. Use relative paths only (no leading `/`). URL: https://workwithaastha.github.io/BBA-3RD-SEM/
 10. **Every commit** ends with the co-author trailer:
