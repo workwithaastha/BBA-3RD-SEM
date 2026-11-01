@@ -26,6 +26,7 @@ Source PDFs stay untouched. `tools/` = generators and checkers, `site/` = deploy
 6. Tech: relative paths only, light/dark, mobile friendly, container max-width **1450px**, mobile breakpoint 640px, `prefers-reduced-motion` respected, works when localStorage is blocked.
 7. MCQs: exactly 4 options, one correct, no "all/none of the above", correct answer not clearly the longest (`node tools/lenbias.js <subject> 1.8`).
 8. Never commit secrets. Keep `.gitignore` (`__pycache__/`).
+9. **Source files**: the original PDFs/PPTs are viewable on the site (`#/<id>/files`, "📂 Source files") and linked from every notes page and quiz unit ("📄 Original files for this page"). Whenever a source file is added, renamed or removed, run `python -I tools/build_sources.py` and update `site/data/sourcemap.js` (page ↔ file links). Never rename or edit the PDFs themselves without telling the user.
 
 ## Workflow
 1. Edit sources: MCQs → `tools/data_*.py` (+ `overrides_*.py`); notes / Q&A / cards → `site/data/*.js`; UI → `site/js|css`.
@@ -47,3 +48,5 @@ GitHub Pages, legacy mode (branch `main`, path `/`); root `index.html` redirects
 
 ## Where things are
 Architecture, routes, data shapes, storage keys, tools, PDFs read, assumptions and open questions: **PROGRESS.md**. Extra MCQs for the user to verify: `REVIEW_EXTRA_QUESTIONS.md`.
+
+Feature map (all built): notes · quiz / mock exam / Daily 20 · progress, badges, weekly summary · welcome pop-up with resume-last · revision, expected, last-night sheets · concept cards, Finance formula explorer, click-any-formula pop-up · written Q&A banks (Finance, Marketing) with mock paper · **source files viewer with page ↔ file links**.
