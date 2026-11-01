@@ -9,6 +9,7 @@
 | 4 Business Environment (MCQ) | done - 800 MCQs parsed from the PDFs with answer key |
 | 5 HRM (MCQ) | done - 202 MCQs (80 flagged extra, list in REVIEW_EXTRA_QUESTIONS.md) generated from PDF notes (Units 1-2 flagged "extra", no PDFs) |
 | 6 Office Management (MCQ) | done - 235 MCQs (28 flagged extra) |
+| 7c Daily 20 mode (#/daily) + printable revision sheets (#/revision/<subject>) | done |
 | 7b Finance (74) + Marketing (116) practice MCQs, progress tracker (#/progress) | done |
 | 7a UI upgrade (colour themes, hero, animations) + mock exam mode | done |
 | 7 Polish / review | pending user feedback |

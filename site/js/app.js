@@ -83,6 +83,69 @@ function progress() {
   if (clr) clr.onclick = () => { if (confirm('Reset all saved progress?')) { store.set('stats', {}); store.set('wrong', {}); store.set('hist', []); progress(); } };
 }
 
+
+// ---- Daily 20: weak topics first, then unseen, mixed across subjects ----
+function daily() {
+  setTheme('');
+  const stats = store.get('stats', {});
+  const wrong = store.get('wrong', {});
+  const pool = [];
+  for (const [id, sub] of Object.entries(S)) {
+    for (const m of sub.mcqs) {
+      const st = stats[topicKey(id, m)];
+      const wk = wrong[id + '|' + m.n + '|' + m.q.slice(0, 40)] ? 3 : 0;
+      const acc = st ? st.c / st.t : null;
+      const w = wk + (acc === null ? 1.5 : acc < 0.7 ? 2.5 : 0.4) + Math.random();
+      pool.push({ ...m, _id: id, _w: w });
+    }
+  }
+  const qs = pool.sort((a, b) => b._w - a._w).slice(0, 20).sort(() => Math.random() - 0.5);
+  $(`<div class="crumb"><a href="#/">Home</a> / Daily 20</div>
+     <section class="banner"><span class="bico">🔥</span><div><h1>Daily 20</h1>
+     <p>20 questions picked from your weak topics, wrong answers and unseen questions across all subjects.</p></div>
+     <div class="bact"><a class="btn solid" href="#/daily" id="dn">New set</a></div></section><div id="qa" class="sp"></div>`);
+  document.getElementById('dn').onclick = (e) => { e.preventDefault(); daily(); };
+  run(qs, qs[0]._id, true);
+}
+
+// ---- Revision sheet: key points only, printable ----
+function revision(id) {
+  const sub = S[id];
+  if (!sub) return home();
+  setTheme(id);
+  const tmp = document.createElement('div');
+  let body = '';
+  if (sub.units.length) {
+    for (const u of sub.units) {
+      tmp.innerHTML = u.html;
+      const keep = [];
+      tmp.querySelectorAll('.box, .formula, table').forEach((el) => {
+        if (el.tagName === 'TABLE' && el.rows.length > 12) return;
+        if (el.closest('table') && el.tagName !== 'TABLE') return;
+        keep.push(el.outerHTML);
+      });
+      if (keep.length) body += `<section class="rsec"><h2>${esc(u.title)}</h2>${keep.join('')}</section>`;
+    }
+  } else {
+    const groups = {};
+    sub.mcqs.forEach((m) => { ((groups[m.u] = groups[m.u] || {})[m.t || 'General'] = groups[m.u][m.t || 'General'] || []).push(m); });
+    for (const [u, topics] of Object.entries(groups)) {
+      body += `<section class="rsec"><h2>${esc(u)}</h2>`;
+      for (const [t, list] of Object.entries(topics)) {
+        const items = list.filter((m) => !m.c).map((m) => `<li><b>${esc(m.q)}</b> ${esc(m.o[m.a])}${m.e ? ` <i>(${esc(m.e)})</i>` : ''}</li>`).join('');
+        if (items) body += `<h3>${esc(t)}</h3><ul class="facts">${items}</ul>`;
+      }
+      body += '</section>';
+    }
+  }
+  $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${esc(sub.title)}</a> / Revision sheet</div>
+     <section class="banner"><span class="bico">📄</span><div><h1>${esc(sub.title)} · Revision sheet</h1>
+     <p>${sub.units.length ? 'Quick-revision boxes, formulas and key tables' : 'Every question with its correct answer, grouped by topic'} · use Print → Save as PDF</p></div>
+     <div class="bact"><button class="btn solid" id="prt">🖨 Print / Save PDF</button></div></section>
+     <div class="rev notes">${body || '<p>Nothing to show yet.</p>'}</div>`);
+  document.getElementById('prt').onclick = () => window.print();
+}
+
 function setTheme(id) {
   document.body.className = id ? 't-' + id : '';
 }
@@ -102,6 +165,7 @@ function home() {
         <span class="pill">BBA · 3rd Semester</span>
         <h1>Crack your exams<br><span class="grad">with notes, MCQs &amp; mock tests</span></h1>
         <p>Everything from your own study material, organised unit by unit.</p>
+        <div class="hero-act"><a class="btn solid" href="#/daily">🔥 Daily 20</a> <a class="btn ghost" href="#/progress">📊 My progress</a></div>
         <div class="stats">
           <div><b>${subs.length}</b><span>Subjects</span></div>
           <div><b>${notes}</b><span>Note pages</span></div>
@@ -125,7 +189,7 @@ function subject(id) {
   const s = S[id];
   if (!s) return home();
   setTheme(id);
-  const quizBtn = s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a>` : '';
+  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a>`;
   const links = s.units.map((u, i) => `<a class="ucard" style="--d:${i * 45}ms" href="#/${id}/${u.id}">
       <span class="num">${i + 1}</span><span class="ut">${esc(u.title)}</span><span class="arr">→</span></a>`).join('');
   $(`<div class="crumb"><a href="#/">Home</a> / ${esc(s.title)}</div>
@@ -345,6 +409,8 @@ function route() {
   if (!a) return home();
   if (a === 'search') return search(b || '');
   if (a === 'progress') return progress();
+  if (a === 'daily') return daily();
+  if (a === 'revision') return revision(b);
   if (b === 'quiz') return quiz(a);
   if (b) return unit(a, b);
   return subject(a);
