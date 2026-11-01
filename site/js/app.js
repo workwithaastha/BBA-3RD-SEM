@@ -146,6 +146,36 @@ function revision(id) {
   document.getElementById('prt').onclick = () => window.print();
 }
 
+
+// ---- Most-expected questions page ----
+function expected(id) {
+  const sub = S[id];
+  if (!sub) return home();
+  setTheme(id);
+  const groups = (window.EXPECTED && window.EXPECTED[id]) || [];
+  const link = (g) => {
+    if (g.ref) return `<a class="btn" href="#/${id}/${g.ref}">📖 Read notes</a>`;
+    return '';
+  };
+  const quizLink = (g) => (sub.mcqs.length ? `<a class="btn" href="#/${id}/quiz/${encodeURIComponent(g.t || '')}">▶ Practise MCQs</a>` : '');
+  const written = groups.map((g) => `<section class="rsec"><h2>${esc(g.h)}</h2>
+      <ol class="eq">${g.q.map((q) => `<li>${esc(q)}</li>`).join('')}</ol>
+      <div class="row">${link(g)} ${g.t ? quizLink(g) : ''}</div></section>`).join('');
+  // hot topics = topics with the most MCQs (a rough guide to weightage in the question bank)
+  const cnt = {};
+  sub.mcqs.forEach((m) => { const k = m.u + '|' + (m.t || ''); cnt[k] = (cnt[k] || 0) + 1; });
+  const hot = Object.entries(cnt).sort((a, b) => b[1] - a[1]).slice(0, 12);
+  const hotHtml = hot.length ? `<h2 class="sec">Heavily tested topics (by number of MCQs)</h2><div class="ugrid">${hot.map(([k, n], i) => {
+    const [u, t] = k.split('|');
+    return `<a class="ucard" href="#/${id}/quiz/${encodeURIComponent(t)}"><span class="num">${n}</span><span class="ut">${esc(u)} · ${esc(t)}<small>practise now</small></span><span class="arr">→</span></a>`;
+  }).join('')}</div>` : '';
+  $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${esc(sub.title)}</a> / Expected questions</div>
+     <section class="banner"><span class="bico">🎯</span><div><h1>${esc(sub.title)} · Expected questions</h1>
+     <p>From the end-of-chapter / Important Questions lists, assignments and test papers in your PDFs</p></div></section>
+     ${written ? `<h2 class="sec">Theory &amp; numerical questions</h2><div class="rev notes">${written}</div>` : ''}
+     ${hotHtml}`);
+}
+
 function setTheme(id) {
   document.body.className = id ? 't-' + id : '';
 }
@@ -189,7 +219,7 @@ function subject(id) {
   const s = S[id];
   if (!s) return home();
   setTheme(id);
-  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a>`;
+  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>`;
   const links = s.units.map((u, i) => `<a class="ucard" style="--d:${i * 45}ms" href="#/${id}/${u.id}">
       <span class="num">${i + 1}</span><span class="ut">${esc(u.title)}</span><span class="arr">→</span></a>`).join('');
   $(`<div class="crumb"><a href="#/">Home</a> / ${esc(s.title)}</div>
@@ -214,7 +244,7 @@ function unit(id, uid) {
      ${next ? `<a class="btn solid" href="#/${id}/${next.id}">${esc(next.title)} →</a>` : `<a class="btn solid" href="#/${id}">Back to ${esc(s.title)}</a>`}</nav>`);
 }
 
-function quiz(id) {
+function quiz(id, topic) {
   const s = S[id];
   if (!s || !s.mcqs.length) return subject(id);
   setTheme(id);
@@ -243,6 +273,10 @@ function quiz(id) {
   document.getElementById('qu').onchange = refresh;
   document.getElementById('qt').onchange = () => { document.getElementById('qc').textContent = pool().length + ' questions available'; };
   refresh();
+  if (topic) {
+    const hit = s.mcqs.find((m) => m.t === topic);
+    if (hit) { document.getElementById('qu').value = hit.u; refresh(); document.getElementById('qt').value = topic; document.getElementById('qc').textContent = pool().length + ' questions available'; }
+  }
   document.getElementById('go').onclick = () => {
     let qs = pool();
     if (document.getElementById('qs').checked) qs = qs.slice().sort(() => Math.random() - 0.5);
@@ -404,14 +438,16 @@ function search(q) {
 
 function route() {
   clearInterval(mockTimer);
-  const [, a, b] = location.hash.split('/').map(decodeURIComponent);
+  const parts = location.hash.split('/').map(decodeURIComponent);
+  const [, a, b] = parts;
   window.scrollTo(0, 0);
   if (!a) return home();
   if (a === 'search') return search(b || '');
   if (a === 'progress') return progress();
   if (a === 'daily') return daily();
   if (a === 'revision') return revision(b);
-  if (b === 'quiz') return quiz(a);
+  if (a === 'expected') return expected(b);
+  if (b === 'quiz') return quiz(a, parts[3]);
   if (b) return unit(a, b);
   return subject(a);
 }

@@ -69,7 +69,7 @@ FIN = [
 (V, "EBIT-EPS", "If expected EBIT is above the indifference point, the better plan is the one with", "more debt", "more equity", "no financing", "only preference shares", "Debt financing gives higher EPS at higher EBIT.", F),
 (V, "EBIT-EPS", "EBIT Rs 3,00,000, interest Rs 50,000, tax 30%, 10,000 shares. EPS is", "Rs 17.50", "Rs 25", "Rs 30", "Rs 20", "(3,00,000 - 50,000) x 0.7 / 10,000.", F),
 (V, "Coverage", "Interest coverage ratio is", "EBIT / interest", "interest / EBIT", "PAT / interest", "sales / interest", "EBIT 6,00,000 and interest 1,00,000 gives 6 times.", F),
-(V, "Coverage", "DSCR is", "(PAT + interest + depreciation) / (interest + principal instalment)", "EBIT / interest", "sales / debt", "PAT / equity", "Lenders require a minimum DSCR.", F),
+(V, "Coverage", "The Debt Service Coverage Ratio (DSCR) is calculated as", "(PAT + interest + depreciation) / (interest + principal instalment)", "EBIT / interest", "sales / debt", "PAT / equity", "Lenders require a minimum DSCR.", F),
 (V, "Pecking Order", "The pecking order of financing is", "internal funds, debt, hybrid securities, new equity", "new equity, debt, internal funds", "debt, equity, internal funds", "hybrid, equity, debt", "Propounded by Myers and Majluf.", F),
 (V, "Cost of Capital", "Cost of equity by CAPM is", "Rf + beta x (Rm - Rf)", "Rf x beta", "Rm - Rf", "beta / Rf", "Rf 7%, Rm 13%, beta 1.5 gives 16%.", F),
 (V, "Cost of Capital", "Rf = 6%, Rm = 12%, beta = 1.2. Cost of equity by CAPM is", "13.2%", "12%", "7.2%", "18%", "6 + 1.2 x 6.", F),

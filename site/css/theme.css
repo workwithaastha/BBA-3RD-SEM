@@ -148,3 +148,7 @@ h2:has(+ .row #rw),#qa>h2{background:var(--grad);-webkit-background-clip:text;ba
   .notes th{background:#e5e7eb!important;color:#000!important}
   a{color:#000;text-decoration:none}
 }
+
+.eq{padding-left:22px;margin:6px 0 12px}
+.eq li{margin:0 0 7px}
+.bact{display:flex;gap:8px;flex-wrap:wrap}
