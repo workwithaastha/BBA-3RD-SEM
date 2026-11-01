@@ -199,6 +199,7 @@ function describe(hash) {
   if (a === 'daily') return 'Daily 20';
   if (a === 'revision' && S[b]) return S[b].title + ' · Revision sheet';
   if (a === 'expected' && S[b]) return S[b].title + ' · Expected questions';
+  if (a === 'sheet' && S[b]) return S[b].title + ' · Last-night sheet';
   const sub = S[a];
   if (!sub) return null;
   if (!b) return sub.title;
@@ -257,7 +258,7 @@ function subject(id) {
   const s = S[id];
   if (!s) return home();
   setTheme(id);
-  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>` + (s.units.some((u) => u.id === 'qa') ? ` <a class="btn solid" href="#/${id}/qa">✍️ Exam Q&amp;A</a>` : '');
+  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>` + (s.units.some((u) => u.id === 'qa') ? ` <a class="btn solid" href="#/${id}/qa">✍️ Exam Q&amp;A</a> <a class="btn solid" href="#/sheet/${id}">🌙 Last-night sheet</a>` : '');
   const links = s.units.map((u, i) => `<a class="ucard" style="--d:${i * 45}ms" href="#/${id}/${u.id}">
       <span class="num">${i + 1}</span><span class="ut">${esc(u.title)}</span><span class="arr">→</span></a>`).join('');
   $(`<div class="crumb"><a href="#/">Home</a> / ${esc(s.title)}</div>
@@ -487,6 +488,7 @@ function routeInner() {
   if (a === 'daily') return daily();
   if (a === 'revision') return revision(b);
   if (a === 'expected') return expected(b);
+  if (a === 'sheet' && window.ExamQA) return window.ExamQA.sheet(b);
   if (b === 'quiz') return quiz(a, parts[3]);
   if (b) return unit(a, b);
   return subject(a);
