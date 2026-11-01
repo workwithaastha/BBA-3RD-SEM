@@ -28,12 +28,68 @@ const BLURB = {
   'office-mgmt': 'Filing, secretarial practice, forms, meetings',
 };
 
+
+// ---- progress tracker (browser only, localStorage) ----
+function topicKey(id, m) { return id + '|' + m.u + '|' + (m.t || ''); }
+function record(id, m, ok) {
+  const all = store.get('stats', {});
+  const k = topicKey(id, m);
+  const e = all[k] || { c: 0, t: 0 };
+  e.t++;
+  if (ok) e.c++;
+  all[k] = e;
+  store.set('stats', all);
+  const w = store.get('wrong', {});
+  const qk = id + '|' + m.n + '|' + m.q.slice(0, 40);
+  if (ok) delete w[qk]; else w[qk] = 1;
+  store.set('wrong', w);
+}
+function sessionDone(id, score, total) {
+  const h = store.get('hist', []);
+  h.push({ id, score, total, at: Date.now() });
+  store.set('hist', h.slice(-30));
+}
+function progress() {
+  setTheme('');
+  const all = store.get('stats', {});
+  const hist = store.get('hist', []);
+  const rows = Object.entries(all).map(([k, v]) => {
+    const [id, u, t] = k.split('|');
+    return { id, u, t, c: v.c, n: v.t, p: Math.round((v.c / v.t) * 100) };
+  }).sort((a, b) => a.p - b.p || b.n - a.n);
+  const weak = rows.filter((r) => r.n >= 3 && r.p < 70);
+  const tot = rows.reduce((a, r) => ({ c: a.c + r.c, n: a.n + r.n }), { c: 0, n: 0 });
+  const wrongCount = Object.keys(store.get('wrong', {})).length;
+  $(`<div class="crumb"><a href="#/">Home</a> / My progress</div>
+     <section class="banner"><span class="bico">📊</span><div><h1>My progress</h1>
+       <p>${tot.n ? `${tot.n} questions answered · ${Math.round((tot.c / tot.n) * 100)}% correct · ${hist.length} sessions` : 'Take a quiz to start tracking.'} · stored only in this browser</p></div>
+       <div class="bact">${wrongCount ? '<button class="btn solid" id="pw">Practise my wrong answers (' + wrongCount + ')</button>' : ''}
+       ${rows.length ? '<button class="btn" id="clr">Reset</button>' : ''}</div></section>
+     <h2 class="sec">Weak topics (below 70%, at least 3 answers)</h2>
+     ${weak.length ? `<div class="ugrid">${weak.map((r) => `<div class="ucard t-${r.id}"><span class="num">${r.p}%</span><span class="ut">${esc(S[r.id] ? S[r.id].title : r.id)} · ${esc(r.u)} · ${esc(r.t)}<small> ${r.c}/${r.n} correct</small></span></div>`).join('')}</div>` : '<p class="expl">No weak topics yet. Keep practising!</p>'}
+     <h2 class="sec">All topics</h2>
+     ${rows.length ? `<table class="res"><tr><th>Subject</th><th>Unit</th><th>Topic</th><th>Correct</th><th>Accuracy</th></tr>${rows.map((r) => `<tr><td>${esc(S[r.id] ? S[r.id].title : r.id)}</td><td>${esc(r.u)}</td><td>${esc(r.t)}</td><td>${r.c}/${r.n}</td><td><span class="acc ${r.p >= 70 ? 'g' : r.p >= 40 ? 'm' : 'b'}">${r.p}%</span></td></tr>`).join('')}</table>` : '<p class="expl">Nothing yet.</p>'}
+     <div id="qa"></div>`);
+  const pw = document.getElementById('pw');
+  if (pw) pw.onclick = () => {
+    const w = store.get('wrong', {});
+    const qs = [];
+    for (const [id, s] of Object.entries(S)) for (const m of s.mcqs) if (w[id + '|' + m.n + '|' + m.q.slice(0, 40)]) qs.push({ ...m, _id: id });
+    if (!qs.length) return;
+    document.getElementById('pw').scrollIntoView({ behavior: 'smooth' });
+    run(qs.sort(() => Math.random() - 0.5), qs[0]._id, true);
+  };
+  const clr = document.getElementById('clr');
+  if (clr) clr.onclick = () => { if (confirm('Reset all saved progress?')) { store.set('stats', {}); store.set('wrong', {}); store.set('hist', []); progress(); } };
+}
+
 function setTheme(id) {
   document.body.className = id ? 't-' + id : '';
 }
 
 function count(s) {
-  return s.type === 'notes' ? s.units.length + ' topics' : s.mcqs.length + ' MCQs';
+  if (s.type === 'notes') return s.units.length + ' topics' + (s.mcqs.length ? ' · ' + s.mcqs.length + ' MCQs' : '');
+  return s.mcqs.length + ' MCQs';
 }
 
 function home() {
@@ -58,7 +114,7 @@ function home() {
     <div class="grid">${subs.map(([id, s], i) =>
     `<a class="scard t-${id}" style="--d:${i * 70}ms" href="#/${id}">
        <span class="ico">${ICON[id] || '📘'}</span>
-       <span class="badge">${s.type === 'notes' ? 'Notes' : 'MCQ'}</span>
+       <span class="badge">${s.type === 'notes' ? (s.mcqs.length ? 'Notes + MCQ' : 'Notes') : 'MCQ'}</span>
        <h3>${esc(s.title)}</h3>
        <p>${esc(BLURB[id] || '')}</p>
        <div class="meta">${count(s)} <span class="go">Open →</span></div>
@@ -163,6 +219,9 @@ function mock(qs, secPerQ) {
       if (ok) u.r++;
     });
     const skipped = ans.filter((a) => a < 0).length;
+    const sid = location.hash.split('/')[1];
+    qs.forEach((m, i) => { if (ans[i] >= 0) record(sid, m, ans[i] === m.a); });
+    sessionDone(sid, score, qs.length);
     const rows = Object.entries(byUnit).map(([u, v]) => '<tr><td>' + esc(u) + '</td><td>' + v.r + '</td><td>' + v.t + '</td></tr>').join('');
     box.innerHTML = '<h2>' + (auto ? 'Time up! ' : '') + 'Score: ' + score + '/' + qs.length + ' (' + Math.round((score / qs.length) * 100) + '%)</h2>' +
       '<p class="expl">Correct ' + score + ' · Wrong ' + (qs.length - score - skipped) + ' · Skipped ' + skipped + ' · Time used ' + fmt(qs.length * secPerQ - Math.max(0, left)) + '</p>' +
@@ -216,7 +275,8 @@ function mock(qs, secPerQ) {
   }, 1000);
 }
 
-function run(qs) {
+function run(qs, sid, mixed) {
+  sid = sid || (location.hash.split('/')[1]);
   const box = document.getElementById('qa');
   let i = 0;
   let score = 0;
@@ -224,10 +284,11 @@ function run(qs) {
   const show = () => {
     if (i >= qs.length) {
       const again = wrong.length ? '<button class="btn primary" id="rw">Retry wrong ones</button>' : '';
+      sessionDone(sid, score, qs.length);
       box.innerHTML = `<h2>Score: ${score}/${qs.length} (${Math.round((score / qs.length) * 100)}%)</h2><div class="row">${again}</div>${wrong.map((m) =>
         `<div class="q">${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}<b>${esc(m.q)}</b><div>Answer: <b>${esc(m.o[m.a])}</b></div><div class="expl">${esc(m.e || '')}</div></div>`).join('')}`;
       const rw = document.getElementById('rw');
-      if (rw) rw.onclick = () => run(wrong);
+      if (rw) rw.onclick = () => run(wrong, sid, mixed);
       return;
     }
     const m = qs[i];
@@ -241,6 +302,7 @@ function run(qs) {
         const k = +b.dataset.k;
         box.querySelectorAll('.opt').forEach((x) => { x.disabled = true; if (+x.dataset.k === m.a) x.classList.add('ok'); });
         if (k === m.a) score++; else { b.classList.add('bad'); wrong.push(m); }
+        record(mixed ? m._id : sid, m, k === m.a);
         document.getElementById('ex').textContent = m.e || '';
         const n = document.createElement('button');
         n.className = 'btn primary';
@@ -282,6 +344,7 @@ function route() {
   window.scrollTo(0, 0);
   if (!a) return home();
   if (a === 'search') return search(b || '');
+  if (a === 'progress') return progress();
   if (b === 'quiz') return quiz(a);
   if (b) return unit(a, b);
   return subject(a);
