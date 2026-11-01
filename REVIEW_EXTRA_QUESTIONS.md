@@ -3,7 +3,7 @@
 Tick each box if it matches your syllabus / teacher. Tell me which to change or delete.
 Correct answer is marked ✅ (the site shuffles the option order).
 
-Counts: HRM 80, Office Management 1.
+Counts: HRM 80, Office Management 28.
 
 ## HRM - questions NOT in your PDFs (standard knowledge)
 
@@ -611,3 +611,210 @@ Counts: HRM 80, Office Management 1.
   - C. Farming
   - D. Printing currency
   - _AI supports communication, scheduling, document and data analysis._
+
+### Unit 4 - Agenda
+
+- [ ] **2. A statement explaining the nature of special business is attached to the notice as an**
+  - A. explanatory statement  ✅
+  - B. audit report
+  - C. directors' report
+  - D. balance sheet
+  - _Required by Section 102 of the Companies Act, 2013._
+
+### Unit 4 - Auditor
+
+- [ ] **3. An auditor of a company cannot**
+  - A. be a director or an employee of the same company  ✅
+  - B. be a Chartered Accountant
+  - C. report to shareholders
+  - D. inspect books of accounts
+  - _Independence is essential to the audit function._
+
+### Unit 4 - Company Secretary
+
+- [ ] **4. The Company Secretary is a Key Managerial Personnel (KMP) under**
+  - A. Section 203 of the Companies Act, 2013  ✅
+  - B. the Sale of Goods Act
+  - C. the Contract Act
+  - D. the Partnership Act
+  - _KMP includes MD/CEO/manager, whole-time director, CS and CFO._
+
+- [ ] **5. Which professional body conducts the Company Secretary course in India?**
+  - A. ICSI  ✅
+  - B. ICAI
+  - C. ICMAI
+  - D. SEBI
+  - _ICSI: Institute of Company Secretaries of India._
+
+- [ ] **6. Filing annual returns and statutory forms with the Registrar of Companies (ROC) is a**
+  - A. statutory duty of the secretary  ✅
+  - B. marketing duty
+  - C. production duty
+  - D. sales duty
+  - _Statutory duties include maintaining registers and filing returns._
+
+- [ ] **7. Secretarial Standards SS-1 and SS-2 issued by ICSI relate to**
+  - A. Board meetings and general meetings  ✅
+  - B. accounting standards
+  - C. audit standards
+  - D. tax rules
+  - _SS-1 covers Board meetings; SS-2 covers general meetings._
+
+### Unit 4 - Directors
+
+- [ ] **8. A Director Identification Number (DIN) is**
+  - A. a unique number allotted to every director  ✅
+  - B. a type of share
+  - C. a tax number for companies
+  - D. a bank account number
+  - _DIN is required for every person appointed as a director._
+
+- [ ] **9. An independent director is one who**
+  - A. has no material pecuniary relationship with the company and can judge independently  ✅
+  - B. is the founder of the company
+  - C. is the largest shareholder
+  - D. is a close relative of the managing director
+  - _Independent directors protect minority shareholders' interests._
+
+- [ ] **10. A Managing Director is a director who**
+  - A. is entrusted with substantial powers of management of the company's affairs  ✅
+  - B. is only a shareholder
+  - C. audits the books
+  - D. keeps the minutes
+  - _He works subject to the superintendence of the Board._
+
+- [ ] **11. Directors act collectively as the**
+  - A. Board of Directors  ✅
+  - B. General Body of Auditors
+  - C. Registrar
+  - D. Trade union
+  - _Decisions of the Board are taken at Board meetings by majority._
+
+### Unit 4 - General Meetings
+
+- [ ] **12. The maximum gap between two Annual General Meetings should not exceed**
+  - A. 15 months  ✅
+  - B. 6 months
+  - C. 3 years
+  - D. 5 years
+  - _The AGM must also be held within 6 months of the financial year end._
+
+- [ ] **13. Ordinary business at an AGM includes**
+  - A. consideration of financial statements, declaration of dividend, appointment of directors and auditors  ✅
+  - B. alteration of the Memorandum
+  - C. sale of the whole undertaking
+  - D. winding up of the company
+  - _All other business is special business._
+
+- [ ] **14. All business other than ordinary business at an AGM, and all business at an EGM, is called**
+  - A. special business  ✅
+  - B. routine business
+  - C. annual business
+  - D. casual business
+  - _Special business requires an explanatory statement with the notice._
+
+- [ ] **15. An EGM can be requisitioned by members holding at least**
+  - A. 10% of the voting power / paid-up capital  ✅
+  - B. 1% of shares
+  - C. 50% of shares
+  - D. 75% of shares
+  - _Section 100 permits a requisition by members holding not less than 10%._
+
+- [ ] **16. A general meeting can be called at shorter notice if consent is given by**
+  - A. at least 95% of the members entitled to vote  ✅
+  - B. 50% of the members
+  - C. the Chairman alone
+  - D. any one director
+  - _The 21 clear days rule can be relaxed with consent of 95% of members._
+
+- [ ] **17. If quorum is not present within half an hour of the scheduled time, a general meeting is generally**
+  - A. adjourned to the same day in the next week  ✅
+  - B. held without quorum
+  - C. cancelled forever
+  - D. held next year
+  - _Section 103 provides for adjournment._
+
+- [ ] **18. To adjourn a meeting without fixing a date for the next meeting is to adjourn**
+  - A. sine die  ✅
+  - B. pro rata
+  - C. ex parte
+  - D. suo motu
+  - _'Sine die' means without a day._
+
+### Unit 4 - Meeting Documentation
+
+- [ ] **19. The attendance register of a Board meeting is signed by**
+  - A. directors present at the meeting  ✅
+  - B. customers
+  - C. the auditor only
+  - D. the public
+  - _It is kept as part of the meeting record._
+
+- [ ] **20. Who prepares the agenda of a Board meeting in consultation with the Chairman?**
+  - A. Company Secretary  ✅
+  - B. Customer
+  - C. Bank manager
+  - D. Peon
+  - _The agenda is circulated with the notice._
+
+### Unit 4 - Minutes
+
+- [ ] **21. As per the secretarial standards, signed minutes of a Board meeting should be entered in the minutes book within**
+  - A. 30 days of the meeting  ✅
+  - B. 1 day
+  - C. 1 year
+  - D. 5 years
+  - _Draft minutes are circulated within 15 days._
+
+- [ ] **22. Minutes are written in**
+  - A. the past tense and in a concise and impartial manner  ✅
+  - B. the future tense
+  - C. the first person with opinions
+  - D. slang
+  - _Minutes record what was done and decided, not what was said verbatim._
+
+- [ ] **23. Minutes of a meeting, once signed by the Chairman, are**
+  - A. prima facie evidence of the proceedings  ✅
+  - B. invalid
+  - C. only a draft forever
+  - D. private opinions
+  - _They are legal proof of decisions._
+
+### Unit 4 - Motion & Resolution
+
+- [ ] **24. A special resolution requires votes in favour to be at least**
+  - A. three times the votes against (75% of votes cast)  ✅
+  - B. equal to votes against
+  - C. half of votes cast
+  - D. unanimity only
+  - _Ordinary resolution: simple majority._
+
+### Unit 4 - Voting
+
+- [ ] **25. A proxy is a person who**
+  - A. attends and votes on behalf of a member who cannot attend  ✅
+  - B. audits the meeting
+  - C. chairs the meeting
+  - D. takes the minutes
+  - _The proxy form must be deposited with the company before the meeting (generally 48 hours)._
+
+- [ ] **26. A proxy generally cannot**
+  - A. speak at the meeting or vote on a show of hands  ✅
+  - B. vote on a poll
+  - C. be appointed by a member
+  - D. hold a proxy form
+  - _A proxy can vote only on a poll._
+
+- [ ] **27. Voting on a show of hands is on the principle of**
+  - A. one person, one vote  ✅
+  - B. one share, one vote
+  - C. one rupee, one vote
+  - D. two votes for directors
+  - _A poll gives votes according to shares held._
+
+- [ ] **28. The casting vote is exercised by the Chairman**
+  - A. only when the votes are equally divided  ✅
+  - B. always
+  - C. never
+  - D. only at AGM for dividend
+  - _He does not have a second vote otherwise._

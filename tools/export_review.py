@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_hrm import HRM
 from data_hrm_more import HRM_MORE
 from data_om import OM
+from data_om_more import OM_MORE
 
 OUT = Path(__file__).resolve().parent.parent / "REVIEW_EXTRA_QUESTIONS.md"
 
@@ -32,7 +33,7 @@ def section(title, rows):
 
 
 hrm, nh = section("HRM - questions NOT in your PDFs (standard knowledge)", HRM + HRM_MORE)
-om, no = section("Office Management - questions NOT in your PDFs", OM)
+om, no = section("Office Management - questions NOT in your PDFs", OM + OM_MORE)
 head = [
     "# Review list: questions not taken from your PDFs", "",
     "Tick each box if it matches your syllabus / teacher. Tell me which to change or delete.",
