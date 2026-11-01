@@ -26,6 +26,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | 18 | Q&A coverage batches 3-4: every topic has short, medium and long answers | done |
 | 19 | Click-any-formula pop-up (48 formula cards) | done |
 | 20 | Agent.md / PROGRESS.md restructure | done |
+| 22 | Source files linked to pages: "📄 Original files for this page" strip on every notes page and quiz unit, "Used for" tags in the viewer (`data/sourcemap.js`) | done |
 | 21 | Source files viewer (`#/<id>/files`): view / open / download the original PDFs, duplicate detection | done |
 | - | Final polish | pending user feedback |
 
@@ -48,7 +49,7 @@ site/
 ├── js/   app.js (router, quizzes, progress, daily, revision, expected, search) · examqa.js · formulapop.js
 │         rewards.js · welcome.js · sources.js   (app.js exposes window.App for them)
 └── data/ subject notes + MCQ files · finance-formulas.js · formulalib-extra.js · concepts.js
-          expected.js · sources.js (generated) · examqa-finance*.js · examqa-marketing*.js
+          expected.js · sources.js (generated) · sourcemap.js (hand-written page↔file links) · examqa-finance*.js · examqa-marketing*.js
 ```
 Script order: subject data → `finance-mcq` → `finance-formulas` → `formulalib-extra` → `marketing*` → `marketing-mcq` → `business-env`, `hrm`, `office-mgmt` → `concepts` → `js/examqa.js` → `examqa-*` → `expected` → `js/app.js` → `rewards.js` → `formulapop.js` → `sources.js` → `welcome.js` (`data/sources.js` loads after `expected.js`).
 

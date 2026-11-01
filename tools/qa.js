@@ -55,5 +55,11 @@ for (const [id, list] of Object.entries((window.ExamQA && window.ExamQA.data) ||
   });
   console.log(id + ' exam Q&A: ' + list.length + ' answers checked');
 }
+// source map: every mapped file must exist in the generated source list
+if (window.SOURCEMAP && window.SOURCES) {
+  let n = 0;
+  for (const [id, m] of Object.entries(window.SOURCEMAP)) for (const [k, names] of Object.entries(m)) names.forEach((f) => { n++; if (!window.SOURCES[id].files.some((x) => x.f === f)) bad(`sourcemap ${id}/${k}: file not found: ${f}`); });
+  console.log('source map: ' + n + ' links checked');
+}
 console.log(issues.length ? issues.join('\n') : 'QA: no issues');
 console.log('issues:', issues.length);

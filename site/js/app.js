@@ -283,6 +283,7 @@ function unit(id, uid) {
      <nav class="pn">${prev ? `<a class="btn" href="#/${id}/${prev.id}">← ${esc(prev.title)}</a>` : '<span></span>'}
      ${next ? `<a class="btn solid" href="#/${id}/${next.id}">${esc(next.title)} →</a>` : `<a class="btn solid" href="#/${id}">Back to ${esc(s.title)}</a>`}</nav>`);
   if (typeof u.after === 'function') u.after();
+  if (window.Sources) window.Sources.attachUnit(id, uid);
 }
 
 function quiz(id, topic) {
@@ -299,7 +300,7 @@ function quiz(id, topic) {
        <select id="qm" aria-label="Mode"><option value="p">Practice (instant answers)</option><option value="m">Mock exam (timed, answers at the end)</option></select>
        <select id="qd" aria-label="Time per question"><option value="30">30 s / Q</option><option value="45">45 s / Q</option><option value="60" selected>60 s / Q</option><option value="90">90 s / Q</option></select>
        <button class="btn primary" id="go">Start</button>
-     </div><p class="expl" id="qc"></p><div id="qa"></div>`);
+     </div><p class="expl" id="qc"></p><div id="srcstrip"></div><div id="qa"></div>`);
   const pool = () => {
     const u = document.getElementById('qu').value;
     const t = document.getElementById('qt').value;
@@ -310,6 +311,7 @@ function quiz(id, topic) {
     const topics = [...new Set(s.mcqs.filter((m) => !u || m.u === u).map((m) => m.t).filter(Boolean))];
     document.getElementById('qt').innerHTML = '<option value="">All topics</option>' + topics.map((t) => `<option>${esc(t)}</option>`).join('');
     document.getElementById('qc').textContent = pool().length + ' questions available';
+    if (window.Sources) window.Sources.quizStrip(id, u);
   };
   document.getElementById('qu').onchange = refresh;
   document.getElementById('qt').onchange = () => { document.getElementById('qc').textContent = pool().length + ' questions available'; };

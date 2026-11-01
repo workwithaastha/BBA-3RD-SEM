@@ -23,3 +23,12 @@
 .svhint{margin:0;padding:5px 12px;font-size:.78em;background:#141a33;color:#aab}
 body.noscroll{overflow:hidden}
 @media print{#srcview{display:none!important}}
+
+.srcstrip{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0 14px;padding:8px 12px;border-radius:14px;background:color-mix(in srgb,var(--a1) 8%,var(--card));border:1px dashed var(--a1);font-size:.88em}
+.schip{border:1px solid color-mix(in srgb,var(--a1) 40%,var(--line));background:var(--card);color:var(--ink);border-radius:99px;padding:4px 11px;font:inherit;font-size:.92em;cursor:pointer;transition:.2s}
+.schip:hover{background:var(--a1);color:#fff;border-color:transparent;transform:translateY(-1px)}
+.sall{margin-left:auto;font-size:.9em;color:var(--a1);text-decoration:none;font-weight:600}
+.sused{margin-top:4px;font-size:.78em;color:var(--mute)}
+.sused a{color:var(--a1);text-decoration:none}
+.sused a:hover{text-decoration:underline}
+@media print{.srcstrip{display:none}}

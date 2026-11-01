@@ -32,7 +32,7 @@ Source PDFs stay untouched. `tools/` = generators and checkers, `site/` = deploy
 2. If MCQs changed: `python -I tools/build_mcq.py`.
 3. Check: `node --check <file>` · `node tools/qa.js` (**must be `issues: 0`**) · `node tools/topicmatrix.js` (no `⚠`).
 4. Test behaviour with jsdom installed in the scratchpad (not the repo). jsdom fires `hashchange` itself: don't dispatch it manually, wait ~80 ms after setting `location.hash`.
-5. If source PDFs/PPTs were added, renamed or removed: `python -I tools/build_sources.py` (feeds the 📂 Source files viewer; the files themselves are served from the repo folders via `../<FOLDER>/<file>`).
+5. If source PDFs/PPTs were added, renamed or removed: `python -I tools/build_sources.py` (feeds the 📂 Source files viewer; page↔file links live in `site/data/sourcemap.js` and are checked by `tools/qa.js`; the files themselves are served from the repo folders via `../<FOLDER>/<file>`).
 6. Update PROGRESS.md, commit with the trailer, push. Pages rebuild takes a few minutes.
 
 ## Hosting
