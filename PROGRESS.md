@@ -9,6 +9,7 @@
 | 4 Business Environment (MCQ) | done - 800 MCQs parsed from the PDFs with answer key |
 | 5 HRM (MCQ) | done - 202 MCQs (80 flagged extra, list in REVIEW_EXTRA_QUESTIONS.md) generated from PDF notes (Units 1-2 flagged "extra", no PDFs) |
 | 6 Office Management (MCQ) | done - 235 MCQs (28 flagged extra) |
+| 10 Confetti + sound + 15 badges (#/badges) | done |
 | 9 Welcome pop-up (Hi Astha), resume-last, streak, 3D cube + tilt cards | done |
 | 8 Expected-questions pages (#/expected/<subject>), QA pass (tools/qa.js) | done |
 | 7c Daily 20 mode (#/daily) + printable revision sheets (#/revision/<subject>) | done |

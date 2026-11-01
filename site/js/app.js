@@ -41,13 +41,16 @@ function record(id, m, ok) {
   store.set('stats', all);
   const w = store.get('wrong', {});
   const qk = id + '|' + m.n + '|' + m.q.slice(0, 40);
+  const wasWrong = !!w[qk];
   if (ok) delete w[qk]; else w[qk] = 1;
   store.set('wrong', w);
+  if (window.Rewards) window.Rewards.onAnswer(ok, wasWrong);
 }
-function sessionDone(id, score, total) {
+function sessionDone(id, score, total, kind) {
   const h = store.get('hist', []);
   h.push({ id, score, total, at: Date.now() });
   store.set('hist', h.slice(-30));
+  if (window.Rewards) window.Rewards.onSession(score, total, kind);
 }
 function progress() {
   setTheme('');
@@ -105,7 +108,7 @@ function daily() {
      <p>20 questions picked from your weak topics, wrong answers and unseen questions across all subjects.</p></div>
      <div class="bact"><a class="btn solid" href="#/daily" id="dn">New set</a></div></section><div id="qa" class="sp"></div>`);
   document.getElementById('dn').onclick = (e) => { e.preventDefault(); daily(); };
-  run(qs, qs[0]._id, true);
+  run(qs, qs[0]._id, true, 'daily');
 }
 
 // ---- Revision sheet: key points only, printable ----
@@ -187,6 +190,7 @@ function describe(hash) {
   const b = p[2];
   if (!a || a === 'search') return null;
   if (a === 'progress') return 'My progress';
+  if (a === 'badges') return 'Badges';
   if (a === 'daily') return 'Daily 20';
   if (a === 'revision' && S[b]) return S[b].title + ' · Revision sheet';
   if (a === 'expected' && S[b]) return S[b].title + ' · Expected questions';
@@ -201,6 +205,7 @@ function describe(hash) {
 function trackLast() {
   const label = describe(location.hash);
   if (label) store.set('last', { hash: location.hash, label, at: Date.now() });
+  if (window.Rewards) window.Rewards.onRoute(location.hash);
 }
 
 function setTheme(id) {
@@ -347,7 +352,7 @@ function mock(qs, secPerQ) {
     const skipped = ans.filter((a) => a < 0).length;
     const sid = location.hash.split('/')[1];
     qs.forEach((m, i) => { if (ans[i] >= 0) record(sid, m, ans[i] === m.a); });
-    sessionDone(sid, score, qs.length);
+    sessionDone(sid, score, qs.length, 'mock');
     const rows = Object.entries(byUnit).map(([u, v]) => '<tr><td>' + esc(u) + '</td><td>' + v.r + '</td><td>' + v.t + '</td></tr>').join('');
     box.innerHTML = '<h2>' + (auto ? 'Time up! ' : '') + 'Score: ' + score + '/' + qs.length + ' (' + Math.round((score / qs.length) * 100) + '%)</h2>' +
       '<p class="expl">Correct ' + score + ' · Wrong ' + (qs.length - score - skipped) + ' · Skipped ' + skipped + ' · Time used ' + fmt(qs.length * secPerQ - Math.max(0, left)) + '</p>' +
@@ -401,7 +406,7 @@ function mock(qs, secPerQ) {
   }, 1000);
 }
 
-function run(qs, sid, mixed) {
+function run(qs, sid, mixed, kind) {
   sid = sid || (location.hash.split('/')[1]);
   const box = document.getElementById('qa');
   let i = 0;
@@ -410,11 +415,11 @@ function run(qs, sid, mixed) {
   const show = () => {
     if (i >= qs.length) {
       const again = wrong.length ? '<button class="btn primary" id="rw">Retry wrong ones</button>' : '';
-      sessionDone(sid, score, qs.length);
+      sessionDone(sid, score, qs.length, kind);
       box.innerHTML = `<h2>Score: ${score}/${qs.length} (${Math.round((score / qs.length) * 100)}%)</h2><div class="row">${again}</div>${wrong.map((m) =>
         `<div class="q">${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}<b>${esc(m.q)}</b><div>Answer: <b>${esc(m.o[m.a])}</b></div><div class="expl">${esc(m.e || '')}</div></div>`).join('')}`;
       const rw = document.getElementById('rw');
-      if (rw) rw.onclick = () => run(wrong, sid, mixed);
+      if (rw) rw.onclick = () => run(wrong, sid, mixed, kind);
       return;
     }
     const m = qs[i];
@@ -472,6 +477,7 @@ function routeInner() {
   if (!a) return home();
   if (a === 'search') return search(b || '');
   if (a === 'progress') return progress();
+  if (a === 'badges' && window.Rewards) return window.Rewards.page();
   if (a === 'daily') return daily();
   if (a === 'revision') return revision(b);
   if (a === 'expected') return expected(b);
@@ -502,4 +508,4 @@ addEventListener('scroll', () => {
   topBtn.classList.toggle('show', h.scrollTop > 500);
 }, { passive: true });
 
-window.App = { S, store, esc, ICON, cubeHtml };
+window.App = { S, store, esc, ICON, cubeHtml, $, setTheme };

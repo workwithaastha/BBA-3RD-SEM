@@ -82,6 +82,7 @@
           <div><b>🔥 ${sk.streak}</b><span>day streak</span></div>
           <div><b>✅ ${ans}</b><span>answered</span></div>
           <div><b>🎯 ${ans ? Math.round((ok / ans) * 100) : 0}%</b><span>accuracy</span></div>
+          <div><b>🏅 ${window.Rewards ? window.Rewards.count() : 0}</b><span>badges</span></div>
         </div>
         ${resume}${lastQuiz}
         <div class="wbtns">
