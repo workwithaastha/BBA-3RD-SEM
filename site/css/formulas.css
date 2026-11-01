@@ -1,0 +1,39 @@
+/* Finance formula explorer */
+.ftools{position:sticky;top:56px;z-index:6;background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:16px;padding:10px 12px;margin:14px 0;box-shadow:var(--shadow)}
+#fsearch{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit}
+#fsearch:focus{outline:none;border-color:var(--a1);box-shadow:0 0 0 3px color-mix(in srgb,var(--a1) 25%,transparent)}
+.fchips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.fchips button{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:6px 12px;border-radius:99px;font:inherit;font-size:.88em;cursor:pointer;transition:.2s}
+.fchips button:hover{border-color:var(--a1);transform:translateY(-1px)}
+.fchips button.on{background:var(--grad);color:#fff;border-color:transparent}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:18px;margin:14px 0}
+.fcard{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-top:5px solid var(--a1);border-radius:18px;padding:16px;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;animation:rise .45s both}
+.fcard[hidden]{display:none}
+.fcard:hover{transform:translateY(-4px);box-shadow:0 18px 34px -16px var(--a1)}
+.fcard header{display:flex;gap:12px;align-items:center}
+.fcard h3{margin:0;color:var(--ink)}
+.fno{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;font-weight:700}
+.fgrp{font-size:.78em;color:var(--mute)}
+.fread{margin-left:auto;font-size:.8em;text-decoration:none;white-space:nowrap;padding:5px 10px;border-radius:99px;border:1px solid color-mix(in srgb,var(--a1) 40%,var(--line));color:var(--a1)}
+.fread:hover{background:var(--a1);color:#fff}
+.fformula{font-family:Cambria,'Times New Roman',serif;font-size:1.25em;font-weight:600;text-align:center;padding:14px 12px;border-radius:14px;color:#fff;background:var(--grad);box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);overflow-x:auto;overflow-wrap:normal}
+.fsym{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.fsym li{font-size:.82em;padding:3px 10px;border-radius:99px;background:color-mix(in srgb,var(--a1) 12%,transparent);border:1px solid color-mix(in srgb,var(--a1) 25%,transparent)}
+.fwhat{margin:0}
+.fex{background:color-mix(in srgb,var(--a2) 8%,var(--bg));border:1px solid color-mix(in srgb,var(--a2) 25%,var(--line));border-radius:14px;padding:10px 12px;display:grid;gap:6px}
+.step{display:flex;gap:8px;align-items:flex-start}
+.step i{flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--a2);color:#fff;font-size:.72em;font-style:normal;margin-top:3px}
+.fcols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.fcols{grid-template-columns:1fr}.fread{display:none}}
+.fwhen,.fwhere{border-radius:14px;padding:10px 12px;font-size:.92em}
+.fwhen{background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.3)}
+.fwhere{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3)}
+.fcols ul{margin:4px 0 0;padding-left:18px}
+.fwarn{border-radius:12px;padding:8px 12px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);font-size:.92em}
+.fcalc{border-radius:14px;padding:10px 12px;background:color-mix(in srgb,var(--a1) 8%,var(--card));border:1px dashed var(--a1)}
+.cin{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:8px 0}
+.cin label{display:grid;gap:3px;font-size:.78em;color:var(--mute)}
+.cin input{padding:7px 9px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit}
+.cin input:focus{outline:none;border-color:var(--a1)}
+.cout{font-weight:700;color:var(--a1);font-size:1.05em;min-height:1.4em}
+@media print{.ftools{display:none}.fcard{break-inside:avoid;box-shadow:none}.fformula{background:#eee!important;color:#000!important}.fcalc{display:none}}

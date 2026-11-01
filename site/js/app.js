@@ -128,6 +128,9 @@ function revision(id) {
         if (el.closest('table') && el.tagName !== 'TABLE') return;
         keep.push(el.outerHTML);
       });
+      tmp.querySelectorAll('.fcard').forEach((c) => {
+        keep.push('<div class="formula"><b>' + c.querySelector('h3').textContent + '</b><br>' + c.querySelector('.fformula').innerHTML + '</div>');
+      });
       if (keep.length) body += `<section class="rsec"><h2>${esc(u.title)}</h2>${keep.join('')}</section>`;
     }
   } else {
@@ -276,6 +279,7 @@ function unit(id, uid) {
      <article class="notes"><header class="uhead"><span class="num">${idx + 1}</span><h1>${esc(u.title)}</h1></header>${u.html}</article>
      <nav class="pn">${prev ? `<a class="btn" href="#/${id}/${prev.id}">← ${esc(prev.title)}</a>` : '<span></span>'}
      ${next ? `<a class="btn solid" href="#/${id}/${next.id}">${esc(next.title)} →</a>` : `<a class="btn solid" href="#/${id}">Back to ${esc(s.title)}</a>`}</nav>`);
+  if (typeof u.after === 'function') u.after();
 }
 
 function quiz(id, topic) {
