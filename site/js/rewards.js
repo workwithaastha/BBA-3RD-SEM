@@ -117,10 +117,54 @@
     if (fresh) store.set('badges', have);
   }
 
+
+  // ---------------- weekly summary ----------------
+  function weekData() {
+    const log = store.get('log', {});
+    const day = (off) => { const d = new Date(); d.setDate(d.getDate() - off); return d; };
+    const cur = []; let prevT = 0;
+    for (let i = 6; i >= 0; i--) { const d = day(i); const e = log[d.toISOString().slice(0, 10)] || { t: 0, c: 0, per: {} }; cur.push({ d, e }); }
+    for (let i = 7; i <= 13; i++) { const e = log[day(i).toISOString().slice(0, 10)]; if (e) prevT += e.t; }
+    let t = 0, c = 0; const per = {};
+    cur.forEach(({ e }) => { t += e.t; c += e.c; Object.entries(e.per).forEach(([id, v]) => { const p = per[id] || (per[id] = { t: 0, c: 0 }); p.t += v.t; p.c += v.c; }); });
+    const eligible = Object.entries(per).filter(([, v]) => v.t >= 5);
+    const best = eligible.sort((a, b) => b[1].c / b[1].t - a[1].c / a[1].t)[0];
+    const most = Object.entries(per).sort((a, b) => b[1].t - a[1].t)[0];
+    const weak = Object.entries(per).filter(([, v]) => v.t >= 5).sort((a, b) => a[1].c / a[1].t - b[1].c / b[1].t)[0];
+    return { cur, t, c, prevT, best, most, weak, activeDays: cur.filter(({ e }) => e.t).length };
+  }
+  function weekHtml(compact) {
+    const w = weekData();
+    const max = Math.max(1, ...w.cur.map(({ e }) => e.t));
+    const bars = w.cur.map(({ d, e }) => `<div class="wk"><i style="height:${Math.max(4, (e.t / max) * 100)}%" title="${e.t} answered"></i><span>${'SMTWTFS'[d.getDay()]}</span></div>`).join('');
+    const name = (id) => (S[id] ? S[id].title : id);
+    const delta = w.prevT ? Math.round(((w.t - w.prevT) / w.prevT) * 100) : null;
+    const lines = [];
+    if (w.best) lines.push(`⭐ Best: <b>${esc(name(w.best[0]))}</b> (${Math.round((w.best[1].c / w.best[1].t) * 100)}%)`);
+    if (w.weak && (!w.best || w.weak[0] !== w.best[0])) lines.push(`🎯 Needs work: <b>${esc(name(w.weak[0]))}</b> (${Math.round((w.weak[1].c / w.weak[1].t) * 100)}%)`);
+    if (w.most) lines.push(`📚 Most practised: <b>${esc(name(w.most[0]))}</b> (${w.most[1].t} Qs)`);
+    const body = w.t
+      ? `<div class="wkhead"><b>${w.t}</b> questions · <b>${Math.round((w.c / w.t) * 100)}%</b> correct · <b>${w.activeDays}</b>/7 days${delta === null ? '' : ` · <span class="${delta >= 0 ? 'up' : 'down'}">${delta >= 0 ? '▲' : '▼'} ${Math.abs(delta)}% vs last week</span>`}</div>
+         <div class="wkbars">${bars}</div><div class="wklines">${lines.map((l) => `<div>${l}</div>`).join('')}</div>`
+      : '<div class="wkhead">No questions answered in the last 7 days yet. Start a Daily 20 and light up this chart!</div>';
+    return `<section class="week${compact ? ' compact' : ''}"><h3>📅 This week</h3>${body}</section>`;
+  }
+
   // ---------------- hooks called by app.js ----------------
   const Rewards = {
-    onAnswer(ok, wasWrong) {
+    onAnswer(ok, wasWrong, sid) {
       sfx(ok ? 'ok' : 'bad');
+      const log = store.get('log', {});
+      const k = new Date().toISOString().slice(0, 10);
+      const e = log[k] || (log[k] = { t: 0, c: 0, per: {} });
+      e.t++;
+      if (ok) e.c++;
+      const ps = e.per[sid] || (e.per[sid] = { t: 0, c: 0 });
+      ps.t++;
+      if (ok) ps.c++;
+      const keys = Object.keys(log).sort();
+      while (keys.length > 60) delete log[keys.shift()];
+      store.set('log', log);
       if (ok && wasWrong) store.set('fixed', store.get('fixed', 0) + 1);
       check();
     },
@@ -155,7 +199,8 @@
       $(`<div class="crumb"><a href="#/">Home</a> / Badges</div>
          <section class="banner"><span class="bico">🏅</span><div><h1>Badges</h1>
          <p>${n} of ${BADGES.length} unlocked · answered ${c.answered} questions · ${c.streak}-day streak</p></div>
-         <div class="bact"><a class="btn solid" href="#/daily">🔥 Earn more - Daily 20</a></div></section>
+         <div class="bact"><a class="btn solid" href="#/daily">🔥 Earn more - Daily 20</a> <button class="btn" id="rst">↺ Reset badges &amp; progress</button></div></section>
+         ${weekHtml()}
          <div class="bgrid">${BADGES.map((b, i) => {
     const got = have[b.id];
     const v = Math.min(b.val(c), b.max);
@@ -163,8 +208,15 @@
       <div class="bface"><span class="bico2">${got ? b.ico : '🔒'}</span><h3>${esc(b.name)}</h3><p>${esc(b.desc)}</p>
       ${got ? `<small>Unlocked ${new Date(got).toLocaleDateString()}</small>` : `<div class="bar"><i style="width:${(v / b.max) * 100}%"></i></div><small>${v} / ${b.max}</small>`}</div></div>`;
   }).join('')}</div>`);
+      document.getElementById('rst').onclick = () => {
+        if (confirm('Reset ALL badges, streak, quiz history and progress stored in this browser? This cannot be undone.')) { Rewards.resetAll(); toast('<span class="tbig">↺</span><div><b>Reset done</b><br>Fresh start - go earn them again!</div>'); Rewards.page(); }
+      };
     },
     count() { return Object.keys(store.get('badges', {})).length; },
+    weekHtml,
+    resetAll() {
+      ['stats', 'wrong', 'hist', 'badges', 'flags', 'fixed', 'pages', 'days', 'log', 'last'].forEach((k) => store.set(k, k === 'fixed' ? 0 : (k === 'days' || k === 'hist' ? [] : {})));
+    },
     total: BADGES.length,
   };
   window.Rewards = Rewards;

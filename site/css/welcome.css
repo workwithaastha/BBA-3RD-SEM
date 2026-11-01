@@ -97,3 +97,21 @@
 .bface p{margin:0 0 8px;color:var(--mute);font-size:.88em}
 .bface small{color:var(--mute)}
 @media print{#toasts,#confetti,#snd{display:none!important}}
+
+/* ---------- weekly summary ---------- */
+.week{margin:14px 0;padding:14px 16px;border-radius:18px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);text-align:left;animation:rise .5s both}
+.week h3{margin:0 0 8px;color:var(--a1)}
+.wkhead{margin-bottom:8px}
+.wkhead .up{color:#16a34a;font-weight:700}.wkhead .down{color:#dc2626;font-weight:700}
+.wkbars{display:flex;gap:8px;align-items:flex-end;height:70px;margin:6px 0 8px}
+.wk{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
+.wk i{width:100%;max-width:34px;border-radius:8px 8px 3px 3px;background:var(--grad,linear-gradient(135deg,#6366f1,#8b5cf6));animation:grow .7s cubic-bezier(.2,.9,.25,1.2) backwards;transform-origin:bottom}
+.wk span{font-size:.72em;color:var(--mute)}
+@keyframes grow{from{transform:scaleY(0)}}
+.wklines{display:grid;gap:3px;font-size:.92em}
+#wel .week{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.35);color:#fff;box-shadow:none;margin:10px 0}
+#wel .week h3{color:#fde68a}
+#wel .wk span{color:rgba(255,255,255,.8)}
+#wel .wk i{background:linear-gradient(180deg,#fde68a,#f472b6)}
+#wel .wkhead .up{color:#bbf7d0}#wel .wkhead .down{color:#fecaca}
+@media print{.week{display:none}}

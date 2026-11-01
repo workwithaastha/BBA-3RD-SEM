@@ -84,6 +84,7 @@
           <div><b>🎯 ${ans ? Math.round((ok / ans) * 100) : 0}%</b><span>accuracy</span></div>
           <div><b>🏅 ${window.Rewards ? window.Rewards.count() : 0}</b><span>badges</span></div>
         </div>
+        ${window.Rewards ? window.Rewards.weekHtml(true) : ''}
         ${resume}${lastQuiz}
         <div class="wbtns">
           <button class="wbtn" id="wdaily">🔥 Daily 20</button>

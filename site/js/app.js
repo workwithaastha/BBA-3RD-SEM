@@ -44,7 +44,7 @@ function record(id, m, ok) {
   const wasWrong = !!w[qk];
   if (ok) delete w[qk]; else w[qk] = 1;
   store.set('wrong', w);
-  if (window.Rewards) window.Rewards.onAnswer(ok, wasWrong);
+  if (window.Rewards) window.Rewards.onAnswer(ok, wasWrong, id);
 }
 function sessionDone(id, score, total, kind) {
   const h = store.get('hist', []);
@@ -68,6 +68,7 @@ function progress() {
        <p>${tot.n ? `${tot.n} questions answered · ${Math.round((tot.c / tot.n) * 100)}% correct · ${hist.length} sessions` : 'Take a quiz to start tracking.'} · stored only in this browser</p></div>
        <div class="bact">${wrongCount ? '<button class="btn solid" id="pw">Practise my wrong answers (' + wrongCount + ')</button>' : ''}
        ${rows.length ? '<button class="btn" id="clr">Reset</button>' : ''}</div></section>
+     ${window.Rewards ? window.Rewards.weekHtml() : ''}
      <h2 class="sec">Weak topics (below 70%, at least 3 answers)</h2>
      ${weak.length ? `<div class="ugrid">${weak.map((r) => `<div class="ucard t-${r.id}"><span class="num">${r.p}%</span><span class="ut">${esc(S[r.id] ? S[r.id].title : r.id)} · ${esc(r.u)} · ${esc(r.t)}<small> ${r.c}/${r.n} correct</small></span></div>`).join('')}</div>` : '<p class="expl">No weak topics yet. Keep practising!</p>'}
      <h2 class="sec">All topics</h2>
