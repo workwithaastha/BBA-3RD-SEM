@@ -176,6 +176,33 @@ function expected(id) {
      ${hotHtml}`);
 }
 
+
+function cubeHtml() {
+  return '<div class="cube">' + ['💰', '📣', '🌍', '👥', '🗂️', '🎯'].map((e) => '<i>' + e + '</i>').join('') + '</div>';
+}
+
+function describe(hash) {
+  const p = hash.split('/').map(decodeURIComponent);
+  const a = p[1];
+  const b = p[2];
+  if (!a || a === 'search') return null;
+  if (a === 'progress') return 'My progress';
+  if (a === 'daily') return 'Daily 20';
+  if (a === 'revision' && S[b]) return S[b].title + ' · Revision sheet';
+  if (a === 'expected' && S[b]) return S[b].title + ' · Expected questions';
+  const sub = S[a];
+  if (!sub) return null;
+  if (!b) return sub.title;
+  if (b === 'quiz') return sub.title + ' · Quiz';
+  const u = sub.units.find((x) => x.id === b);
+  return u ? sub.title + ' · ' + u.title : sub.title;
+}
+
+function trackLast() {
+  const label = describe(location.hash);
+  if (label) store.set('last', { hash: location.hash, label, at: Date.now() });
+}
+
 function setTheme(id) {
   document.body.className = id ? 't-' + id : '';
 }
@@ -203,6 +230,7 @@ function home() {
         </div>
       </div>
       <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="scene hero-cube" aria-hidden="true">${cubeHtml()}</div>
     </section>
     <h2 class="sec">Pick a subject</h2>
     <div class="grid">${subs.map(([id, s], i) =>
@@ -436,7 +464,7 @@ function search(q) {
   $(`<h1>Search: ${esc(q)}</h1><div class="grid">${out.join('') || '<p>No results.</p>'}</div>`);
 }
 
-function route() {
+function routeInner() {
   clearInterval(mockTimer);
   const parts = location.hash.split('/').map(decodeURIComponent);
   const [, a, b] = parts;
@@ -450,6 +478,10 @@ function route() {
   if (b === 'quiz') return quiz(a, parts[3]);
   if (b) return unit(a, b);
   return subject(a);
+}
+function route() {
+  routeInner();
+  trackLast();
 }
 addEventListener('hashchange', route);
 route();
@@ -469,3 +501,5 @@ addEventListener('scroll', () => {
   prog.style.transform = 'scaleX(' + p + ')';
   topBtn.classList.toggle('show', h.scrollTop > 500);
 }, { passive: true });
+
+window.App = { S, store, esc, ICON, cubeHtml };
