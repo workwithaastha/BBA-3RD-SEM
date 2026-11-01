@@ -26,6 +26,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | 18 | Q&A coverage batches 3-4: every topic has short, medium and long answers | done |
 | 19 | Click-any-formula pop-up (48 formula cards) | done |
 | 20 | Agent.md / PROGRESS.md restructure | done |
+| 21 | Source files viewer (`#/<id>/files`): view / open / download the original PDFs, duplicate detection | done |
 | - | Final polish | pending user feedback |
 
 ## 2. Content counts
@@ -37,7 +38,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | HRM | concept page | 202 (80 extra) | - | 17 concept cards |
 | Office Management | concept page | 235 (28 extra) | - | 15 concept cards |
 
-Total MCQs: 1,452. Formula library: 48 cards (`window.FormulaLib`).
+Total MCQs: 1,452. Source files shown in the viewer: 47 (3 same-content duplicates flagged). Formula library: 48 cards (`window.FormulaLib`).
 
 ## 3. Architecture
 ```
@@ -45,11 +46,11 @@ site/
 ├── index.html        loads css, data, then js (ORDER MATTERS)
 ├── css/  style · theme (per-subject colours .t-<id>) · welcome · formulas · examqa · formulapop
 ├── js/   app.js (router, quizzes, progress, daily, revision, expected, search) · examqa.js · formulapop.js
-│         rewards.js · welcome.js          (app.js exposes window.App for them)
+│         rewards.js · welcome.js · sources.js   (app.js exposes window.App for them)
 └── data/ subject notes + MCQ files · finance-formulas.js · formulalib-extra.js · concepts.js
-          expected.js · examqa-finance*.js · examqa-marketing*.js
+          expected.js · sources.js (generated) · examqa-finance*.js · examqa-marketing*.js
 ```
-Script order: subject data → `finance-mcq` → `finance-formulas` → `formulalib-extra` → `marketing*` → `marketing-mcq` → `business-env`, `hrm`, `office-mgmt` → `concepts` → `js/examqa.js` → `examqa-*` → `expected` → `js/app.js` → `rewards.js` → `formulapop.js` → `welcome.js`.
+Script order: subject data → `finance-mcq` → `finance-formulas` → `formulalib-extra` → `marketing*` → `marketing-mcq` → `business-env`, `hrm`, `office-mgmt` → `concepts` → `js/examqa.js` → `examqa-*` → `expected` → `js/app.js` → `rewards.js` → `formulapop.js` → `sources.js` → `welcome.js` (`data/sources.js` loads after `expected.js`).
 
 ### Data shapes
 - Subject: `window.SUBJECTS[id] = { title, type:'notes'|'mcq', units:[{id,title,html,after?}], mcqs:[{u,t,n,q,o[4],a,e?,g?,x?,c?}] }` (`a` index of correct option; `g` generated; `x` extra; `c` case text).
@@ -57,7 +58,7 @@ Script order: subject data → `finance-mcq` → `finance-formulas` → `formula
 - Concept card: `{g,n,key,pts,what,ex[],when[],where[],mistake,ref,topic}`; formula card adds `f,sym,u,s?,calc?`.
 
 ### Routes (hash)
-`#/` · `#/<id>` · `#/<id>/<unit>` · `#/<id>/quiz[/<topic>]` · `#/<id>/qa` · `#/<id>/concepts` · `#/finance/formulas` · `#/revision/<id>` · `#/expected/<id>` · `#/sheet/<id>` · `#/progress` · `#/badges` · `#/daily` · `#/search/<q>`
+`#/` · `#/<id>` · `#/<id>/<unit>` · `#/<id>/quiz[/<topic>]` · `#/<id>/qa` · `#/<id>/files` (source PDFs) · `#/<id>/concepts` · `#/finance/formulas` · `#/revision/<id>` · `#/expected/<id>` · `#/sheet/<id>` · `#/progress` · `#/badges` · `#/daily` · `#/search/<q>`
 
 ### Features
 Notes viewer (prev/next, search, progress bar, themes) · quiz with filters, retry-wrong · mock exam (timer, navigator, flag, review) · Daily 20 · progress tracker, weak topics, weekly summary · 15 badges, confetti, sound · welcome modal with resume-last and streak · revision sheets, expected questions, last-night sheet · concept cards and formula explorer with calculators · Formula Finder quiz · click-any-formula pop-up · written Q&A bank with marks filter, predicted tags, revised tick, mock paper (presets + custom).
@@ -76,6 +77,7 @@ Notes viewer (prev/next, search, progress bar, themes) · quiz with filters, ret
 | `qa.js` | Automated QA (`issues: 0` required) |
 | `lenbias.js` | Correct-answer-is-longest check |
 | `qacover.js`, `topicmatrix.js` | Q&A coverage per unit and topic × marks |
+| `build_sources.py` | Scan the 5 subject folders → `site/data/sources.js` (size, pages, same-content duplicates). **Run after adding / renaming source files** |
 
 Rebuild: edit `tools/data_*.py` → `python -I tools/build_mcq.py` → `node tools/qa.js`.
 

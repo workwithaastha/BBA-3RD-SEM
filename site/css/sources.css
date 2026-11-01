@@ -1,0 +1,25 @@
+/* Source files viewer */
+.srcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:14px;margin:14px 0}
+.src{display:flex;gap:12px;padding:14px;border-radius:16px;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--a1);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s;animation:rise .4s both}
+.src[hidden]{display:none}
+.src:hover{transform:translateY(-3px);box-shadow:0 16px 30px -16px var(--a1)}
+.sico{flex:none;display:grid;place-items:center;width:46px;height:56px;border-radius:10px;background:color-mix(in srgb,var(--a1) 12%,transparent);font-size:26px}
+.sbody{min-width:0;flex:1}
+.sbody h3{margin:0 0 3px;font-size:1em;overflow-wrap:anywhere}
+.smeta{font-size:.8em;color:var(--mute)}
+.sdup{margin-top:4px;font-size:.78em;color:#b45309;background:rgba(245,158,11,.12);border-radius:8px;padding:2px 8px;display:inline-block}
+.sact{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.sact .btn{padding:6px 10px;font-size:.85em}
+#srcview{position:fixed;inset:0;z-index:140;display:flex;flex-direction:column;background:#0b1020;animation:fadein .2s both}
+.svbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 12px;background:#141a33;color:#fff}
+.svt{flex:1;min-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.svbtns{display:flex;gap:6px;flex-wrap:wrap}
+.svbtns button,.svbtns a{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;padding:6px 12px;border-radius:10px;font:inherit;font-size:.85em;cursor:pointer;text-decoration:none}
+.svbtns button:hover:not(:disabled),.svbtns a:hover{background:#fff;color:#111}
+.svbtns button:disabled{opacity:.35;cursor:not-allowed}
+#srcview iframe{flex:1;width:100%;border:0;background:#fff}
+.svimg{flex:1;overflow:auto;display:grid;place-items:center;background:#111}
+.svimg img{max-width:100%;height:auto}
+.svhint{margin:0;padding:5px 12px;font-size:.78em;background:#141a33;color:#aab}
+body.noscroll{overflow:hidden}
+@media print{#srcview{display:none!important}}

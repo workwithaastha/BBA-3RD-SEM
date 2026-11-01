@@ -204,6 +204,7 @@ function describe(hash) {
   if (!sub) return null;
   if (!b) return sub.title;
   if (b === 'quiz') return sub.title + ' · Quiz';
+  if (b === 'files') return sub.title + ' · Source files';
   const u = sub.units.find((x) => x.id === b);
   return u ? sub.title + ' · ' + u.title : sub.title;
 }
@@ -258,7 +259,7 @@ function subject(id) {
   const s = S[id];
   if (!s) return home();
   setTheme(id);
-  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>` + (s.units.some((u) => u.id === 'qa') ? ` <a class="btn solid" href="#/${id}/qa">✍️ Exam Q&amp;A</a> <a class="btn solid" href="#/sheet/${id}">🌙 Last-night sheet</a>` : '');
+  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>` + (s.units.some((u) => u.id === 'qa') ? ` <a class="btn solid" href="#/${id}/qa">✍️ Exam Q&amp;A</a> <a class="btn solid" href="#/sheet/${id}">🌙 Last-night sheet</a>` : '') + (window.SOURCES && window.SOURCES[id] ? ` <a class="btn solid" href="#/${id}/files">📂 Source files (${window.SOURCES[id].files.length})</a>` : '');
   const links = s.units.map((u, i) => `<a class="ucard" style="--d:${i * 45}ms" href="#/${id}/${u.id}">
       <span class="num">${i + 1}</span><span class="ut">${esc(u.title)}</span><span class="arr">→</span></a>`).join('');
   $(`<div class="crumb"><a href="#/">Home</a> / ${esc(s.title)}</div>
@@ -489,6 +490,7 @@ function routeInner() {
   if (a === 'revision') return revision(b);
   if (a === 'expected') return expected(b);
   if (a === 'sheet' && window.ExamQA) return window.ExamQA.sheet(b);
+  if (b === 'files' && window.Sources) return window.Sources.page(a);
   if (b === 'quiz') return quiz(a, parts[3]);
   if (b) return unit(a, b);
   return subject(a);
