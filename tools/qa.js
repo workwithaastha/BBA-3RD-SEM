@@ -3,7 +3,7 @@ const fs = require('fs'), path = require('path');
 const dir = path.join(__dirname, '..', 'site');
 const html = fs.readFileSync(path.join(dir, 'index.html'), 'utf8');
 global.window = {};
-for (const m of html.matchAll(/<script src="(data\/[^"]+)"/g)) require(path.join(dir, m[1]));
+for (const m of html.matchAll(/<script src="((?:data|js)\/[^"]+)"/g)) { if (m[1] === 'js/app.js' || m[1] === 'js/welcome.js' || m[1] === 'js/rewards.js') continue; require(path.join(dir, m[1])); }
 const S = window.SUBJECTS;
 const issues = [];
 const bad = (msg) => issues.push(msg);
@@ -41,6 +41,19 @@ for (const [id, s] of Object.entries(S)) {
     if (/undefined|NaN|\[object/.test(d)) bad(`${id}/${u.id}: contains undefined/NaN`);
     if (/[�]/.test(d)) bad(`${id}/${u.id}: replacement char`);
   }
+}
+// exam Q&A answers: tag balance + required fields
+for (const [id, list] of Object.entries((window.ExamQA && window.ExamQA.data) || {})) {
+  list.forEach((q, i) => {
+    const t = `${id} QA#${i + 1} (${q.m}m)`;
+    if (![2, 3, 5, 6, 10].includes(q.m)) bad(`${t}: odd marks`);
+    if (!q.q || !q.a || !q.u || !q.t) bad(`${t}: missing field`);
+    const o = (q.a.match(/<(div|table|ul|ol|p|h4|tr|td|th|b|i|sup|sub)/g) || []).length;
+    const c = (q.a.match(/<\/(div|table|ul|ol|p|h4|tr|td|th|b|i|sup|sub)>/g) || []).length;
+    if (o !== c) bad(`${t}: unbalanced tags ${o}/${c}`);
+    if (/undefined|\[object/.test(q.a)) bad(`${t}: undefined in answer`);
+  });
+  console.log(id + ' exam Q&A: ' + list.length + ' answers checked');
 }
 console.log(issues.length ? issues.join('\n') : 'QA: no issues');
 console.log('issues:', issues.length);

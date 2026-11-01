@@ -121,7 +121,7 @@ function revision(id) {
   let body = '';
   if (sub.type === 'notes') {
     for (const u of sub.units) {
-      if (u.id === 'concepts') continue;
+      if (u.id === 'concepts' || u.id === 'qa') continue;
       tmp.innerHTML = u.html;
       const keep = [];
       tmp.querySelectorAll('.box, .formula, table').forEach((el) => {
@@ -257,7 +257,7 @@ function subject(id) {
   const s = S[id];
   if (!s) return home();
   setTheme(id);
-  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>`;
+  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>` + (s.units.some((u) => u.id === 'qa') ? ` <a class="btn solid" href="#/${id}/qa">✍️ Exam Q&amp;A</a>` : '');
   const links = s.units.map((u, i) => `<a class="ucard" style="--d:${i * 45}ms" href="#/${id}/${u.id}">
       <span class="num">${i + 1}</span><span class="ut">${esc(u.title)}</span><span class="arr">→</span></a>`).join('');
   $(`<div class="crumb"><a href="#/">Home</a> / ${esc(s.title)}</div>
