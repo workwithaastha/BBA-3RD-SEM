@@ -37,3 +37,6 @@
 .cin input:focus{outline:none;border-color:var(--a1)}
 .cout{font-weight:700;color:var(--a1);font-size:1.05em;min-height:1.4em}
 @media print{.ftools{display:none}.fcard{break-inside:avoid;box-shadow:none}.fformula{background:#eee!important;color:#000!important}.fcalc{display:none}}
+
+.kidea{font-family:inherit;font-size:1.05em;line-height:1.5}
+.fprac{align-self:flex-start;text-decoration:none}

@@ -11,6 +11,7 @@ from data_hrm_more import HRM_MORE
 from data_om import OM
 from data_om_more import OM_MORE
 from data_fin import FIN
+from data_fin_more import FIN_MORE
 from data_mkt import MKT
 from overrides_hrm import HRM_OVR
 from overrides_om import OM_OVR
@@ -65,5 +66,5 @@ def build(rows, sid, title, seed, append=False, ovr=None):
 
 build(HRM + HRM_MORE, "hrm", "Human Resource Management", 11, ovr=HRM_OVR)
 build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR)
-build(FIN, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR)
+build(FIN + FIN_MORE, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR)
 build(MKT, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR)

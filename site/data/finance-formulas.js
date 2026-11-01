@@ -171,7 +171,7 @@
     </article>`;
 
   unit.html = `
-    <div class="box"><b>How to use this page:</b> every formula has its <b>symbols</b>, a <b>worked example</b> (numbers from your PDFs), <b>when</b> and <b>where</b> to use it, and a <b>common mistake</b>. Use the chips to filter by topic or type to search. Cards marked with 🎛️ have a live calculator.</div>
+    <div class="box"><b>How to use this page:</b> every formula has its <b>symbols</b>, a <b>worked example</b> (numbers from your PDFs), <b>when</b> and <b>where</b> to use it, and a <b>common mistake</b>. Use the chips to filter by topic or type to search. Cards marked with 🎛️ have a live calculator. Then test yourself with the <a href="#/finance/quiz/Which%20formula%3F"><b>🎯 Formula Finder quiz</b></a> - a situation is given and you pick the right formula.</div>
     <div class="ftools">
       <input id="fsearch" type="search" placeholder="Search a formula (e.g. NPV, EPS, annuity)…" aria-label="Search formulas">
       <div class="fchips" id="fchips"><button class="on" data-g="">All (${CARDS.length})</button>${groups.map((g) => `<button data-g="${g}">${GICON[g] || ''} ${g} (${CARDS.filter((c) => c.g === g).length})</button>`).join('')}</div>

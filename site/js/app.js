@@ -119,8 +119,9 @@ function revision(id) {
   setTheme(id);
   const tmp = document.createElement('div');
   let body = '';
-  if (sub.units.length) {
+  if (sub.type === 'notes') {
     for (const u of sub.units) {
+      if (u.id === 'concepts') continue;
       tmp.innerHTML = u.html;
       const keep = [];
       tmp.querySelectorAll('.box, .formula, table').forEach((el) => {
@@ -147,7 +148,7 @@ function revision(id) {
   }
   $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${esc(sub.title)}</a> / Revision sheet</div>
      <section class="banner"><span class="bico">📄</span><div><h1>${esc(sub.title)} · Revision sheet</h1>
-     <p>${sub.units.length ? 'Quick-revision boxes, formulas and key tables' : 'Every question with its correct answer, grouped by topic'} · use Print → Save as PDF</p></div>
+     <p>${sub.type === 'notes' ? 'Quick-revision boxes, formulas and key tables' : 'Every question with its correct answer, grouped by topic'} · use Print → Save as PDF</p></div>
      <div class="bact"><button class="btn solid" id="prt">🖨 Print / Save PDF</button></div></section>
      <div class="rev notes">${body || '<p>Nothing to show yet.</p>'}</div>`);
   document.getElementById('prt').onclick = () => window.print();
