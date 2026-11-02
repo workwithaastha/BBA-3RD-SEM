@@ -448,7 +448,12 @@ function run(qs, sid, mixed, kind) {
         box.querySelectorAll('.opt').forEach((x) => { x.disabled = true; if (+x.dataset.k === m.a) x.classList.add('ok'); });
         if (k === m.a) score++; else { b.classList.add('bad'); wrong.push(m); }
         record(mixed ? m._id : sid, m, k === m.a);
-        document.getElementById('ex').textContent = m.e || '';
+        const ex = document.getElementById('ex');
+        ex.className = 'expl ' + (k === m.a ? 'exok' : 'exbad');
+        ex.innerHTML = (k === m.a ? '<b>✅ Correct!</b> ' : '<b>❌ Wrong.</b> You chose <b>' + 'ABCD'[k] + '. ' + esc(m.o[k]) + '</b>. ') +
+          'Correct answer: <b>' + 'ABCD'[m.a] + '. ' + esc(m.o[m.a]) + '</b>.' + (m.e ? '<div class="why"><b>Why:</b> ' + esc(m.e) + '</div>' : '') +
+          (k !== m.a ? '<div class="why">Why <b>' + esc(m.o[k]) + '</b> is wrong: it is not the answer to this question' + (m.e ? ' - see the reason above.' : '.') + '</div>' : '');
+        if (window.Rewards && window.Rewards.face) window.Rewards.face(k === m.a);
         const n = document.createElement('button');
         n.className = 'btn primary';
         n.textContent = i + 1 < qs.length ? 'Next' : 'Finish';

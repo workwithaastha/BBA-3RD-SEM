@@ -219,6 +219,18 @@
     },
     total: BADGES.length,
   };
+  // happy / sad face pop-up after each practice answer (follows the same on/off toggle as sound)
+  Rewards.face = function (ok) {
+    if (!soundOn()) return;
+    document.querySelectorAll('.face').forEach((x) => x.remove());
+    const f = document.createElement('div');
+    f.className = 'face ' + (ok ? 'happy' : 'sad');
+    f.setAttribute('aria-hidden', 'true');
+    f.innerHTML = '<img src="img/' + (ok ? 'happy' : 'sad') + '.webp" alt="" width="240" height="240"><span>' + (ok ? 'Correct!' : 'Oops!') + '</span>';
+    document.body.appendChild(f);
+    setTimeout(() => f.classList.add('bye'), 1300);
+    setTimeout(() => f.remove(), 1700);
+  };
   window.Rewards = Rewards;
 
   // sound toggle in the header
@@ -226,8 +238,8 @@
   if (top) {
     const b = document.createElement('button');
     b.id = 'snd';
-    b.setAttribute('aria-label', 'Toggle sound');
-    const paint = () => { b.textContent = soundOn() ? '🔊' : '🔇'; b.title = soundOn() ? 'Sound on' : 'Sound off'; };
+    b.setAttribute('aria-label', 'Toggle sound and animations');
+    const paint = () => { b.textContent = soundOn() ? '🔊' : '🔇'; b.title = soundOn() ? 'Sound and animations on - click to turn off' : 'Sound and animations off - click to turn on'; };
     b.onclick = () => { store.set('sound', !soundOn()); paint(); if (soundOn()) sfx('ok'); };
     paint();
     top.insertBefore(b, document.getElementById('theme'));

@@ -142,3 +142,19 @@
   .wcard .wl2{display:block}
 }
 @media (min-width:900px) and (min-aspect-ratio:3/2) and (max-height:620px){.wcard .week{display:none}}
+
+/* answer feedback: happy / sad face pop-up and explanation */
+.face{position:fixed;left:50%;top:42%;z-index:120;transform:translate(-50%,-50%);pointer-events:none;text-align:center;animation:face-in .55s cubic-bezier(.2,1.4,.4,1) both}
+.face img{width:clamp(120px,24vh,240px);height:auto;filter:drop-shadow(0 18px 28px rgba(0,0,0,.45))}
+.face span{display:block;margin-top:4px;font-weight:800;font-size:1.4em;color:#fff;text-shadow:0 3px 12px rgba(0,0,0,.6)}
+.face.happy img{animation:face-hop .6s .5s ease-in-out 2}
+.face.sad img{animation:face-shake .5s .5s ease-in-out 2}
+.face.bye{animation:face-out .4s both}
+@keyframes face-in{from{opacity:0;transform:translate(-50%,-30%) scale(.2) rotate(-12deg)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes face-out{to{opacity:0;transform:translate(-50%,-80%) scale(.7)}}
+@keyframes face-hop{50%{transform:translateY(-22px) scale(1.08)}}
+@keyframes face-shake{25%{transform:translateX(-12px) rotate(-6deg)}75%{transform:translateX(12px) rotate(6deg)}}
+.expl.exok{border-left:4px solid #16a34a;background:rgba(22,163,74,.1);padding:8px 12px;border-radius:10px}
+.expl.exbad{border-left:4px solid #dc2626;background:rgba(220,38,38,.1);padding:8px 12px;border-radius:10px}
+.expl .why{margin-top:4px}
+@media (prefers-reduced-motion:reduce){.face,.face img{animation:none!important}}

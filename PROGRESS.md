@@ -29,6 +29,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | 22 | Source files linked to pages: "📄 Original files for this page" strip on every notes page and quiz unit, "Used for" tags in the viewer (`data/sourcemap.js`) | done |
 | 21 | Source files viewer (`#/<id>/files`): view / open / download the original PDFs, duplicate detection | done |
 | 23 | Physical Education & Yoga: 300 past-paper MCQs (3 papers), 20 concept cards, expected topics, source files (3 PDFs + syllabus image), exam-pattern note, 72 s/Q mock option | done |
+| 24 | Answer feedback: every practice answer shows correct answer + why; happy / sad webp face pop-up with animation; 🔊 toggle (top bar) switches sound AND animations, default on | done |
 | - | Final polish | pending user feedback |
 
 ## 2. Content counts
