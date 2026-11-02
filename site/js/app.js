@@ -392,7 +392,7 @@ function mock(qs, secPerQ) {
     const m = qs[cur];
     const answered = ans.filter((a) => a >= 0).length;
     const nav = qs.map((_, i) => '<button class="nb' + (i === cur ? ' cur' : '') + (ans[i] >= 0 ? ' ans' : '') + (flag[i] ? ' flg' : '') + '" data-i="' + i + '">' + (i + 1) + '</button>').join('');
-    const opts = m.o.map((o, k) => '<button class="opt' + (ans[cur] === k ? ' sel' : '') + '" data-k="' + k + '">' + 'ABCD'[k] + '. ' + esc(o) + '</button>').join('');
+    const opts = m.o.map((o, k) => '<button class="opt' + (ans[cur] === k ? ' sel' : '') + '" data-k="' + k + '"><span class="ol">' + 'ABCD'[k] + '</span><span class="ot">' + esc(o) + '</span></button>').join('');
     box.innerHTML = '<div class="mockbar"><span class="timer" id="tm">' + fmt(left) + '</span><span>Answered ' + answered + '/' + qs.length + '</span><button class="btn" id="sub">Submit exam</button></div>' +
       '<div class="navg">' + nav + '</div>' +
       '<div class="q">' + (m.c ? '<div class="box">' + esc(m.c) + '</div>' : '') + '<p><b>' + (cur + 1) + '/' + qs.length + '. ' + esc(m.q) + '</b></p>' + opts + '</div>' +
@@ -441,7 +441,7 @@ function run(qs, sid, mixed, kind) {
       <div class="q">${m.t ? `<span class="tag">${esc(m.u)} · ${esc(m.t)}</span>` : ''}${m.x ? ' <span class="tag gen">extra: not in PDFs</span>' : m.g ? ' <span class="tag gen">generated from PDF notes</span>' : ''}${m.p ? ` <span class="tag gen">📝 ${esc(m.p)}</span>` : ''}${m.k ? ' <span class="tag gen">⚠ answer not sure</span>' : ''}
       ${m.t || m.g ? '' : ''}
       ${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}
-      <p><b>${i + 1}/${qs.length}. ${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt" data-k="${k}">${'ABCD'[k]}. ${esc(o)}</button>`).join('')}<div class="expl" id="ex"></div></div>`;
+      <p><b>${i + 1}/${qs.length}. ${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt" data-k="${k}"><span class="ol">${'ABCD'[k]}</span><span class="ot">${esc(o)}</span></button>`).join('')}<div class="expl" id="ex"></div></div>`;
     box.querySelectorAll('.opt').forEach((b) => {
       b.onclick = () => {
         const k = +b.dataset.k;
