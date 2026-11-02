@@ -9,6 +9,7 @@ body{background:radial-gradient(1200px 500px at 10% -10%,color-mix(in srgb,var(-
 .t-business-env{--a1:#3b82f6;--a2:#06b6d4}
 .t-hrm{--a1:#8b5cf6;--a2:#d946ef}
 .t-office-mgmt{--a1:#f59e0b;--a2:#ef4444}
+.t-physical-education{--a1:#14b8a6;--a2:#84cc16}
 
 /* header */
 .top{background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid color-mix(in srgb,var(--a1) 30%,var(--line));box-shadow:0 2px 14px -8px var(--a1)}

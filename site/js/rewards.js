@@ -82,7 +82,7 @@
     { id: 'mock', ico: '📝', name: 'Exam Ready', desc: 'Finish a mock exam', val: (c) => (c.flags.mock ? 1 : 0), max: 1 },
     { id: 'daily', ico: '☀️', name: 'Daily Hero', desc: 'Finish a Daily 20', val: (c) => (c.flags.daily ? 1 : 0), max: 1 },
     { id: 'fixer', ico: '🛠️', name: 'Mistake Fixer', desc: 'Get 10 earlier mistakes right', val: (c) => c.fixed, max: 10 },
-    { id: 'all', ico: '🌈', name: 'All-Rounder', desc: 'Answer 10+ questions in every subject', val: (c) => c.subjects, max: 5 },
+    { id: 'all', ico: '🌈', name: 'All-Rounder', desc: 'Answer 10+ questions in every subject', val: (c) => c.subjects, max: 6 },
     { id: 'explorer', ico: '🧭', name: 'Explorer', desc: 'Open a revision sheet, expected questions and progress', val: (c) => c.pages, max: 3 },
   ];
 

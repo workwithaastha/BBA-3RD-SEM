@@ -14,6 +14,7 @@ FOLDERS = {
     "business-env": "BUSINESS ENV",
     "hrm": "HRM",
     "office-mgmt": "OFFICE MANG",
+    "physical-education": "Physical Education",
 }
 EXT = {".pdf", ".ppt", ".pptx", ".doc", ".docx", ".xls", ".xlsx", ".txt", ".png", ".jpg", ".jpeg"}
 

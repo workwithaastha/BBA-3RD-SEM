@@ -67,5 +67,14 @@
     'q:Unit 1': mk('o_u1', 'o_ppt'), 'q:Unit 2': mk('o_auto', 'o_a2'), 'q:Unit 3': mk('o_forms', 'o_formsd'), 'q:Unit 4': mk('o_u4'),
   };
 
-  window.SOURCEMAP = { finance, marketing, 'business-env': be, hrm, 'office-mgmt': office };
+  const P = {
+    p25: '2025-26 paper.pdf', pB: 'Z040401T-B.pdf', p24: 'bsc-bba-4-sem-physical-education-and-yoga-z040401-set-d-2024.pdf', syl: 'WhatsApp Image 2026-11-02 at 9.29.58 AM.jpeg',
+  };
+  const pe = {
+    concepts: [P.syl, P.p25, P.pB, P.p24],
+    'q:Unit I': [P.syl, P.p25, P.pB, P.p24], 'q:Unit II': [P.syl, P.p25, P.pB, P.p24], 'q:Unit III': [P.syl, P.p25, P.pB, P.p24],
+    'q:Unit IV': [P.syl, P.p25, P.pB, P.p24], 'q:Sports & General': [P.p24, P.pB],
+  };
+
+  window.SOURCEMAP = { finance, marketing, 'business-env': be, hrm, 'office-mgmt': office, 'physical-education': pe };
 })();

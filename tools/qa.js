@@ -26,7 +26,7 @@ for (const [id, s] of Object.entries(S)) {
     const lens = m.o.map((o) => o.length);
     if (lens[m.a] === Math.max(...lens) && Math.max(...lens) > 1.6 * (lens.reduce((a, b) => a + b) - Math.max(...lens)) / 3) longest++;
     pos[m.a]++;
-    if (/\b(all of the above|none of the above)\b/i.test(m.o.join(' '))) bad(`${tag}: all/none of the above`);
+    if (!m.p && /\b(all of the above|none of the above)\b/i.test(m.o.join(' '))) bad(`${tag}: all/none of the above`);
   }
   const n = s.mcqs.length;
   if (n) console.log(`${id}: ${n} MCQs | answer positions ${pos.join('/')} | correct is clearly longest in ${longest} (${Math.round(100 * longest / n)}%)`);

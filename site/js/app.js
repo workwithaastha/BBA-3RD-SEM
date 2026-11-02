@@ -19,15 +19,19 @@ document.getElementById('search').addEventListener('input', (e) => {
   location.hash = q.length > 1 ? '#/search/' + encodeURIComponent(q) : '#/';
 });
 
-const ICON = { finance: '💰', marketing: '📣', 'business-env': '🌍', hrm: '👥', 'office-mgmt': '🗂️' };
+const ICON = { finance: '💰', marketing: '📣', 'business-env': '🌍', hrm: '👥', 'office-mgmt': '🗂️', 'physical-education': '🧘' };
 const BLURB = {
   finance: 'TVM, bonds & stocks, capital budgeting, leverage',
   marketing: 'Core concepts, consumer behaviour, research, STP',
   'business-env': 'PESTLE, LPG, ethics, CSR, case-based questions',
   hrm: 'HRP, appraisal, compensation, industrial relations',
   'office-mgmt': 'Filing, secretarial practice, forms, meetings',
+  'physical-education': 'Fitness, obesity, yoga & asanas, traditional games, recreation',
 };
 
+const PATTERN = {
+  'physical-education': '<b>Real paper pattern</b> (from the past papers): 100 MCQs in the booklet, answer any 75 on the OMR sheet · 75 marks · 90 minutes · no negative marking. Practise it: Mock exam, 75 Qs, 72 s / Q. The marked answers come from the syllabus and standard knowledge - the papers have no answer key.',
+};
 
 // ---- progress tracker (browser only, localStorage) ----
 function topicKey(id, m) { return id + '|' + m.u + '|' + (m.t || ''); }
@@ -298,9 +302,9 @@ function quiz(id, topic) {
        <select id="qn" aria-label="Number of questions"><option value="10">10 Qs</option><option value="25">25 Qs</option><option value="50">50 Qs</option><option value="0">All</option></select>
        <label><input type="checkbox" id="qs" checked> Shuffle</label>
        <select id="qm" aria-label="Mode"><option value="p">Practice (instant answers)</option><option value="m">Mock exam (timed, answers at the end)</option></select>
-       <select id="qd" aria-label="Time per question"><option value="30">30 s / Q</option><option value="45">45 s / Q</option><option value="60" selected>60 s / Q</option><option value="90">90 s / Q</option></select>
+       <select id="qd" aria-label="Time per question"><option value="30">30 s / Q</option><option value="45">45 s / Q</option><option value="60" selected>60 s / Q</option><option value="72">72 s / Q (75 Qs = 90 min)</option><option value="90">90 s / Q</option></select>
        <button class="btn primary" id="go">Start</button>
-     </div><p class="expl" id="qc"></p><div id="srcstrip"></div><div id="qa"></div>`);
+     </div>${PATTERN[id] ? `<p class="box">${PATTERN[id]}</p>` : ''}<p class="expl" id="qc"></p><div id="srcstrip"></div><div id="qa"></div>`);
   const pool = () => {
     const u = document.getElementById('qu').value;
     const t = document.getElementById('qt').value;
@@ -434,7 +438,7 @@ function run(qs, sid, mixed, kind) {
     }
     const m = qs[i];
     box.innerHTML = `<div class="bar"><i style="width:${(i / qs.length) * 100}%"></i></div>
-      <div class="q">${m.t ? `<span class="tag">${esc(m.u)} · ${esc(m.t)}</span>` : ''}${m.x ? ' <span class="tag gen">extra: not in PDFs</span>' : m.g ? ' <span class="tag gen">generated from PDF notes</span>' : ''}
+      <div class="q">${m.t ? `<span class="tag">${esc(m.u)} · ${esc(m.t)}</span>` : ''}${m.x ? ' <span class="tag gen">extra: not in PDFs</span>' : m.g ? ' <span class="tag gen">generated from PDF notes</span>' : ''}${m.p ? ` <span class="tag gen">📝 ${esc(m.p)}</span>` : ''}${m.k ? ' <span class="tag gen">⚠ answer not sure</span>' : ''}
       ${m.t || m.g ? '' : ''}
       ${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}
       <p><b>${i + 1}/${qs.length}. ${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt" data-k="${k}">${'ABCD'[k]}. ${esc(o)}</button>`).join('')}<div class="expl" id="ex"></div></div>`;

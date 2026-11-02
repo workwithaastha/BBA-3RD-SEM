@@ -4,7 +4,7 @@ Short rulebook for Claude in this repo. **Read this first, then [PROGRESS.md](PR
 
 ## Goal
 Exam-prep website for BBA 3rd Sem, **pure HTML + CSS + vanilla JS** (no frameworks, no build step), hosted on GitHub Pages. Student: Astha.
-Written exams: **Finance, Marketing**. MCQ exams: **Business Environment, HRM, Office Management**.
+Written exams: **Finance, Marketing**. MCQ exams: **Business Environment, HRM, Office Management, Physical Education & Yoga**.
 
 ## Subjects & folders
 | Folder | Subject | Exam |
@@ -14,6 +14,7 @@ Written exams: **Finance, Marketing**. MCQ exams: **Business Environment, HRM, O
 | `BUSINESS ENV/` | Business Environment & Ethics | MCQ |
 | `HRM/` | Human Resource Management | MCQ |
 | `OFFICE MANG/` | Office Management | MCQ |
+| `Physical Education/` | Physical Education & Yoga (co-curricular, 75 marks, 90 min, 100 MCQs / answer 75) | MCQ (past papers only) |
 
 Source PDFs stay untouched. `tools/` = generators and checkers, `site/` = deployable app.
 
@@ -29,7 +30,7 @@ Source PDFs stay untouched. `tools/` = generators and checkers, `site/` = deploy
 9. **Source files**: the original PDFs/PPTs are viewable on the site (`#/<id>/files`, "📂 Source files") and linked from every notes page and quiz unit ("📄 Original files for this page"). Whenever a source file is added, renamed or removed, run `python -I tools/build_sources.py` and update `site/data/sourcemap.js` (page ↔ file links). Never rename or edit the PDFs themselves without telling the user.
 
 ## Workflow
-1. Edit sources: MCQs → `tools/data_*.py` (+ `overrides_*.py`); notes / Q&A / cards → `site/data/*.js`; UI → `site/js|css`.
+1. Edit sources: MCQs → `tools/data_*.py` (+ `overrides_*.py`; Physical Education = `data_pe_{a,b,d}.py` → `python -I tools/build_pe.py`, keeps original option order); notes / Q&A / cards → `site/data/*.js`; UI → `site/js|css`.
 2. If MCQs changed: `python -I tools/build_mcq.py`.
 3. Check: `node --check <file>` · `node tools/qa.js` (**must be `issues: 0`**) · `node tools/topicmatrix.js` (no `⚠`).
 4. Test behaviour with jsdom installed in the scratchpad (not the repo). jsdom fires `hashchange` itself: don't dispatch it manually, wait ~80 ms after setting `location.hash`.
@@ -48,5 +49,7 @@ GitHub Pages, legacy mode (branch `main`, path `/`); root `index.html` redirects
 
 ## Where things are
 Architecture, routes, data shapes, storage keys, tools, PDFs read, assumptions and open questions: **PROGRESS.md**. Extra MCQs for the user to verify: `REVIEW_EXTRA_QUESTIONS.md`.
+
+Physical Education: the 3 past papers have **no answer key** - marked answers are my own (31 flagged "not sure", listed in `REVIEW_PE_ANSWERS.md`). Never present them as official.
 
 Feature map (all built): notes · quiz / mock exam / Daily 20 · progress, badges, weekly summary · welcome pop-up with resume-last · revision, expected, last-night sheets · concept cards, Finance formula explorer, click-any-formula pop-up · written Q&A banks (Finance, Marketing) with mock paper · **source files viewer with page ↔ file links**.

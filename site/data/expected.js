@@ -120,5 +120,32 @@ window.EXPECTED = {
       'Draft a notice, agenda and minutes for a Board meeting.',
       'Short notes: quorum, proxy, poll, special resolution, minutes book, casting vote.'] },
   ],
+  'physical-education': [
+    { h: 'Unit I · Physical Education (meaning, aim, India)', t: 'Meaning & aim', q: [
+      'Meaning, aim and objectives of PE; J.F. Williams definition; "man in motion".',
+      'Misconceptions about PE (only for athletes / boys, only entertainment).',
+      'Need, importance and scope of PE in modern society (sports, yoga, recreation).',
+      'PE in India before and after independence; 1882 Commission, YMCA Madras 1920, LNIPE Gwalior, NIS Patiala, SAI.'] },
+    { h: 'Unit II · Fitness, weight management, lifestyle', t: 'Components of fitness', q: [
+      'Components of fitness: health-related (5) vs skill-related; define strength, endurance, flexibility, agility, speed, balance, body composition.',
+      'Fitness vs wellness (WHO meaning).',
+      'Obesity: meaning, causes, management, health problems; WHO BMI categories (30 and above = obese).',
+      'Healthy lifestyle: balanced diet, exercise, rest; sedentary lifestyle; role of physical activity.',
+      'Nutrition: balanced diet, vitamin D, iron, fibre, carbohydrate as main energy source.'] },
+    { h: 'Unit III · Yoga and meditation', t: 'Yoga basics', q: [
+      'Meaning and origin of yoga (yuj, India); Patanjali Yoga Sutra; eight limbs of Ashtanga yoga; yama and niyama.',
+      'Asana names and meanings: Bhujanga, Nauka, Hala, Vajra, Padma, Tada, Dhanu, Makara, Shava; Surya Namaskar.',
+      'Pranayama: puraka, kumbhaka, rechaka; Anulom-Vilom, Bhastrika, Kapalbhati, Ujjayi; pranayama vs deep breathing.',
+      'Asana vs physical exercise; yoga and mental health, value education and sports.',
+      'Shatkarma: Neti, Trataka, Dhauti, Nauli, Basti, Kapalbhati; International Day of Yoga (21 June).'] },
+    { h: 'Unit IV · Traditional games and recreation', t: 'Traditional games', q: [
+      'Gilli-Danda, Kanche (marbles), Stapu (hopscotch), Gatte - equipment, rules, benefits.',
+      'Importance and benefits of traditional games; how to design one.',
+      'Recreation: meaning, scope, general principles, types (indoor / outdoor), aerobics and Zumba.'] },
+    { h: 'Sports GK (asked in the papers)', t: 'Olympics', q: [
+      'Olympics: ancient (Zeus), first modern (Athens 1896), motto, interval; first Asian Games 1951.',
+      'Team sizes, marathon distance, Arjuna Award, National Sports Day, LNIPE / NIS / SAI.',
+      'Anatomy and health facts: muscles (3 types), heart rate 72, body temperature 37 C, CPR 10 seconds.'] },
+  ],
   'business-env': [],
 };
