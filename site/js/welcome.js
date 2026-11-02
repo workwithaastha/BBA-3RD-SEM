@@ -74,10 +74,11 @@
       <div class="wbg" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
       <div class="wcard" id="wcard">
         <button class="wx" id="wclose" aria-label="Close">×</button>
-        <div class="scene">${cubeHtml()}</div>
+        <div class="wleft"><div class="scene">${cubeHtml()}</div>
         <h2 id="welh">Hi ${esc(NAME)} <span class="wave">👋</span></h2>
         <p class="wl1">What's up? <b>Let's learn!</b></p>
-        <p class="wl2">${greeting()}${first ? ' - welcome to your exam prep' : ' - welcome back'}. ${QUOTES[Math.floor(Math.random() * QUOTES.length)]}</p>
+        <p class="wl2">${greeting()}${first ? ' - welcome to your exam prep' : ' - welcome back'}. ${QUOTES[Math.floor(Math.random() * QUOTES.length)]}</p></div>
+        <div class="wright">
         <div class="wstats">
           <div><b>🔥 ${sk.streak}</b><span>day streak</span></div>
           <div><b>✅ ${ans}</b><span>answered</span></div>
@@ -92,6 +93,7 @@
           <button class="wbtn ghost" id="wstart">${last ? 'Start fresh' : 'Let\'s go →'}</button>
         </div>
         <div class="wchips">${Object.entries(S).map(([id, s]) => `<a class="wchip t-${id}" href="#/${id}">${ICON[id] || '📘'} ${esc(s.title.split(' ').slice(0, 2).join(' '))}</a>`).join('')}</div>
+        </div>
       </div>`;
     document.body.appendChild(el);
 

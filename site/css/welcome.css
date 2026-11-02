@@ -126,5 +126,19 @@
 .wstats{margin-bottom:clamp(6px,1.5vh,14px)}
 .wstats div{padding:clamp(4px,1.2vh,10px) 6px}
 .wbtn{padding:clamp(7px,1.5vh,11px) 16px}
-@media (max-height:760px){.wcard .week{display:none}}
+@media (max-height:760px) and (max-width:899px){.wcard .week{display:none}}
 @media (max-height:600px){.wcard .wl2,.wcard .wchips{display:none}}
+
+/* landscape: two columns, never scrolls on wide screens */
+@media (min-width:900px) and (min-aspect-ratio:3/2){
+  #wel{overflow:hidden}
+  .wcard{display:grid;grid-template-columns:minmax(240px,.8fr) 1.4fr;gap:clamp(14px,2.5vw,40px);align-items:center;width:min(1100px,96vw);max-height:94vh;font-size:clamp(13px,1.9vh,18px)}
+  .wleft{display:flex;flex-direction:column;justify-content:center;align-items:center}
+  .wright{min-width:0}
+  .wcard .scene{--cs:clamp(70px,16vh,130px)}
+  .wcard h2{font-size:clamp(1.6rem,7vh,3rem)}
+  .wcard .week{margin:8px 0;padding:8px 12px}
+  .wcard .wkbars{height:clamp(36px,7vh,70px)}
+  .wcard .wl2{display:block}
+}
+@media (min-width:900px) and (min-aspect-ratio:3/2) and (max-height:620px){.wcard .week{display:none}}
