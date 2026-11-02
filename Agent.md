@@ -25,8 +25,8 @@ Source PDFs stay untouched. `tools/` = generators and checkers, `site/` = deploy
 4. Analyse **every PDF** (`pdftotext -layout`; image-only PDFs → render with PyMuPDF). Log files read in PROGRESS.md.
 5. **Never invent facts.** Content comes from the PDFs; anything else is marked `[extra]` (notes) or tagged "extra: not in PDFs" (MCQs). Ask the user when unclear.
 6. Tech: relative paths only, light/dark, mobile friendly, container max-width **1450px**, mobile breakpoint 640px, `prefers-reduced-motion` respected, works when localStorage is blocked.
-7. MCQs: exactly 4 options, one correct, no "all/none of the above", correct answer not clearly the longest (`node tools/lenbias.js <subject> 1.8`).
-8. Never commit secrets. Keep `.gitignore` (`__pycache__/`).
+7. MCQs: exactly 4 options, one correct, no "all/none of the above", correct answer not clearly the longest (`node tools/lenbias.js <subject> 1.8`). Exception: real past-paper MCQs (Physical Education, flag `p`) keep the paper's original options and order.
+8. Never commit secrets. Keep `.gitignore` (`__pycache__/`, `*.tmp.pdf`).
 9. **Source files**: the original PDFs/PPTs are viewable on the site (`#/<id>/files`, "📂 Source files") and linked from every notes page and quiz unit ("📄 Original files for this page"). Whenever a source file is added, renamed or removed, run `python -I tools/build_sources.py` and update `site/data/sourcemap.js` (page ↔ file links). Never rename or edit the PDFs themselves without telling the user.
 
 ## Workflow
@@ -52,4 +52,10 @@ Architecture, routes, data shapes, storage keys, tools, PDFs read, assumptions a
 
 Physical Education: the 3 past papers have **no answer key** - marked answers are my own (31 flagged "not sure", listed in `REVIEW_PE_ANSWERS.md`). Never present them as official.
 
-Feature map (all built): notes · quiz / mock exam / Daily 20 · progress, badges, weekly summary · welcome pop-up with resume-last · revision, expected, last-night sheets · concept cards, Finance formula explorer, click-any-formula pop-up · written Q&A banks (Finance, Marketing) with mock paper · **source files viewer with page ↔ file links**.
+Feature map (all built): notes · quiz / mock exam / Daily 20 · progress, badges, weekly summary · welcome pop-up with resume-last · revision, expected, last-night sheets · concept cards, Finance formula explorer, click-any-formula pop-up · written Q&A banks (Finance, Marketing) with mock paper · source files viewer with page ↔ file links · **answer feedback** (correct answer + why, happy/sad webp pop-up, 🔊 toggle = sound + animations, default on) · **UI layer** (`css/ui2.css`, `js/ui2.js`: quick tiles, progress rings, subject strip, mobile bottom tab bar, quiz keyboard shortcuts A-D / 1-4 / Enter) · welcome pop-up fits any screen (landscape two columns) · Physical Education PDF (`tools/make_pe_pdf.py` → `PHYSICAL_EDUCATION_MCQ_Answers_and_Predicted_Sets.pdf`: all 300 MCQs + 3 predicted sets of 50).
+
+## Recent user preferences
+- Do exactly what is asked; ask only when truly unclear (once, with options).
+- Images on the site: compress and use `.webp` (`site/img/`); originals stay in the repo root.
+- Layouts must fit any screen without scrolling where possible (welcome pop-up) and work on phones.
+- After each feature: update this file and PROGRESS.md, run `node tools/qa.js`, commit with the trailer, push.
