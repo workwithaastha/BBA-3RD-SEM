@@ -115,3 +115,16 @@
 #wel .wk i{background:linear-gradient(180deg,#fde68a,#f472b6)}
 #wel .wkhead .up{color:#bbf7d0}#wel .wkhead .down{color:#fecaca}
 @media print{.week{display:none}}
+
+/* fit the pop-up to any screen: size by the smaller of width / height */
+#wel{padding:min(16px,2vh) 16px}
+.wcard{--cs:clamp(56px,13vh,110px);width:min(clamp(320px,52vh + 20vw,760px),100%);padding:clamp(12px,3vh,36px) clamp(14px,3vw,36px);font-size:clamp(13px,1.05vw + 1.1vh,19px)}
+.wcard .scene{margin:0 auto clamp(4px,1.6vh,18px)}
+.wcard h2{font-size:clamp(1.4rem,6vh,2.8rem)}
+.wl1{font-size:clamp(1rem,3.4vh,1.6rem);margin:2px 0}
+.wl2{margin:2px 0 clamp(6px,1.8vh,16px)}
+.wstats{margin-bottom:clamp(6px,1.5vh,14px)}
+.wstats div{padding:clamp(4px,1.2vh,10px) 6px}
+.wbtn{padding:clamp(7px,1.5vh,11px) 16px}
+@media (max-height:760px){.wcard .week{display:none}}
+@media (max-height:600px){.wcard .wl2,.wcard .wchips{display:none}}
