@@ -226,7 +226,7 @@
     const f = document.createElement('div');
     f.className = 'face ' + (ok ? 'happy' : 'sad');
     f.setAttribute('aria-hidden', 'true');
-    f.innerHTML = '<img src="img/' + (ok ? 'happy' : 'sad') + '.webp" alt="" width="240" height="240"><span>' + (ok ? 'Correct!' : 'Oops!') + '</span>';
+    f.innerHTML = '<img src="img/' + (ok ? 'happy' : 'sad') + '.webp" alt="" width="440" height="440"><span>' + (ok ? 'Correct!' : 'Oops!') + '</span>';
     document.body.appendChild(f);
     setTimeout(() => f.classList.add('bye'), 1300);
     setTimeout(() => f.remove(), 1700);
