@@ -81,6 +81,7 @@ Notes viewer (prev/next, search, progress bar, themes) · quiz with filters, ret
 | `qa.js` | Automated QA (`issues: 0` required) |
 | `lenbias.js` | Correct-answer-is-longest check |
 | `qacover.js`, `topicmatrix.js` | Q&A coverage per unit and topic × marks |
+| `make_pe_pdf.py` | Physical Education PDF: all 300 MCQs with answers + 3 predicted sets of 50 (`PHYSICAL_EDUCATION_MCQ_Answers_and_Predicted_Sets.pdf`) |
 | `data_pe_{a,b,d}.py`, `build_pe.py` | Physical Education past-paper rows (original option order, answer letter, explanation, paper Q no.) → `physical-education.js` + `REVIEW_PE_ANSWERS.md` |
 | `build_sources.py` | Scan the 6 subject folders → `site/data/sources.js` (size, pages, same-content duplicates). **Run after adding / renaming source files** |
 
