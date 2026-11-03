@@ -484,9 +484,12 @@ function run(qs, sid, mixed, kind) {
         record(mixed ? m._id : sid, m, k === m.a);
         const ex = document.getElementById('ex');
         ex.className = 'expl ' + (k === m.a ? 'exok' : 'exbad');
+        const meta = /question \d+|Unit \d Q\d|asks for|statement given/i.test(m.e || '');
+        const why = m.e && !meta ? m.e.replace(/^\(\?\)\s*Not sure - check with your teacher\.\s*/, '') : '';
+        const wy = m.w && m.w[k] ? m.w[k] : '';
         ex.innerHTML = (k === m.a ? '<b>✅ Correct!</b> ' : '<b>❌ Wrong.</b> You chose <b>' + 'ABCD'[k] + '. ' + esc(m.o[k]) + '</b>. ') +
-          'Correct answer: <b>' + 'ABCD'[m.a] + '. ' + esc(m.o[m.a]) + '</b>.' + (m.e ? '<div class="why"><b>Why:</b> ' + esc(m.e) + '</div>' : '') +
-          (k !== m.a ? '<div class="why">Why <b>' + esc(m.o[k]) + '</b> is wrong: it is not the answer to this question' + (m.e ? ' - see the reason above.' : '.') + '</div>' : '');
+          'Correct answer: <b>' + 'ABCD'[m.a] + '. ' + esc(m.o[m.a]) + '</b>.' + (why ? '<div class="why"><b>Why it is correct:</b> ' + esc(why) + '</div>' : '') +
+          (k !== m.a && wy ? '<div class="why"><b>Why your answer is wrong:</b> ' + esc(wy) + '</div>' : '');
         if (window.Rewards && window.Rewards.face) window.Rewards.face(k === m.a);
         const n = document.createElement('button');
         n.className = 'btn primary';
