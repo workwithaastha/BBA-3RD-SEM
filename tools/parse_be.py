@@ -136,6 +136,28 @@ def main():
                          "q": q["q"], "o": q["o"], "a": "ABCD".index(a) if a else -1})
     bad = [q for q in allq if q["a"] < 0 or len(q["o"]) != 4]
     print("total", len(allq), "bad", len(bad))
+    # real explanations (tools/expl_be_u<unit>*.py): n -> (why correct, reason for each wrong option in A-D order)
+    import importlib, pkgutil
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    expl = {}
+    for m in pkgutil.iter_modules([str(Path(__file__).resolve().parent)]):
+        if m.name.startswith("expl_be_u"):
+            mod = importlib.import_module(m.name)
+            for name, d in vars(mod).items():
+                if name.startswith("BE") and isinstance(d, dict):
+                    expl.update({(f"Unit {name[2]}", n): v for n, v in d.items()})
+    done = 0
+    for q in allq:
+        v = expl.get((q["u"], q["n"]))
+        if not v:
+            continue
+        why, *wr = v
+        assert len(wr) == 3, (q["u"], q["n"])
+        q["e"] = why
+        it = iter(wr)
+        q["w"] = ["" if k == q["a"] else next(it) for k in range(4)]
+        done += 1
+    print("explanations attached:", done, "of", len(allq))
     js = ("window.SUBJECTS = window.SUBJECTS || {};\n"
           "window.SUBJECTS['business-env'] = {\n  title: 'Business Environment & Ethics',\n  type: 'mcq',\n  units: [],\n  mcqs: "
           + json.dumps(allq, ensure_ascii=False, separators=(",", ":")) + "\n};\n")
