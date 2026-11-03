@@ -72,3 +72,18 @@ body{letter-spacing:.005em}
   #totop{bottom:84px}
 }
 @media print{#tabbar,#subnav,#qtiles,.ring,#qa .q::after{display:none!important}}
+
+/* where am I: unit + topic label, subject scoreboard, wrong-question sets */
+.tag.where{background:color-mix(in srgb,var(--a1) 16%,var(--card));color:var(--ink);border:1px solid var(--a1);font-size:.85em;font-weight:700;padding:4px 12px;margin-bottom:6px}
+.sboard{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:8px 0 14px}
+.sb{padding:14px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);text-align:center}
+.sb b{display:block;font-size:2em;line-height:1.1}
+.sb span{color:var(--mute);font-size:.85em}
+.sb.ok{border-color:#16a34a}.sb.ok b{color:#16a34a}
+.sb.bad{border-color:#dc2626}.sb.bad b{color:#dc2626}
+.sb.warn{border-color:#f59e0b}.sb.warn b{color:#d97706}
+.wsets{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 18px}
+.wset{display:grid;gap:0;text-align:center;padding:10px 18px;border-radius:14px;border-color:#dc2626;font-weight:700}
+.wset small{font-weight:400;color:var(--mute)}
+.wset:hover{background:#dc2626;color:#fff}.wset:hover small{color:#fee2e2}
+.wset.all{background:linear-gradient(135deg,#dc2626,#f97316);color:#fff;border-color:transparent}.wset.all small{color:#ffe4d6}

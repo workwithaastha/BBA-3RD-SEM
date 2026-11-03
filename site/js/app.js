@@ -270,8 +270,42 @@ function subject(id) {
      <section class="banner"><span class="bico">${ICON[id] || '📘'}</span>
        <div><h1>${esc(s.title)}</h1><p>${esc(BLURB[id] || '')} · ${count(s)}</p></div>
        <div class="bact">${quizBtn}</div></section>
+     ${s.mcqs.length ? '<div id="scoreboard"></div>' : ''}<div id="qa"></div>
      ${links ? `<h2 class="sec">Notes</h2><div class="ugrid">${links}</div>` : ''}
      ${!links && !quizBtn ? '<p>Content coming soon.</p>' : ''}`);
+  if (s.mcqs.length) scoreboard(id);
+}
+
+// correct / wrong totals of one subject + practice sets made from its wrong questions
+function scoreboard(id) {
+  const box = document.getElementById('scoreboard');
+  if (!box) return;
+  const s = S[id];
+  let t = 0, c = 0;
+  Object.entries(store.get('stats', {})).forEach(([k, v]) => { if (k.startsWith(id + '|')) { t += v.t; c += v.c; } });
+  const w = store.get('wrong', {});
+  const pending = s.mcqs.filter((m) => w[id + '|' + m.n + '|' + m.q.slice(0, 40)]);
+  const SIZE = 10;
+  const nsets = Math.ceil(pending.length / SIZE);
+  box.innerHTML = `<h2 class="sec">📈 Your score in this subject</h2>
+    <div class="sboard">
+      <div class="sb ok"><b>${c}</b><span>✅ Correct answers</span></div>
+      <div class="sb bad"><b>${t - c}</b><span>❌ Wrong answers</span></div>
+      <div class="sb"><b>${t ? Math.round((c / t) * 100) : 0}%</b><span>🎯 Accuracy (${t} answered)</span></div>
+      <div class="sb warn"><b>${pending.length}</b><span>🔁 Wrong questions to fix</span></div>
+    </div>
+    ${nsets ? `<h3>❌ Wrong-question sets <small>(${SIZE} per set - answer one correctly and it leaves the list)</small></h3>
+    <div class="wsets">${Array.from({ length: nsets }, (_, i) => `<button class="btn wset" data-i="${i}">Set ${i + 1}<small>${Math.min(SIZE, pending.length - i * SIZE)} questions</small></button>`).join('')}
+      <button class="btn wset all" data-i="-1">All wrong<small>${pending.length} questions</small></button></div>`
+      : (t ? '<p class="expl">🎉 No wrong questions waiting. Sets appear here when you answer something wrong.</p>' : '<p class="expl">Answer some questions and your correct / wrong count and wrong-question sets show up here.</p>')}`;
+  box.querySelectorAll('.wset').forEach((b) => {
+    b.onclick = () => {
+      const i = +b.dataset.i;
+      const qs = i < 0 ? pending : pending.slice(i * SIZE, (i + 1) * SIZE);
+      document.getElementById('qa').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      run(qs.slice(), id, false, 'wrongset');
+    };
+  });
 }
 
 function unit(id, uid) {
@@ -395,7 +429,7 @@ function mock(qs, secPerQ) {
     const opts = m.o.map((o, k) => '<button class="opt' + (ans[cur] === k ? ' sel' : '') + '" data-k="' + k + '"><span class="ol">' + 'ABCD'[k] + '</span><span class="ot">' + esc(o) + '</span></button>').join('');
     box.innerHTML = '<div class="mockbar"><span class="timer" id="tm">' + fmt(left) + '</span><span>Answered ' + answered + '/' + qs.length + '</span><button class="btn" id="sub">Submit exam</button></div>' +
       '<div class="navg">' + nav + '</div>' +
-      '<div class="q">' + (m.c ? '<div class="box">' + esc(m.c) + '</div>' : '') + '<p><b>' + (cur + 1) + '/' + qs.length + '. ' + esc(m.q) + '</b></p>' + opts + '</div>' +
+      '<div class="q"><span class="tag where">📚 ' + esc(m.u) + (m.t ? ' · ' + esc(m.t) : '') + '</span>' + (m.c ? '<div class="box">' + esc(m.c) + '</div>' : '') + '<p><b>' + (cur + 1) + '/' + qs.length + '. ' + esc(m.q) + '</b></p>' + opts + '</div>' +
       '<div class="row"><button class="btn" id="pv"' + (cur === 0 ? ' disabled' : '') + '>Previous</button>' +
       '<button class="btn" id="fl">' + (flag[cur] ? 'Unflag' : 'Flag for review') + '</button>' +
       '<button class="btn" id="cl">Clear answer</button>' +
@@ -438,7 +472,7 @@ function run(qs, sid, mixed, kind) {
     }
     const m = qs[i];
     box.innerHTML = `<div class="bar"><i style="width:${(i / qs.length) * 100}%"></i></div>
-      <div class="q">${m.t ? `<span class="tag">${esc(m.u)} · ${esc(m.t)}</span>` : ''}${m.x ? ' <span class="tag gen">extra: not in PDFs</span>' : m.g ? ' <span class="tag gen">generated from PDF notes</span>' : ''}${m.p ? ` <span class="tag gen">📝 ${esc(m.p)}</span>` : ''}${m.k ? ' <span class="tag gen">⚠ answer not sure</span>' : ''}
+      <div class="q"><span class="tag where">📚 ${esc(m.u)}${m.t ? ' · ' + esc(m.t) : ''}</span>${m.x ? ' <span class="tag gen">extra: not in PDFs</span>' : m.g ? ' <span class="tag gen">generated from PDF notes</span>' : ''}${m.p ? ` <span class="tag gen">📝 ${esc(m.p)}</span>` : ''}${m.k ? ' <span class="tag gen">⚠ answer not sure</span>' : ''}
       ${m.t || m.g ? '' : ''}
       ${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}
       <p><b>${i + 1}/${qs.length}. ${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt" data-k="${k}"><span class="ol">${'ABCD'[k]}</span><span class="ot">${esc(o)}</span></button>`).join('')}<div class="expl" id="ex"></div></div>`;
