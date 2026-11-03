@@ -32,7 +32,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | 24 | Answer feedback: every practice answer shows correct answer + why; happy / sad webp face pop-up with animation; 🔊 toggle (top bar) switches sound AND animations, default on | done |
 | 25 | UI upgrade: new palette + glass header, quick tiles and progress rings on home, subject switcher strip, mobile bottom tab bar, quiz letter badges + keyboard shortcuts (`css/ui2.css`, `js/ui2.js`) | done |
 | 26 | Per-subject scoreboard (correct / wrong / accuracy / wrong-to-fix) + wrong-question sets of 10; every question shows `📚 Unit · Topic` (practice and mock) | done |
-| 27 | Real per-option explanations (why correct / why each wrong option is wrong) for all 300 Physical Education MCQs; shown after every answer and in the PDF. Other subjects pending | PE done |
+| 27 | Real per-option explanations (why correct / why each wrong option is wrong) for all 1,752 MCQs (every subject); shown after every answer; PE also in the PDF | done |
 | - | Final polish | pending user feedback |
 
 ## 2. Content counts

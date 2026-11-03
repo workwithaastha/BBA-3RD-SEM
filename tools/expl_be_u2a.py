@@ -36,7 +36,7 @@ BE2A = {
 34: ("The First Plan stressed agriculture.", "Heavy industry was the Second Plan.", "Services were not the focus.", "Exports were not the focus."),
 35: ("The Second Plan (Mahalanobis model) stressed heavy and basic industries.", "Agriculture alone was the First Plan.", "Services were not the focus.", "Consumer goods exports were not the focus."),
 36: ("The Planning Commission was set up in 1950.", "1947 is independence.", "1956 is the Industrial Policy.", "1991 is the reforms year."),
-37: ("NITI Aayog = National Institution for Transforming India.", "Not the right words.", "Not the right words.", "Not the right words."),
+37: ("NITI Aayog = National Institution for Transforming India, the government think tank that replaced the Planning Commission.", "National Institute for Trade and Industry is not its name.", "National Industrial Trade Investment Agency is not its name.", "New India Trade Initiative is not its name."),
 38: ("Taxation is a fiscal policy instrument.", "Repo rate is monetary.", "CRR is monetary.", "Open market operations are monetary."),
 39: ("The Cash Reserve Ratio is a monetary policy tool.", "Income tax is fiscal.", "Excise duty is fiscal.", "Public borrowing is fiscal."),
 40: ("Fiscal deficit = total expenditure minus total receipts excluding borrowings.", "Tax revenue is a receipt.", "Interest payments are expenditure.", "Grants are receipts."),
