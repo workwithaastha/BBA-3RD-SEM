@@ -21,6 +21,8 @@ from expl_om_1 import O1
 from expl_om_2 import O2
 from expl_om_3 import O3
 OM_EXPL = {**O1, **O2, **O3}
+from expl_fin import FIN_EXPL
+from expl_mkt import MKT_EXPL
 from overrides_hrm import HRM_OVR
 from overrides_om import OM_OVR
 from overrides_hrm2 import HRM_OVR2
@@ -79,5 +81,5 @@ def build(rows, sid, title, seed, append=False, ovr=None, expl=None):
 
 build(HRM + HRM_MORE, "hrm", "Human Resource Management", 11, ovr=HRM_OVR, expl=HRM_EXPL)
 build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR, expl=OM_EXPL)
-build(FIN + FIN_MORE, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR)
-build(MKT, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR)
+build(FIN + FIN_MORE, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR, expl=FIN_EXPL)
+build(MKT, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR, expl=MKT_EXPL)
