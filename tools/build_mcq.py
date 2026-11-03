@@ -17,6 +17,10 @@ from expl_hrm_1 import H1
 from expl_hrm_2 import H2
 from expl_hrm_3 import H3
 HRM_EXPL = {**H1, **H2, **H3}
+from expl_om_1 import O1
+from expl_om_2 import O2
+from expl_om_3 import O3
+OM_EXPL = {**O1, **O2, **O3}
 from overrides_hrm import HRM_OVR
 from overrides_om import OM_OVR
 from overrides_hrm2 import HRM_OVR2
@@ -74,6 +78,6 @@ def build(rows, sid, title, seed, append=False, ovr=None, expl=None):
     print(sid, len(qs), per, "answer spread", [sum(1 for q in qs if q["a"] == k) for k in range(4)])
 
 build(HRM + HRM_MORE, "hrm", "Human Resource Management", 11, ovr=HRM_OVR, expl=HRM_EXPL)
-build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR)
+build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR, expl=OM_EXPL)
 build(FIN + FIN_MORE, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR)
 build(MKT, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR)
