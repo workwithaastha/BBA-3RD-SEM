@@ -11,6 +11,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from data_pe_a import PE_A, SRC as SRC_A
 from data_pe_b import PE_B, SRC as SRC_B
 from data_pe_d import PE_D, SRC as SRC_D
+import expl_pe_a, expl_pe_b, expl_pe_d
+
+EXPL = {m.SRC: m.X for m in (expl_pe_a, expl_pe_b, expl_pe_d)}
 
 OUT = Path(__file__).resolve().parent.parent / "site" / "data" / "physical-education.js"
 UNIT_ORDER = ["Unit I", "Unit II", "Unit III", "Unit IV", "Sports & General"]
@@ -41,7 +44,27 @@ def main():
     merged.sort(key=lambda r: (UNIT_ORDER.index(r[0]), r[1]))
     qs = []
     for n, (u, t, q, opts, a, e, p) in enumerate(merged, 1):
-        item = {"u": u, "t": t, "n": n, "q": q, "o": opts, "a": a, "e": e, "p": ", ".join(p)}
+        src, no = p[0].rsplit(" Q", 1)
+        why, wrongs = EXPL[src][int(no)]
+        ans = opts[a]
+        w = []
+        for k, o in enumerate(opts):
+            if k == a:
+                w.append("")
+                continue
+            r = (wrongs or {}).get("ABCD"[k], "")
+            low = o.lower()
+            if low.startswith("none"):
+                r = f"Not correct - there is a right answer among the options: {ans}."
+            elif low.startswith("both"):
+                r = f"Not correct - only \"{ans}\" is right, so 'both' does not hold."
+            elif not r or r.endswith(" is wrong.") or r.endswith(" is correct.") or r.startswith("Only A "):
+                r = r if (r and not (r.endswith(" is wrong.") or r.endswith(" is correct.") or r.startswith("Only A "))) else (
+                    f"\"{o}\" is true, but it is only one of the listed points - the other options are also correct, so \"{ans}\" is the complete answer." if wrongs is None
+                    else f"Incorrect - the right answer is \"{ans}\", not \"{o}\".")
+            w.append(r)
+        prefix = "(?) Not sure - check with your teacher. " if e.startswith("(?)") else ""
+        item = {"u": u, "t": t, "n": n, "q": q, "o": opts, "a": a, "e": prefix + why, "w": w, "p": ", ".join(p)}
         if e.startswith("(?)"):
             item["k"] = 1  # not sure about the marked answer
         qs.append(item)

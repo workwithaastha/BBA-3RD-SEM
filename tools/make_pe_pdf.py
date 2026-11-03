@@ -69,6 +69,7 @@ def qhtml(i, q, answers):
         warn = ' <span class="k">[answer not sure - verify]</span>' if q.get("k") else ""
         h += f'<p class="a">Answer: {"ABCD"[q["a"]]}. {e(q["o"][q["a"]])}{warn}</p>'
         h += f'<p class="w">{e(why)} &nbsp;[{e(q["p"])}]</p>'
+        h += "".join(f'<p class="w">&nbsp;&nbsp;{"ABCD"[k]} is wrong: {e(r)}</p>' for k, r in enumerate(q.get("w", [])) if r)
     return h
 
 
