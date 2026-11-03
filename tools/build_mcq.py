@@ -13,6 +13,10 @@ from data_om_more import OM_MORE
 from data_fin import FIN
 from data_fin_more import FIN_MORE
 from data_mkt import MKT
+from expl_hrm_1 import H1
+from expl_hrm_2 import H2
+from expl_hrm_3 import H3
+HRM_EXPL = {**H1, **H2, **H3}
 from overrides_hrm import HRM_OVR
 from overrides_om import OM_OVR
 from overrides_hrm2 import HRM_OVR2
@@ -36,7 +40,7 @@ def apply_overrides(rows, ovr, sid):
     return [tuple(r) for r in rows]
 
 
-def build(rows, sid, title, seed, append=False, ovr=None):
+def build(rows, sid, title, seed, append=False, ovr=None, expl=None):
     if ovr:
         rows = apply_overrides(rows, ovr, sid)
     rnd = random.Random(seed)
@@ -49,6 +53,11 @@ def build(rows, sid, title, seed, append=False, ovr=None):
         order = list(range(4)); rnd.shuffle(order)
         shuffled = [opts[k] for k in order]
         item = {"u": u, "t": t, "n": i, "q": q, "o": shuffled, "a": order.index(0), "e": e, "g": 1}
+        if expl and i in expl:
+            why, *wr = expl[i]
+            assert len(wr) == 3, (sid, i)
+            item["e"] = why
+            item["w"] = [("" if order[k] == 0 else wr[order[k] - 1]) for k in range(4)]
         if x: item["x"] = 1
         qs.append(item)
     data = json.dumps(qs, ensure_ascii=False, separators=(",", ":"))
@@ -64,7 +73,7 @@ def build(rows, sid, title, seed, append=False, ovr=None):
     for q in qs: per[q["u"]] = per.get(q["u"], 0) + 1
     print(sid, len(qs), per, "answer spread", [sum(1 for q in qs if q["a"] == k) for k in range(4)])
 
-build(HRM + HRM_MORE, "hrm", "Human Resource Management", 11, ovr=HRM_OVR)
+build(HRM + HRM_MORE, "hrm", "Human Resource Management", 11, ovr=HRM_OVR, expl=HRM_EXPL)
 build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR)
 build(FIN + FIN_MORE, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR)
 build(MKT, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR)
