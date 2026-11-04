@@ -14,7 +14,7 @@ import pymupdf
 ROOT = Path(__file__).resolve().parent.parent
 js = (ROOT / "site/data/physical-education.js").read_text(encoding="utf-8")
 Q = json.loads(js[js.index("mcqs: ") + 6: js.rindex("\n};")])
-OUT = ROOT / "PHYSICAL_EDUCATION_MCQ_Answers_and_Predicted_Sets.pdf"
+OUT = ROOT / "MCQ pdf" / "Physical_Education_MCQ_Answers_and_Predicted_Sets.pdf"
 UNITS = ["Unit I", "Unit II", "Unit III", "Unit IV", "Sports & General"]
 TITLES = {"Unit I": "Unit I - Physical Education", "Unit II": "Unit II - Fitness, Weight Management, Lifestyle",
           "Unit III": "Unit III - Yoga and Meditation", "Unit IV": "Unit IV - Traditional Games and Recreation",
