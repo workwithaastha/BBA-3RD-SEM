@@ -20,7 +20,8 @@ LETTER = "ABCD"
 NODE = (
     "global.window={SUBJECTS:{}};"
     "const fs=require('fs');"
-    "for(const f of fs.readdirSync('site/data')){if(/^(" + SID + "|" + SID + "-mcq|finance|marketing|finance-mcq|marketing-mcq)\\.js$/.test(f)){try{require('./site/data/'+f)}catch(e){}}}"
+    "const fl=fs.readdirSync('site/data').sort((a,b)=>(a.includes('-mcq')?1:0)-(b.includes('-mcq')?1:0));"
+    "for(const f of fl){if(/^(" + SID + "|" + SID + "-mcq|finance|marketing|finance-mcq|marketing-mcq)\\.js$/.test(f)){try{require('./site/data/'+f)}catch(e){}}}"
     "console.log(JSON.stringify(window.SUBJECTS['" + SID + "']));"
 )
 raw = subprocess.run(["node", "-e", NODE], cwd=ROOT, capture_output=True, text=True, encoding="utf-8").stdout
