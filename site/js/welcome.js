@@ -79,6 +79,7 @@
         <p class="wl1">What's up? <b>Let's learn!</b></p>
         <p class="wl2">${greeting()}${first ? ' - welcome to your exam prep' : ' - welcome back'}. ${QUOTES[Math.floor(Math.random() * QUOTES.length)]}</p></div>
         <div class="wright">
+        ${window.Exams ? window.Exams.nextHtml() : ''}
         <div class="wstats">
           <div><b>🔥 ${sk.streak}</b><span>day streak</span></div>
           <div><b>✅ ${ans}</b><span>answered</span></div>

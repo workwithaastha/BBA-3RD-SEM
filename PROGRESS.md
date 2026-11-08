@@ -33,6 +33,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | 25 | UI upgrade: new palette + glass header, quick tiles and progress rings on home, subject switcher strip, mobile bottom tab bar, quiz letter badges + keyboard shortcuts (`css/ui2.css`, `js/ui2.js`) | done |
 | 26 | Per-subject scoreboard (correct / wrong / accuracy / wrong-to-fix) + wrong-question sets of 10; every question shows `📚 Unit · Topic` (practice and mock) | done |
 | 27 | Real per-option explanations (why correct / why each wrong option is wrong) for all 1,752 MCQs (every subject); shown after every answer; PE also in the PDF | done |
+| 28 | Exam features from the date sheet: countdown timeline, subject exam banners, day-wise study plan (`#/plan`), next-exam line in welcome pop-up | done |
 | - | Final polish | pending user feedback |
 
 ## 2. Content counts

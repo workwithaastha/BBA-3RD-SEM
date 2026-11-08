@@ -534,6 +534,7 @@ function routeInner() {
   if (a === 'search') return search(b || '');
   if (a === 'progress') return progress();
   if (a === 'badges' && window.Rewards) return window.Rewards.page();
+  if (a === 'plan' && window.Exams) return window.Exams.plan();
   if (a === 'daily') return daily();
   if (a === 'revision') return revision(b);
   if (a === 'expected') return expected(b);

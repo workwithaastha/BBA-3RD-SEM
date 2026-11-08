@@ -62,3 +62,4 @@ Feature map (all built): notes · quiz / mock exam / Daily 20 · progress, badge
 - After each feature: update this file and PROGRESS.md, run `node tools/qa.js`, commit with the trailer, push.
 - PDFs: all generated subject PDFs live in `MCQ pdf/` (Physical Education only for now). Create more PDFs there only when the user asks, one subject at a time.
 - Set PDFs: when the user names a subject, run `python -I tools/make_set_pdfs.py <subject-id> <Prefix>` -> `MCQ pdf/<Prefix>/<Prefix>_Set_N.pdf` (50 MCQs per set, no repeats between sets, answer key + explanations at the end; an incomplete last set is not made). Done: HRM (4 sets), Office Management (4 sets), Business Environment (16 sets).
+- Exam features (`data/examdates.js`, `js/exams.js`): countdown timeline on home, exam banner on each subject, day-wise study plan at `#/plan`, next-exam line in the welcome pop-up. If the date sheet changes, edit `data/examdates.js` only.
