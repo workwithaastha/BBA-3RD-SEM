@@ -18,6 +18,10 @@
       { id: 'tp', name: 'Test-paper pattern - 30 marks (90 min)', parts: [['Section A', 3, 4], ['Section B', 6, 3]] },
       { id: 'full', name: 'Full paper - 50 marks (2 h)', parts: [['Section A (very short)', 2, 5], ['Section B (short)', 3, 4], ['Section C (medium)', 6, 3], ['Section D (long)', 10, 1]] },
     ],
+    hrm: [
+      { id: 'tp', name: 'Mid-term style - 30 marks (90 min)', parts: [['Section A', 3, 4], ['Section B', 6, 3]] },
+      { id: 'full', name: 'Full paper - 50 marks (2 h)', parts: [['Section A (very short)', 2, 5], ['Section B (short)', 3, 4], ['Section C (medium)', 6, 3], ['Section D (long)', 10, 1]] },
+    ],
     marketing: [
       { id: 'tp', name: 'Mid-term style - 30 marks (90 min)', parts: [['Section A', 3, 4], ['Section B', 6, 3]] },
       { id: 'full', name: 'Full paper - 50 marks (2 h)', parts: [['Section A (very short)', 2, 5], ['Section B (short)', 3, 4], ['Section C (medium)', 6, 3], ['Section D (long)', 10, 1]] },

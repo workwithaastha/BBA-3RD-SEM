@@ -12,7 +12,7 @@ Written exams: **Finance, Marketing**. MCQ exams: **Business Environment, HRM, O
 | `FINANCE/` | Business Finance | Written |
 | `MARKETING/` | Marketing Management | Written |
 | `BUSINESS ENV/` | Business Environment & Ethics | MCQ |
-| `HRM/` | Human Resource Management | Written per date sheet (Core II, 2 h) - MCQs are practice; confirm with user |
+| `HRM/` | Human Resource Management | Written (Core II, 2 h) + MCQ practice - both built |
 | `OFFICE MANG/` | Office Management | MCQ |
 | `Physical Education/` | Physical Education & Yoga (co-curricular, 75 marks, 90 min, 100 MCQs / answer 75) | MCQ (past papers only) |
 
@@ -52,7 +52,7 @@ Architecture, routes, data shapes, storage keys, tools, PDFs read, assumptions a
 
 Physical Education: the 3 past papers have **no answer key** - marked answers are my own (31 flagged "not sure", listed in `REVIEW_PE_ANSWERS.md`). Never present them as official.
 
-Feature map (all built): notes · quiz / mock exam / Daily 20 · progress, badges, weekly summary · welcome pop-up with resume-last · revision, expected, last-night sheets · concept cards, Finance formula explorer, click-any-formula pop-up · written Q&A banks (Finance, Marketing) with mock paper · source files viewer with page ↔ file links · **answer feedback** (correct answer + why, happy/sad webp pop-up, 🔊 toggle = sound + animations, default on) · **UI layer** (`css/ui2.css`, `js/ui2.js`: quick tiles, progress rings, subject strip, mobile bottom tab bar, quiz keyboard shortcuts A-D / 1-4 / Enter) · **subject scoreboard + wrong-question sets** (`scoreboard()` in app.js) · unit/topic label on every question · welcome pop-up fits any screen (landscape two columns) · Physical Education PDF (`tools/make_pe_pdf.py` → `MCQ pdf/Physical_Education_MCQ_Answers_and_Predicted_Sets.pdf`: all 300 MCQs + 3 predicted sets of 50).
+Feature map (all built): notes · quiz / mock exam / Daily 20 · progress, badges, weekly summary · welcome pop-up with resume-last · revision, expected, last-night sheets · concept cards, Finance formula explorer, click-any-formula pop-up · written Q&A banks (Finance, Marketing, HRM) with mock paper · source files viewer with page ↔ file links · **answer feedback** (correct answer + why, happy/sad webp pop-up, 🔊 toggle = sound + animations, default on) · **UI layer** (`css/ui2.css`, `js/ui2.js`: quick tiles, progress rings, subject strip, mobile bottom tab bar, quiz keyboard shortcuts A-D / 1-4 / Enter) · **subject scoreboard + wrong-question sets** (`scoreboard()` in app.js) · unit/topic label on every question · welcome pop-up fits any screen (landscape two columns) · Physical Education PDF (`tools/make_pe_pdf.py` → `MCQ pdf/Physical_Education_MCQ_Answers_and_Predicted_Sets.pdf`: all 300 MCQs + 3 predicted sets of 50).
 
 ## Recent user preferences
 - Every MCQ must explain WHY the correct option is right and WHY each wrong option is wrong (real subject reasoning, never filler). Data field `w` = 4 reasons per question, `e` = why correct. **Done for all MCQ subjects**: PE (`tools/expl_pe_{a,b,d}.py` via `build_pe.py`), HRM / Office / Finance / Marketing (`tools/expl_hrm_*.py`, `expl_om_*.py`, `expl_fin.py`, `expl_mkt.py` via `build_mcq.py`), Business Environment (`tools/expl_be_u*.py` via `parse_be.py`). New MCQs must come with their reasons.

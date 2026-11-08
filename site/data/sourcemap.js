@@ -59,7 +59,7 @@
     'q:Unit 1': mk('b1'), 'q:Unit 2': mk('b2'), 'q:Unit 3': mk('b3', 'b3s'), 'q:Unit 4': mk('b4'),
   };
   const hrm = {
-    concepts: mk('h_iq', 'h_pa', 'h_u4'),
+    concepts: mk('h_iq', 'h_pa', 'h_u4'), qa: mk('h_iq', 'h_pa', 'h_pab', 'h_u4'),
     'q:Unit 1': mk('h_iq'), 'q:Unit 2': mk('h_iq'), 'q:Unit 3': mk('h_pa', 'h_pab', 'h_iq'), 'q:Unit 4': mk('h_u4', 'h_iq'),
   };
   const office = {
