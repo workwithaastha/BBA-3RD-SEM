@@ -12,7 +12,7 @@ Written exams: **Finance, Marketing**. MCQ exams: **Business Environment, HRM, O
 | `FINANCE/` | Business Finance | Written |
 | `MARKETING/` | Marketing Management | Written |
 | `BUSINESS ENV/` | Business Environment & Ethics | MCQ |
-| `HRM/` | Human Resource Management | MCQ |
+| `HRM/` | Human Resource Management | Written per date sheet (Core II, 2 h) - MCQs are practice; confirm with user |
 | `OFFICE MANG/` | Office Management | MCQ |
 | `Physical Education/` | Physical Education & Yoga (co-curricular, 75 marks, 90 min, 100 MCQs / answer 75) | MCQ (past papers only) |
 

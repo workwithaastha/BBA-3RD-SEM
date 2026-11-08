@@ -112,3 +112,15 @@ Rebuild: edit `tools/data_*.py` → `python -I tools/build_mcq.py` → `node too
 4. Review `REVIEW_EXTRA_QUESTIONS.md` (80 HRM + 28 Office extras).
 5. Confirm the assumed unit numbering above.
 6. Physical Education: verify the 31 flagged answers (`REVIEW_PE_ANSWERS.md`); ask for the official answer key if one exists. Folder is spelled `Physical Education` (mixed case) - rename to `PHYSICAL EDUCATION` only if the user wants it.
+
+## 8. Exam date sheet (regular students, BBA III Sem, CSJM University - memo CSJMVV/COE/1368/2026, 26-10-2026)
+| Date | Paper | Type / time |
+|---|---|---|
+| Sun 22-11-2026 | Office Management and Secretarial Practices (VOC 169) | objective, 1 h (12:30-1:30 PM) |
+| Mon 23-11-2026 | Business Finance (Core I, F010301TN) | written, 2 h (11:30-1:30) |
+| Wed 25-11-2026 | Human Resource Management (Core II, F010302TN) | **written, 2 h** (11:30-1:30) |
+| Thu 26-11-2026 | Marketing Management (Core III, F010303TN) | written, 2 h (11:30-1:30) |
+| Sat 28-11-2026 | Business Environment, Ethics & Governance (Minor, F010304TN) | objective, 1.5 h (11:30-1:00) |
+| Sat 05-12-2026 | Physical Education and Yoga (Z031301) | objective, 1.5 h (11:30-1:00) |
+
+Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM as MCQ - the HRM MCQs stay as practice, but HRM written answers may be needed (open item).
