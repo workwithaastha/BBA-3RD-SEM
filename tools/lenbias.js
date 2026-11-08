@@ -3,7 +3,7 @@ const fs = require('fs'), path = require('path');
 global.window = {};
 const dir = path.join(__dirname, '..', 'site', 'data');
 const html = fs.readFileSync(path.join(dir, '..', 'index.html'), 'utf8');
-for (const m of html.matchAll(/<script src="(data\/[^"]+)"/g)) if (!m[1].includes('expected')) require(path.join(dir, '..', m[1]));
+for (const m of html.matchAll(/<script src="((?:data|js)\/[^"]+)"/g)) { if (!(m[1].startsWith('data/') || m[1] === 'js/examqa.js')) continue; require(path.join(dir, '..', m[1])); }
 const [id, ratio = 1.6] = process.argv.slice(2);
 const list = [];
 for (const m of window.SUBJECTS[id].mcqs) {
