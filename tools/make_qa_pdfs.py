@@ -33,19 +33,19 @@ STAR = {3: "***", 2: "**", 1: "*"}
 CSS = """
 body{font-family:sans-serif;font-size:10pt;line-height:1.35}
 h1{font-size:22pt;color:#4338ca;margin:0}
-h2{font-size:15pt;color:#4338ca;border-bottom:2px solid #6366f1;margin:12pt 0 4pt}
+h2{font-size:15pt;color:#4338ca;margin:12pt 0 4pt}
 h3{font-size:11pt;margin:9pt 0 1pt;color:#111}
 h4{font-size:10.5pt;margin:5pt 0 1pt;color:#334155}
 .sub{color:#475569}
 .tag{font-size:8.5pt;color:#64748b;margin:0 0 3pt 0}
-.ms{margin:3pt 0;padding:3pt 6pt;background:#ecfdf5;font-size:9pt}
+.ms{margin:3pt 0;padding:0 0 0 6pt;border-left:3px solid #10b981;font-size:9pt;color:#065f46}
 .src{margin:2pt 0 8pt 0;font-size:8.5pt;color:#64748b}
-.box{border:1px solid #6366f1;padding:6pt;margin:8pt 0;background:#eef2ff}
-.formula{font-family:monospace;background:#f1f5f9;padding:3pt}
-.eg{margin:3pt 0;padding:3pt 6pt;background:#fffbeb;font-size:9.5pt}
-.diag{margin:3pt 0;padding:3pt 6pt;background:#f8fafc;border:1px dashed #94a3b8}
+.box{border-left:3px solid #6366f1;padding:2pt 0 2pt 8pt;margin:6pt 0}
+.formula{font-family:monospace;padding:3pt;border-left:3px solid #94a3b8}
+.eg{margin:3pt 0;padding:0 0 0 6pt;border-left:3px solid #f59e0b;font-size:9.5pt}
+.diag{margin:3pt 0;padding:0 0 0 6pt;border-left:3px solid #94a3b8}
 table{border-collapse:collapse;margin:3pt 0}
-th{background:#e0e7ff;border:1px solid #94a3b8;padding:2pt 5pt;text-align:left;font-size:9pt}
+th{border:1px solid #94a3b8;padding:2pt 5pt;text-align:left;font-size:9pt}
 td{border:1px solid #cbd5e1;padding:2pt 5pt;font-size:9pt}
 ul,ol{margin:2pt 0 2pt 0}
 """

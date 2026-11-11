@@ -36,14 +36,14 @@ OUTDIR.mkdir(parents=True, exist_ok=True)
 CSS = """
 body{font-family:sans-serif;font-size:10pt;line-height:1.3}
 h1{font-size:22pt;color:#4338ca;margin:0}
-h2{font-size:14pt;color:#4338ca;border-bottom:2px solid #6366f1;margin:10pt 0 4pt}
+h2{font-size:14pt;color:#4338ca;margin:10pt 0 4pt}
 .sub{color:#475569}
 .q{margin:7pt 0 1pt}
-.c{margin:2pt 0 2pt 0;padding:4pt;background:#f1f5f9;font-size:9pt}
+.c{margin:2pt 0 2pt 0;padding:0 0 0 6pt;border-left:3px solid #94a3b8;font-size:9pt}
 .o{margin:0 0 0 14pt}
 .w{margin:1pt 0 3pt 8pt;color:#334155;font-size:9pt}
 .a{margin:5pt 0 0 0;color:#166534;font-weight:bold}
-.box{border:1px solid #6366f1;padding:6pt;margin:8pt 0;background:#eef2ff}
+.box{border-left:3px solid #6366f1;padding:2pt 0 2pt 8pt;margin:6pt 0}
 table{border-collapse:collapse}
 td{padding:2pt 8pt;border:1px solid #cbd5e1}
 """

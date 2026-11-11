@@ -73,21 +73,21 @@ UNITS = [
 CSS = """
 body{font-family:sans-serif;font-size:10pt;line-height:1.4}
 h1{font-size:24pt;color:#7c3aed;margin:0}
-h2{font-size:14.5pt;color:#7c3aed;border-bottom:2px solid #a78bfa;margin:12pt 0 4pt}
+h2{font-size:14.5pt;color:#7c3aed;margin:12pt 0 4pt}
 h3{font-size:11pt;color:#334155;margin:8pt 0 2pt}
 h4{font-size:10.5pt;margin:6pt 0 1pt;color:#5b21b6}
-.part{font-size:18pt;color:#fff;background:#7c3aed;padding:6pt 10pt;margin:0 0 8pt 0}
+.part{font-size:18pt;font-weight:bold;color:#7c3aed;border-left:8px solid #7c3aed;padding:2pt 0 2pt 8pt;margin:0 0 8pt 0}
 .sub{color:#475569}
-.box{border:1px solid #a78bfa;padding:5pt 8pt;margin:6pt 0;background:#f5f3ff}
+.box{border-left:3px solid #a78bfa;padding:2pt 0 2pt 8pt;margin:6pt 0}
 .q{margin:7pt 0 1pt}.o{margin:0 0 0 14pt}
 .qh{font-size:11pt;margin:10pt 0 1pt;color:#111}
 .tag{font-size:8.5pt;color:#64748b;margin:0}
-.ms{margin:3pt 0;padding:3pt 6pt;background:#ecfdf5;font-size:9pt}
+.ms{margin:3pt 0;padding:0 0 0 6pt;border-left:3px solid #10b981;font-size:9pt;color:#065f46}
 .src{font-size:8.5pt;color:#64748b;margin:2pt 0 6pt 0}
 .a{margin:4pt 0 0 0;color:#166534;font-weight:bold}.w{margin:1pt 0 2pt 8pt;color:#334155;font-size:9pt}
-.eg{margin:3pt 0;padding:3pt 6pt;background:#fffbeb;font-size:9.5pt}
+.eg{margin:3pt 0;padding:0 0 0 6pt;border-left:3px solid #f59e0b;font-size:9.5pt}
 table{border-collapse:collapse;margin:3pt 0}
-th{background:#ede9fe;border:1px solid #a78bfa;padding:2pt 5pt;text-align:left;font-size:9pt}
+th{border:1px solid #a78bfa;padding:2pt 5pt;text-align:left;font-size:9pt}
 td{border:1px solid #cbd5e1;padding:2pt 5pt;font-size:9pt}
 ul,ol{margin:2pt 0}
 """

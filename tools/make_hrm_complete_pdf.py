@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "Syllabus" / "HRM_Complete_Unitwise_Notes_Questions_Answers.pdf"
 TMP = ROOT / "Syllabus" / "hrm_complete.tmp.pdf"
 EXTRA_CSS = """
-.unit{font-size:26pt;color:#fff;background:#4c1d95;padding:10pt 12pt;margin:0 0 4pt 0}
+.unit{font-size:26pt;font-weight:bold;color:#4c1d95;border-left:10px solid #4c1d95;padding:4pt 0 4pt 10pt;margin:0 0 4pt 0}
 .unitsub{font-size:11pt;color:#4c1d95;margin:0 0 8pt 0}
 """
 

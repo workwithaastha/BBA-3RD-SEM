@@ -47,7 +47,7 @@ for s in sets:
 CSS = """
 body{font-family:sans-serif;font-size:10pt;line-height:1.3}
 h1{font-size:24pt;color:#0f766e;margin:0}
-h2{font-size:15pt;color:#0f766e;border-bottom:2px solid #14b8a6;margin:10pt 0 4pt}
+h2{font-size:15pt;color:#0f766e;margin:10pt 0 4pt}
 h3{font-size:11.5pt;color:#334155;margin:8pt 0 2pt}
 .sub{color:#475569}
 .q{margin:5pt 0 1pt}
@@ -55,7 +55,7 @@ h3{font-size:11.5pt;color:#334155;margin:8pt 0 2pt}
 .a{margin:1pt 0 2pt 14pt;color:#166534;font-weight:bold}
 .w{margin:0 0 4pt 14pt;color:#475569;font-size:9pt}
 .k{color:#b45309}
-.box{border:1px solid #14b8a6;padding:6pt;margin:8pt 0;background:#f0fdfa}
+.box{border-left:3px solid #14b8a6;padding:2pt 0 2pt 8pt;margin:6pt 0}
 table{border-collapse:collapse}
 td{padding:2pt 6pt;border:1px solid #cbd5e1}
 """
