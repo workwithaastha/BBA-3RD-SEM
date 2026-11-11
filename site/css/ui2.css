@@ -130,3 +130,13 @@ body{letter-spacing:.005em}
 @keyframes pulse{50%{box-shadow:0 0 0 6px rgba(220,38,38,.18)}}
 .extoday{margin-top:4px}
 .extoday a{color:var(--a1);font-weight:600}
+
+/* links inside notes and boxes: readable accent colour in light and dark */
+.notes a,.box a{color:var(--a1);font-weight:600;text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--a1) 45%,transparent)}
+.notes a:visited,.box a:visited{color:var(--a1)}
+.notes a:hover,.box a:hover{border-bottom-color:var(--a1)}
+.nextsteps{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 6px;padding:14px 16px;border-radius:20px;background:linear-gradient(135deg,color-mix(in srgb,var(--a1) 16%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--a1) 40%,var(--line));box-shadow:var(--shadow)}
+.nextsteps>span{flex-basis:100%;font-weight:800;letter-spacing:.02em;color:var(--a1);text-transform:uppercase;font-size:.78em}
+.notes .nextsteps a.nbtn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:14px;border:0;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 10px 20px -12px var(--a1);transition:transform .15s,box-shadow .2s}
+.notes .nextsteps a.nbtn:hover{transform:translateY(-2px);box-shadow:0 14px 24px -12px var(--a1)}
+.notes .nextsteps a.nbtn:visited{color:#fff}

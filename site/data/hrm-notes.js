@@ -156,7 +156,7 @@ ${T(['Party', 'Role'], [['Government', 'Labour laws, conciliation, adjudication,
     { id: 'u3', title: 'Unit III - Training, Appraisal, Career & Succession (notes)', html: U3 },
     { id: 'u4', title: 'Unit IV - Job Evaluation, Compensation, IR & Grievances (notes)', html: U4 },
   ];
-  const ql = (n) => `<div class="box"><b>Next:</b> <a href="#/hrm/qa">✍️ Detailed written answers</a> · <a href="#/hrm/quiz">▶ MCQs (choose Unit ${n})</a> · <a href="#/expected/hrm">🎯 Important questions</a></div>`;
+  const ql = (n) => `<div class="nextsteps"><span>Next steps for Unit ${n}</span><a class="nbtn" href="#/hrm/qa">✍️ Detailed written answers</a><a class="nbtn" href="#/hrm/quiz">▶ Practise MCQs</a><a class="nbtn" href="#/expected/hrm">🎯 Important questions</a></div>`;
   notes.forEach((u, i) => { u.html += ql(i + 1); });
   SUB.notes = notes;
   SUB.units.push(...notes);

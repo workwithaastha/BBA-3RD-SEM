@@ -98,7 +98,7 @@ rnd = random.Random(5)
 def build(i, qa_label, mcq_label, title, iqs):
     notes = data["notes"][i]["html"]
     # drop the in-page "Next:" link box
-    cut = notes.rfind('<div class="box"><b>Next:</b>')
+    cut = notes.rfind('<div class="nextsteps">')
     if cut > 0:
         notes = notes[:cut]
     qas = [q for q in data["qa"] if q["u"] == qa_label]
