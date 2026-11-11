@@ -35,6 +35,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | 27 | Real per-option explanations (why correct / why each wrong option is wrong) for all 1,752 MCQs (every subject); shown after every answer; PE also in the PDF | done |
 | 28 | Exam features from the date sheet: countdown timeline, subject exam banners, day-wise study plan (`#/plan`), next-exam line in welcome pop-up | done |
 | 29 | HRM written Q&A bank (44 answers, all 'Important Questions' Units 1-4; Units 1-2 from standard HRM knowledge [extra]), mock paper + last-night sheet; HRM now has both MCQs and written Q&A | done |
+| 30 | HRM written Q&A rewritten in detail (96 answers: 2/3/5/6/10 marks for every topic, Units I-IV, 4 data files); site adapts to days left: subjects sorted by exam date, countdown chips, Today's focus card, per-subject today task, Daily 20 weighted to nearest exams | done |
 | - | Final polish | pending user feedback |
 
 ## 2. Content counts
@@ -43,7 +44,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | Business Finance | 9 (+ formulas page) | 99 (25 Formula Finder) | 117 | 40 formula cards, 11 calculators |
 | Marketing Management | 15 + concept page | 116 | 112 | 17 concept cards + 6 formula cards |
 | Business Environment | concept page | 800 (PDF) | - | 10 concept cards |
-| HRM | concept page | 202 (80 extra) | 44 (written exam) | 17 concept cards |
+| HRM | concept page | 202 (80 extra) | 96 (written exam, detailed) | 17 concept cards |
 | Office Management | concept page | 235 (28 extra) | - | 15 concept cards |
 | Physical Education & Yoga | concept page | 300 (past papers; 31 answers flagged not sure) | - | 20 concept cards |
 

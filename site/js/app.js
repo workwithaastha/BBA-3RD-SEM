@@ -103,14 +103,14 @@ function daily() {
       const st = stats[topicKey(id, m)];
       const wk = wrong[id + '|' + m.n + '|' + m.q.slice(0, 40)] ? 3 : 0;
       const acc = st ? st.c / st.t : null;
-      const w = wk + (acc === null ? 1.5 : acc < 0.7 ? 2.5 : 0.4) + Math.random();
+      const w = (wk + (acc === null ? 1.5 : acc < 0.7 ? 2.5 : 0.4)) * (window.Exams ? window.Exams.weight(id) : 1) + Math.random();
       pool.push({ ...m, _id: id, _w: w });
     }
   }
   const qs = pool.sort((a, b) => b._w - a._w).slice(0, 20).sort(() => Math.random() - 0.5);
   $(`<div class="crumb"><a href="#/">Home</a> / Daily 20</div>
      <section class="banner"><span class="bico">🔥</span><div><h1>Daily 20</h1>
-     <p>20 questions picked from your weak topics, wrong answers and unseen questions across all subjects.</p></div>
+     <p>20 questions picked from your weak topics, wrong answers and unseen questions - weighted towards the exams that are closest.</p></div>
      <div class="bact"><a class="btn solid" href="#/daily" id="dn">New set</a></div></section><div id="qa" class="sp"></div>`);
   document.getElementById('dn').onclick = (e) => { e.preventDefault(); daily(); };
   run(qs, qs[0]._id, true, 'daily');

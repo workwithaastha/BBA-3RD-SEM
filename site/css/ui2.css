@@ -121,3 +121,12 @@ body{letter-spacing:.005em}
 .pt a{color:var(--a1);font-weight:600}
 @media (max-width:560px){.prow{grid-template-columns:62px 1fr}}
 @media print{#examline,#exbanner{display:none!important}}
+
+/* days-left upgrades */
+.todayfocus{margin:6px 0 12px;padding:12px 14px;border-radius:var(--r);background:linear-gradient(135deg,color-mix(in srgb,var(--a1) 14%,var(--card)),var(--card));border:1px solid var(--a1);display:grid;gap:6px}
+.todayfocus h3{margin:0}
+.dchip{display:inline-block;margin-bottom:6px;padding:2px 10px;border-radius:99px;font-size:.78em;font-weight:700;background:var(--a1);color:#fff}
+.dchip.hot{background:#dc2626;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(220,38,38,.18)}}
+.extoday{margin-top:4px}
+.extoday a{color:var(--a1);font-weight:600}

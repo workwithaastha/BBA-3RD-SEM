@@ -32,6 +32,7 @@
     const box = document.createElement('section');
     box.id = 'examline';
     box.innerHTML = `<div class="exhead"><h2 class="sec">📅 Exam countdown</h2><a class="btn solid" href="#/plan">🗓️ Day-wise study plan</a></div>
+      <div class="todayfocus"><h3>🎯 Today's focus</h3>${todayItems()}</div>
       <div class="exgrid">${sorted.map((ex) => {
         const d = left(ex);
         return `<a class="exc t-${ex.id}${ex.id === nextId ? ' next' : ''}${d < 0 ? ' past' : ''}" href="#/${ex.id}">
@@ -40,6 +41,23 @@
             <p>${fmt(ex)} · ${esc(ex.time)}</p><p class="exk">${kindLabel(ex)} · ${esc(ex.tag)}</p></div></a>`;
       }).join('')}</div>`;
     hero.after(box);
+    // subject cards: nearest exam first, with a days-left chip
+    const grid = document.querySelector('.grid');
+    if (grid) {
+      const cards = [...grid.querySelectorAll('.scard')];
+      const key = (c) => { const ex = byId((c.getAttribute('href') || '').split('/')[1]); return ex ? parse(ex.date).getTime() : 9e15; };
+      cards.sort((a, b) => key(a) - key(b)).forEach((c) => {
+        grid.appendChild(c);
+        const ex = byId((c.getAttribute('href') || '').split('/')[1]);
+        if (ex && !c.querySelector('.dchip')) {
+          const d = left(ex);
+          const chip = document.createElement('span');
+          chip.className = 'dchip' + (d >= 0 && d <= 3 ? ' hot' : '');
+          chip.textContent = d < 0 ? 'Exam done' : d === 0 ? 'Exam TODAY' : d === 1 ? 'Exam tomorrow' : 'Exam in ' + d + ' days';
+          c.prepend(chip);
+        }
+      });
+    }
   }
 
   // ---------- subject banner ----------
@@ -56,6 +74,10 @@
     el.className = d >= 0 && d <= 3 ? 'urgent' : '';
     el.innerHTML = `⏳ <b>${d < 0 ? 'Exam over' : when(d) + (d > 1 ? ' left' : '')}</b> · ${fmt(ex)}, ${esc(ex.time)} · ${kindLabel(ex)}
       · <a href="#/plan">Study plan</a>`;
+    if (d > 0) {
+      const tk = task(ex, d, new Date().getDate(), false);
+      el.innerHTML += `<div class="extoday"><b>${d <= 3 ? '🔥 Final days - ' : 'Today for this subject: '}</b>${tk.items.join(' · ')}</div>`;
+    }
     app.prepend(el);
   }
 
@@ -130,7 +152,28 @@
       <div class="plan">${rows.join('')}</div>`;
   }
 
-  window.Exams = { nextHtml, plan, left };
+  // study weight of a subject for Daily 20: exams close in time get more questions
+  function weight(id) {
+    const ex = byId(id);
+    if (!ex) return 1;
+    const d = left(ex);
+    return d < 0 ? 0.15 : d <= 3 ? 3 : d <= 7 ? 2.2 : d <= 14 ? 1.6 : 1;
+  }
+  // what to do today, from the same logic as the plan
+  function todayItems() {
+    const rest = upcoming();
+    const out = [];
+    rest.slice(0, 2).forEach((x, k) => {
+      const days = left(x);
+      if (days === 0) { out.push(`<div class="pt exam"><b>📝 Exam today</b> - ${esc(x.name)} · ${esc(x.time)}</div>`); return; }
+      if (k === 1 && days <= 2) return;
+      const tk = task(x, days, new Date().getDate(), k === 1);
+      out.push(`<div class="pt${k ? ' light' : ''}"><b>${ICON[x.id] || '📘'} ${esc(tk.name)}</b> <small>${tk.label} · exam in ${days} d</small><div>${tk.items.join(' · ')}</div></div>`);
+    });
+    return out.join('');
+  }
+
+  window.Exams = { nextHtml, plan, left, weight };
   function decorate() { homeBlock(); subjectBanner(); }
   window.addEventListener('hashchange', () => setTimeout(decorate, 60));
   setTimeout(decorate, 180);
