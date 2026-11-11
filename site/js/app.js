@@ -548,8 +548,10 @@ function route() {
   routeInner();
   trackLast();
 }
+window.App = { S, store, esc, ICON, cubeHtml, $, setTheme };
 addEventListener('hashchange', route);
-route();
+// first render waits until every script (rewards, exams, sources, examqa...) has loaded, so direct links and refresh work
+if (document.readyState === 'complete') route(); else addEventListener('load', route);
 
 const prog = document.createElement('div');
 prog.id = 'prog';
