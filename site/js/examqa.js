@@ -97,33 +97,33 @@
   function html(id, all) {
     const units = [...new Set(all.map((q) => q.u))];
     const cnt = (m) => all.filter((q) => m.includes(q.m)).length;
+    const chips = [['', '📚', 'All', all.length], ['2', '⚡', '2 marks', cnt([2])], ['3', '✏️', '3 marks', cnt([3])], ['5,6', '📝', '5-6 marks', cnt([5, 6])], ['10', '📖', '10 marks', cnt([10])], ['p3', '🔮', 'Most predicted', all.filter((q) => q.p === 3).length]];
     return `
-    <div class="box"><b>How to use:</b> every question has a <b>model answer</b> written the way you can write it in the exam, with the <b>marking scheme</b> and where it was asked. Tap a question to open its answer. Tick <b>Revised</b> to track yourself. ★★★ = very likely (asked in your PDFs).</div>
-    <section class="guide"><h3>✍️ How much to write</h3>
-      <div class="gtable">
-        <div><b>2 marks</b><span>Definition + 1 point or example · 3-4 lines · 2 min</span></div>
-        <div><b>3 marks</b><span>Intro line + 3 points (or a short numerical) · 8-10 lines · 4 min</span></div>
-        <div><b>5-6 marks</b><span>Intro + 5-6 headed points + example/table · 1 page · 8-10 min</span></div>
-        <div><b>10 marks</b><span>Intro · headings · table/diagram · example · conclusion · 2 pages · 15-18 min</span></div>
-      </div>
-      <p class="expl">Numericals: write the formula first, show every step, box the final answer with units (₹, %, years). Marks are given for method.</p></section>
-    <div class="ftools"><input id="qasearch" type="search" placeholder="Search a question (e.g. NPV, leverage, STP)…" aria-label="Search questions">
-      <div class="fchips" id="qamarks"><button class="on" data-m="">All (${all.length})</button><button data-m="2">2 marks · very short (${cnt([2])})</button><button data-m="3">3 marks · short (${cnt([3])})</button><button data-m="5,6">5-6 marks · medium (${cnt([5, 6])})</button><button data-m="10">10 marks · long (${cnt([10])})</button><button data-m="p3">🔮 Most predicted (${all.filter((q) => q.p === 3).length})</button></div>
-      <div class="row"><select id="qaunit" aria-label="Unit"><option value="">All units</option>${units.map((u) => `<option>${esc(u)}</option>`).join('')}</select>
-        <label><input type="checkbox" id="qahide"> Hide revised</label>
-        <button class="btn" id="qaall">Open all</button><button class="btn" id="qaclose">Close all</button>
-        <button class="btn solid" id="qamock">🎲 Mock paper</button>
+    <section class="qahero">
+      <div class="qaring" id="qaring" style="--p:0"><b id="qapct">0%</b><span>revised</span></div>
+      <div class="qaintro"><h2>${all.length} model answers</h2>
+        <p>Every answer is written the way you can write it in the exam - with the <b>marking scheme</b> and where it was asked. Tap a question to open it, tick <b>✔ I have revised this</b> when done.</p>
+        <div class="qaguide"><span><b>2 marks</b> definition + 2 points + example · 2 min</span><span><b>3 marks</b> intro + 3 points · 4 min</span><span><b>5-6 marks</b> headed points + table · 10 min</span><span><b>10 marks</b> full answer, table, example, conclusion · 18 min</span></div></div>
+    </section>
+    <div class="qabar" id="qafilters">
+      <div class="qasearchbox"><span>🔍</span><input id="qasearch" type="search" placeholder="Search a question or topic (e.g. recruitment, appraisal, wage)…" aria-label="Search questions" autocomplete="off"><button type="button" id="qaclear" title="Clear all filters">✕ Clear</button></div>
+      <div class="qachips" id="qamarks">${chips.map((c, i) => `<button type="button" class="qchip c${c[0].replace(',', '')}${i ? '' : ' on'}" data-m="${c[0]}"><i>${c[1]}</i><b>${c[2]}</b><em>${c[3]}</em></button>`).join('')}</div>
+      <div class="qarow"><select id="qaunit" aria-label="Unit"><option value="">All units</option>${units.map((u) => `<option>${esc(u)}</option>`).join('')}</select>
+        <label class="qatoggle"><input type="checkbox" id="qahide"> Hide revised</label>
+        <button type="button" class="btn" id="qaall">▼ Open all</button><button type="button" class="btn" id="qaclose">▲ Close all</button>
+        <button type="button" class="btn solid" id="qamock">🎲 Mock paper</button>
         <a class="btn solid" href="#/sheet/${id}">🌙 Last-night sheet</a>
-        <span class="expl" id="qacount"></span></div></div>
+        <span class="qacount" id="qacount"></span></div>
+    </div>
     <div id="qamockbox"></div>
     <div id="qalist">${all.map((q, i) => item(q, i)).join('')}</div>
-    <p class="expl" id="qanone" hidden>No question matches the filters.</p>`;
+    <p class="expl" id="qanone" hidden>No question matches the filters. <button type="button" class="btn" id="qaclear2">Clear filters</button></p>`;
   }
 
   function item(q, i) {
-    return `<details class="qa" data-i="${i}" data-m="${q.m}" data-u="${esc(q.u)}" data-p="${q.p}" data-s="${esc((q.q + ' ' + q.u + ' ' + q.t).toLowerCase())}">
-      <summary><span class="mk m${q.m}">${q.m}</span><span class="qt">${q.q}</span><span class="st" title="${LIKE[q.p]}">${STAR[q.p]}</span></summary>
-      <div class="qtags">${esc(q.u)} · ${esc(q.t)} · ${LIKE[q.p]}</div>
+    return `<details class="qa m${q.m}" data-i="${i}" data-m="${q.m}" data-u="${esc(q.u)}" data-p="${q.p}" data-s="${esc((q.q + ' ' + q.u + ' ' + q.t).toLowerCase())}">
+      <summary><span class="qn">${i + 1}</span><span class="mk m${q.m}"><b>${q.m}</b><small>marks</small></span>
+        <span class="qbody"><span class="qt">${q.q}</span><span class="qmeta"><span class="qtopic">${esc(q.u)} · ${esc(q.t)}</span><span class="st" title="${LIKE[q.p]}">${STAR[q.p]}</span><span class="qdone">✔ revised</span></span></span></summary>
       <div class="ans">${q.a}
         ${q.ms ? `<div class="msch"><b>📝 Marking scheme:</b> ${q.ms}</div>` : ''}
         ${q.src ? `<div class="src"><b>📌 Asked in:</b> ${q.src}</div>` : ''}
@@ -136,41 +136,52 @@
     const store = window.App.store;
     const key = 'qa_' + id;
     let done = store.get(key, {});
-    let marks = '', unitSel = '', term = '', hideDone = false;
+    const f = { marks: '', unit: '', term: '', hide: false };
     const sig = (i) => all[i].m + '|' + all[i].q.slice(0, 40);
-
-    list.querySelectorAll('input[data-k]').forEach((c) => {
-      c.checked = !!done[sig(c.dataset.k)];
-      c.onchange = () => { if (c.checked) done[sig(c.dataset.k)] = 1; else delete done[sig(c.dataset.k)]; store.set(key, done); apply(); };
-    });
+    const $id = (x) => document.getElementById(x);
 
     function apply() {
       let n = 0, d = 0;
-      list.querySelectorAll('.qa').forEach((el) => {
+      list.querySelectorAll('details.qa').forEach((el) => {
         const q = all[+el.dataset.i];
         const isDone = !!done[sig(el.dataset.i)];
         el.classList.toggle('revised', isDone);
         if (isDone) d++;
-        const okM = !marks || (marks === 'p3' ? q.p === 3 : marks.split(',').map(Number).includes(q.m));
-        const show = okM && (!unitSel || q.u === unitSel) && (!term || el.dataset.s.includes(term)) && !(hideDone && isDone);
+        const okM = !f.marks || (f.marks === 'p3' ? q.p === 3 : f.marks.split(',').map(Number).includes(q.m));
+        const show = okM && (!f.unit || q.u === f.unit) && (!f.term || el.dataset.s.includes(f.term)) && !(f.hide && isDone);
         el.hidden = !show;
+        el.style.display = show ? '' : 'none';
         if (show) n++;
       });
-      document.getElementById('qanone').hidden = n > 0;
-      document.getElementById('qacount').textContent = n + ' shown · ' + d + '/' + all.length + ' revised';
+      $id('qanone').hidden = n > 0;
+      $id('qacount').textContent = n + ' shown';
+      const pct = Math.round((d / all.length) * 100);
+      $id('qapct').textContent = pct + '%';
+      $id('qaring').style.setProperty('--p', pct);
+      document.querySelectorAll('#qamarks .qchip').forEach((x) => x.classList.toggle('on', x.dataset.m === f.marks));
     }
-    document.getElementById('qamarks').onclick = (e) => {
-      const b = e.target.closest('button'); if (!b) return;
-      marks = b.dataset.m;
-      document.querySelectorAll('#qamarks button').forEach((x) => x.classList.toggle('on', x === b));
-      apply();
-    };
-    document.getElementById('qaunit').onchange = (e) => { unitSel = e.target.value; apply(); };
-    document.getElementById('qasearch').oninput = (e) => { term = e.target.value.trim().toLowerCase(); apply(); };
-    document.getElementById('qahide').onchange = (e) => { hideDone = e.target.checked; apply(); };
-    document.getElementById('qaall').onclick = () => list.querySelectorAll('.qa:not([hidden])').forEach((d) => { d.open = true; });
-    document.getElementById('qaclose').onclick = () => list.querySelectorAll('.qa').forEach((d) => { d.open = false; });
-    document.getElementById('qamock').onclick = () => mock(id, all);
+    list.querySelectorAll('input[data-k]').forEach((c) => {
+      c.checked = !!done[sig(c.dataset.k)];
+      c.addEventListener('change', () => { if (c.checked) done[sig(c.dataset.k)] = 1; else delete done[sig(c.dataset.k)]; store.set(key, done); apply(); });
+    });
+    // one delegated listener for the whole filter bar - survives any re-render
+    const bar = $id('qafilters');
+    bar.addEventListener('click', (e) => {
+      const chip = e.target.closest('.qchip');
+      if (chip) { f.marks = chip.dataset.m; apply(); return; }
+      if (e.target.closest('#qaclear')) { reset(); return; }
+      if (e.target.closest('#qaall')) { list.querySelectorAll('details.qa:not([hidden])').forEach((x) => { x.open = true; }); return; }
+      if (e.target.closest('#qaclose')) { list.querySelectorAll('details.qa').forEach((x) => { x.open = false; }); return; }
+      if (e.target.closest('#qamock')) mock(id, all);
+    });
+    const search = (e) => { f.term = e.target.value.trim().toLowerCase(); apply(); };
+    $id('qasearch').addEventListener('input', search);
+    $id('qasearch').addEventListener('keyup', search);
+    $id('qasearch').addEventListener('search', search);
+    $id('qaunit').addEventListener('change', (e) => { f.unit = e.target.value; apply(); });
+    $id('qahide').addEventListener('change', (e) => { f.hide = e.target.checked; apply(); });
+    function reset() { f.marks = ''; f.unit = ''; f.term = ''; f.hide = false; $id('qasearch').value = ''; $id('qaunit').value = ''; $id('qahide').checked = false; apply(); }
+    $id('qaclear2').addEventListener('click', reset);
     apply();
   }
 
