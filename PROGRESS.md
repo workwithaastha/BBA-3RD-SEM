@@ -36,6 +36,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | 28 | Exam features from the date sheet: countdown timeline, subject exam banners, day-wise study plan (`#/plan`), next-exam line in welcome pop-up | done |
 | 29 | HRM written Q&A bank (44 answers, all 'Important Questions' Units 1-4; Units 1-2 from standard HRM knowledge [extra]), mock paper + last-night sheet; HRM now has both MCQs and written Q&A | done |
 | 30 | HRM written Q&A rewritten in detail (96 answers: 2/3/5/6/10 marks for every topic, Units I-IV, 4 data files); site adapts to days left: subjects sorted by exam date, countdown chips, Today's focus card, per-subject today task, Daily 20 weighted to nearest exams | done |
+| 31 | HRM unit-wise notes (Units I-IV) on the site + 4 unit PDFs (notes, important questions, detailed answers, MCQs) | done |
 | - | Final polish | pending user feedback |
 
 ## 2. Content counts

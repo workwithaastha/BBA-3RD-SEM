@@ -60,6 +60,7 @@
   };
   const hrm = {
     concepts: mk('h_iq', 'h_pa', 'h_u4'), qa: mk('h_iq', 'h_pa', 'h_pab', 'h_u4'),
+    u1: mk('h_iq'), u2: mk('h_iq'), u3: mk('h_pa', 'h_pab', 'h_iq'), u4: mk('h_u4', 'h_iq'),
     'q:Unit 1': mk('h_iq'), 'q:Unit 2': mk('h_iq'), 'q:Unit 3': mk('h_pa', 'h_pab', 'h_iq'), 'q:Unit 4': mk('h_u4', 'h_iq'),
   };
   const office = {
