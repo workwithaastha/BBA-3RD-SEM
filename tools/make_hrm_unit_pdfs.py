@@ -133,10 +133,41 @@ def build(i, qa_label, mcq_label, title, iqs):
 
 W = pymupdf.paper_rect("a4")
 where = W + (36, 40, -36, -40)
-for i, (ql, ml, title, iqs) in enumerate(UNITS):
-    html, nq, nm = build(i, ql, ml, title, iqs)
-    out = OUTDIR / f"HRM_Unit_{i + 1}_Notes_Questions_MCQ.pdf"
-    tmp = OUTDIR / f"u{i + 1}.tmp.pdf"
+
+
+def main():
+    for i, (ql, ml, title, iqs) in enumerate(UNITS):
+        html, nq, nm = build(i, ql, ml, title, iqs)
+        out = OUTDIR / f"HRM_Unit_{i + 1}_Notes_Questions_MCQ.pdf"
+        tmp = OUTDIR / f"u{i + 1}.tmp.pdf"
+        story = pymupdf.Story(html=html, user_css=CSS)
+        wr = pymupdf.DocumentWriter(str(tmp))
+        more = 1
+        while more:
+            dev = wr.begin_page(W)
+            more, _ = story.place(where)
+            story.draw(dev)
+            wr.end_page()
+        wr.close()
+        d = pymupdf.open(tmp)
+        for n, pg in enumerate(d, 1):
+            pg.insert_text((W.width / 2 - 60, W.height - 20), f"HRM {ql} - page {n}/{len(d)}", fontsize=8, color=(0.4, 0.4, 0.4))
+        d.save(str(out), garbage=3, deflate=True)
+        pages = len(d)
+        d.close()
+        try:
+            tmp.unlink()
+        except OSError:
+            pass
+        print(out.name, pages, "pages |", nq, "answers |", nm, "MCQs")
+
+    # Exam Master page (answer framework, mnemonics, flowcharts, last-night plan)
+    em = data["notes"][4]["html"]
+    cut = em.rfind('<div class="nextsteps">')
+    em = em[:cut] if cut > 0 else em
+    html = "<html><body><h1>HRM - Exam Master</h1><p class='sub'>Answer framework, priority topics, mnemonic bank, flowcharts and last-night plan</p>" + em + "</body></html>"
+    out = OUTDIR / "HRM_Exam_Master_Mnemonics_Last_Night.pdf"
+    tmp = OUTDIR / "em.tmp.pdf"
     story = pymupdf.Story(html=html, user_css=CSS)
     wr = pymupdf.DocumentWriter(str(tmp))
     more = 1
@@ -148,39 +179,16 @@ for i, (ql, ml, title, iqs) in enumerate(UNITS):
     wr.close()
     d = pymupdf.open(tmp)
     for n, pg in enumerate(d, 1):
-        pg.insert_text((W.width / 2 - 60, W.height - 20), f"HRM {ql} - page {n}/{len(d)}", fontsize=8, color=(0.4, 0.4, 0.4))
+        pg.insert_text((W.width / 2 - 60, W.height - 20), f"HRM Exam Master - page {n}/{len(d)}", fontsize=8, color=(0.4, 0.4, 0.4))
     d.save(str(out), garbage=3, deflate=True)
-    pages = len(d)
+    print(out.name, len(d), "pages")
     d.close()
     try:
         tmp.unlink()
     except OSError:
         pass
-    print(out.name, pages, "pages |", nq, "answers |", nm, "MCQs")
 
-# Exam Master page (answer framework, mnemonics, flowcharts, last-night plan)
-em = data["notes"][4]["html"]
-cut = em.rfind('<div class="nextsteps">')
-em = em[:cut] if cut > 0 else em
-html = "<html><body><h1>HRM - Exam Master</h1><p class='sub'>Answer framework, priority topics, mnemonic bank, flowcharts and last-night plan</p>" + em + "</body></html>"
-out = OUTDIR / "HRM_Exam_Master_Mnemonics_Last_Night.pdf"
-tmp = OUTDIR / "em.tmp.pdf"
-story = pymupdf.Story(html=html, user_css=CSS)
-wr = pymupdf.DocumentWriter(str(tmp))
-more = 1
-while more:
-    dev = wr.begin_page(W)
-    more, _ = story.place(where)
-    story.draw(dev)
-    wr.end_page()
-wr.close()
-d = pymupdf.open(tmp)
-for n, pg in enumerate(d, 1):
-    pg.insert_text((W.width / 2 - 60, W.height - 20), f"HRM Exam Master - page {n}/{len(d)}", fontsize=8, color=(0.4, 0.4, 0.4))
-d.save(str(out), garbage=3, deflate=True)
-print(out.name, len(d), "pages")
-d.close()
-try:
-    tmp.unlink()
-except OSError:
-    pass
+
+
+if __name__ == "__main__":
+    main()
