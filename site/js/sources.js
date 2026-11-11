@@ -15,7 +15,7 @@
     if (old) old.remove();
     const f = list[i];
     const e = ext(f.f);
-    const u = url(dir, f.f);
+    const u = url(f.d || dir, f.f);
     const abs = new URL(u, location.href).href;
     const office = ['ppt', 'pptx', 'doc', 'docx', 'xls', 'xlsx'].includes(e);
     const src = office ? 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(abs) : u;
@@ -121,8 +121,8 @@
           ${f.dup ? `<div class="sdup">Same content as “${esc(nice(f.dup))}”</div>` : ''}
           ${(() => { const u = usedFor(id, f.f); return u.length ? `<div class="sused">Used for: ${u.join(' · ')}</div>` : ''; })()}
           <div class="sact"><button class="btn solid sview" data-i="${i}">👁 View</button>
-            <a class="btn" href="${url(src.dir, f.f)}" target="_blank" rel="noopener">↗ New tab</a>
-            <a class="btn" href="${url(src.dir, f.f)}" download>⬇</a></div></div></article>`;
+            <a class="btn" href="${url(f.d || src.dir, f.f)}" target="_blank" rel="noopener">↗ New tab</a>
+            <a class="btn" href="${url(f.d || src.dir, f.f)}" download>⬇</a></div></div></article>`;
   }).join('')}</div><p class="expl" id="srcnone" hidden>No file matches.</p>`);
     let kind = '', term = '';
     const apply = () => {

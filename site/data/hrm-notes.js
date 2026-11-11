@@ -1,163 +1,248 @@
-// Human Resource Management - unit-wise NOTES (Units I-IV). Used by the site (notes pages) and tools/make_hrm_unit_pdfs.py.
-// Units III-IV follow the PDFs (Unit 3 Performance Appraisal slides, Notes of Unit - 4, Important Questions); Units I-II have no notes PDF,
-// so they are written from standard HRM knowledge (marked [extra]).
+// Human Resource Management - unit-wise NOTES (Units I-IV) + Exam Master page. Used by the site and tools/make_hrm_unit_pdfs.py.
+// Sources: Syllabus/HRM_Four_Units_Comprehensive_Notes.pdf (syllabus + unit decks + earlier test) - main source;
+// HRM/Unit 3 Performance Appraisal slides, HRM/Notes of Unit - 4 and HRM/Important Questions for extra detail.
+// Syllabus: Core Course - II, credits 4, max marks 25 (internal) + 75 (external), L-3 T-0 P-0.
 (function () {
   const SUB = window.SUBJECTS && window.SUBJECTS.hrm;
   if (!SUB) return;
   const T = (head, rows) => '<table><tr>' + head.map((h) => '<th>' + h + '</th>').join('') + '</tr>' + rows.map((r) => '<tr>' + r.map((c) => '<td>' + c + '</td>').join('') + '</tr>').join('') + '</table>';
   const UL = (...a) => '<ul>' + a.map((x) => '<li>' + x + '</li>').join('') + '</ul>';
   const OL = (...a) => '<ol>' + a.map((x) => '<li>' + x + '</li>').join('') + '</ol>';
-  const KEY = (t, ...a) => '<div class="box"><b>' + t + '</b>' + UL(...a) + '</div>';
-  const EX = (x) => '<div class="box"><b>Example:</b> ' + x + '</div>';
+  const BOX = (t, ...a) => '<div class="box"><b>' + t + '</b>' + UL(...a) + '</div>';
+  const MN = (x) => '<div class="box"><b>Mnemonic:</b> ' + x + '</div>';
+  const FLOW = (...a) => '<div class="box"><b>Flow:</b> ' + a.join(' → ') + '</div>';
 
+  // ---------------------------------------------------------------- UNIT I
   const U1 = `
-<h2>1. Meaning and definition of HRM</h2>
-<p><b>Human Resource Management (HRM)</b> is the process of <b>acquiring, developing, motivating and maintaining</b> a workforce so that the organisation achieves its goals. It treats people as a valuable <b>resource</b>, not a cost.</p>
-${KEY('Remember', 'Acquire → Develop → Motivate → Maintain', 'People are assets that can grow in value', 'HRM is a function of every manager, not only the HR department')}
-<h2>2. Nature (features) of HRM</h2>
-${UL('<b>People oriented</b> - deals with human beings, their needs and feelings.', '<b>Continuous</b> - goes on throughout the life of the organisation.', '<b>Pervasive</b> - all managers perform HR work.', '<b>Strategic</b> - linked to business objectives.', '<b>Action oriented</b> - solves problems through policies and practice.')}
+<div class="box"><b>Syllabus - Unit I (10 lectures):</b> Evolution of HRM, definition, objectives, scope and importance of HRM in modern organisations; HRM vs Personnel Management; role and responsibilities of HR managers, required competencies, and the changing role of HR in the era of globalization and digital transformation.</div>
+<h2>1. Definition of HRM</h2>
+<p><b>Gary Dessler:</b> "HRM is the process of <b>acquiring, training, appraising and compensating</b> employees, and of attending to their labour relations, health, safety and fairness concerns."</p>
+<p>Also: HRM is the process of acquiring, developing, motivating and maintaining a workforce so that the organisation achieves its goals.</p>
+${UL('Manages the <b>complete employee lifecycle</b>.', 'Treats people as <b>assets</b>, not merely as a cost.', 'Aligns individual goals with organisational objectives.', 'Combines human judgement with policies, systems and HR data.')}
+${MN('<b>A-T-A-C</b> = Acquire → Train → Appraise → Compensate (support layer: Labour relations, Health, Safety, Fairness).')}
+<h2>2. Evolution of HRM</h2>
+${T(['Stage', 'Period', 'Main focus'], [['Welfare stage', 'Pre-1920s', 'Employee well-being, safety and basic amenities in factories'], ['Personnel management', '1920s-1980s', 'Administrative work: hiring, payroll, discipline, record keeping'], ['HRM', '1980s-2000s', 'Employees as valuable resources; development and motivation'], ['Strategic and digital HR', '2000s-present', 'HR as strategic partner; analytics, AI and automation support decisions']])}
+${MN('<b>W-P-H-D</b> = Welfare → Personnel → HRM → Digital/Strategic. "Care → Admin → Develop → Strategise".')}
+<p><b>Exam line:</b> HRM evolved from basic welfare to administrative personnel management, then to employee development and finally to a strategic, technology-enabled approach - from worker welfare to strategic value creation.</p>
 <h2>3. Objectives of HRM</h2>
-${T(['Objective', 'Meaning', 'Example'], [['Organisational', 'Contribute to organisational effectiveness; right people in the right place', 'Workforce planning'], ['Functional', 'Keep the HR department\'s contribution in proportion to the organisation\'s needs', 'Cost-effective HR services'], ['Societal', 'Be ethically and socially responsible; follow laws; reduce negative impact on society', 'Equal opportunity, no child labour'], ['Personal', 'Help employees achieve their personal goals and growth', 'Training, career paths']])}
+${T(['Objective', 'Meaning'], [['Organisational', 'Support organisational effectiveness through workforce planning and productivity'], ['Functional', 'Maintain HR\'s contribution at a level appropriate to the organisation\'s needs'], ['Social (societal)', 'Respond ethically and legally to society\'s needs; minimise negative impact'], ['Personal', 'Help employees achieve individual career and personal goals']])}
+${MN('<b>OFSP</b> = Organisational, Functional, Societal, Personal.')}
 <h2>4. Scope of HRM</h2>
-${UL('<b>Procurement:</b> HR planning, job analysis, recruitment, selection, placement.', '<b>Development:</b> induction, training, career development, succession planning.', '<b>Compensation:</b> job evaluation, wages, incentives, benefits.', '<b>Integration:</b> bringing employee and organisational interests together; motivation, participation.', '<b>Maintenance:</b> health, safety, welfare, grievance handling.', '<b>Separation:</b> resignation, retirement, retrenchment.')}
+${UL('HR planning, recruitment and selection', 'Training and development', 'Performance appraisal and management', 'Compensation and benefits administration', 'Employee health, safety and welfare', 'Industrial and labour relations', 'HR records and HR information systems (HRIS)', 'Career planning and succession management')}
+${MN('<b>P-R-T-P-C-H-I-C</b> = Planning, Recruitment, Training, Performance, Compensation, Health, Industrial relations, Career.')}
 <h2>5. Functions of HRM</h2>
-${T(['Managerial functions', 'Operative functions'], [['Planning - HR plans and policies', 'Procurement - recruitment and selection'], ['Organising - structure, duties, authority', 'Development - training, career development'], ['Directing - motivation, leadership, communication', 'Compensation - pay, incentives, benefits'], ['Controlling - appraisal, audit, corrective action', 'Integration and maintenance - relations, welfare, safety']])}
-<h2>6. Evolution of HRM</h2>
-${T(['Stage', 'Approach'], [['Welfare work', 'Concern for workers\' conditions and welfare'], ['Personnel management', 'Administrative: hiring, payroll, records, discipline'], ['Human resource management', 'People seen as resources; planning, development, motivation linked to strategy'], ['Strategic HRM', 'HR aligned with business strategy, technology and globalisation']])}
-<h2>7. HRM vs Personnel Management ("paradigm shift")</h2>
-${T(['Basis', 'Personnel Management', 'HRM'], [['View of people', 'A cost to be controlled', 'A valuable asset to be developed'], ['Approach', 'Reactive, routine, clerical', 'Proactive and strategic'], ['Scope', 'Payroll, attendance, records', 'Planning, development, motivation, culture'], ['Link with strategy', 'Weak or none', 'Integrated with business strategy'], ['Role of manager', 'Staff specialist', 'Strategic partner; line managers share HR work'], ['Time horizon', 'Short term', 'Long term']])}
-<p><b>Critical view:</b> basic activities (hiring, pay, discipline) are common to both; the real change is the strategic outlook - so HRM is a shift in thinking, not only in functions.</p>
-<h2>8. Role of the HR manager</h2>
-${T(['Traditional role', 'Changing (modern) role'], [['Record keeper and administrator', 'Strategic partner of top management'], ['Policy maker and enforcer', 'Change agent - leads technology and culture change'], ['Conciliator between management and employees', 'Employee champion - engagement and well-being'], ['Welfare officer', 'Data-driven decision maker (HR analytics)']])}
-<h2>9. Skills of an HR manager</h2>
-${UL('Communication and interpersonal skills', 'Leadership, negotiation and conflict handling', 'Analytical and decision-making skills', 'Technical / IT skills (HR software, analytics)', 'Ethics and integrity')}
+${T(['Managerial functions', 'Operative functions'], [['Planning', 'Staffing (procurement)'], ['Organising', 'Training and development'], ['Directing', 'Compensation and rewards'], ['Controlling', 'Motivation and integration; maintenance and welfare; emerging HR issues']])}
+${MN('<b>PODC</b> = Plan, Organise, Direct, Control. Operative: "Staff - Train - Pay - Motivate - Maintain - Evolve".')}
+<div class="box"><b>Very important link (long answers):</b> objectives tell HR <i>what it must achieve</i>; functions are the <i>activities through which it achieves them</i>. Example: productivity objective → HR planning, staffing and training; employee career objective → training, performance management and career development.</div>
+<h2>6. Importance of HRM in modern organisations</h2>
+${T(['Importance', 'How HR contributes'], [['Drives productivity', 'Better engagement and output'], ['Fosters innovation', 'Skilled, motivated employees contribute ideas'], ['Ensures compliance', 'Handles legal, ethical and regulatory workforce obligations'], ['Builds competitive advantage', 'People are difficult for competitors to copy'], ['Strengthens culture', 'Shapes values, communication and employee relations'], ['Enables change management', 'Supports growth, restructuring and disruption']])}
+${MN('<b>P-I-C-A-C-C</b> = Productivity, Innovation, Compliance, Advantage, Culture, Change.')}
+<h2>7. Personnel Management vs HRM</h2>
+${T(['Dimension', 'Personnel Management', 'HRM'], [['Employment contract', 'Careful delineation of written contracts', 'Aims to go beyond the contract'], ['Rules', 'Emphasis on clear rules', 'More value / mission orientation'], ['Behaviour referent', 'Norms, customs and practices', 'Values and mission'], ['Managerial task', 'Monitoring', 'Nurturing'], ['Management role', 'Transactional', 'Transformational leadership'], ['Communication', 'Indirect', 'Direct'], ['Conflict handling', 'Reach a temporary truce', 'Manage climate and culture'], ['Training and development', 'Controlled access to courses', 'Learning organisation'], ['Intervention focus', 'Personnel procedures', 'Wider cultural, structural and personnel strategies'], ['Shared interests', 'Organisational interests uppermost', 'Mutuality of interests']])}
+<p><b>Fast recall:</b> PM = administer people; HRM = develop and align people. "A paradigm shift" - HRM changes the way of thinking (people as assets, strategy-linked); the basic functions (hiring, pay, discipline) are common to both. Use at least five comparison bases.</p>
+<h2>8. Roles and responsibilities of HR managers</h2>
+${T(['Role', 'Core responsibility'], [['Strategic partner', 'Align HR strategy with business goals'], ['Administrative expert', 'Efficient HR processes and legal compliance'], ['Employee champion', 'Advocate employee needs, morale and well-being'], ['Change agent', 'Drive organisational change and transformation'], ['Talent manager', 'Recruitment, retention and succession'], ['Learning facilitator', 'Build capability through training and development']])}
+${MN('<b>S-A-E-C-T-L</b> = Strategic, Administrative, Employee, Change, Talent, Learning.')}
+<p>Older roles: policy maker, conciliator (mediator) between management and employees, welfare officer, record keeper.</p>
+<h2>9. Competencies required for HR managers</h2>
+${UL('Communication and interpersonal skills', 'Ethical judgement and confidentiality', 'Knowledge of labour laws and compliance', 'Data and HR analytics proficiency', 'Problem-solving and decision-making', 'Change management and adaptability', 'Digital and HR technology (HRIS) skills', 'Negotiation and conflict resolution')}
+${MN('<b>C-E-L-D-P-C-D-N</b> = Communication, Ethics, Labour law, Data, Problem-solving, Change, Digital, Negotiation.')}
 <h2>10. HR policies and principles</h2>
-<p>An HR policy is a guideline that tells managers how to handle people matters consistently. Good policies give <b>effectiveness</b> (clear decisions), <b>continuity</b> (same practice when managers change) and <b>stability</b> (equal and predictable treatment).</p>
-<h2>11. Importance of HRM in the emerging scenario</h2>
-${UL('Competition makes skilled, committed people the main advantage.', 'Technology change needs continuous training.', 'Higher productivity and lower turnover.', 'Legal and ethical compliance builds a good image.', 'Better industrial relations through fair policies.')}
-<h2>12. Changing role of HR - globalisation and digital transformation</h2>
-${T(['Force', 'Effect on HR'], [['Globalisation', 'Multicultural teams, global talent, international standards'], ['Digital technology', 'HRMS, e-recruitment, e-learning, biometric attendance, analytics'], ['Remote / hybrid work', 'Flexible policies, virtual team management'], ['New skills', 'Re-skilling for AI and new tools']])}
-<div class="box"><b>Quick revision - Unit I</b>${UL('HRM = acquire, develop, motivate, maintain', '4 objectives: Organisational, Functional, Societal, Personal', '2 types of functions: Managerial (POD-C: plan, organise, direct, control) and Operative (procure, develop, compensate, integrate, maintain)', 'Evolution: welfare → personnel → HRM → strategic HRM', 'HRM = proactive + strategic; Personnel Mgmt = reactive + clerical', 'HR manager: administrator → strategic partner and change agent')}</div>`;
+<p>An HR policy is a guideline for handling people matters consistently. Good policies give <b>effectiveness</b> (clear decisions), <b>continuity</b> (same practice when managers change) and <b>stability</b> (equal, predictable treatment).</p>
+<h2>11. Changing role of HR - globalisation and digital transformation</h2>
+${T(['Force', 'Effect on HR'], [['Globalisation', 'Multicultural, geographically dispersed workforces; cross-border compliance; global mobility / expatriates; culturally sensitive policies'], ['Digital transformation', 'AI and automation in recruitment and screening; HR analytics for evidence-based decisions; cloud HRIS self-service; remote and hybrid work tools']])}
+<p><b>Exam line:</b> "Modern HR is no longer only a support department; it is a strategic partner that uses people knowledge and technology to create organisational value."</p>
+${BOX('Unit I - most probable questions', 'Define HRM and explain its evolution.', 'Explain the objectives of HRM and relate them to HRM functions.', 'Explain the scope and importance of HRM in modern organisations.', 'Differentiate Personnel Management and HRM.', 'Discuss the roles and competencies of HR managers.', 'Explain the changing role of HR in globalisation and digital transformation.')}`;
 
+  // ---------------------------------------------------------------- UNIT II
   const U2 = `
+<div class="box"><b>Syllabus - Unit II (12 lectures) - Talent Acquisition (Procurement):</b> Concept of HRP, process and factors affecting HRP; forecasting demand and supply of human resources. Job analysis, job description (JD) and job specification (JS). Recruitment: meaning, factors affecting recruitment, internal vs external sources. Selection: the selection process, types of tests (aptitude, personality, situational) and interviewing techniques.</div>
+${FLOW('HR planning', 'Job analysis (JD + JS)', 'Recruitment (attract)', 'Selection (choose)')}
 <h2>1. Human Resource Planning (HRP)</h2>
-<p><b>HRP</b> is the process of <b>forecasting an organisation's future demand for and supply of employees</b> and planning to meet the gap, so that the right number and type of people are available at the right time.</p>
-${OL('Analyse organisational objectives and plans (first step).', 'Forecast demand for human resources.', 'Forecast supply (internal and external).', 'Identify the gap - shortage or surplus.', 'Prepare and implement action plans.', 'Control and review.')}
-<h3>Factors affecting HRP</h3>
-${T(['Internal factors', 'External factors'], [['Organisational strategy and growth plans', 'Labour market and unemployment'], ['Organisational structure and job design', 'Economy and technology'], ['Employee turnover, skills inventory', 'Government laws, trade unions']])}
-<h3>Techniques of forecasting demand</h3>
-${T(['Technique', 'How it works'], [['Managerial judgement', 'Managers estimate needs'], ['Delphi technique', 'Experts give estimates anonymously in rounds until consensus'], ['Nominal group technique', 'Structured group discussion and ranking'], ['Work-study technique', 'Workload ÷ output per employee'], ['Ratio / trend analysis', 'Past ratios projected']])}
-<p>For a <b>growing firm</b> Delphi / managerial judgement suits best, because the future differs from the past.</p>
-<h3>Methods of forecasting supply</h3>
-${UL('<b>Markov analysis</b> - probability of employees moving between jobs and leaving.', '<b>Skill inventory</b> - records of employees\' skills.', '<b>Replacement / succession charts</b> - who can replace whom.', '<b>External supply</b> - labour market, campuses.')}
+<p>HRP is the process of <b>anticipating and making provision for the movement of people into, within and out of an organisation</b> - ensuring the right number and kind of people are available, at the right place, at the right time. (Also: forecasting demand for and supply of employees and planning to meet the gap.) HRP links people strategy with business strategy; without it organisations face shortages that restrict growth or surpluses that raise cost.</p>
+<h3>Objectives of HRP</h3>
+${UL('Cope with change in technology, markets and products', 'Develop employees by providing a base for training and growth', 'Plan recruitment and redundancy levels in advance', 'Control HR cost within the budget', 'Match staffing requirements with organisational goals')}
+${MN('<b>C-D-P-C-M</b> = Change, Develop, Plan recruitment, Control cost, Match goals.')}
+<h3>Nature of HRP</h3>
+${UL('Continuous process - not one-time', 'Sub-system of overall organisational planning', 'Quantitative and qualitative - numbers and skills', 'Futuristic - anticipates future needs', 'Matches manpower supply and demand')}
+<h3>Importance of HRP</h3>
+${UL('Right people at the right time', 'Supports growth, expansion, diversification and technology change', 'Prepares people for future needs through training', 'Reduces labour cost by avoiding over- or under-staffing', 'Base for recruitment, promotion and succession decisions')}
+<h2>2. HRP process</h2>
+${T(['Step', 'What to write'], [['1. Analyse objectives', 'Study organisational goals, strategy and future direction (first step)'], ['2. Demand forecasting', 'Estimate future number and type of people required'], ['3. Supply forecasting', 'Assess manpower likely to be available internally and externally'], ['4. Identify gaps', 'Compare demand with supply - shortage or surplus'], ['5. Action plan', 'Recruit, train, transfer, promote, redeploy or reduce'], ['6. Monitor and control', 'Check results and update the plan continuously']])}
+${MN('<b>A-D-S-G-A-M</b> = Analyse → Demand → Supply → Gaps → Action → Monitor.')}
+<h2>3. Factors affecting HRP</h2>
+${T(['Internal factors', 'External factors'], [['Company policies, growth / expansion plans, budget constraints, production levels / organisation structure, turnover and absenteeism', 'Government policies and labour legislation, economic conditions, technological change, demographic trends, competitive conditions']])}
 <h3>Barriers to effective HRP</h3>
-${T(['Barrier', 'Remedy'], [['Lack of top management support', 'Show benefits; involve top management'], ['Inaccurate data and forecasts', 'Improve the HR information system'], ['Resistance to planning', 'Communication and participation']])}
-<h2>2. Job analysis</h2>
-<p>Job analysis is the process of <b>collecting and analysing information about the tasks, duties, responsibilities and requirements of a job</b>. It is the <b>foundation (cornerstone) of all HR activities</b>.</p>
-${T(['Method', 'How it works'], [['Observation', 'Analyst watches the job being done'], ['Interview', 'Job holders and supervisors are questioned'], ['Questionnaire', 'Written form filled by employees'], ['Diary method', 'Job holder records daily activities in a log']])}
-${T(['Job description', 'Job specification'], [['Statement of tasks, duties and responsibilities - about the JOB', 'Statement of qualifications, skills and traits - about the PERSON'], ['Title, duties, reporting, conditions', 'Education, experience, skills, personality']])}
-${EX('<b>Marketing Executive</b> - JD: promote products, meet customers, prepare sales reports, report to the Marketing Manager. JS: BBA/MBA, 1-2 years\' experience, communication skills, basic computer skills.')}
-<h3>Uses of job analysis</h3>
-${T(['HR activity', 'Use'], [['Planning', 'Defines jobs needed'], ['Recruitment and selection', 'Gives JD and JS'], ['Training', 'Shows skills required'], ['Appraisal', 'Sets performance standards'], ['Job evaluation and pay', 'Basis of the pay structure']])}
-<h2>3. Recruitment</h2>
-<p><b>Recruitment</b> is the process of <b>searching for and attracting potential candidates</b> to apply for jobs. It creates a pool of applicants.</p>
-<h3>Factors affecting recruitment</h3>
-${T(['Internal', 'External'], [['Recruitment policy, HR plan, size, cost, image of the firm', 'Labour market, unemployment, competitors, laws, economy']])}
-<h3>Internal vs external sources</h3>
-${T(['Basis', 'Internal', 'External'], [['Examples', 'Promotion, transfer, job posting, referrals', 'Campus, advertisements, employment exchange, agencies'], ['Merits', 'Cheap, fast, boosts morale, performance known', 'Fresh ideas and skills, wider choice'], ['Demerits', 'Limited choice, no new ideas, rivalry', 'Costly, slow, risk of a wrong fit']])}
-<p>"Internal recruitment boosts morale, external brings innovation" - broadly true; the best firms use a mix.</p>
-${T(['Recruitment', 'Selection'], [['Searching and attracting candidates', 'Choosing the best from the applicants'], ['Positive process', 'Negative process (rejects unsuitable persons)'], ['Comes first', 'Follows recruitment']])}
-<h2>4. Selection</h2>
-<p><b>Selection</b> is the process of <b>choosing the most suitable candidate</b> from the applicants.</p>
-${OL('Application screening (first stage)', 'Employment tests', 'Interview', 'Reference and background check', 'Medical examination', 'Final selection and job offer', 'Placement and induction')}
-<h3>Employment tests</h3>
-${T(['Test', 'Measures'], [['Aptitude', 'Potential to learn / ability'], ['Personality', 'Traits and attitude'], ['Situational', 'Judgement in job-like situations']])}
-<p><b>Reliability</b> = consistent results; <b>validity</b> = the test really predicts job performance.</p>
-<h3>Interviews</h3>
-${T(['Type', 'Meaning'], [['Structured', 'Fixed questions in the same order'], ['Unstructured', 'Free-flowing conversation'], ['Panel', 'A group of interviewers'], ['Behavioural', 'Questions on past behaviour'], ['Stress', 'Deliberate pressure to test composure'], ['Telephonic / video', 'Remote interview']])}
-${T(['Interview error', 'Meaning', 'Remedy'], [['Halo effect', 'One good trait colours all', 'Rate each trait separately'], ['Horns effect', 'One bad trait colours all', 'Structured criteria'], ['Bias / stereotyping', 'Judging by gender, looks, background', 'Train interviewers, panel']])}
-<div class="box"><b>Quick revision - Unit II</b>${UL('HRP: demand + supply → gap → action plan; Delphi = demand, Markov = supply', 'Job analysis → JD (job) + JS (person); methods: observation, interview, questionnaire, diary', 'Recruitment = attract (positive); Selection = choose (negative)', 'Selection stages: screening → tests → interview → checks → medical → offer', 'Interview errors: halo, horns, bias')}</div>`;
+${T(['Barrier', 'Remedy'], [['Lack of top management support', 'Show benefits; involve top management'], ['Inaccurate data and forecasts', 'Improve the HR information system'], ['Resistance from managers / employees', 'Communication and participation']])}
+<h2>4. Forecasting demand and supply</h2>
+${T(['Demand method', 'Meaning'], [['Managerial judgement', 'Experienced managers estimate future requirements'], ['Ratio-trend analysis', 'Past staffing ratios projected forward'], ['Work-study technique', 'Work broken into tasks; standard time and staff need calculated'], ['Delphi technique', 'Anonymous expert opinions collected over several rounds'], ['Regression analysis', 'Statistical relationship between business variables and staffing']])}
+${MN('<b>M-R-W-D-R</b> = Managerial, Ratio, Work-study, Delphi, Regression. For a growing firm, Delphi / managerial judgement suits best.')}
+${T(['Supply', 'Sources / methods'], [['Internal', 'Skills inventory, replacement charts, succession planning, promotion and transfer (also Markov analysis)'], ['External', 'Labour market trends, employment exchanges / job portals, campus recruitment, workforce availability']])}
+<h2>5. Job analysis</h2>
+<p>Job analysis is the <b>systematic process of collecting and studying information about a job's content, context and requirements</b> - what the job involves and what kind of person is needed. It is the foundation of HR activities.</p>
+<p><b>Methods:</b> direct observation, interviews, questionnaires / surveys, diaries / logs (also critical incidents, job performance analysis, work diaries).</p>
+${FLOW('Purpose and use', 'Background information', 'Select jobs', 'Collect data', 'Review', 'Prepare JD + JS')}
+<p><b>Uses:</b> recruitment and selection; performance management; training and development; compensation and benefits; career development.</p>
+<h2>6. Job description (JD) vs job specification (JS)</h2>
+${T(['Basis', 'JD - Job description', 'JS - Job specification'], [['Question answered', 'WHAT is the job?', 'WHO can do the job?'], ['Focus', 'Job duties, responsibilities, tasks, objectives and conditions', 'Qualifications, experience, physical, mental, technical and communication abilities'], ['Examples', 'Title, reporting, duties, tools, working conditions', 'Education, experience, skills, personality, certifications'], ['Use', 'Advertise the role; set expectations', 'Screen and evaluate candidates']])}
+${MN('JD = Do; JS = Who.')} <p><b>Sample - Marketing Executive:</b> JD - promote products, meet customers, prepare sales reports, report to the Marketing Manager. JS - BBA/MBA, 1-2 years' experience, communication and computer skills.</p>
+<h2>7. Recruitment</h2>
+<p><b>Edwin B. Flippo:</b> recruitment is the process of searching for prospective employees and stimulating and encouraging them to apply for jobs in an organisation. It is a <b>positive</b> process - it widens the applicant pool.</p>
+${FLOW('HR planning', 'Job analysis', 'Recruitment planning', 'Identify sources', 'Contact sources', 'Attract candidates', 'Build application pool')}
+${T(['Factors affecting recruitment', ''], [['Internal', 'Recruitment policy, organisation size / manpower plan, cost of hiring, growth / expansion, HR planning decisions'], ['External', 'Labour market conditions, legal / political factors, organisational image, unemployment rate, competitors\' practices']])}
+${T(['Internal sources', 'External sources'], [['Promotions, transfers, job posting, employee referrals, re-employment', 'Campus recruitment, advertisements / job portals / social media, employment agencies, walk-ins, external referrals'], ['Faster, cheaper, boosts morale; may limit fresh ideas', 'Wider choice, fresh talent; costlier, longer induction']])}
+${MN('Internal <b>P-T-J-E-R</b> (Promotion, Transfer, Job posting, Employee referral, Re-employment); external <b>C-A-E-W</b> (Campus, Advertisements, Employment agencies, Walk-ins).')}
+<h2>8. Selection</h2>
+<p><b>Edwin B. Flippo:</b> selection is the process of choosing individuals who have the requisite qualifications and competence to fill jobs. It is a <b>negative</b> process - unsuitable candidates are eliminated.</p>
+${FLOW('Preliminary screening', 'Application review', 'Selection tests', 'Interview', 'Reference / background check', 'Medical examination', 'Final offer')}
+<p><b>Tests:</b> aptitude (numerical, verbal, reasoning, mechanical), personality, situational, achievement / trade and interest tests. A good test is objective, valid, reliable and standardised (<b>reliability</b> = consistent results; <b>validity</b> = predicts job performance).</p>
+<p><b>Interviews:</b> structured, unstructured, behavioural, panel, stress, group discussion, situational, technical (also telephonic / video). Common errors: halo effect, horns effect, bias / stereotyping, first-impression error - reduce by structured questions and trained interviewers.</p>
+<h2>9. Recruitment vs selection</h2>
+${T(['Basis', 'Recruitment', 'Selection'], [['Meaning', 'Searches for and attracts candidates', 'Chooses suitable candidate(s) from the pool'], ['Candidate pool', 'Widens the pool', 'Reduces the pool'], ['Sequence', 'Comes first', 'Follows recruitment'], ['Nature', 'Positive process', 'Negative process'], ['Main techniques', 'Advertising, campus drives, referrals, agencies', 'Tests, interviews, reference and medical checks'], ['Outcome', 'Applications / candidate pool', 'Offer / appointment']])}
+<p><b>Golden line:</b> recruitment attracts; selection chooses.</p>
+${BOX('Unit II - most probable questions', 'Define HRP and explain its process in detail.', 'Explain objectives and importance of HRP.', 'Explain demand and supply forecasting methods.', 'Define Job Analysis and distinguish JD from JS.', 'Define recruitment and explain internal and external sources.', 'Differentiate recruitment and selection; state two sources of each.', 'Explain the selection process, tests and interviewing techniques.')}`;
 
+  // ---------------------------------------------------------------- UNIT III
   const U3 = `
+<div class="box"><b>Syllabus - Unit III (12 lectures) - Development &amp; Performance Management:</b> Training &amp; development: need and importance; identifying training needs; methods of training (on-the-job vs off-the-job); evaluating training effectiveness. Performance appraisal: concept and objectives; traditional vs modern methods (MBO, 360-degree appraisal, BARS); common biases in performance evaluation. Career planning &amp; development: concept of career stages, succession planning, individual vs organisational career management.</div>
 <h2>1. Training and development</h2>
-${T(['Training', 'Development'], [['Improves skills for the PRESENT job', 'Prepares for FUTURE roles'], ['Short term, job-specific', 'Long term, career oriented'], ['Mostly workers', 'Mostly managers']])}
-<h3>Need and importance</h3>
-${T(['For employees', 'For the organisation'], [['Better skills and confidence', 'Higher productivity and quality'], ['Career growth', 'Lower turnover'], ['Job security', 'Competitive advantage']])}
-<h3>Identifying training needs - three levels of analysis</h3>
-${T(['Level', 'What is studied'], [['Organisational', 'Goals, resources and climate'], ['Task (job)', 'Knowledge and skills the job requires'], ['Person', 'Which employees need training and what type']])}
-<h3>Training methods</h3>
-${T(['On-the-job', 'Off-the-job'], [['Coaching, job rotation, apprenticeship, understudy', 'Lectures, case study, role play, simulation, vestibule training'], ['Merit: practical, low cost', 'Merit: controlled learning, no disturbance to production'], ['Demerit: poor trainer or disturbance to production may affect learning', 'Demerit: may be costly, lacks real conditions']])}
-<h3>Training evaluation - Kirkpatrick's four levels</h3>
-${OL('<b>Reaction</b> - trainee satisfaction', '<b>Learning</b> - knowledge and skills gained', '<b>Behaviour</b> - use of learning on the job', '<b>Results</b> - impact on organisational results')}
-<h2>2. Performance appraisal</h2>
-<p><b>Performance appraisal</b> is a process of evaluating an employee's performance of a job in terms of its requirements. <b>Beach:</b> systematic evaluation of the performance of an individual on the job and also his/her potential for development. It is systematic, objective, periodic and planned (never random).</p>
-<p><b>Objectives:</b> compensation and promotion decisions, training needs, feedback and personal development.</p>
+<p><b>Training</b> is a short-term, systematic process of imparting specific knowledge and skills required for a <b>present job</b> (Flippo: the act of increasing an employee's knowledge and skill for doing a particular job). <b>Development</b> is a long-term, education-oriented process aimed at overall growth and <b>future roles</b>; it is person-centred and builds conceptual and managerial ability.</p>
+${T(['Basis', 'Training', 'Development'], [['Focus', 'Present job', 'Future role'], ['Term', 'Short term', 'Long term'], ['Orientation', 'Job / technical', 'Career / conceptual'], ['Initiated by', 'Mainly organisation', 'Individual and organisation'], ['Nature', 'Specific and narrow', 'Broad and general']])}
+${MN('Training = Today; Development = Tomorrow.')}
+<h2>2. Need and importance of training</h2>
+<p><b>Organisation:</b> bridges skill gaps; improves quality and productivity; reduces wastage, errors and accidents; reduces supervision; prepares employees for higher responsibility; strengthens competitiveness and succession planning. <b>Employee:</b> adapts to technology and changing jobs; increases confidence, morale and job satisfaction.</p>
+${MN('<b>Q-P-S-C-S + M-C</b> = Quality, Productivity, Safety, Cost/supervision, Succession + Morale, Change.')}
+<h2>3. Training process - six steps</h2>
+${FLOW('Assess organisational objectives', 'Training needs analysis', 'Set training goals', 'Design programme', 'Execute', 'Evaluate')}
+${MN('<b>A-T-G-D-E-E</b> = Assess, TNA, Goals, Design, Execute, Evaluate.')}
+<h2>4. Training needs analysis (TNA)</h2>
+<p>TNA is the systematic identification of the <b>gap between the knowledge, skills and performance required for a job and those actually available</b>.</p>
+${T(['Level', 'Asks', 'Examines'], [['Organisational analysis', 'WHERE?', 'Goals, resources, efficiency indicators and climate - where can training help'], ['Task / operational analysis', 'WHAT?', 'Job duties, standards and skills - what should be taught'], ['Individual / person analysis', 'WHO?', 'Individual performance - who needs training and in what area']])}
+<p><b>Methods of TNA:</b> observation, interviews, surveys, performance appraisals, job analysis, focus groups (<b>O-I-S-A-J-F</b>). Mnemonic for levels: <b>O-T-I</b>.</p>
+<h2>5. On-the-job training (OJT)</h2>
+<p>Given at the actual workplace while the trainee performs real work.</p>
+${UL('<b>Job rotation</b> - move across jobs / departments', '<b>Coaching</b> - experienced person guides one-to-one', '<b>Job Instruction Training (JIT)</b> - prepare → present → try-out → follow-up', '<b>Committee assignments</b> - solve real problems in a team', '<b>Understudy / apprenticeship</b> - work under a senior to learn the role', '<b>Internship</b> - practical exposure for a fixed period', '<b>Mentoring</b> - longer-term developmental guidance')}
+<h2>6. Off-the-job training</h2>
+<p>Conducted away from the work spot so trainees can focus on learning.</p>
+${UL('<b>Lecture / classroom</b> - theory and concepts', '<b>Case study</b> - analyse real or simulated problems', '<b>Role playing</b> - act out situations to build interpersonal skill', '<b>Business games / simulation</b> - practise decision-making', '<b>Sensitivity training / T-group</b> - self-awareness and interpersonal sensitivity', '<b>Vestibule training</b> - practise on replica equipment away from production', 'Also: programmed instruction, conference / discussion, in-basket, brainstorming, field trips, e-learning')}
+${T(['Basis', 'OJT', 'Off-the-job'], [['Place', 'Actual workplace', 'Away from workplace'], ['Cost', 'Usually cheaper', 'Usually costlier'], ['Approach', 'Practical', 'More theoretical / conceptual'], ['Best fit', 'Production / job-specific work', 'Managerial and non-production learning'], ['Trainer', 'Often an experienced employee', 'Experts / trainers'], ['Principle', 'Learning by performing', 'Learning by acquiring knowledge']])}
+<p><b>Merit / demerit:</b> OJT is practical and low cost, but a poor trainer or disturbance to production may affect learning; off-the-job gives controlled learning but may be costly and lacks real conditions.</p>
+<h2>7. Management development</h2>
+<p>A planned, continuous process of improving the conceptual, human and decision-making abilities of present and future managers. <b>On-the-job:</b> job rotation, coaching, understudy. <b>Off-the-job:</b> case study, in-basket, sensitivity training. <b>Objectives:</b> improve managerial performance, prevent skill obsolescence, identify future leaders.</p>
+<h2>8. Training effectiveness and evaluation</h2>
+<p>Evaluation checks whether the programme met its objectives, improved learning and behaviour, improved organisational performance and generated value (ROI).</p>
+${T(['Kirkpatrick level', 'Question', 'Method'], [['1. Reaction', 'How did they feel?', 'Feedback forms'], ['2. Learning', 'What did they learn?', 'Tests before / after'], ['3. Behaviour', 'Did work change?', 'Supervisor observation'], ['4. Results', 'Business impact', 'Performance data']])}
+${T(['CIPP model (Stufflebeam)', 'Meaning'], [['Context', 'Need / problem - Why?'], ['Input', 'Resources and plan - With what?'], ['Process', 'Implementation - How executed?'], ['Product', 'Outcomes - What came out?']])}
+<p>Other models: CIRO (Context, Input, Reaction, Outcome), Phillips ROI (adds ROI as a fifth level), Kaufman five levels, Brinkerhoff Success Case Method. <b>Tools:</b> questionnaires / feedback forms, written tests, performance observation and checklists, interviews and focus groups, performance metrics and business data. <b>Mnemonics:</b> R-L-B-R; C-I-P-P.</p>
+<h2>9. Performance appraisal</h2>
+<p>Performance appraisal is the systematic evaluation of an employee's performance and potential in relation to job requirements and organisational expectations (Beach: also his / her potential for development). It is systematic, objective, periodic and planned.</p>
+<p><b>Objectives:</b> feedback and strengths / weaknesses; promotion, transfer and other decisions; training and development needs; performance standards; compensation and rewards; basis for career development and succession planning. <b>F-P-T-S-C-C</b>.</p>
 <h3>Process (steps)</h3>
-${OL('Establish performance standards (first step)', 'Communicate the standards', 'Measure actual performance', 'Compare actual with standards', 'Discuss the results (feedback)', 'Decision making and corrective action (last step)')}
-<h3>Traditional vs modern methods</h3>
-${T(['Traditional', 'Modern'], [['Straight ranking, paired comparison, grading scale, forced distribution, checklist, essay, critical incidents, field review, confidential reports, performance tests, group appraisal', 'Assessment centre, MBO, 360-degree, human asset accounting, BARS']])}
-${T(['Method', 'Key point'], [['Straight ranking', 'Employees ranked from best to worst'], ['Paired comparison', 'Each employee compared with every other, one trait at a time'], ['Forced distribution', 'Fit employees into set categories (outstanding ... poor)'], ['Critical incident', 'Dated records of good and bad incidents'], ['Field review', 'Trained HR person in the field supports line managers'], ['Group appraisal', 'A panel evaluates the employee'], ['Assessment centre', 'Simulated tasks rated by observers; German Army, 1930'], ['MBO', 'Appraisal by results; joint SMART goals (Drucker, McGregor)'], ['360-degree', 'Superiors, subordinates and peers rate'], ['BARS', 'Scale 5 Outstanding, 4 Very Good, 3 Satisfactory, 2 Needs improvement, 1 Poor, anchored to behaviours'], ['Human asset accounting', 'Values people as assets in money terms']])}
-<p><b>SMART:</b> Specific, Measurable, Achievable, Result-oriented, Time-bound.</p>
-<h3>Appraisal biases</h3>
-${T(['Bias', 'Meaning'], [['Halo effect', 'One strong trait inflates all ratings'], ['Horns effect', 'One weak trait lowers all ratings'], ['Leniency', 'Rating higher than deserved'], ['Strictness', 'Rating lower than deserved'], ['Central tendency', 'Rating everyone average'], ['Recency', 'Judging only recent events']])}
-<p><b>Overcoming challenges:</b> two-way dialogue and regular check-ins (not once-a-year feedback), train appraisers, clear KPIs, technology, 360-degree feedback.</p>
-<h2>3. Career management</h2>
-${UL('<b>Career management:</b> continuous process of preparing, implementing and monitoring career plans.', '<b>Career path:</b> series of positions through which one can be promoted, transferred and rotated (HR Executive → Sr Executive → HR Manager → HR Director).', '<b>Career development:</b> linking individual career needs with the organisation\'s workforce requirements.')}
-${T(['Individual career management', 'Organisational career management'], [['Person\'s own goals; self-assessment', 'Organisation\'s workforce needs; planned moves']])}
-${T(['Party', 'Responsibility'], [['Individual', 'Self-assessment, goals, skill development'], ['Manager', 'Feedback, coaching, support'], ['Organisation', 'Opportunities, training, career paths']])}
-<h2>4. Succession planning</h2>
-<p>Identifying, evaluating, developing and tracking <b>high-potential employees for future leadership roles</b>, so the company runs smoothly when key people leave.</p>
-${OL('Identify the positions included', 'Identify the employees', 'Set standards', 'Assess potential', 'Review the process', 'Link with HR systems', 'Give feedback to employees', 'Measure effectiveness')}
-${T(['Type', 'Meaning'], [['Strategic leadership development', 'Long-term preparation of leaders'], ['Departure-defined', 'Started only when a key employee leaves'], ['Emergency / interim', 'Short-term replacement in sudden situations']])}
-<p><b>Challenges:</b> resistance to change, limited resources, inadequate planning, lack of buy-in, incomplete information.</p>
-<div class="box"><b>Quick revision - Unit III</b>${UL('Training = present job; development = future', 'TNA levels: organisational, task, person', 'Kirkpatrick: reaction, learning, behaviour, results', 'PA steps: standards → communicate → measure → compare → discuss → decide', 'Modern methods: assessment centre, MBO, 360, HR accounting, BARS', 'Biases: halo, horns, leniency, strictness, central tendency', 'Succession planning: 8 steps, 3 types')}</div>`;
+${FLOW('Establish standards', 'Communicate standards', 'Measure actual performance', 'Compare with standards', 'Discuss results (feedback)', 'Decision / corrective action')}
+${T(['Traditional methods', 'Modern methods'], [['Ranking, paired comparison, forced distribution, graphic rating scale, checklist, essay, critical incidents, field review, group appraisal, confidential reports', 'MBO, 360-degree feedback, BARS, assessment centre, human asset accounting']])}
+${T(['Method', 'Key point'], [['Straight ranking', 'Best to worst'], ['Paired comparison', 'Each employee compared with every other, one trait at a time'], ['Forced distribution', 'Fit employees into set categories (outstanding ... poor)'], ['Critical incident', 'Dated records of good and bad incidents'], ['MBO', 'Manager and employee agree objectives; judged on results (Drucker, McGregor); SMART goals'], ['360-degree', 'Feedback from superiors, peers, subordinates and sometimes customers'], ['BARS', 'Behavioural statements anchored to performance levels (5 Outstanding ... 1 Poor)'], ['Assessment centre', 'Simulated tasks rated by observers; German Army, 1930']])}
+<h3>Common appraisal biases</h3>
+${T(['Bias', 'Meaning'], [['Halo effect', 'One strong quality influences the whole rating'], ['Horns effect', 'One negative quality lowers the whole rating'], ['Recency effect', 'Recent performance dominates judgement'], ['Leniency', 'Unusually high scores'], ['Strictness', 'Unusually low scores'], ['Central tendency', 'Avoids extremes; scores near the middle'], ['Similarity bias', 'Favours people who resemble the rater'], ['Contrast effect', 'Rating influenced by comparison with another employee rather than the standard']])}
+${MN('<b>H-H-R-L-S-C-S-C</b>.')}
+<p><b>Minimising biases:</b> train appraisers, clear KPIs, regular two-way feedback instead of once-a-year reviews, technology, 360-degree feedback.</p>
+<h2>10. Career planning and development</h2>
+<p><b>Career planning:</b> the process by which an individual identifies career goals and determines the path to achieve them. <b>Career development:</b> the ongoing process of building skills, experience and opportunities that support career growth. <b>Career path:</b> series of positions through which one can move (HR Executive → Sr Executive → HR Manager → Director).</p>
+<h3>Career stages</h3>
+${T(['Stage', 'Meaning'], [['Exploration', 'Interests and options are identified'], ['Establishment', 'Entry and early growth'], ['Mid-career', 'Consolidation, advancement or change'], ['Late career', 'Mentoring, senior responsibility, preparation for retirement'], ['Decline / retirement', 'Reduced work role and transition']])}
+<h3>Succession planning</h3>
+<p>Systematic identification and development of employees who can take over key positions when vacancies arise; it reduces disruption, preserves organisational knowledge and supports leadership continuity. Steps: identify positions → identify employees → set standards → assess potential → review → link with HR systems → feedback → measure effectiveness. Types: strategic leadership development, departure-defined, emergency / interim. Challenges: lack of buy-in, limited resources, incomplete information.</p>
+${T(['Individual career management', 'Organisational career management'], [['Self-assessment, career goals, skill development, job choices and career decisions', 'Career paths, development programmes, internal mobility, succession planning, opportunities']])}
+<p><b>Memory line:</b> the individual chooses the direction; the organisation creates the opportunities. Responsibilities: individual - self-assessment and goals; manager - feedback and coaching; organisation - opportunities, training, paths.</p>
+${BOX('Unit III - most probable questions', 'Define training and distinguish training from development.', 'Explain TNA process / levels and methods.', 'List and explain on-the-job and off-the-job training methods; OJT vs off-the-job.', 'Explain Kirkpatrick and CIPP models and methods of evaluation.', 'Define performance appraisal; objectives; traditional vs modern methods.', 'Explain MBO, 360-degree appraisal and BARS.', 'Discuss common biases in performance evaluation.', 'Explain career stages and succession planning.')}`;
 
+  // ---------------------------------------------------------------- UNIT IV
   const U4 = `
+<div class="box"><b>Syllabus - Unit IV - Compensation, Employee Welfare &amp; Industrial Relations:</b> Job evaluation; objectives and components of employee compensation (base pay, incentives, fringe benefits); wage policy, wage determination, wage board, factors influencing wage and salary administration. Industrial relations: concept and importance; overview of industrial disputes, collective bargaining and grievance handling machinery.</div>
+${FLOW('Evaluate the job', 'Design fair compensation', 'Support employee welfare', 'Sound industrial relations', 'Prevent / settle disputes', 'Collective bargaining', 'Resolve grievances')}
 <h2>1. Job evaluation</h2>
-<p><b>Job evaluation</b> is a systematic way of determining the <b>value or worth of a job in relation to other jobs</b>. It begins with job analysis and aims at a rational pay structure.</p>
-<p><b>Objectives:</b> equitable wage differentials; remove inequities and discrimination (age, gender, caste); consistent wage policy; basis for incentives and negotiation; control payroll cost.</p>
-${OL('Gain acceptance', 'Form the job evaluation committee (experienced employees, union representatives, HR experts)', 'Identify jobs', 'Analyse and prepare job descriptions', 'Select the method', 'Classify jobs', 'Convert ratings to pay')}
-${T(['Method', 'How it works', 'Merit', 'Demerit'], [['Ranking', 'Jobs ranked as whole, highest to lowest', 'Simplest', 'Subjective; small firms only'], ['Classification', 'Jobs put in predetermined grades', 'Simple', 'Grades hard to define'], ['Factor comparison', 'Factor by factor against 15-20 key jobs; money to each factor', 'Consistent', 'Most complex'], ['Point method', 'Points for skill, responsibility, effort; converted to money', 'Widely used; systematic', 'Time consuming']])}
-<h2>2. Compensation</h2>
-<p><b>Compensation</b> is the total reward received by an employee in exchange for services (direct pay + indirect benefits). <b>Aims:</b> attract and retain good people, ensure adequate role behaviour, motivate extra-role behaviour.</p>
-${T(['Component', 'Examples'], [['Base (guaranteed) pay', 'Salary, wages'], ['Variable pay / incentives', 'Bonus, sales incentive, piece rate, profit sharing, gainsharing'], ['Equity-based pay', 'Stock options'], ['Benefits', 'Paid time off, medical insurance, company car']])}
-${T(['Term', 'Meaning'], [['Pay level', 'Pay of a job compared with the job market'], ['Pay structure', 'Pay differences among jobs inside the firm'], ['Pay form', 'Mix of guaranteed and at-risk pay']])}
-${T(['Plan', 'Meaning'], [['Piece rate', 'Pay per unit produced (individual incentive)'], ['Standard hour plan', 'Hourly rate × standard time, whatever the actual time'], ['Profit sharing', 'Annual bonus from a profit pool'], ['Gainsharing', 'Bonus from productivity - lower labour cost shared with employees']])}
-<p>A <b>bonus</b> is a lump sum that does not join base pay; merit pay does. <b>Defined contribution plans:</b> fixed contributions into a separate fund. <b>Termination benefits:</b> early termination / voluntary retirement. <b>Vested benefits:</b> already earned.</p>
-<h2>3. Wage and salary administration</h2>
-<p><b>Wage policy:</b> principles guiding pay (equity, adequacy, incentive, ability to pay; equal pay for equal work). <b>Wage determination:</b> fixing wage rates using job evaluation, wage surveys and ability to pay.</p>
-${T(['Internal factors', 'External factors'], [['Ability to pay, strategy, job evaluation, performance, seniority, potential', 'Laws, economy, inflation, labour market, technology, unions']])}
-<p>In a depressed economy labour supply rises so wages fall. Unions prefer <b>seniority</b> as the objective criterion for pay rises.</p>
+<p>Job evaluation is a <b>systematic assessment of the relative value or worth of jobs</b> within an organisation so that pay can be set fairly. It compares the <i>job</i>, not the person doing it, and begins with job analysis.</p>
+${UL('<b>Objectives:</b> determine relative job worth; ensure fair pay; support recruitment and retention; basis for promotion; aid performance management; internal equity; align jobs with organisational goals; legal compliance (also: remove discrimination, basis for incentives and negotiation, control payroll cost).')}
+<h3>Process</h3>
+${OL('Gain acceptance', 'Form the job evaluation committee (experienced employees, union and HR experts)', 'Identify jobs', 'Analyse jobs and prepare job descriptions', 'Select the method', 'Classify jobs', 'Convert ratings into pay')}
+<h3>Six methods</h3>
+${T(['Method', 'How it works', 'Memory cue'], [['Ranking', 'Jobs ordered from highest to lowest relative worth (simple; does not show size of difference)', 'Order'], ['Classification / grading', 'Jobs placed into predefined grades or classes', 'Grade'], ['Point-factor', 'Job broken into factors (skills, responsibility, effort, conditions); weights / points assigned and added', 'Points'], ['Factor comparison', 'Jobs compared factor by factor against benchmark jobs (15-20 key jobs)', 'Benchmark'], ['Hay Guide Chart-Profile', 'Three profile factors: know-how, problem-solving, accountability', 'Hay = 3 factors'], ['Market pricing', 'Job value set from what the external market pays for similar jobs', 'Market rate']])}
+${T(['Point-factor example', 'HR Executive', 'HR Manager'], [['Skills and knowledge', '30', '40'], ['Responsibility', '20', '35'], ['Effort', '15', '15'], ['Working conditions', '10', '10'], ['Total points', '75', '100']])}
+<h3>Factors, levels and challenges</h3>
+<p><b>Factors of job value:</b> strategy, complexity, skills and experience, responsibility, working conditions and effort, impact on results, market trends / skill scarcity, legal compliance and interdependence. <b>Job-level streams:</b> management, professional and support career ladders. <b>Challenges:</b> subjectivity, complexity and time, keeping evaluations current, employee perceptions, market alignment, consistency and integration.</p>
+<p><b>Fair pay structure:</b> equal worth gets equal pay; higher worth gets higher pay. A sound system is systematic, consistent, transparent and reviewed. <b>Start-up with ten jobs:</b> ranking (simple, few jobs).</p>
+<h2>2. Employee compensation</h2>
+<p>Compensation is the total package of <b>financial and non-financial rewards</b> an employee receives in return for work. <b>Objectives:</b> attract talented people, retain good employees, motivate performance, ensure equity, comply with law (e.g. PF in India).</p>
+${T(['Direct compensation', 'Indirect compensation (fringe benefits)'], [['Base salary or wages, bonuses, commissions, overtime pay, profit sharing, performance pay', 'Health insurance, retirement plans, life and disability insurance, paid time off, employee services, stock options / equity, non-monetary rewards']])}
+${T(['Term', 'Meaning'], [['Pay level', 'Pay compared with the job market'], ['Pay structure', 'Pay differences among jobs inside the firm'], ['Pay form', 'Mix of guaranteed and at-risk pay']])}
+${T(['Incentive plan', 'Meaning'], [['Piece rate', 'Pay per unit produced'], ['Standard hour plan', 'Hourly rate × standard time, whatever the actual time'], ['Profit sharing', 'Annual bonus from a profit pool'], ['Gainsharing', 'Bonus from productivity (lower labour cost shared)']])}
+<h2>3. Wage policy, wage determination and wage boards</h2>
+<p>A wage policy sets the principles guiding pay: fair and adequate wages, reduce disparities, support economic stability, raise productivity, maintain industrial peace. <b>Components:</b> minimum, fair and living wage; internal and external equity; wage differentials; incentives; wage revision; legal compliance. Principle: equal pay for equal work.</p>
 ${T(['Wage', 'Meaning'], [['Minimum wage', 'Basic needs of worker and family at the lowest acceptable level; legal floor (Minimum Wages Act, 1948)'], ['Fair wage', 'Between minimum and living wage; productivity and capacity to pay'], ['Living wage', 'Decent standard of living incl. education, health, some savings']])}
-<p><b>Order:</b> minimum &lt; fair &lt; living (Committee on Fair Wages, 1948). A <b>Wage Board</b> is a tripartite body (employer, employee, independent members) that recommends wage structure and benefits for an industry.</p>
-<h2>4. Industrial relations (IR)</h2>
-<p>IR = relationship between <b>management and employees and their organisations</b> (Dale Yoder). <b>Dunlop:</b> complex of interrelations among managers, workers and agencies of government.</p>
-${UL('<b>Parties:</b> employees, employers, trade unions, employers\' associations, government, courts and tribunals.', '<b>Scope:</b> collective bargaining, workers\' participation, disputes and machinery, grievance and discipline, labour legislation.', '<b>Importance:</b> avoid disputes, harmony, higher productivity, industrial democracy.')}
-<h2>5. Industrial disputes</h2>
-<p><b>Causes:</b> wages and allowances, bonus, working conditions, retrenchment, lay-off, victimisation, indiscipline. <b>Disputes of interest</b> = new claims; <b>disputes of right</b> = interpretation of an existing agreement.</p>
+<p><b>Factors in wage determination:</b> employer's ability to pay, market rates, cost of living, government regulation, trade unions, job requirements and skills, productivity, labour demand and supply, industry conditions. <b>Mechanisms:</b> collective bargaining, market-based pay, job evaluation, government regulation.</p>
+<p><b>Wage board:</b> brings together government, employers and trade unions (and independent experts). <b>Functions:</b> set minimum wages, review wage structures, address pay disparities, advise government. <b>Advantages:</b> balanced representation, expert input, flexibility. <b>Challenges:</b> enforcing recommendations, balancing interests, keeping rates updated.</p>
+<h2>4. Wage and salary administration</h2>
+<p>Designing, applying and reviewing the pay structure within organisational, employee, market and legal limits. <b>Ten factors:</b> ability to pay, market rates, cost of living, laws and rules, trade unions, job evaluation, skills, performance, labour market, pay policy. In a depressed economy labour supply rises and wages fall; unions prefer seniority as an objective criterion.</p>
+<h2>5. Employee welfare</h2>
+<p>Organised facilities and services provided by the employer over and above wages for workers' well-being (ILO view: measures for workers' comfort, safety and satisfaction).</p>
+<p><b>Objectives:</b> improve working conditions, protect health and safety, raise morale, boost productivity, reduce absenteeism and turnover, attract and retain talent, support workers' families, build goodwill and industrial harmony.</p>
+${T(['Type', 'Meaning / examples'], [['Statutory', 'Facilities required by law'], ['Non-statutory', 'Offered voluntarily by the employer'], ['Financial', 'Loans, allowances, financial aid'], ['Health', 'Medical care, hygiene, safety'], ['Housing', 'Quarters or housing support'], ['Recreational and cultural', 'Sports, clubs, cultural events'], ['Educational and training', 'Learning and skill building'], ['Transport', 'Commuting facilities']])}
+<p><b>Role of HR:</b> plan, implement, monitor and review welfare programmes; ensure legal compliance; handle grievances. <b>Challenges:</b> limited budgets, different needs, difficulty measuring impact, changing laws, low awareness.</p>
+<h2>6. Industrial relations (IR)</h2>
+<p>IR are the relationships among <b>employers, employees and the government</b> that shape how work is organised and how workplace conflict is handled (Dale Yoder: between management and employees and their organisations; Dunlop: complex of interrelations among managers, workers and agencies of government).</p>
+<p><b>Nature:</b> bipartite or tripartite; collective bargaining; conflict and cooperation; dynamic and union-influenced; affected by globalisation; HRM and social justice. <b>Types:</b> individual, collective, employer-employee, employer-union, tripartite, public sector, private sector. <b>Scope:</b> employer-employee relations, union-management relations, collective bargaining, disputes and settlement, grievance handling, labour laws and government role. <b>Importance:</b> industrial peace, higher productivity, better morale, protection of both parties, social justice and economic growth.</p>
+<h2>7. Industrial disputes</h2>
+<p>Under the <b>Industrial Disputes Act, 1947</b> an industrial dispute is a difference between employers and workmen, or among workers, connected with employment, non-employment or the terms and conditions of work. <b>Causes:</b> wages and allowances, working conditions, supervision / management style, job security / retrenchment, violation of agreements / laws. <b>Ten types:</b> wage disputes, working conditions, disciplinary matters, retrenchment, dismissal, promotion and transfer, bonus and incentive, union recognition, leave and benefits, workload and hours.</p>
 ${T(['Form', 'Meaning'], [['Strike', 'Workers quit work to press demands - economic, sympathetic, sit-down, slow-down, hunger'], ['Lockout', 'Employer closes the workplace'], ['Gherao', 'Management confined by human barricade'], ['Picketing', 'People at the gate dissuade workers from entering'], ['Retrenchment', 'Permanent discharge of surplus staff'], ['Lay-off', 'Temporary setting aside of workmen']])}
-${T(['Machinery', 'Nature'], [['Conciliation', 'Third party persuades; cannot impose'], ['Arbitration', 'Neutral arbitrator; binding award (voluntary)'], ['Adjudication', 'Labour courts and tribunals; compulsory, binding']])}
-<p>Trade unions are registered under the <b>Trade Unions Act, 1926</b>.</p>
-<h2>6. Collective bargaining</h2>
-<p>Management and employee representatives meet and <b>negotiate terms and conditions of employment</b>. It is <b>bipartite, voluntary, flexible, dynamic and continuous</b>.</p>
-${UL('<b>Preparation</b> before negotiation decides about 83% of the outcome.', 'Issues: wage-related (DA, wage revision), supplementary benefits (pension, gratuity, health insurance), administrative (seniority, grievance).', '<b>Ratification</b> is needed because negotiators may not have final authority.', 'After signing, the HR manager <b>administers and implements</b> the agreement.')}
-<h2>7. Grievance handling</h2>
-<p>A <b>grievance</b> is any dissatisfaction or feeling of injustice about one's employment brought to the notice of management. <b>Causes:</b> management policy (wages, leave, overtime, seniority, transfer), working conditions, personal reasons.</p>
-<p>Deal with a grievance first at the <b>lowest level</b>. The <b>Code of Discipline (Indian Labour Conference, 1957)</b> advised a mutually agreed grievance procedure.</p>
-${T(['Step (Model Grievance Procedure)', 'Time'], [['Officer designated by management replies', '48 hours'], ['Head of department', '3 days'], ['Grievance committee recommends', '7 days'], ['Manager\'s decision', '3 days'], ['Revision petition', '7 days'], ['Still unsatisfied', 'Voluntary arbitration']])}
-<p><b>Essentials of a good procedure:</b> legal sanctity, acceptability, simplicity and promptness.</p>
-<h2>8. Role of government, unions and management</h2>
+<h3>Prevention and settlement</h3>
+<p><b>Preventive machinery:</b> works committees, joint consultation, grievance handling, code of discipline. <b>Settlement sequence:</b> conciliation officer → board of conciliation → arbitration → Labour Court → Industrial Tribunal → National Tribunal.</p>
+${UL('<b>Conciliation:</b> government appoints an officer / board; investigates; if settled, a signed memorandum binds the parties; if it fails, the officer reports to government within 14 days (board: two months, per the deck).', '<b>Voluntary arbitration:</b> both parties agree in writing; select an arbitrator (and an umpire if the number is even); the award binds them.', '<b>Labour Court:</b> single judge - dismissal, discharge, standing orders. <b>Industrial Tribunal:</b> wider matters - wages, hours, bonus, retrenchment. <b>National Tribunal:</b> set up by the Central Government for disputes of national importance.')}
+<h2>8. Collective bargaining</h2>
+<p>Representatives of workers and employers <b>negotiate wages and conditions of work</b> and reach a binding agreement. It is bipartite, voluntary, flexible, dynamic and continuous; preparation decides about 83% of the outcome. It gives workers a collective voice, balances bargaining power, builds industrial democracy and reduces strikes.</p>
+${T(['Eight principles', 'Eight types', 'Eight levels'], [['Good faith; mutual trust and respect; voluntary participation; give and take; equality and fair representation; continuous dialogue; problem-solving; compliance with agreements', 'Distributive (win-lose), integrative (win-win), productivity, composite, concessionary, attitudinal structuring, intra-organisational, continuous', 'Plant, industry, national, sectoral, regional, multi-employer, enterprise, international']])}
+${T(['Step', 'Action'], [['1. Preparation', 'Gather information, set goals'], ['2. Identify issues', 'Agree the agenda / demands'], ['3. Select representatives', 'Choose negotiating teams'], ['4. Negotiation', 'Present positions and proposals'], ['5. Bargaining and compromise', 'Trade concessions'], ['6. Agreement', 'Write the settled terms'], ['7. Ratification', 'Approval from members and management'], ['8. Implementation and follow-up', 'Apply and review']])}
+<p><b>Advantages:</b> industrial peace, protects employee rights, better wages and conditions, industrial democracy, productivity, stability. <b>Disadvantages:</b> time consuming, deadlock, union rivalry, unequal power, cost, confrontation, hard to implement, individuals overlooked. Type = style; level = where bargaining takes place.</p>
+<h2>9. Grievance handling</h2>
+<p>A grievance is an employee's complaint or dissatisfaction about something at work - real or imagined - that calls for corrective action. <b>Ten causes:</b> wages, promotion, working conditions, workload, management behaviour, transfers, leave, appraisal, discipline, job security.</p>
+${FLOW('Receive', 'Acknowledge', 'Investigate', 'Analyse', 'Act', 'Communicate', 'Appeal', 'Follow up')}
+<p><b>Five principles:</b> promptness; fairness and impartiality; confidentiality; multiple channels; documentation and follow-up. <b>In-house machinery:</b> open-door policy, grievance procedure and committee, employee representation, mediation and arbitration, suggestion and complaint system, HR department, escalation and appeal.</p>
+<p><b>Statutory machinery (per the deck):</b> Grievance Redressal Committee - Industrial Relations Code, 2020, 20 or more workers; Works committee - Industrial Disputes Act, 1947, 100 or more workmen; conciliation officer / board; Labour Court and Industrial Tribunal; National Industrial Tribunal; voluntary arbitration. (Verify thresholds against current law for any real decision.)</p>
+${T(['Model Grievance Procedure (Notes of Unit - 4)', 'Time'], [['Officer designated by management replies', '48 hours'], ['Head of department', '3 days'], ['Grievance committee recommends', '7 days'], ['Manager\'s decision', '3 days'], ['Revision petition', '7 days'], ['Still unsatisfied', 'Voluntary arbitration']])}
+<p>The Code of Discipline (Indian Labour Conference, 1957) advised a mutually agreed grievance procedure; deal with a grievance first at the lowest level; essentials of a good procedure: legal sanctity, acceptability, simplicity, promptness. Trade unions are registered under the Trade Unions Act, 1926.</p>
+<h2>10. Role of government, unions and management</h2>
 ${T(['Party', 'Role'], [['Government', 'Labour laws, conciliation, adjudication, wage boards'], ['Trade unions', 'Represent workers, bargain collectively, maintain discipline'], ['Management', 'Fair pay and conditions, grievance procedure, communication, participation']])}
-<div class="box"><b>Quick revision - Unit IV</b>${UL('Job evaluation methods: ranking, classification, factor comparison, point', 'Compensation = base + variable + benefits (+ equity)', 'Wages: minimum &lt; fair &lt; living; wage board = tripartite', 'IR parties: employees, employers, unions, government', 'Dispute forms: strike, lockout, gherao, picketing, lay-off, retrenchment; machinery: conciliation, arbitration, adjudication', 'Model grievance procedure: 48 h, 3 d, 7 d, 3 d, 7 d, then arbitration')}</div>`;
+${BOX('Application questions (from the deck)', 'A start-up has ten jobs and no pay structure - which method and why? (Ranking: simple, few jobs.)', 'Why might a fringe benefit be worth more to an employee than the same amount as salary?', 'How can ability to pay and cost of living pull a wage decision in opposite directions?', 'Which welfare facilities are statutory and which voluntary?', 'A strike begins over bonus payment - which preventive and settlement machinery could have been used?', 'An employee says a promotion was unfair - walk through the grievance procedure step by step.')}`;
+
+  // ---------------------------------------------------------------- EXAM MASTER
+  const U5 = `
+<div class="box"><b>Exam format (from the syllabus image):</b> Core Course - II · Credits 4 · Max marks 25 (internal) + 75 (external) · Min pass 10 + 25 · L-3 T-0 P-0. Lecture weight: Unit I 10 · Unit II 12 · Unit III 12 (Unit IV also a full unit). Date: Wed 25 Nov 2026, 11:30 AM - 1:30 PM (written, 2 hours).</div>
+<h2>1. How to write a good answer</h2>
+${T(['Marks', 'Structure'], [['2-3', 'Definition → 3-4 core points → one concluding line'], ['5-6', 'Definition → brief introduction → flowchart / table → 5-7 explained points → short conclusion'], ['Long answer', 'Headings; 2-4 lines under each heading; tables for differences; flowcharts for sequences']])}
+<p><b>Presentation rule:</b> underline definitions, keywords and model names once; leave a small gap after every heading. <b>Safe conclusion line:</b> "Thus, effective HRM aligns employee capability and organisational requirements, leading to better performance and long-term organisational effectiveness."</p>
+<h2>2. Priority areas (the earlier test signalled these)</h2>
+<p>The earlier test asked: HRM definition and evolution; TNA process and levels; recruitment vs selection with sources; on-the-job vs off-the-job training; HRM objectives and their relation to functions; HRP process; Kirkpatrick + CIPP training evaluation. <i>Emphasis, not a prediction</i> - prepare the whole syllabus, then revise these first.</p>
+${T(['Priority A - must write without hesitation', 'Write this structure'], [['HRM definition + evolution', 'Definition; W-P-H-D stages; one-line conclusion on strategic HR'], ['TNA process and levels', 'Definition; organisational / task / individual; process; methods'], ['Recruitment vs selection', 'Definition; positive vs negative; pool widens vs narrows; sources; sequence'], ['OJT vs off-the-job', 'Definitions; 5-6 methods each; comparison table'], ['HRM objectives + functions', 'OFSP + PODC + operative functions + relationship'], ['HRP process', 'ADSGAM flowchart + demand / supply forecasting + gap / action'], ['Kirkpatrick + CIPP', 'R-L-B-R + C-I-P-P + evaluation tools']])}
+<h2>3. Mnemonic bank</h2>
+${T(['Mnemonic', 'Recall'], [['A-T-A-C', 'HRM: Acquire, Train, Appraise, Compensate'], ['W-P-H-D', 'Evolution: Welfare, Personnel, HRM, Strategic / Digital HR'], ['OFSP', 'Objectives: Organisational, Functional, Societal, Personal'], ['PODC', 'Managerial functions: Plan, Organise, Direct, Control'], ['S-A-E-C-T-L', 'HR roles: Strategic, Administrative, Employee, Change, Talent, Learning'], ['A-D-S-G-A-M', 'HRP process: Analyse, Demand, Supply, Gaps, Action, Monitor'], ['M-R-W-D-R', 'Demand forecasting: Managerial, Ratio, Work-study, Delphi, Regression'], ['JD = WHAT; JS = WHO', 'Job description vs specification'], ['P-T-J-E-R / C-A-E-W', 'Recruitment sources: internal / external'], ['O-T-I', 'TNA levels: Organisation, Task, Individual (Where? What? Who?)'], ['A-T-G-D-E-E', 'Training process: Assess, TNA, Goals, Design, Execute, Evaluate'], ['R-L-B-R', 'Kirkpatrick: Reaction, Learning, Behaviour, Results'], ['C-I-P-P', 'CIPP: Context, Input, Process, Product'], ['H-H-R-L-S-C-S-C', 'Biases: Halo, Horns, Recency, Leniency, Strictness, Central tendency, Similarity, Contrast']])}
+<h2>4. Ready-made flowcharts</h2>
+${FLOW('Analyse objectives', 'Demand forecast', 'Supply forecast', 'Identify gaps', 'Action plan', 'Monitor and control')}
+${FLOW('Job analysis', 'JD (WHAT) + JS (WHO)', 'Recruitment', 'Selection')}
+${FLOW('Objectives', 'TNA', 'Goals', 'Design', 'Execute', 'Evaluate')}
+${FLOW('Preparation', 'Identify issues', 'Select representatives', 'Negotiate', 'Compromise', 'Agree', 'Ratify', 'Implement')}
+${FLOW('Receive', 'Acknowledge', 'Investigate', 'Analyse', 'Act', 'Communicate', 'Appeal', 'Follow up')}
+<h2>5. Last-night plan (for a 50-mark test)</h2>
+${T(['Time', 'What to do'], [['Block 1 - 45 min', 'Unit I: definition, evolution, objectives, PM vs HRM, roles'], ['Block 2 - 60 min', 'Unit II: HRP process + forecasting + JD / JS + recruitment vs selection'], ['Block 3 - 75 min', 'Unit III: TNA + OJT / off-the-job + Kirkpatrick / CIPP + appraisal basics'], ['Block 4 - 30 min', 'Unit IV: job evaluation, compensation, IR, disputes, collective bargaining, grievances'], ['Final 15 min', 'Write 3 answers from memory using the skeletons']])}
+<p><b>Golden rule:</b> only mnemonics, flowcharts and definitions in the last hours; do not start new topics; do not spend ten minutes on one beautiful answer while another is untouched - coverage matters.</p>
+<div class="box"><b>Final 60-second self-check:</b> Can I define HRM? Reproduce W-P-H-D? Write OFSP + PODC? Draw ADSGAM? Tell JD from JS? Explain recruitment as positive and selection as negative? List TNA levels and OJT / off-the-job methods? Write R-L-B-R and C-I-P-P? Explain MBO, 360, BARS and the biases? Explain job evaluation methods, wage concepts, the dispute machinery, the 8-step bargaining and 8-step grievance procedures? If yes, stop reading and sleep.</div>`;
 
   const notes = [
     { id: 'u1', title: 'Unit I - Introduction to HRM (notes)', html: U1 },
-    { id: 'u2', title: 'Unit II - HR Planning, Job Analysis, Recruitment & Selection (notes)', html: U2 },
-    { id: 'u3', title: 'Unit III - Training, Appraisal, Career & Succession (notes)', html: U3 },
-    { id: 'u4', title: 'Unit IV - Job Evaluation, Compensation, IR & Grievances (notes)', html: U4 },
+    { id: 'u2', title: 'Unit II - Talent Acquisition: HRP, Job Analysis, Recruitment & Selection (notes)', html: U2 },
+    { id: 'u3', title: 'Unit III - Development & Performance Management (notes)', html: U3 },
+    { id: 'u4', title: 'Unit IV - Compensation, Employee Welfare & Industrial Relations (notes)', html: U4 },
+    { id: 'exam-master', title: '⭐ Exam Master - answer framework, mnemonics, priority topics, last-night plan', html: U5 },
   ];
-  const ql = (n) => `<div class="nextsteps"><span>Next steps for Unit ${n}</span><a class="nbtn" href="#/hrm/qa">✍️ Detailed written answers</a><a class="nbtn" href="#/hrm/quiz">▶ Practise MCQs</a><a class="nbtn" href="#/expected/hrm">🎯 Important questions</a></div>`;
-  notes.forEach((u, i) => { u.html += ql(i + 1); });
+  const ql = (n) => `<div class="nextsteps"><span>Next steps${n ? ' for Unit ' + n : ''}</span><a class="nbtn" href="#/hrm/qa">✍️ Detailed written answers</a><a class="nbtn" href="#/hrm/quiz">▶ Practise MCQs</a><a class="nbtn" href="#/expected/hrm">🎯 Important questions</a></div>`;
+  notes.forEach((u, i) => { u.html += ql(i < 4 ? i + 1 : ''); });
   SUB.notes = notes;
   SUB.units.push(...notes);
 })();

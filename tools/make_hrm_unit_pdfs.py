@@ -104,10 +104,10 @@ def build(i, qa_label, mcq_label, title, iqs):
     qas = [q for q in data["qa"] if q["u"] == qa_label]
     mcqs = [q for q in data["mcqs"] if q["u"] == mcq_label]
     rnd.shuffle(mcqs)
-    mcqs = mcqs[:25]
+    mcqs = mcqs[:30]
     p = [f"<h1>HRM - {e(qa_label)}</h1><p class='sub'><b>{e(title)}</b></p>"
          "<div class='box'><b>Contents:</b> Part A Notes · Part B Important questions · Part C Detailed model answers (2, 3, 5, 6 and 10 marks) · Part D MCQs with answers at the end.<br>"
-         "BBA III Sem · Human Resource Management · CSJM University. Units I-II notes and answers are written from standard HRM knowledge; Units III-IV follow your PDFs.</div>"]
+         "BBA III Sem · Human Resource Management · CSJM University. Built from your syllabus image, the HRM Four Units Comprehensive Notes PDF and the earlier HRM PDFs.</div>"]
     p.append("<p class='part'>Part A - Notes</p>" + notes)
     p.append("<p class='part' style='page-break-before:always'>Part B - Important questions</p><ol>" + "".join(f"<li>{e(q)}</li>" for q in iqs) + "</ol>")
     p.append(f"<p class='part' style='page-break-before:always'>Part C - Detailed model answers ({len(qas)} answers)</p>")
@@ -157,3 +157,30 @@ for i, (ql, ml, title, iqs) in enumerate(UNITS):
     except OSError:
         pass
     print(out.name, pages, "pages |", nq, "answers |", nm, "MCQs")
+
+# Exam Master page (answer framework, mnemonics, flowcharts, last-night plan)
+em = data["notes"][4]["html"]
+cut = em.rfind('<div class="nextsteps">')
+em = em[:cut] if cut > 0 else em
+html = "<html><body><h1>HRM - Exam Master</h1><p class='sub'>Answer framework, priority topics, mnemonic bank, flowcharts and last-night plan</p>" + em + "</body></html>"
+out = OUTDIR / "HRM_Exam_Master_Mnemonics_Last_Night.pdf"
+tmp = OUTDIR / "em.tmp.pdf"
+story = pymupdf.Story(html=html, user_css=CSS)
+wr = pymupdf.DocumentWriter(str(tmp))
+more = 1
+while more:
+    dev = wr.begin_page(W)
+    more, _ = story.place(where)
+    story.draw(dev)
+    wr.end_page()
+wr.close()
+d = pymupdf.open(tmp)
+for n, pg in enumerate(d, 1):
+    pg.insert_text((W.width / 2 - 60, W.height - 20), f"HRM Exam Master - page {n}/{len(d)}", fontsize=8, color=(0.4, 0.4, 0.4))
+d.save(str(out), garbage=3, deflate=True)
+print(out.name, len(d), "pages")
+d.close()
+try:
+    tmp.unlink()
+except OSError:
+    pass

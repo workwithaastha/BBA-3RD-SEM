@@ -17,6 +17,7 @@ from expl_hrm_1 import H1
 from expl_hrm_2 import H2
 from expl_hrm_3 import H3
 HRM_EXPL = {**H1, **H2, **H3}
+from data_hrm_syl import HRM_SYL, HRM_SYL_REASONS
 from expl_om_1 import O1
 from expl_om_2 import O2
 from expl_om_3 import O3
@@ -28,6 +29,8 @@ from overrides_om import OM_OVR
 from overrides_hrm2 import HRM_OVR2
 from overrides_om2 import OM_OVR2
 HRM_OVR.update(HRM_OVR2)
+from overrides_hrm3 import HRM_OVR3
+HRM_OVR.update(HRM_OVR3)
 OM_OVR.update(OM_OVR2)
 try:
     from overrides_fm import FIN_OVR, MKT_OVR
@@ -79,7 +82,14 @@ def build(rows, sid, title, seed, append=False, ovr=None, expl=None):
     for q in qs: per[q["u"]] = per.get(q["u"], 0) + 1
     print(sid, len(qs), per, "answer spread", [sum(1 for q in qs if q["a"] == k) for k in range(4)])
 
-build(HRM + HRM_MORE, "hrm", "Human Resource Management", 11, ovr=HRM_OVR, expl=HRM_EXPL)
+_have = {r[2] for r in HRM + HRM_MORE}
+_keep = [i for i, r in enumerate(HRM_SYL) if r[2] not in _have]
+print("HRM syllabus MCQs skipped as duplicates:", len(HRM_SYL) - len(_keep))
+HRM_SYL = [HRM_SYL[i] for i in _keep]
+HRM_SYL_REASONS = [HRM_SYL_REASONS[i] for i in _keep]
+_n0 = len(HRM) + len(HRM_MORE)
+HRM_EXPL.update({_n0 + i + 1: r for i, r in enumerate(HRM_SYL_REASONS)})
+build(HRM + HRM_MORE + HRM_SYL, "hrm", "Human Resource Management", 11, ovr=HRM_OVR, expl=HRM_EXPL)
 build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR, expl=OM_EXPL)
 build(FIN + FIN_MORE, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR, expl=FIN_EXPL)
 build(MKT, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR, expl=MKT_EXPL)

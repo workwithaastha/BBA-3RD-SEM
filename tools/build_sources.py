@@ -16,6 +16,7 @@ FOLDERS = {
     "office-mgmt": "OFFICE MANG",
     "physical-education": "Physical Education",
 }
+EXTRA = {"hrm": ["Syllabus"]}  # more folders whose files also belong to a subject (each file keeps its own folder in "d")
 EXT = {".pdf", ".ppt", ".pptx", ".doc", ".docx", ".xls", ".xlsx", ".txt", ".png", ".jpg", ".jpeg"}
 
 try:
@@ -52,11 +53,15 @@ def main():
     data = {}
     for sid, folder in FOLDERS.items():
         files = sorted([p for p in (ROOT / folder).iterdir() if p.is_file() and p.suffix.lower() in EXT], key=lambda p: p.name.lower())
+        extra = [p for f2 in EXTRA.get(sid, []) for p in sorted((ROOT / f2).iterdir(), key=lambda p: p.name.lower()) if p.is_file() and p.suffix.lower() in EXT]
+        files = files + extra
         seen = {}
         rows = []
         for p in files:
             keys = content_key(p)
             row = {"f": p.name, "kb": round(p.stat().st_size / 1024), "p": pages(p)}
+            if p.parent.name != folder:
+                row["d"] = p.parent.name
             hit = next((seen[k] for k in keys if k in seen), None)
             if hit:
                 row["dup"] = hit

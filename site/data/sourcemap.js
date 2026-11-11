@@ -18,6 +18,7 @@
     // Business Environment
     b1: 'UNIT 1 MCQ (4).pdf', b2: 'UNIT 2 MCQ (1).pdf', b3: 'UNIT 3 MCQ (5).pdf', b3s: 'UNIT 3 BE.pdf', b4: 'UNIT 4 MCQ (2).pdf',
     // HRM
+    h_syl: 'HRM_Four_Units_Comprehensive_Notes.pdf', h_img: 'hrm .jpeg',
     h_iq: 'Important Questions.pdf', h_pa: 'Unit 3 - Performance_Appraisal.pdf', h_pab: 'Unit 3 - Performance_Appraisal (1).pdf', h_u4: 'Notes of Unit - 4.pdf',
     // Office Management
     o_u1: 'OM Unit 1.pdf', o_ppt: 'UNIT 1 PPT (1).pdf', o_auto: 'Office_Automation_Secretarial_Practices.pdf', o_a2: 'ASSIGNMENT-2 office.pdf',
@@ -59,9 +60,9 @@
     'q:Unit 1': mk('b1'), 'q:Unit 2': mk('b2'), 'q:Unit 3': mk('b3', 'b3s'), 'q:Unit 4': mk('b4'),
   };
   const hrm = {
-    concepts: mk('h_iq', 'h_pa', 'h_u4'), qa: mk('h_iq', 'h_pa', 'h_pab', 'h_u4'),
-    u1: mk('h_iq'), u2: mk('h_iq'), u3: mk('h_pa', 'h_pab', 'h_iq'), u4: mk('h_u4', 'h_iq'),
-    'q:Unit 1': mk('h_iq'), 'q:Unit 2': mk('h_iq'), 'q:Unit 3': mk('h_pa', 'h_pab', 'h_iq'), 'q:Unit 4': mk('h_u4', 'h_iq'),
+    concepts: mk('h_syl', 'h_iq', 'h_pa', 'h_u4'), qa: mk('h_syl', 'h_iq', 'h_pa', 'h_pab', 'h_u4'),
+    u1: mk('h_syl', 'h_img', 'h_iq'), u2: mk('h_syl', 'h_img', 'h_iq'), u3: mk('h_syl', 'h_img', 'h_pa', 'h_pab', 'h_iq'), u4: mk('h_syl', 'h_img', 'h_u4', 'h_iq'), 'exam-master': mk('h_syl', 'h_img'),
+    'q:Unit 1': mk('h_syl', 'h_iq'), 'q:Unit 2': mk('h_syl', 'h_iq'), 'q:Unit 3': mk('h_syl', 'h_pa', 'h_pab', 'h_iq'), 'q:Unit 4': mk('h_syl', 'h_u4', 'h_iq'),
   };
   const office = {
     concepts: mk('o_u1', 'o_ppt', 'o_auto', 'o_forms', 'o_formsd', 'o_u4'),

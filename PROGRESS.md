@@ -37,6 +37,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | 29 | HRM written Q&A bank (44 answers, all 'Important Questions' Units 1-4; Units 1-2 from standard HRM knowledge [extra]), mock paper + last-night sheet; HRM now has both MCQs and written Q&A | done |
 | 30 | HRM written Q&A rewritten in detail (96 answers: 2/3/5/6/10 marks for every topic, Units I-IV, 4 data files); site adapts to days left: subjects sorted by exam date, countdown chips, Today's focus card, per-subject today task, Daily 20 weighted to nearest exams | done |
 | 31 | HRM unit-wise notes (Units I-IV) on the site + 4 unit PDFs (notes, important questions, detailed answers, MCQs) | done |
+| 32 | HRM updated from the `Syllabus/` folder (syllabus image + HRM_Four_Units_Comprehensive_Notes.pdf): notes rewritten for all 4 units + Exam Master page (mnemonics, flowcharts, priority A, last-night plan), +107 MCQs with reasons, +40 detailed written answers (136 total), expected questions and exam-format note updated, syllabus files in the source viewer, all HRM PDFs rebuilt | done |
 | - | Final polish | pending user feedback |
 
 ## 2. Content counts
@@ -45,7 +46,7 @@ Detailed status, architecture and decisions. **Rules and workflow live in [Agent
 | Business Finance | 9 (+ formulas page) | 99 (25 Formula Finder) | 117 | 40 formula cards, 11 calculators |
 | Marketing Management | 15 + concept page | 116 | 112 | 17 concept cards + 6 formula cards |
 | Business Environment | concept page | 800 (PDF) | - | 10 concept cards |
-| HRM | concept page | 202 (80 extra) | 96 (written exam, detailed) | 17 concept cards |
+| HRM | 4 unit notes + Exam Master + concept page | 309 (202 + 107 from the syllabus PDF) | 136 (written exam, detailed) | 17 concept cards |
 | Office Management | concept page | 235 (28 extra) | - | 15 concept cards |
 | Physical Education & Yoga | concept page | 300 (past papers; 31 answers flagged not sure) | - | 20 concept cards |
 
@@ -100,6 +101,7 @@ Rebuild: edit `tools/data_*.py` → `python -I tools/build_mcq.py` → `node too
 - **Business Environment (5/5):** UNIT 1-4 MCQ (200 each; Unit 4 case-based) + UNIT 3 BE ethics slides.
 - **HRM (4/4):** Important Questions, Unit 3 Performance Appraisal (+ identical copy), Notes of Unit 4.
 - **Physical Education (4/4):** `2025-26 paper.pdf` (scanned, Set A, 100 Qs), `Z040401T-B.pdf` (text, Series B 2025-26, 100 Qs), `bsc-bba-4-sem-physical-education-and-yoga-z040401-set-d-2024.pdf` (scanned, Set D 2024, 100 Qs, has pencil marks - ignored), `WhatsApp Image ... 9.29.58 AM.jpeg` (syllabus: Units I-IV, Z031301 Physical Education and Yoga, 25+75 marks).
+- **HRM extra (Syllabus folder, 2/2):** `hrm .jpeg` (syllabus: Core Course II, 25+75 marks, units), `HRM_Four_Units_Comprehensive_Notes.pdf` (37 pages: syllabus-based notes for Units I-IV, earlier-test priorities, mnemonics; Unit III appraisal / career parts use standard BBA treatment).
 - **Office Management (7/7):** OM Unit 1, UNIT 1 PPT, Office_Automation_Secretarial_Practices, Office_Forms_Record_Management (+ Detailed Notes), Unit4_Office_Management, ASSIGNMENT-2 (AI assignment).
 
 ## 6. Content decisions and assumptions
