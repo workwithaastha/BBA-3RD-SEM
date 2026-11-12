@@ -24,6 +24,7 @@ from expl_om_3 import O3
 OM_EXPL = {**O1, **O2, **O3}
 from expl_fin import FIN_EXPL
 from expl_mkt import MKT_EXPL
+from data_mkt_syl import MKT_SYL, MKT_SYL_REASONS
 from overrides_hrm import HRM_OVR
 from overrides_om import OM_OVR
 from overrides_hrm2 import HRM_OVR2
@@ -32,11 +33,13 @@ HRM_OVR.update(HRM_OVR2)
 from overrides_hrm3 import HRM_OVR3
 HRM_OVR.update(HRM_OVR3)
 OM_OVR.update(OM_OVR2)
+from overrides_mkt_syl import MKT_OVR4
 try:
     from overrides_fm import FIN_OVR, MKT_OVR
 except ImportError:
     FIN_OVR, MKT_OVR = {}, {}
 
+MKT_OVR = {**MKT_OVR, **MKT_OVR4}
 OUT = Path(__file__).resolve().parent.parent / "site" / "data"
 
 def apply_overrides(rows, ovr, sid):
@@ -92,4 +95,11 @@ HRM_EXPL.update({_n0 + i + 1: r for i, r in enumerate(HRM_SYL_REASONS)})
 build(HRM + HRM_MORE + HRM_SYL, "hrm", "Human Resource Management", 11, ovr=HRM_OVR, expl=HRM_EXPL)
 build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR, expl=OM_EXPL)
 build(FIN + FIN_MORE, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR, expl=FIN_EXPL)
-build(MKT, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR, expl=MKT_EXPL)
+_mh = {r[2] for r in MKT}
+_mk = [i for i, r in enumerate(MKT_SYL) if r[2] not in _mh]
+print("Marketing syllabus MCQs skipped as duplicates:", len(MKT_SYL) - len(_mk))
+MKT_SYL = [MKT_SYL[i] for i in _mk]
+MKT_SYL_REASONS = [MKT_SYL_REASONS[i] for i in _mk]
+_m0 = len(MKT)
+MKT_EXPL.update({_m0 + i + 1: r for i, r in enumerate(MKT_SYL_REASONS)})
+build(MKT + MKT_SYL, "marketing", "Marketing Management", 44, append=True, ovr=MKT_OVR, expl=MKT_EXPL)

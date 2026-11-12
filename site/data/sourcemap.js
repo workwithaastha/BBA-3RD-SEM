@@ -12,7 +12,7 @@
     m_digital: 'Digital Marketing - Types, Channels & Examples.pdf', m_ai: 'Advanced AI Integrated Marketing Assignment.pdf',
     m_u2: 'unit-2 notes 2026.pdf', m_u2b: 'unit-2 notes 2026 (1).pdf', m_cb: 'Consumer_Behaviour.pdf', m_factors: 'factors of consumer behaviour.pdf',
     m_mis: 'Marketing Information System.pdf', m_misb: 'Marketing Information System (1).pdf', m_misp: 'MIS_Presentation.pdf',
-    m_mrp: 'Marketing Research Process 1.pdf', m_tools: 'TOOLS OF MARKETING RESEARCH.pdf', m_book: 'marketing esearch.pdf',
+    m_img: 'marketing.jpeg', m_mrp: 'Marketing Research Process 1.pdf', m_tools: 'TOOLS OF MARKETING RESEARCH.pdf', m_book: 'marketing esearch.pdf',
     m_seg: 'SEGMENTATION.pdf', m_target: 'Market_Targeting.pdf', m_pos: 'Positioning_and_Repositioning.pdf', m_india: 'Indian_Brands_Positioning_Repositioning (1).pdf',
     m_vp: 'Value_Proposition.pdf', m_vp2: 'value proposition.pdf', m_a3: 'Marketing_Management_Unit3_Assignment.pdf',
     // Business Environment
@@ -51,8 +51,9 @@
     'u2-cb': mk('m_cb', 'm_factors', 'm_u2', 'm_u2b'), 'u2-mis': mk('m_mis', 'm_misb', 'm_misp', 'm_book'),
     'u2-mr1': mk('m_mrp', 'm_book', 'm_u2', 'm_tools'), 'u2-mr2': mk('m_book', 'm_tools'),
     'u3-seg': mk('m_seg', 'm_a3'), 'u3-target': mk('m_target'), 'u3-pos': mk('m_pos', 'm_india'), 'u3-india': mk('m_india'), 'u3-vp': mk('m_vp', 'm_vp2'),
-    assign: mk('m_a3', 'm_ai'), qa: mk('m_a3', 'm_ai', 'm_book'), concepts: mU1.concat(mU2, mU3),
-    'q:Unit I': mU1, 'q:Unit II': mU2, 'q:Unit III': mU3,
+    'u4-product': mk('m_img'), 'u4-price': mk('m_img'), 'u4-place': mk('m_img'), 'u4-promo': mk('m_img'), 'exam-master': mk('m_img'),
+    assign: mk('m_a3', 'm_ai'), qa: mk('m_img', 'm_a3', 'm_ai', 'm_book'), concepts: mU1.concat(mU2, mU3, mk('m_img')),
+    'q:Unit I': mU1, 'q:Unit II': mU2, 'q:Unit III': mU3, 'q:Unit IV': mk('m_img'),
   };
 
   const be = {

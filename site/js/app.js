@@ -31,6 +31,7 @@ const BLURB = {
 
 const PATTERN = {
   hrm: '<b>HRM paper (syllabus):</b> Core Course II · 4 credits · 25 internal + 75 external marks · written, 2 hours (Wed 25 Nov 2026). These MCQs are practice for concepts; the exam answers are written - use the ✍️ Exam Q&A bank and the ⭐ Exam Master notes.',
+  marketing: '<b>Marketing paper (syllabus):</b> Core Course III · 4 credits · 25 internal + 75 external marks · written, 2 hours (Thu 26 Nov 2026). Unit weights: I 11 · II 11 · III 10 · IV 13 lectures. These MCQs are practice for concepts; the exam answers are written - use the ✍️ Exam Q&A bank and the ⭐ Exam Master notes. Unit IV (4Ps) is from standard textbooks - no notes PDF.',
   'physical-education': '<b>Real paper pattern</b> (from the past papers): 100 MCQs in the booklet, answer any 75 on the OMR sheet · 75 marks · 90 minutes · no negative marking. Practise it: Mock exam, 75 Qs, 72 s / Q. The marked answers come from the syllabus and standard knowledge - the papers have no answer key.',
 };
 

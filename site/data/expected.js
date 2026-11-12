@@ -57,6 +57,25 @@ window.EXPECTED = {
       'What is positioning? Explain its bases; explain repositioning with Indian examples (Cadbury, Titan, Lifebuoy).',
       'What is a value proposition? Explain its seven types and how to write one.',
       'Assignment questions: compare segmentation of two brands; analyse a company\'s targeting strategy; study a brand\'s positioning/repositioning.'] },
+    { h: 'Unit IV · Product (13 lectures - the biggest unit)', ref: 'u4-product', q: [
+      'What is the marketing mix? Explain the 4Ps with decisions and examples.',
+      'Explain the levels of a product and the product mix (width, length, depth, consistency).',
+      'Explain the stages of new product development; why do new products fail?',
+      'What is the product life cycle? Explain its stages and the strategy for each stage with a diagram.',
+      'What is a brand? Explain brand name, mark, trademark, equity and branding strategies.',
+      'Explain the functions of packaging and labelling.'] },
+    { h: 'Unit IV · Price', ref: 'u4-price', q: [
+      'Explain the factors affecting pricing and the main pricing methods (cost-based, demand-based, competition-based).',
+      'Distinguish between market skimming and market penetration pricing.',
+      'Explain price adaptation strategies and price discrimination with examples.'] },
+    { h: 'Unit IV · Place', ref: 'u4-place', q: [
+      'Explain the levels of distribution channels, the functions of intermediaries and factors affecting channel choice.',
+      'Explain intensive, selective and exclusive distribution.',
+      'What is logistics? Explain its elements and importance.'] },
+    { h: 'Unit IV · Promotion', ref: 'u4-promo', q: [
+      'What is the promotion mix? Explain its tools with merits and limitations.',
+      'Explain advertising (objectives, media, decisions) and the steps in personal selling.',
+      'Explain sales promotion, public relations and digital media; push vs pull strategy.'] },
   ],
   hrm: [
     { h: '⭐ Priority A - the earlier test asked these (learn first)', t: 'Introduction to HRM', q: [

@@ -130,3 +130,11 @@ Rebuild: edit `tools/data_*.py` → `python -I tools/build_mcq.py` → `node too
 | Sat 05-12-2026 | Physical Education and Yoga (Z031301) | objective, 1.5 h (11:30-1:00) |
 
 Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM as MCQ - the HRM MCQs stay as practice, but HRM written answers may be needed (open item).
+
+### Phase 33 - Marketing updated from Syllabus/marketing.jpeg (like HRM)
+- Syllabus image added to the Marketing source viewer (`EXTRA["marketing"]`, sourcemap `m_img`); exam-format note in `PATTERN.marketing` (Core III, 25+75, written 2 h, Thu 26 Nov; lectures 11/11/10/13).
+- New `site/data/marketing-u4.js`: Unit IV notes (4Ps: product, price, place, promotion) + Exam Master. No notes PDF exists for Unit IV -> standard textbooks, marked [extra].
+- +54 Unit IV MCQs with per-option reasons (`tools/data_mkt_syl.py`, `overrides_mkt_syl.py`; 1 duplicate skipped) -> Marketing MCQs 170.
+- +26 detailed written answers for Unit IV (`site/data/examqa-marketing5.js`) -> Marketing written Q&A 138; expected-questions block for Unit IV.
+- PDFs: `Syllabus/Marketing_Complete_Unitwise_Notes_Questions_Answers.pdf` (`tools/make_marketing_complete_pdf.py`, 82 pages), `Written QA pdf/Marketing_Written_QA.pdf`, `MCQ pdf/Marketing/` sets (3).
+- Open: Unit I-III written answers are still short (not yet upgraded to detailed 2/3/5/6/10 like HRM).
