@@ -87,7 +87,8 @@
   function add(id, items) {
     const sub = window.SUBJECTS && window.SUBJECTS[id];
     if (!sub) return;
-    window.ExamQA.data[id] = (window.ExamQA.data[id] || []).concat(items);
+    const redo = new Set(items.map((x) => x.m + '|' + x.q));  // a later file with the same marks + question replaces the earlier (shorter) answer
+    window.ExamQA.data[id] = (window.ExamQA.data[id] || []).filter((x) => !redo.has(x.m + '|' + x.q)).concat(items);
     const all = window.ExamQA.data[id];
     const old = sub.units.findIndex((u) => u.id === 'qa');
     const unit = { id: 'qa', title: '✍️ Exam Q&A bank (' + all.length + ')', html: html(id, all), after: () => init(id, all) };

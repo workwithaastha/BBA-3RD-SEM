@@ -138,3 +138,7 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - +26 detailed written answers for Unit IV (`site/data/examqa-marketing5.js`) -> Marketing written Q&A 138; expected-questions block for Unit IV.
 - PDFs: `Syllabus/Marketing_Complete_Unitwise_Notes_Questions_Answers.pdf` (`tools/make_marketing_complete_pdf.py`, 82 pages), `Written QA pdf/Marketing_Written_QA.pdf`, `MCQ pdf/Marketing/` sets (3).
 - Open: Unit I-III written answers are still short (not yet upgraded to detailed 2/3/5/6/10 like HRM).
+
+### Phase 34 - Marketing Units I-III upgraded to detailed answers
+- `site/data/examqa-marketing6.js` (Unit I), `-7.js` (Unit II), `-8.js` (Unit III): 51 detailed 5/6/10-mark answers (intro, headed points, tables, flows, example, conclusion) that REPLACE the earlier short ones. `ExamQA.add` now replaces an earlier item with the same marks + question text.
+- 2- and 3-mark Marketing answers stay short (right size for those marks). Marketing Q&A stays 138; PDFs rebuilt.
