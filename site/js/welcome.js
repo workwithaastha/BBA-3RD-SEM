@@ -28,6 +28,8 @@
     ['Have you eaten something? 🍱', [['Yes 😋', 'Good! Study with a happy tummy.'], ['Not yet', 'Eat first, then revise. Promise? 🤝']]],
     ['Ready for a quick Daily 20? 🔥', [['Let\'s go! 🚀', '__daily'], ['Later ⏳', 'Okay, but don\'t forget me 🥺']]],
   ];
+  // answers that start with one of these show the SAD image, all others the HAPPY image
+  const SAD = ['Sorry, forgot', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Later'];
   const ASK = () => (Math.random() < 0.65 ? pick(FAV) : pick(MORE));
 
   const FACES = ['😊', '🤗', '😄', '🥰', '😎', '🤓', '🙂', '✨'];
@@ -64,7 +66,7 @@
   function greet(thenDays) {
     clearAll();
     const [q, replies] = ASK();
-    const el = bubble(`<div class="bface">${pick(FACES)}</div>
+    const el = bubble(`<div class="bface"><img src="img/dino.webp" alt="" width="64" height="64"></div>
       <div class="bbody"><h3>Hi ${esc(NAME)} <span class="wave">👋</span></h3>
       <p class="bq">${esc(q)}</p>
       <div class="breps">${replies.map((r, i) => `<button class="brep" data-i="${i}">${esc(r[0])}</button>`).join('')}</div></div>`, (e) => {
@@ -76,7 +78,11 @@
           e.querySelector('.bq').textContent = ans;
           e.querySelector('.bq').classList.add('ans');
           e.querySelector('.breps').remove();
-          e.querySelector('.bface').classList.add('happy');
+          const label = replies[+b.dataset.i][0];
+          const mood = SAD.some((x) => label.indexOf(x) === 0) ? 'sad' : 'happy';
+          const face = e.querySelector('.bface');
+          face.classList.add('mood', mood);
+          face.innerHTML = '<img src="img/' + mood + '.webp" alt="" width="72" height="72">';
           later(() => dismiss(e, thenDays), 3800);
         };
       });
@@ -96,7 +102,7 @@
     const when = d === 0 ? 'is TODAY!' : d === 1 ? 'is tomorrow!' : 'is in ' + d + ' days';
     const date = new Date(ex.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
     const hot = d <= 3;
-    const el = bubble(`<div class="bface cal">${ICON[ex.id] || '📅'}</div>
+    const el = bubble(`<div class="bface"><img src="img/dino.webp" alt="" width="64" height="64"><span class="bico">${ICON[ex.id] || '📅'}</span></div>
       <div class="bbody"><h3>⏳ ${d === 0 ? 'Today' : d + (d === 1 ? ' day' : ' days') + ' left'}</h3>
       <p class="bq"><b>${esc(ex.name)}</b> ${when}</p>
       <p class="bsub">${date} · ${esc(ex.time)} · ${ex.kind === 'objective' ? 'MCQ' : 'Written'} · ${esc(ex.dur)}</p>
