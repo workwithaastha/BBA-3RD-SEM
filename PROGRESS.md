@@ -169,3 +169,4 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - Buddy questions are now NOT about study (feelings, food, water, sleep, tea/coffee, mood...); favourites (remember me / angry / order food) still asked most; no study words in answers.
 - Buddy: small "Next question ›" button on the question card (shows a different question, never the same twice in a row) and "Another exam ›" on the days-left popup (different exam).
 - Buddy: days-left popup no longer has Study now / Study plan (just "Got it 👍" + "Another exam ›"); 10 cute couple questions added (`LOVE` in welcome.js, asked ~45% of the time, then the favourites, then the daily-life ones).
+- Buddy: 13 more cute couple questions (LOVE list now 23).

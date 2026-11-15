@@ -32,6 +32,19 @@
     ["Do you love me? 🥺💗", [["Obviously 😘", "Love you more than all the pizzas in the world 🍕💗"], ["Maybe... 😜", "Maybe?! I will take it and make you say yes 😎💗"]]],
     ["Should I send you a flower? 🌹", [["Send it! 🌹", "Sent! Smell it with your eyes closed 🌹😚"], ["Send chocolate 🍫", "Even better: a chocolate bouquet 🍫💐"]]],
     ["Tell me honestly, am I annoying? 😅", [["Never 💕", "Good, because you are stuck with me forever 😌💞"], ["Sometimes 😜", "Only sometimes?! I will take that win 😎"]]],
+    ["Good morning, sunshine! Did you wake up smiling? ☀️", [["Yes, thinking of you 😊", "Then my morning is already perfect 🌞💞"], ["Still sleepy 😴", "Five more minutes, then come and shine ☀️"]]],
+    ["If I was there right now, what would you do? 😏", [["Hug you tight 🫂", "Come here, I am already hugging you back 💞"], ["Steal your food 🍟", "Haha, deal! But I get half of yours 😜"]]],
+    ["Do you want a goodnight kiss? 😘🌙", [["Yes please 🥰", "Mwah! Sleep tight, my cutie 😘🌙"], ["Two please 🥹", "Mwah mwah! Dream of me 💫"]]],
+    ["Guess how much I like you? 🤭", [["To the moon 🌙", "And all the way back, and then some 🚀💗"], ["Tell me 🥺", "More than chai, more than pizza, more than anything 💗"]]],
+    ["Can I call you my forever? 💍😄", [["Haha, yes 😍", "Then it is official, no returns or refunds 😎💞"], ["Ask me later 🙈", "I will ask every day until you say yes 😘"]]],
+    ["Which is better - chocolate or me? 🍫😏", [["You, always 😘", "Correct answer! Here is a chocolate as a prize 🍫"], ["Chocolate 😜", "Ouch! Then I will share my chocolate with someone else 😤🍫"]]],
+    ["Did anyone make you smile today besides me? 🤨", [["No one but you 💕", "Good! That job belongs only to me 😌💗"], ["A few people 😄", "Fine, but I am still your favourite smile-maker 😎"]]],
+    ["Selfie time? Show me your cutest face 📸", [["Smiling 😊", "Aww, that is my favourite look 💖"], ["Making a funny face 🤪", "Best face ever, I am saving it forever 😂💞"]]],
+    ["What should we eat on our next date? 🍝", [["Pizza 🍕", "Pizza date locked in! 🍕💞"], ["Momos 🥟", "Momos it is - extra chutney for you 🥟💗"]]],
+    ["Are you my cutie pie or my chocolate cake? 🍰", [["Cutie pie 🥧", "Cutie pie it is, sweet and a little crazy 😍"], ["Chocolate cake 🍫", "Rich, sweet and I want a big slice of you 😋💞"]]],
+    ["Do you miss our silly talks? 🥹", [["Every day 💕", "Me too, I save every silly word 🫶"], ["Tell me a joke first 😜", "Why did the cutie cross the road? To get to me! 😂💗"]]],
+    ["Who loves who more? 👀", [["Me, obviously 😎", "Wrong. Me. Final answer. Case closed 😤💗"], ["You 🥰", "Okay, you win this one... for today 😘"]]],
+    ["Can I borrow your smile for the rest of my life? 😇", [["Keep it forever 💞", "Deal! Returning it only with interest 😘"], ["Only on rent 😜", "Fine, I will pay in hugs every day 🤗💗"]]],
   ];
   const MORE = [
     ["Are you okay? 🤗", [["Yes, I'm good 😊", "Yay! That makes me really happy 💪"], ["A bit tired 😴", "Take a deep breath and a little rest, you deserve it 🫶"]]],
@@ -45,7 +58,7 @@
     ["How is your mood right now? 🌈", [["Super happy 🥳", "Yay! Keep shining 🌟"], ["Not great 😔", "Sending you a big virtual hug 🤗"]]],
   ];
   // answers that start with one of these show the SAD image, all others the HAPPY image
-  const SAD = ['Sorry, forgot', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
+  const SAD = ['Sorry, forgot', 'Still sleepy', 'Chocolate 😜', 'Ask me later', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
   let lastQ = '', lastEx = '';
   const ASK = () => { let r; for (let i = 0; i < 12; i++) { const x = Math.random(); r = x < 0.45 ? pick(LOVE) : x < 0.75 ? pick(FAV) : pick(MORE); if (r[0] !== lastQ) break; } lastQ = r[0]; return r; };
 
