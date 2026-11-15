@@ -17,19 +17,23 @@
   // ---------- messages: [question, [[reply button, answer], ...]] ----------
   // the three "favourites" are asked most often
   const FAV = [
-    ['Did you remember me? 🥺', [['Always 💜', 'Aww! I remembered you too. Now go and shine ✨'], ['Sorry, forgot 🙈', 'Forgiven! Just do one quiz for me 😌']]],
-    ['Are you angry with me? 😶', [['No, not at all 😄', 'Phew! 😮‍💨 Then let\'s make today count.'], ['A little bit 😤', 'Sorry! I\'ll make it up with an easy quiz 🍬']]],
-    ['Should I order you some food? 🍕', [['Yes please! 🍔', 'Ordered! (Imaginary pizza 🍕 - study first, then eat 😄)'], ['No, I\'m full 😋', 'Then water and a quick quiz it is 💧']]],
+    ["Did you remember me? 🥺", [["Always 💜", "Aww! I remembered you too. You made my day ✨"], ["Sorry, forgot 🙈", "Forgiven! But you owe me a smile 😌"]]],
+    ["Are you angry with me? 😶", [["No, not at all 😄", "Phew! 😮‍💨 I was worried for a second."], ["A little bit 😤", "Sorry! I will make it up with a virtual chocolate 🍫"]]],
+    ["Should I order you some food? 🍕", [["Yes please! 🍔", "Ordered! Imaginary pizza is on its way 🍕😄"], ["No, I'm full 😋", "Okay! Then I will keep the pizza for myself 🍕"]]],
   ];
   const MORE = [
-    ['Are you okay? 🤗', [['Yes, I\'m good 😊', 'Yay! Then let\'s learn something today 💪'], ['A bit tired 😴', 'Take a 5-minute break, then one small quiz.']]],
-    ['Whatsup? 😎', [['Studying 📚', 'Proud of you! Keep going 🔥'], ['Nothing much', 'Perfect time for a Daily 20 then!']]],
-    ['Did you drink water today? 💧', [['Yes 👍', 'Great! Brain runs on water 🧠'], ['Not yet 😅', 'Go grab a glass - I\'ll wait 🥤']]],
-    ['Have you eaten something? 🍱', [['Yes 😋', 'Good! Study with a happy tummy.'], ['Not yet', 'Eat first, then revise. Promise? 🤝']]],
-    ['Ready for a quick Daily 20? 🔥', [['Let\'s go! 🚀', '__daily'], ['Later ⏳', 'Okay, but don\'t forget me 🥺']]],
+    ["Are you okay? 🤗", [["Yes, I'm good 😊", "Yay! That makes me really happy 💪"], ["A bit tired 😴", "Take a deep breath and a little rest, you deserve it 🫶"]]],
+    ["Whatsup? 😎", [["All good 😄", "Love that energy! 🔥"], ["Nothing much", "Same here, just waiting for you 😅"]]],
+    ["Did you drink water today? 💧", [["Yes 👍", "Great! Your body says thank you 🥤"], ["Not yet 😅", "Go grab a glass - I will wait right here 🥤"]]],
+    ["Have you eaten something? 🍱", [["Yes 😋", "Good! A happy tummy means a happy day."], ["Not yet", "Please eat something soon, promise? 🤝"]]],
+    ["Did you sleep well last night? 😴", [["Like a baby 😇", "Lucky you! Sweet dreams do work 🌙"], ["Not really 🥱", "Oh no. A short nap might help later 🛌"]]],
+    ["Tea or coffee today? ☕", [["Tea 🍵", "Chai lovers unite! 🫖"], ["Coffee ☕", "Strong choice! Enjoy every sip."]]],
+    ["Did you smile today? 😁", [["Yes, a lot 😄", "That smile looks great on you ✨"], ["Not yet 🥲", "Here you go: 🙂 - now your turn!"]]],
+    ["Want some chocolate? 🍫", [["Yes please! 🍫", "Here is a big virtual bar, no calories 😄"], ["No thanks 🙅", "More chocolate for me then 😋"]]],
+    ["How is your mood right now? 🌈", [["Super happy 🥳", "Yay! Keep shining 🌟"], ["Not great 😔", "Sending you a big virtual hug 🤗"]]],
   ];
   // answers that start with one of these show the SAD image, all others the HAPPY image
-  const SAD = ['Sorry, forgot', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Later'];
+  const SAD = ['Sorry, forgot', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
   const ASK = () => (Math.random() < 0.65 ? pick(FAV) : pick(MORE));
 
   const FACES = ['😊', '🤗', '😄', '🥰', '😎', '🤓', '🙂', '✨'];
