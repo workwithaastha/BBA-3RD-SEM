@@ -149,3 +149,10 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - `site/js/app.js`: `unitGroups()` - subject page now lists notes grouped by unit (Start here / Unit I... / More) with a jump bar; `PATTERN` exam notes for Office Management and Business Environment. `site/css/ui2.css`: `.ujump`, `.ugh`.
 - `site/data/expected.js`: refs for Office Management groups; new Business Environment important-questions block. `site/data/sourcemap.js`: source links for all new pages.
 - Physical Education still has MCQs only (no unit notes) - open.
+
+### Phase 36 - MCQ / quiz redesign
+- New `site/js/quiz2.js` + `site/css/quiz2.css` (loaded after ui2.js; replaces the global `quiz()`, `run()`, `mock()` of app.js and keeps `record()`, scoring, badges, A-D / 1-4 shortcuts).
+- Setup: mode cards (Practice, Mock exam, Unit test, Weak spots, Daily 20) + unit chips with accuracy rings + Customise; one big Start button; setup hides once a session starts ("Change mode" button).
+- Practice: one question per screen, progress + live score, result panel with reason, wrong-option reasons in a toggle, "Revise later" mark. Mock / unit test: focus mode (header and tabs hidden), timer (red in last 5 min), flag for review, question navigator, submit summary, arrow / F keys.
+- Results (shared): score ring, unit bars, "what to do next" (retry wrong, revise Unit N notes link), full review with revise-later marks. Weak spots = wrong answers + revise-later marks of the subject (`localStorage` key `revise`).
+- Paper size for mock: Office Management 60 Qs / 60 s, Business Environment 90 / 60 s, Physical Education 75 / 72 s, others 30 / 60 s (`PAPER` in quiz2.js).
