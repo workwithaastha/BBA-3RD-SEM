@@ -48,7 +48,7 @@
     setTimeout(() => { el.remove(); if (then) then(); }, reduce ? 150 : 650);
   }
 
-  function bubble(html, onReady) {
+  function bubble(html, onReady, after) {
     document.querySelectorAll('#buddy').forEach((x) => x.remove());
     const el = document.createElement('div');
     el.id = 'buddy';
@@ -57,7 +57,7 @@
     el.className = reduce ? '' : pick(IN);
     el.innerHTML = '<img class="bdino" src="img/dino.webp" alt="" width="84" height="84">' + html + '<button class="bx" aria-label="Close">×</button>';
     document.body.appendChild(el);
-    el.querySelector('.bx').onclick = () => { clearAll(); dismiss(el); };
+    el.querySelector('.bx').onclick = () => { clearAll(); dismiss(el, after); };
     if (onReady) onReady(el);
     return el;
   }
@@ -71,8 +71,7 @@
     const el = bubble(`<div class="bhead"><div class="bface"><img src="img/avatar.webp" alt="" width="72" height="72"></div>
       <div class="bhello"><small>${hello()}</small><h3>Hi ${esc(NAME)} <span class="wave">👋</span></h3></div></div>
       <p class="bq">${esc(q)}</p>
-      <div class="breps two">${replies.map((r, i) => `<button class="brep${i ? '' : ' main'}" data-i="${i}">${esc(r[0])}</button>`).join('')}</div>
-      <div class="btimer"><i style="animation-duration:9.5s"></i></div>`, (e) => {
+      <div class="breps two">${replies.map((r, i) => `<button class="brep${i ? '' : ' main'}" data-i="${i}">${esc(r[0])}</button>`).join('')}</div>`, (e) => {
       e.querySelectorAll('.brep').forEach((b) => {
         b.onclick = () => {
           clearAll();
@@ -81,7 +80,6 @@
           e.querySelector('.bq').textContent = ans;
           e.querySelector('.bq').classList.add('ans');
           e.querySelector('.breps').remove();
-          e.querySelector('.btimer').remove();
           e.classList.add('answered');
           const label = replies[+b.dataset.i][0];
           const mood = SAD.some((x) => label.indexOf(x) === 0) ? 'sad' : 'happy';
@@ -91,8 +89,8 @@
           later(() => dismiss(e, thenDays), 3800);
         };
       });
-    });
-    later(() => dismiss(el, thenDays), 9500);
+    }, thenDays);
+    return el;  // stays open until you close it (x) or pick an answer
   }
 
   // ---------- 2. days left for a random upcoming exam ----------
@@ -111,13 +109,15 @@
       <div class="bcount"><b>${d === 0 ? '!' : d}</b><span>${d === 0 ? 'TODAY' : d === 1 ? 'day left' : 'days left'}</span></div></div>
       <p class="bq"><b>${esc(ex.name)}</b> ${when}</p>
       <div class="bchips"><span>📅 ${date}</span><span>🕐 ${esc(ex.time)}</span><span>${ex.kind === 'objective' ? '✅ MCQ' : '✍️ Written'} · ${esc(ex.dur)}</span></div>
-      <div class="breps two"><a class="brep main" href="#/${ex.id}">📖 Study now</a><a class="brep" href="#/plan">🗓️ Study plan</a></div>
-      <div class="btimer"><i style="animation-duration:8.5s"></i></div>`, (e) => {
+      <div class="breps two"><a class="brep main" href="#/${ex.id}">📖 Study now</a><a class="brep" href="#/plan">🗓️ Study plan</a></div>`, (e) => {
       if (hot) e.classList.add('hot');
       e.querySelectorAll('a.brep').forEach((a) => a.addEventListener('click', () => { clearAll(); dismiss(e); }));
     });
-    later(() => dismiss(el), 8500);
+    return el;  // stays open until you close it (x) or use a button
   }
+
+  // leaving the first screen closes it
+  addEventListener('hashchange', () => { clearAll(); const x = document.getElementById('buddy'); if (x) x.remove(); });
 
   function sequence() { greet(() => later(daysPopup, 700)); }
 
@@ -161,5 +161,6 @@
   }
 
   // every time the site opens
-  setTimeout(sequence, 900);
+  // only on the first screen (home) when the site opens
+  if (/^#?\/?$/.test(location.hash)) setTimeout(sequence, 900);
 })();
