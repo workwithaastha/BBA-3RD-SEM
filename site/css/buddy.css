@@ -34,3 +34,7 @@
 #buddy .bx{position:absolute;right:12px;top:16px;width:30px;height:30px;border:0;border-radius:50%;background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--ink);cursor:pointer;font-size:1.1rem;line-height:1}
 #buddy .bx:hover{background:color-mix(in srgb,var(--ink) 18%,transparent)}
 @media (max-width:480px){#buddy{padding:20px 16px 16px}#buddy h3{font-size:1.35rem}#buddy .bq{font-size:1.15rem}#buddy .bcount b{font-size:2.6rem}}
+
+#buddy .bfoot{display:flex;justify-content:flex-end;margin-top:10px}
+#buddy .bnext{border:0;background:color-mix(in srgb,var(--a1,#6366f1) 12%,transparent);color:var(--a1,#6366f1);border-radius:99px;padding:5px 14px;font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:transform .15s,background .15s}
+#buddy .bnext:hover{background:var(--a1,#6366f1);color:#fff;transform:translateX(3px)}

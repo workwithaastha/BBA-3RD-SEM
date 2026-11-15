@@ -34,7 +34,8 @@
   ];
   // answers that start with one of these show the SAD image, all others the HAPPY image
   const SAD = ['Sorry, forgot', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
-  const ASK = () => (Math.random() < 0.65 ? pick(FAV) : pick(MORE));
+  let lastQ = '', lastEx = '';
+  const ASK = () => { let r; for (let i = 0; i < 12; i++) { r = Math.random() < 0.65 ? pick(FAV) : pick(MORE); if (r[0] !== lastQ) break; } lastQ = r[0]; return r; };
 
   const FACES = ['😊', '🤗', '😄', '🥰', '😎', '🤓', '🙂', '✨'];
   const IN = ['b-slide', 'b-bounce', 'b-flip', 'b-zoom', 'b-swing', 'b-drop', 'b-roll', 'b-jelly', 'b-rise'];
@@ -75,7 +76,9 @@
     const el = bubble(`<div class="bhead"><div class="bface"><img src="img/avatar.webp" alt="" width="72" height="72"></div>
       <div class="bhello"><small>${hello()}</small><h3>Hi ${esc(NAME)} <span class="wave">👋</span></h3></div></div>
       <p class="bq">${esc(q)}</p>
-      <div class="breps two">${replies.map((r, i) => `<button class="brep${i ? '' : ' main'}" data-i="${i}">${esc(r[0])}</button>`).join('')}</div>`, (e) => {
+      <div class="breps two">${replies.map((r, i) => `<button class="brep${i ? '' : ' main'}" data-i="${i}">${esc(r[0])}</button>`).join('')}</div>
+      <div class="bfoot"><button class="bnext" type="button">Next question ›</button></div>`, (e) => {
+      e.querySelector('.bnext').onclick = () => { clearAll(); e.remove(); greet(thenDays); };
       e.querySelectorAll('.brep').forEach((b) => {
         b.onclick = () => {
           clearAll();
@@ -84,6 +87,7 @@
           e.querySelector('.bq').textContent = ans;
           e.querySelector('.bq').classList.add('ans');
           e.querySelector('.breps').remove();
+          e.querySelector('.bfoot').remove();
           e.classList.add('answered');
           const label = replies[+b.dataset.i][0];
           const mood = SAD.some((x) => label.indexOf(x) === 0) ? 'sad' : 'happy';
@@ -104,7 +108,9 @@
     const left = (ex) => { const [y, m, d] = ex.date.split('-').map(Number); return Math.round((new Date(y, m - 1, d) - t0) / 86400000); };
     const up = E.filter((x) => left(x) >= 0);
     if (!up.length) return;
-    const ex = pick(up);
+    let ex = pick(up);
+    for (let i = 0; i < 12 && up.length > 1 && ex.id === lastEx; i++) ex = pick(up);
+    lastEx = ex.id;
     const d = left(ex);
     const when = d === 0 ? 'is TODAY!' : d === 1 ? 'is tomorrow!' : 'is in ' + d + ' days';
     const date = new Date(ex.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
@@ -113,7 +119,10 @@
       <div class="bcount"><b>${d === 0 ? '!' : d}</b><span>${d === 0 ? 'TODAY' : d === 1 ? 'day left' : 'days left'}</span></div></div>
       <p class="bq"><b>${esc(ex.name)}</b> ${when}</p>
       <div class="bchips"><span>📅 ${date}</span><span>🕐 ${esc(ex.time)}</span><span>${ex.kind === 'objective' ? '✅ MCQ' : '✍️ Written'} · ${esc(ex.dur)}</span></div>
-      <div class="breps two"><a class="brep main" href="#/${ex.id}">📖 Study now</a><a class="brep" href="#/plan">🗓️ Study plan</a></div>`, (e) => {
+      <div class="breps two"><a class="brep main" href="#/${ex.id}">📖 Study now</a><a class="brep" href="#/plan">🗓️ Study plan</a></div>
+      ${up.length > 1 ? '<div class="bfoot"><button class="bnext" type="button">Another exam ›</button></div>' : ''}`, (e) => {
+      const nb = e.querySelector('.bnext');
+      if (nb) nb.onclick = () => { clearAll(); e.remove(); daysPopup(); };
       if (hot) e.classList.add('hot');
       e.querySelectorAll('a.brep').forEach((a) => a.addEventListener('click', () => { clearAll(); dismiss(e); }));
     });

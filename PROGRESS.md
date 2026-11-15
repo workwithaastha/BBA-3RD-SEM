@@ -167,3 +167,4 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - Buddy avatar replaced by the cartoon image (`site/img/avatar.webp`, cyjhmj.png, centre-cropped 220 px, 23 KB).
 - Buddy rules: shown only when the site opens on the home screen; one question at a time; no auto-close (closes only with x or after you pick an answer, which shows the happy/sad image for ~4 s); the days-left popup follows and also stays until closed; leaving the first screen removes it. Header 👋 still replays it.
 - Buddy questions are now NOT about study (feelings, food, water, sleep, tea/coffee, mood...); favourites (remember me / angry / order food) still asked most; no study words in answers.
+- Buddy: small "Next question ›" button on the question card (shows a different question, never the same twice in a row) and "Another exam ›" on the days-left popup (different exam).
