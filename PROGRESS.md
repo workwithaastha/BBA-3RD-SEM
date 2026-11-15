@@ -164,3 +164,4 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - Buddy avatar is now the supplied portrait (`site/img/avatar.webp`, round face crop, 8 KB) instead of the dinosaur; happy / sad images still replace it on answers.
 - Buddy bubble now sits in the centre of the screen (fixed, auto margins, soft dim behind) with the dinosaur (`site/img/dino.webp`) sitting on top of it and bobbing; portrait stays as the avatar.
 - Buddy card redesign (`site/css/buddy.css`, loaded after welcome.css): white card with colour strip, round photo with ring, time-based hello line, big question, two full-width reply buttons (gradient main + outline), countdown bar to auto-close; days-left popup shows a big gradient number, info chips and Study now / Study plan.
+- Buddy avatar replaced by the cartoon image (`site/img/avatar.webp`, cyjhmj.png, centre-cropped 220 px, 23 KB).
