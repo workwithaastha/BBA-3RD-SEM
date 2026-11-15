@@ -66,7 +66,7 @@
   function greet(thenDays) {
     clearAll();
     const [q, replies] = ASK();
-    const el = bubble(`<div class="bface"><img src="img/dino.webp" alt="" width="64" height="64"></div>
+    const el = bubble(`<div class="bface"><img src="img/avatar.webp" alt="" width="64" height="64"></div>
       <div class="bbody"><h3>Hi ${esc(NAME)} <span class="wave">👋</span></h3>
       <p class="bq">${esc(q)}</p>
       <div class="breps">${replies.map((r, i) => `<button class="brep" data-i="${i}">${esc(r[0])}</button>`).join('')}</div></div>`, (e) => {
@@ -102,7 +102,7 @@
     const when = d === 0 ? 'is TODAY!' : d === 1 ? 'is tomorrow!' : 'is in ' + d + ' days';
     const date = new Date(ex.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
     const hot = d <= 3;
-    const el = bubble(`<div class="bface"><img src="img/dino.webp" alt="" width="64" height="64"><span class="bico">${ICON[ex.id] || '📅'}</span></div>
+    const el = bubble(`<div class="bface"><img src="img/avatar.webp" alt="" width="64" height="64"><span class="bico">${ICON[ex.id] || '📅'}</span></div>
       <div class="bbody"><h3>⏳ ${d === 0 ? 'Today' : d + (d === 1 ? ' day' : ' days') + ' left'}</h3>
       <p class="bq"><b>${esc(ex.name)}</b> ${when}</p>
       <p class="bsub">${date} · ${esc(ex.time)} · ${ex.kind === 'objective' ? 'MCQ' : 'Written'} · ${esc(ex.dur)}</p>
