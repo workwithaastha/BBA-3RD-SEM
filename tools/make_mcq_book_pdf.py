@@ -63,7 +63,8 @@ for u in units:
                 parts.append(f"<p class='w'>{L[k]} is wrong: {e(r)}</p>")
 # quick answer key
 cells = [f"{i}.&nbsp;<b>{L[q['a']]}</b>" for i, q in enumerate(Q, 1)]
-rows = "".join("<tr>" + "".join(f"<td style='padding:1pt 6pt;white-space:nowrap'>{c}</td>" for c in cells[r::30]) + "</tr>" for r in range(30))
+KR = 30 if len(Q) <= 400 else 60  # 8-14 columns fit the page width
+rows = "".join("<tr>" + "".join(f"<td style='padding:1pt 6pt;white-space:nowrap'>{c}</td>" for c in cells[r::KR]) + "</tr>" for r in range(KR))
 parts.append(f"<h2 style='page-break-before:always'>Quick answer key (all {len(Q)})</h2><table>{rows}</table>")
 W = pymupdf.paper_rect("a4")
 story = pymupdf.Story(html="<html><body>" + "".join(parts) + "</body></html>", user_css=CSS)
