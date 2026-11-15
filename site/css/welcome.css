@@ -32,47 +32,8 @@
 #wopen{border:1px solid var(--line);background:var(--card);border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:18px;transition:transform .3s}
 #wopen:hover{transform:rotate(20deg) scale(1.15)}
 
-/* ---------- welcome overlay ---------- */
-#wel{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;overflow:auto;background:radial-gradient(900px 600px at 30% 20%,rgba(99,102,241,.55),transparent),radial-gradient(800px 600px at 80% 80%,rgba(236,72,153,.5),transparent),rgba(10,12,32,.82);backdrop-filter:blur(8px);perspective:1200px;animation:fadein .4s both}
-#wel.out{animation:fadeout .38s both}
-@keyframes fadein{from{opacity:0}}
-@keyframes fadeout{to{opacity:0}}
-.wbg i{position:fixed;bottom:-40px;width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.7);animation:rise-up 9s linear infinite;opacity:0}
-.wbg i:nth-child(1){left:8%;animation-delay:0s}.wbg i:nth-child(2){left:20%;animation-delay:2s;width:9px;height:9px}
-.wbg i:nth-child(3){left:34%;animation-delay:4s;width:18px;height:18px}.wbg i:nth-child(4){left:48%;animation-delay:1s}
-.wbg i:nth-child(5){left:62%;animation-delay:3s;width:10px;height:10px}.wbg i:nth-child(6){left:75%;animation-delay:5s}
-.wbg i:nth-child(7){left:88%;animation-delay:2.5s;width:16px;height:16px}.wbg i:nth-child(8){left:55%;animation-delay:6s;width:8px;height:8px}
-@keyframes rise-up{10%{opacity:.8}to{transform:translateY(-110vh) translateX(30px);opacity:0}}
-
-.wcard{--rx:0deg;--ry:0deg;--cs:96px;position:relative;width:min(560px,100%);text-align:center;color:#fff;padding:clamp(20px,4vw,36px);border-radius:28px;border:1px solid rgba(255,255,255,.35);background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.07));box-shadow:0 30px 70px -20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.5);transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .15s ease-out;animation:card-in .9s cubic-bezier(.2,.9,.25,1.2) both}
-@keyframes card-in{from{opacity:0;transform:rotateX(65deg) translateY(80px) scale(.8)}}
-.wcard .scene{margin:6px auto 18px}
-.wcard h2{margin:0;font-size:clamp(1.9rem,6vw,2.8rem);text-shadow:0 4px 18px rgba(0,0,0,.35)}
-.wave{display:inline-block;transform-origin:70% 70%;animation:wave 1.8s ease-in-out infinite}
-@keyframes wave{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(16deg)}20%,40%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
-.wl1{font-size:clamp(1.15rem,3.6vw,1.6rem);margin:6px 0}
-.wl1 b{background:linear-gradient(90deg,#fde68a,#fff,#a5f3fc);-webkit-background-clip:text;background-clip:text;color:transparent}
-.wl2{opacity:.9;margin:6px 0 16px}
-.wstats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
-.wstats div{flex:1 1 90px;background:rgba(255,255,255,.16);border-radius:16px;padding:10px 8px;transform:translateZ(30px)}
-.wstats b{display:block;font-size:1.3em}
-.wstats span{font-size:.78em;opacity:.85}
-.wbtn{border:0;border-radius:14px;padding:11px 18px;font:inherit;font-weight:700;cursor:pointer;color:#4338ca;background:#fff;transition:transform .15s,box-shadow .2s;box-shadow:0 8px 18px -8px rgba(0,0,0,.5)}
-.wbtn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 14px 24px -8px rgba(0,0,0,.55)}
-.wbtn.ghost{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.5)}
-.wbtn.big{display:block;width:100%;margin:6px 0 10px;padding:14px;font-size:1.05em;background:linear-gradient(90deg,#fde68a,#fff);animation:glow 2.2s ease-in-out infinite}
-.wbtn.big small{display:block;font-weight:500;color:#4b5563;margin-top:2px}
-@keyframes glow{50%{box-shadow:0 0 0 6px rgba(253,230,138,.35),0 10px 24px -8px rgba(0,0,0,.5)}}
-.wlast{font-size:.88em;opacity:.9;margin:0 0 10px}
-.wbtns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.wchips{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-.wchip{color:#fff;text-decoration:none;font-size:.82em;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);transition:.2s}
-.wchip:hover{background:#fff;color:#4338ca;transform:translateY(-2px)}
-.wx{position:absolute;right:14px;top:10px;border:0;background:rgba(255,255,255,.2);color:#fff;width:32px;height:32px;border-radius:50%;font-size:20px;cursor:pointer;transition:.2s}
-.wx:hover{background:rgba(255,255,255,.4);transform:rotate(90deg)}
-
 @media (prefers-reduced-motion:reduce){.cube,.hero-cube,.wave,.wbg i,.scard .ico,.wbtn.big{animation:none!important}.wcard{animation:none}}
-@media print{#wel,#wopen{display:none!important}}
+@media print{#buddy,#wopen{display:none!important}}
 
 /* ---------- rewards ---------- */
 #confetti{position:fixed;inset:0;z-index:200;pointer-events:none}
@@ -158,3 +119,56 @@
 .expl.exbad{border-left:4px solid #dc2626;background:rgba(220,38,38,.1);padding:8px 12px;border-radius:10px}
 .expl .why{margin-top:4px}
 @media (prefers-reduced-motion:reduce){.face,.face img{animation:none!important}}
+
+/* ---------- buddy bubble (greeting + days-left popup) ---------- */
+#buddy{position:fixed;left:18px;bottom:18px;z-index:120;display:flex;gap:12px;align-items:center;width:min(420px,calc(100vw - 36px));padding:14px 38px 14px 14px;border-radius:22px;color:#fff;background:linear-gradient(135deg,var(--a1,#6366f1),var(--a2,#ec4899));box-shadow:0 22px 44px -14px rgba(30,20,90,.55);transform-origin:20% 100%;will-change:transform,opacity}
+#buddy.hot{background:linear-gradient(135deg,#ef4444,#f59e0b)}
+#buddy .bface{flex:none;display:grid;place-items:center;width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.22);font-size:1.9rem;animation:bface 2.4s ease-in-out infinite}
+#buddy .bface.happy{animation:bhappy .7s ease 2}
+#buddy .bface.cal{border-radius:16px}
+#buddy h3{margin:0 0 2px;font-size:1.15rem}
+#buddy .wave{display:inline-block;transform-origin:70% 70%;animation:wave 1.8s ease-in-out infinite}
+#buddy .bq{margin:2px 0 8px;font-size:1.02rem;line-height:1.35}
+#buddy .bq.ans{animation:bpop .45s ease both;font-weight:600}
+#buddy .bsub{margin:-4px 0 8px;font-size:.8rem;opacity:.9}
+#buddy .breps{display:flex;flex-wrap:wrap;gap:8px}
+#buddy .brep{border:0;border-radius:99px;padding:6px 14px;font:inherit;font-size:.86rem;font-weight:700;cursor:pointer;text-decoration:none;background:rgba(255,255,255,.2);color:#fff;transition:transform .15s,background .15s}
+#buddy .brep:hover{background:#fff;color:#4338ca;transform:translateY(-2px)}
+#buddy .brep.go{background:#fff;color:#4338ca}
+#buddy .bx{position:absolute;right:10px;top:8px;width:26px;height:26px;border:0;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;cursor:pointer;font-size:1rem;line-height:1}
+#buddy .bx:hover{background:rgba(255,255,255,.4)}
+@keyframes bface{50%{transform:translateY(-4px) rotate(-6deg) scale(1.06)}}
+@keyframes bhappy{40%{transform:scale(1.35) rotate(12deg)}}
+@keyframes bpop{from{opacity:0;transform:scale(.85)}}
+/* random entrances */
+#buddy.b-slide{animation:b-slide .6s cubic-bezier(.2,.9,.3,1) both}
+#buddy.b-bounce{animation:b-bounce .9s both}
+#buddy.b-flip{animation:b-flip .8s cubic-bezier(.2,.9,.3,1) both}
+#buddy.b-zoom{animation:b-zoom .55s cubic-bezier(.3,1.5,.5,1) both}
+#buddy.b-swing{animation:b-swing 1s ease-out both;transform-origin:50% 0}
+#buddy.b-drop{animation:b-drop .8s cubic-bezier(.3,1.4,.5,1) both}
+#buddy.b-roll{animation:b-roll .8s cubic-bezier(.2,.9,.3,1) both}
+#buddy.b-jelly{animation:b-jelly 1s both}
+#buddy.b-rise{animation:b-rise .7s ease-out both}
+@keyframes b-slide{from{opacity:0;transform:translateX(-120%)}}
+@keyframes b-bounce{0%{opacity:0;transform:translateY(120px)}55%{opacity:1;transform:translateY(-22px)}75%{transform:translateY(8px)}100%{transform:none}}
+@keyframes b-flip{from{opacity:0;transform:perspective(700px) rotateX(-90deg)}}
+@keyframes b-zoom{from{opacity:0;transform:scale(.2)}}
+@keyframes b-swing{0%{opacity:0;transform:rotate(-40deg) translateY(-60px)}40%{opacity:1;transform:rotate(18deg)}65%{transform:rotate(-9deg)}85%{transform:rotate(4deg)}100%{transform:none}}
+@keyframes b-drop{from{opacity:0;transform:translateY(-100vh)}}
+@keyframes b-roll{from{opacity:0;transform:translateX(-110%) rotate(-360deg)}}
+@keyframes b-jelly{0%{opacity:0;transform:scale(0)}40%{opacity:1;transform:scale(1.2,.8)}60%{transform:scale(.88,1.12)}80%{transform:scale(1.06,.94)}100%{transform:none}}
+@keyframes b-rise{from{opacity:0;transform:translateY(60px) scale(.9)}}
+/* random exits */
+#buddy.x-fly{animation:x-fly .6s ease-in both}
+#buddy.x-shrink{animation:x-shrink .5s ease-in both}
+#buddy.x-spin{animation:x-spin .6s ease-in both}
+#buddy.x-fade{animation:x-fade .4s ease both}
+#buddy.x-down{animation:x-down .55s ease-in both}
+@keyframes x-fly{to{opacity:0;transform:translate(60vw,-40vh) rotate(25deg) scale(.4)}}
+@keyframes x-shrink{to{opacity:0;transform:scale(0)}}
+@keyframes x-spin{to{opacity:0;transform:rotate(540deg) scale(0)}}
+@keyframes x-fade{to{opacity:0}}
+@keyframes x-down{to{opacity:0;transform:translateY(160px)}}
+@media (max-width:700px){#buddy{left:10px;right:10px;width:auto;bottom:84px}}
+@media (prefers-reduced-motion:reduce){#buddy,#buddy .bface,#buddy .wave{animation:none!important}}

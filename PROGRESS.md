@@ -156,3 +156,7 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - Practice: one question per screen, progress + live score, result panel with reason, wrong-option reasons in a toggle, "Revise later" mark. Mock / unit test: focus mode (header and tabs hidden), timer (red in last 5 min), flag for review, question navigator, submit summary, arrow / F keys.
 - Results (shared): score ring, unit bars, "what to do next" (retry wrong, revise Unit N notes link), full review with revise-later marks. Weak spots = wrong answers + revise-later marks of the subject (`localStorage` key `revise`).
 - Paper size for mock: Office Management 60 Qs / 60 s, Business Environment 90 / 60 s, Physical Education 75 / 72 s, others 30 / 60 s (`PAPER` in quiz2.js).
+
+### Phase 37 - Welcome pop-up replaced by the "buddy" bubble
+- `site/js/welcome.js` rewritten: the big "Hi Astha" modal is gone. On every site open a small bubble greets "Hi Astha 👋" with a random question (the three favourites - "Did you remember me?", "Are you angry with me?", "Should I order you some food?" - are asked ~65% of the time) with reply buttons; then a second popup shows the days left for a random upcoming exam (`window.EXAMS`) with Study now / Study plan.
+- Random entrance (9) and exit (5) animations each time; header 👋 button replays it; reduced-motion respected; hidden in mock-exam focus mode. CSS: end of `site/css/welcome.css` (old `#wel` overlay CSS removed). Study-day streak recording and 3D tilt kept.
