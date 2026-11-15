@@ -59,6 +59,24 @@
   ];
   // answers that start with one of these show the SAD image, all others the HAPPY image
   const SAD = ['Sorry, forgot', 'Still sleepy', 'Chocolate 😜', 'Ask me later', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
+  // extra funny / cute answers: question -> { reply index: [more answers] } (one is picked at random on each tap)
+  const PIZZA = ["I am on my way with your favourite pizza! 🍕🛵 Ordering it right now...", "Order placed! Extra cheese, just like you like it 🧀🍕💗", "Your favourite pizza is on its way - and the delivery guy is me 🛵😄", "Do not eat anything else! I am coming with your favourite pizza 🍕🏃"];
+  const EXTRA = {
+    "Should I order you some food? 🍕": { 0: PIZZA, 1: ["Full?! Then I will eat your share and you can watch 😋🍕", "Okay, but if you get hungry in 10 minutes I am still ordering your favourite pizza 🍕😜"] },
+    "Have you eaten something? 🍱": { 1: PIZZA },
+    "Did you eat on time, my cutie? 🍛": { 1: PIZZA, 0: ["Good! Even my stomach is proud of you 🥰", "Yay! Now you may have dessert with me 🍰💗"] },
+    "Did you drink water today? 💧": { 1: ["Drink some water, or I will send a goldfish to check on you 🐟💧", "Water first, then I will send you a virtual hug 🥤🤗"] },
+    "Are you angry with me? 😶": { 1: ["Sorry, sorry, sorry! Here is a pizza, a hug and a flower 🍕🤗🌹", "Please do not be angry, I will do the cutest puppy face 🥺🐶"], 0: ["Yay! Then I can keep my puppy face for later 🐶😄"] },
+    "Did you remember me? 🥺": { 0: ["Aww! I remembered you so much that even my phone got jealous 📱💗"], 1: ["Not remembering me?! I am telling the pizza on you 🍕😤"] },
+    "Do you love me? 🥺💗": { 0: ["Love you more than pizza, and that is saying a lot 🍕💗", "Obviously? Good, because I already told everyone you are mine 😎💞"], 1: ["Maybe?! I will bring pizza until you say yes 🍕😜"] },
+    "Who is the cutest person in the world? 😏": { 0: ["Wrong answer! The cutest one is you. Punishment: one tickle 😜🤭"], 1: ["Stop it! My cheeks are already red and my phone is hot 🙈🔥"] },
+    "Tell me honestly, am I annoying? 😅": { 1: ["Only sometimes? Then I am doing great, call me a part-time cutie 😂", "Annoying? No no, you are limited-edition entertainment 🎭💗"] },
+    "Did you miss me today? 🥺": { 1: ["A little?! I will send you 100 hugs to correct that answer 🤗x100"] },
+    "Want a big virtual hug? 🤗": { 0: ["Hug incoming! Warning: extremely tight, no escape 🫂😄"] },
+    "Do you want a goodnight kiss? 😘🌙": { 0: ["Mwah! Now sleep, or the moon will tell on you 🌙😚"] },
+    "Want some chocolate? 🍫": { 0: ["Here is a huge chocolate. Do not tell the pizza 🍫🍕😂"], 1: ["No chocolate?! Who are you and what did you do with my cutie? 😳🍫"] },
+  };
+  const answerFor = (q, i, base) => { const more = (EXTRA[q] && EXTRA[q][i]) || []; return pick([base].concat(more)); };
   let lastQ = '', lastEx = '';
   const ASK = () => { let r; for (let i = 0; i < 12; i++) { const x = Math.random(); r = x < 0.45 ? pick(LOVE) : x < 0.75 ? pick(FAV) : pick(MORE); if (r[0] !== lastQ) break; } lastQ = r[0]; return r; };
 
@@ -107,7 +125,7 @@
       e.querySelectorAll('.brep').forEach((b) => {
         b.onclick = () => {
           clearAll();
-          const ans = replies[+b.dataset.i][1];
+          const ans = answerFor(q, +b.dataset.i, replies[+b.dataset.i][1]);
           if (ans === '__daily') { dismiss(e); location.hash = '#/daily'; return; }
           e.querySelector('.bq').textContent = ans;
           e.querySelector('.bq').classList.add('ans');
