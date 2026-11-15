@@ -19,7 +19,7 @@
   const FAV = [
     ["Did you remember me? 🥺", [["Always 💜", "Aww! I remembered you too. You made my day ✨"], ["Sorry, forgot 🙈", "Forgiven! But you owe me a smile 😌"]]],
     ["Are you angry with me? 😶", [["No, not at all 😄", "Phew! 😮‍💨 I was worried for a second."], ["A little bit 😤", "Sorry! I will make it up with some chocolate 🍫"]]],
-    ["Should I order you some food? 🍕", [["Yes please! 🍔", "Ordering for you right now! 🛵 Tell me what you want - is it pizza? 🍕"], ["No, I'm full 😋", "Okay! Then I will keep the pizza for myself 🍕"]]],
+    ["Should I order you some food? 🍕", [["Yes please! 🍔", "Wait, let me order for you! 🛵 Tell me what you want - is it pizza? 🍕"], ["No, I'm full 😋", "Okay! Then I will keep the pizza for myself 🍕"]]],
   ];
   const LOVE = [
     ["Did you miss me today? 🥺", [["Yes, so much 💕", "Aww, I missed you even more! 🫶"], ["Just a little 😜", "Only a little?! I will remember that 😤💗"]]],
