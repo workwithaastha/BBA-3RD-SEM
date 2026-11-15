@@ -21,6 +21,18 @@
     ["Are you angry with me? 😶", [["No, not at all 😄", "Phew! 😮‍💨 I was worried for a second."], ["A little bit 😤", "Sorry! I will make it up with a virtual chocolate 🍫"]]],
     ["Should I order you some food? 🍕", [["Yes please! 🍔", "Ordered! Imaginary pizza is on its way 🍕😄"], ["No, I'm full 😋", "Okay! Then I will keep the pizza for myself 🍕"]]],
   ];
+  const LOVE = [
+    ["Did you miss me today? 🥺", [["Yes, so much 💕", "Aww, I missed you even more! 🫶"], ["Just a little 😜", "Only a little?! I will remember that 😤💗"]]],
+    ["Do you know you are my favourite person? 💖", [["Of course I do 😍", "And I will keep reminding you 💞"], ["Tell me again 🥰", "You are my favourite person, always 💖"]]],
+    ["Want a big virtual hug? 🤗", [["Yes please! 🫂", "Squeezing you tight right now 🤗💞"], ["Make it two 🥹", "Two hugs coming up, with a kiss on top 😘"]]],
+    ["Who is the cutest person in the world? 😏", [["Me, obviously 😎", "Okay okay, you win... because it is you 😍"], ["You 😘", "Aww, stop it, you are making me blush 🙈"]]],
+    ["Are you smiling right now? 😊", [["Yes, because of you 💕", "That is the best thing I heard all day ✨"], ["Now I am 😄", "Mission accomplished! 😎"]]],
+    ["Shall we plan a movie date? 🎬🍿", [["Yes! 🍿", "Popcorn is on me, imaginary of course 😄🎬"], ["Pizza date instead 🍕", "Even better! Pizza date it is 💞"]]],
+    ["Did you eat on time, my cutie? 🍛", [["Yes, I did 😋", "Good girl! I am proud of you 🥰"], ["Not yet 🙈", "Go eat right now, or I will get angry 😤🍛"]]],
+    ["Do you love me? 🥺💗", [["Obviously 😘", "Love you more than all the pizzas in the world 🍕💗"], ["Maybe... 😜", "Maybe?! I will take it and make you say yes 😎💗"]]],
+    ["Should I send you a flower? 🌹", [["Send it! 🌹", "Sent! Smell it with your eyes closed 🌹😚"], ["Send chocolate 🍫", "Even better: a chocolate bouquet 🍫💐"]]],
+    ["Tell me honestly, am I annoying? 😅", [["Never 💕", "Good, because you are stuck with me forever 😌💞"], ["Sometimes 😜", "Only sometimes?! I will take that win 😎"]]],
+  ];
   const MORE = [
     ["Are you okay? 🤗", [["Yes, I'm good 😊", "Yay! That makes me really happy 💪"], ["A bit tired 😴", "Take a deep breath and a little rest, you deserve it 🫶"]]],
     ["Whatsup? 😎", [["All good 😄", "Love that energy! 🔥"], ["Nothing much", "Same here, just waiting for you 😅"]]],
@@ -35,7 +47,7 @@
   // answers that start with one of these show the SAD image, all others the HAPPY image
   const SAD = ['Sorry, forgot', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
   let lastQ = '', lastEx = '';
-  const ASK = () => { let r; for (let i = 0; i < 12; i++) { r = Math.random() < 0.65 ? pick(FAV) : pick(MORE); if (r[0] !== lastQ) break; } lastQ = r[0]; return r; };
+  const ASK = () => { let r; for (let i = 0; i < 12; i++) { const x = Math.random(); r = x < 0.45 ? pick(LOVE) : x < 0.75 ? pick(FAV) : pick(MORE); if (r[0] !== lastQ) break; } lastQ = r[0]; return r; };
 
   const FACES = ['😊', '🤗', '😄', '🥰', '😎', '🤓', '🙂', '✨'];
   const IN = ['b-slide', 'b-bounce', 'b-flip', 'b-zoom', 'b-swing', 'b-drop', 'b-roll', 'b-jelly', 'b-rise'];
@@ -119,12 +131,12 @@
       <div class="bcount"><b>${d === 0 ? '!' : d}</b><span>${d === 0 ? 'TODAY' : d === 1 ? 'day left' : 'days left'}</span></div></div>
       <p class="bq"><b>${esc(ex.name)}</b> ${when}</p>
       <div class="bchips"><span>📅 ${date}</span><span>🕐 ${esc(ex.time)}</span><span>${ex.kind === 'objective' ? '✅ MCQ' : '✍️ Written'} · ${esc(ex.dur)}</span></div>
-      <div class="breps two"><a class="brep main" href="#/${ex.id}">📖 Study now</a><a class="brep" href="#/plan">🗓️ Study plan</a></div>
+      <div class="breps"><button class="brep main" id="bgot" type="button">Got it 👍</button></div>
       ${up.length > 1 ? '<div class="bfoot"><button class="bnext" type="button">Another exam ›</button></div>' : ''}`, (e) => {
       const nb = e.querySelector('.bnext');
       if (nb) nb.onclick = () => { clearAll(); e.remove(); daysPopup(); };
       if (hot) e.classList.add('hot');
-      e.querySelectorAll('a.brep').forEach((a) => a.addEventListener('click', () => { clearAll(); dismiss(e); }));
+      e.querySelector('#bgot').onclick = () => { clearAll(); dismiss(e); };
     });
     return el;  // stays open until you close it (x) or use a button
   }
