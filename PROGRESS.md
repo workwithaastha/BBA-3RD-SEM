@@ -171,3 +171,4 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - Buddy: days-left popup no longer has Study now / Study plan (just "Got it 👍" + "Another exam ›"); 10 cute couple questions added (`LOVE` in welcome.js, asked ~45% of the time, then the favourites, then the daily-life ones).
 - Buddy: 13 more cute couple questions (LOVE list now 23).
 - Buddy: extra funny / cute answers (EXTRA map in welcome.js, one picked at random per tap). Food questions ("order food?", "have you eaten?", "eat on time?") answer with "I am on my way with your favourite pizza, ordering it right now" lines (PIZZA list).
+- Buddy: removed the "imaginary pizza" lines. Food replies now say "Ordering for you right now! Tell me what you want - is it pizza?" and show two quick answers (Yes, pizza! / Something else) before closing (ORDER and FOLLOW in welcome.js).

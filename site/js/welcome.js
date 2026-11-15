@@ -19,7 +19,7 @@
   const FAV = [
     ["Did you remember me? 🥺", [["Always 💜", "Aww! I remembered you too. You made my day ✨"], ["Sorry, forgot 🙈", "Forgiven! But you owe me a smile 😌"]]],
     ["Are you angry with me? 😶", [["No, not at all 😄", "Phew! 😮‍💨 I was worried for a second."], ["A little bit 😤", "Sorry! I will make it up with a virtual chocolate 🍫"]]],
-    ["Should I order you some food? 🍕", [["Yes please! 🍔", "Ordered! Imaginary pizza is on its way 🍕😄"], ["No, I'm full 😋", "Okay! Then I will keep the pizza for myself 🍕"]]],
+    ["Should I order you some food? 🍕", [["Yes please! 🍔", "Ordering for you right now! 🛵 Tell me what you want - is it pizza? 🍕"], ["No, I'm full 😋", "Okay! Then I will keep the pizza for myself 🍕"]]],
   ];
   const LOVE = [
     ["Did you miss me today? 🥺", [["Yes, so much 💕", "Aww, I missed you even more! 🫶"], ["Just a little 😜", "Only a little?! I will remember that 😤💗"]]],
@@ -27,7 +27,7 @@
     ["Want a big virtual hug? 🤗", [["Yes please! 🫂", "Squeezing you tight right now 🤗💞"], ["Make it two 🥹", "Two hugs coming up, with a kiss on top 😘"]]],
     ["Who is the cutest person in the world? 😏", [["Me, obviously 😎", "Okay okay, you win... because it is you 😍"], ["You 😘", "Aww, stop it, you are making me blush 🙈"]]],
     ["Are you smiling right now? 😊", [["Yes, because of you 💕", "That is the best thing I heard all day ✨"], ["Now I am 😄", "Mission accomplished! 😎"]]],
-    ["Shall we plan a movie date? 🎬🍿", [["Yes! 🍿", "Popcorn is on me, imaginary of course 😄🎬"], ["Pizza date instead 🍕", "Even better! Pizza date it is 💞"]]],
+    ["Shall we plan a movie date? 🎬🍿", [["Yes! 🍿", "Popcorn is on me 😄🎬"], ["Pizza date instead 🍕", "Even better! Pizza date it is 💞"]]],
     ["Did you eat on time, my cutie? 🍛", [["Yes, I did 😋", "Good girl! I am proud of you 🥰"], ["Not yet 🙈", "Go eat right now, or I will get angry 😤🍛"]]],
     ["Do you love me? 🥺💗", [["Obviously 😘", "Love you more than all the pizzas in the world 🍕💗"], ["Maybe... 😜", "Maybe?! I will take it and make you say yes 😎💗"]]],
     ["Should I send you a flower? 🌹", [["Send it! 🌹", "Sent! Smell it with your eyes closed 🌹😚"], ["Send chocolate 🍫", "Even better: a chocolate bouquet 🍫💐"]]],
@@ -60,7 +60,10 @@
   // answers that start with one of these show the SAD image, all others the HAPPY image
   const SAD = ['Sorry, forgot', 'Still sleepy', 'Chocolate 😜', 'Ask me later', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
   // extra funny / cute answers: question -> { reply index: [more answers] } (one is picked at random on each tap)
-  const PIZZA = ["I am on my way with your favourite pizza! 🍕🛵 Ordering it right now...", "Order placed! Extra cheese, just like you like it 🧀🍕💗", "Your favourite pizza is on its way - and the delivery guy is me 🛵😄", "Do not eat anything else! I am coming with your favourite pizza 🍕🏃"];
+  const ORDER = ["Ordering for you right now! 🛵 Tell me what you want - is it pizza? 🍕", "Ordering right now, cutie! 🛵 What should I get you - pizza? 🍕", "I am ordering it right now 🛵 Tell me, is it your favourite pizza? 🍕"];
+  const PIZZA = ORDER;
+  // after an order line the card asks "what?" with two quick answers
+  const FOLLOW = [["Yes, pizza! 🍕", "Pizza it is! Extra cheese, ordered and on its way 🧀🛵💗"], ["Something else 😋", "Tell me what - I will order anything for you 🛍️💗"]];
   const EXTRA = {
     "Should I order you some food? 🍕": { 0: PIZZA, 1: ["Full?! Then I will eat your share and you can watch 😋🍕", "Okay, but if you get hungry in 10 minutes I am still ordering your favourite pizza 🍕😜"] },
     "Have you eaten something? 🍱": { 1: PIZZA },
@@ -129,6 +132,24 @@
           if (ans === '__daily') { dismiss(e); location.hash = '#/daily'; return; }
           e.querySelector('.bq').textContent = ans;
           e.querySelector('.bq').classList.add('ans');
+          if (ORDER.indexOf(ans) >= 0) {  // food order: ask what, with two quick answers
+            const bar = e.querySelector('.breps');
+            bar.innerHTML = FOLLOW.map((f, k) => '<button class="brep' + (k ? '' : ' main') + '" data-k="' + k + '">' + esc(f[0]) + '</button>').join('');
+            const fb = e.querySelector('.bfoot'); if (fb) fb.remove();
+            const face0 = e.querySelector('.bface');
+            face0.classList.add('mood', 'happy');
+            face0.innerHTML = '<img src="img/happy.webp" alt="" width="72" height="72">';
+            bar.querySelectorAll('.brep').forEach((fbtn) => {
+              fbtn.onclick = () => {
+                clearAll();
+                e.querySelector('.bq').textContent = FOLLOW[+fbtn.dataset.k][1];
+                bar.remove();
+                e.classList.add('answered');
+                later(() => dismiss(e, thenDays), 3800);
+              };
+            });
+            return;
+          }
           e.querySelector('.breps').remove();
           e.querySelector('.bfoot').remove();
           e.classList.add('answered');
