@@ -24,7 +24,7 @@
   const LOVE = [
     ["Did you miss me today? 🥺", [["Yes, so much 💕", "Aww, I missed you even more! 🫶"], ["Just a little 😜", "Only a little?! I will remember that 😤💗"]]],
     ["Do you know you are my favourite person? 💖", [["Of course I do 😍", "And I will keep reminding you 💞"], ["Tell me again 🥰", "You are my favourite person, always 💖"]]],
-    ["Want a big virtual hug? 🤗", [["Yes please! 🫂", "Squeezing you tight right now 🤗💞"], ["Make it two 🥹", "Two hugs coming up, with a kiss on top 😘"]]],
+    ["Want a big hug? 🤗", [["Yes please! 🫂", "Squeezing you tight right now 🤗💞"], ["Make it two 🥹", "Two hugs coming up, with a kiss on top 😘"]]],
     ["Who is the cutest person in the world? 😏", [["Me, obviously 😎", "Okay okay, you win... because it is you 😍"], ["You 😘", "Aww, stop it, you are making me blush 🙈"]]],
     ["Are you smiling right now? 😊", [["Yes, because of you 💕", "That is the best thing I heard all day ✨"], ["Now I am 😄", "Mission accomplished! 😎"]]],
     ["Shall we plan a movie date? 🎬🍿", [["Yes! 🍿", "Popcorn is on me 😄🎬"], ["Pizza date instead 🍕", "Even better! Pizza date it is 💞"]]],
@@ -55,7 +55,7 @@
     ["Tea or coffee today? ☕", [["Tea 🍵", "Chai lovers unite! 🫖"], ["Coffee ☕", "Strong choice! Enjoy every sip."]]],
     ["Did you smile today? 😁", [["Yes, a lot 😄", "That smile looks great on you ✨"], ["Not yet 🥲", "Here you go: 🙂 - now your turn!"]]],
     ["Want some chocolate? 🍫", [["Yes please! 🍫", "Here is a big chocolate bar, no calories 😄"], ["No thanks 🙅", "More chocolate for me then 😋"]]],
-    ["How is your mood right now? 🌈", [["Super happy 🥳", "Yay! Keep shining 🌟"], ["Not great 😔", "Sending you a big virtual hug 🤗"]]],
+    ["How is your mood right now? 🌈", [["Super happy 🥳", "Yay! Keep shining 🌟"], ["Not great 😔", "Sending you a big hug 🤗"]]],
   ];
   // answers that start with one of these show the SAD image, all others the HAPPY image
   const SAD = ['Sorry, forgot', 'Still sleepy', 'Chocolate 😜', 'Ask me later', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
@@ -68,14 +68,14 @@
     "Should I order you some food? 🍕": { 0: PIZZA, 1: ["Full?! Then I will eat your share and you can watch 😋🍕", "Okay, but if you get hungry in 10 minutes I am still ordering your favourite pizza 🍕😜"] },
     "Have you eaten something? 🍱": { 1: PIZZA },
     "Did you eat on time, my cutie? 🍛": { 1: PIZZA, 0: ["Good! Even my stomach is proud of you 🥰", "Yay! Now you may have dessert with me 🍰💗"] },
-    "Did you drink water today? 💧": { 1: ["Drink some water, or I will send a goldfish to check on you 🐟💧", "Water first, then I will send you a virtual hug 🥤🤗"] },
+    "Did you drink water today? 💧": { 1: ["Drink some water, or I will send a goldfish to check on you 🐟💧", "Water first, then I will give you a big hug 🥤🤗"] },
     "Are you angry with me? 😶": { 1: ["Sorry, sorry, sorry! Here is a pizza, a hug and a flower 🍕🤗🌹", "Please do not be angry, I will do the cutest puppy face 🥺🐶"], 0: ["Yay! Then I can keep my puppy face for later 🐶😄"] },
     "Did you remember me? 🥺": { 0: ["Aww! I remembered you so much that even my phone got jealous 📱💗"], 1: ["Not remembering me?! I am telling the pizza on you 🍕😤"] },
     "Do you love me? 🥺💗": { 0: ["Love you more than pizza, and that is saying a lot 🍕💗", "Obviously? Good, because I already told everyone you are mine 😎💞"], 1: ["Maybe?! I will bring pizza until you say yes 🍕😜"] },
     "Who is the cutest person in the world? 😏": { 0: ["Wrong answer! The cutest one is you. Punishment: one tickle 😜🤭"], 1: ["Stop it! My cheeks are already red and my phone is hot 🙈🔥"] },
     "Tell me honestly, am I annoying? 😅": { 1: ["Only sometimes? Then I am doing great, call me a part-time cutie 😂", "Annoying? No no, you are limited-edition entertainment 🎭💗"] },
     "Did you miss me today? 🥺": { 1: ["A little?! I will send you 100 hugs to correct that answer 🤗x100"] },
-    "Want a big virtual hug? 🤗": { 0: ["Hug incoming! Warning: extremely tight, no escape 🫂😄"] },
+    "Want a big hug? 🤗": { 0: ["Hug incoming! Warning: extremely tight, no escape 🫂😄"] },
     "Do you want a goodnight kiss? 😘🌙": { 0: ["Mwah! Now sleep, or the moon will tell on you 🌙😚"] },
     "Want some chocolate? 🍫": { 0: ["Here is a huge chocolate. Do not tell the pizza 🍫🍕😂"], 1: ["No chocolate?! Who are you and what did you do with my cutie? 😳🍫"] },
   };

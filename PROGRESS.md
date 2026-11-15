@@ -174,3 +174,4 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - Buddy: removed the "imaginary pizza" lines. Food replies now say "Ordering for you right now! Tell me what you want - is it pizza?" and show two quick answers (Yes, pizza! / Something else) before closing (ORDER and FOLLOW in welcome.js).
 - Buddy: no more "virtual" / "imaginary" wording; food replies start with "Wait, let me order for you!".
 - Buddy: "virtual" wording removed only for food/chocolate lines; virtual hug lines restored.
+- Buddy: the word "virtual" is removed completely from the popup texts.
