@@ -55,7 +55,7 @@
     el.setAttribute('role', 'status');
     el.setAttribute('aria-live', 'polite');
     el.className = reduce ? '' : pick(IN);
-    el.innerHTML = html + '<button class="bx" aria-label="Close">×</button>';
+    el.innerHTML = '<img class="bdino" src="img/dino.webp" alt="" width="84" height="84">' + html + '<button class="bx" aria-label="Close">×</button>';
     document.body.appendChild(el);
     el.querySelector('.bx').onclick = () => { clearAll(); dismiss(el); };
     if (onReady) onReady(el);
