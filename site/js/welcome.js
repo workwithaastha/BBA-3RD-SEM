@@ -62,14 +62,17 @@
     return el;
   }
 
+  const hello = () => { const h = new Date().getHours(); return h < 5 ? 'Still awake? 🌙' : h < 12 ? 'Good morning ☀️' : h < 17 ? 'Good afternoon 🌤️' : h < 21 ? 'Good evening 🌆' : 'Late-night study mode 🌙'; };
+
   // ---------- 1. greeting + random question ----------
   function greet(thenDays) {
     clearAll();
     const [q, replies] = ASK();
-    const el = bubble(`<div class="bface"><img src="img/avatar.webp" alt="" width="64" height="64"></div>
-      <div class="bbody"><h3>Hi ${esc(NAME)} <span class="wave">👋</span></h3>
+    const el = bubble(`<div class="bhead"><div class="bface"><img src="img/avatar.webp" alt="" width="72" height="72"></div>
+      <div class="bhello"><small>${hello()}</small><h3>Hi ${esc(NAME)} <span class="wave">👋</span></h3></div></div>
       <p class="bq">${esc(q)}</p>
-      <div class="breps">${replies.map((r, i) => `<button class="brep" data-i="${i}">${esc(r[0])}</button>`).join('')}</div></div>`, (e) => {
+      <div class="breps two">${replies.map((r, i) => `<button class="brep${i ? '' : ' main'}" data-i="${i}">${esc(r[0])}</button>`).join('')}</div>
+      <div class="btimer"><i style="animation-duration:9.5s"></i></div>`, (e) => {
       e.querySelectorAll('.brep').forEach((b) => {
         b.onclick = () => {
           clearAll();
@@ -78,6 +81,8 @@
           e.querySelector('.bq').textContent = ans;
           e.querySelector('.bq').classList.add('ans');
           e.querySelector('.breps').remove();
+          e.querySelector('.btimer').remove();
+          e.classList.add('answered');
           const label = replies[+b.dataset.i][0];
           const mood = SAD.some((x) => label.indexOf(x) === 0) ? 'sad' : 'happy';
           const face = e.querySelector('.bface');
@@ -102,11 +107,12 @@
     const when = d === 0 ? 'is TODAY!' : d === 1 ? 'is tomorrow!' : 'is in ' + d + ' days';
     const date = new Date(ex.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' });
     const hot = d <= 3;
-    const el = bubble(`<div class="bface"><img src="img/avatar.webp" alt="" width="64" height="64"><span class="bico">${ICON[ex.id] || '📅'}</span></div>
-      <div class="bbody"><h3>⏳ ${d === 0 ? 'Today' : d + (d === 1 ? ' day' : ' days') + ' left'}</h3>
+    const el = bubble(`<div class="bhead"><div class="bface"><img src="img/avatar.webp" alt="" width="72" height="72"><span class="bico">${ICON[ex.id] || '📅'}</span></div>
+      <div class="bcount"><b>${d === 0 ? '!' : d}</b><span>${d === 0 ? 'TODAY' : d === 1 ? 'day left' : 'days left'}</span></div></div>
       <p class="bq"><b>${esc(ex.name)}</b> ${when}</p>
-      <p class="bsub">${date} · ${esc(ex.time)} · ${ex.kind === 'objective' ? 'MCQ' : 'Written'} · ${esc(ex.dur)}</p>
-      <div class="breps"><a class="brep go" href="#/${ex.id}">📖 Study now</a><a class="brep" href="#/plan">🗓️ Study plan</a></div></div>`, (e) => {
+      <div class="bchips"><span>📅 ${date}</span><span>🕐 ${esc(ex.time)}</span><span>${ex.kind === 'objective' ? '✅ MCQ' : '✍️ Written'} · ${esc(ex.dur)}</span></div>
+      <div class="breps two"><a class="brep main" href="#/${ex.id}">📖 Study now</a><a class="brep" href="#/plan">🗓️ Study plan</a></div>
+      <div class="btimer"><i style="animation-duration:8.5s"></i></div>`, (e) => {
       if (hot) e.classList.add('hot');
       e.querySelectorAll('a.brep').forEach((a) => a.addEventListener('click', () => { clearAll(); dismiss(e); }));
     });
