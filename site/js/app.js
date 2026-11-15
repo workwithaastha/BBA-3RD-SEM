@@ -32,6 +32,8 @@ const BLURB = {
 const PATTERN = {
   hrm: '<b>HRM paper (syllabus):</b> Core Course II · 4 credits · 25 internal + 75 external marks · written, 2 hours (Wed 25 Nov 2026). These MCQs are practice for concepts; the exam answers are written - use the ✍️ Exam Q&A bank and the ⭐ Exam Master notes.',
   marketing: '<b>Marketing paper (syllabus):</b> Core Course III · 4 credits · 25 internal + 75 external marks · written, 2 hours (Thu 26 Nov 2026). Unit weights: I 11 · II 11 · III 10 · IV 13 lectures. These MCQs are practice for concepts; the exam answers are written - use the ✍️ Exam Q&A bank and the ⭐ Exam Master notes. Unit IV (4Ps) is from standard textbooks - no notes PDF.',
+  'office-mgmt': '<b>Office Management paper:</b> objective (MCQ) · 1 hour · Sun 22 Nov 2026, 12:30-1:30 PM. Read the unit-wise notes below, then practise: quiz, Mock exam (1 hour) and Daily 20.',
+  'business-env': '<b>Business Environment, Ethics &amp; Governance (Minor):</b> objective (MCQ) · 1.5 hours · Sat 28 Nov 2026, 11:30 AM - 1:00 PM. Read the unit-wise notes below, then practise: quiz, Mock exam (1.5 h) and Daily 20.',
   'physical-education': '<b>Real paper pattern</b> (from the past papers): 100 MCQs in the booklet, answer any 75 on the OMR sheet · 75 marks · 90 minutes · no negative marking. Practise it: Mock exam, 75 Qs, 72 s / Q. The marked answers come from the syllabus and standard knowledge - the papers have no answer key.',
 };
 
@@ -261,20 +263,41 @@ function home() {
      </a>`).join('')}</div>`);
 }
 
+// notes list grouped unit-wise: "Start here" tools first, then Unit I, II, III ... each with its own cards + a jump bar
+function unitGroups(id, s) {
+  const ROM = ['I', 'II', 'III', 'IV', 'V', 'VI'];
+  const TOOLS = { qa: 1, 'exam-master': 1, concepts: 1 };
+  const groups = [], tools = [], extra = [];
+  s.units.forEach((u) => {
+    const m = /^u(\d)/.exec(u.id);
+    if (TOOLS[u.id]) tools.push(u);
+    else if (m) { const k = +m[1]; (groups[k - 1] = groups[k - 1] || []).push(u); }
+    else extra.push(u);
+  });
+  const card = (u, label) => `<a class="ucard" href="#/${id}/${u.id}"><span class="num">${label}</span><span class="ut">${esc(u.title)}</span><span class="arr">→</span></a>`;
+  const parts = [];
+  const jump = [];
+  if (tools.length) { jump.push(['g-tools', '⭐ Start here']); parts.push(`<h3 class="ugh" id="g-tools">⭐ Start here <small>${tools.length}</small></h3><div class="ugrid">${tools.map((u, i) => card(u, '★')).join('')}</div>`); }
+  groups.forEach((g, i) => { if (!g) return; jump.push(['g-u' + i, 'Unit ' + ROM[i]]); parts.push(`<h3 class="ugh" id="g-u${i}">Unit ${ROM[i]} <small>${g.length} page${g.length > 1 ? 's' : ''}</small></h3><div class="ugrid">${g.map((u, k) => card(u, g.length > 1 ? ROM[i] + String.fromCharCode(65 + k) : ROM[i])).join('')}</div>`); });
+  if (extra.length) { jump.push(['g-more', '📌 More']); parts.push(`<h3 class="ugh" id="g-more">📌 More <small>${extra.length}</small></h3><div class="ugrid">${extra.map((u) => card(u, '•')).join('')}</div>`); }
+  if (!parts.length) return '';
+  return `<h2 class="sec">Notes - unit wise</h2><nav class="ujump" aria-label="Jump to unit">${jump.map(([a, t]) => `<a href="#/${id}" data-j="${a}">${t}</a>`).join('')}</nav>${parts.join('')}`;
+}
+
 function subject(id) {
   const s = S[id];
   if (!s) return home();
   setTheme(id);
   const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>` + (s.units.some((u) => u.id === 'qa') ? ` <a class="btn solid" href="#/${id}/qa">✍️ Exam Q&amp;A</a> <a class="btn solid" href="#/sheet/${id}">🌙 Last-night sheet</a>` : '') + (window.SOURCES && window.SOURCES[id] ? ` <a class="btn solid" href="#/${id}/files">📂 Source files (${window.SOURCES[id].files.length})</a>` : '');
-  const links = s.units.map((u, i) => `<a class="ucard" style="--d:${i * 45}ms" href="#/${id}/${u.id}">
-      <span class="num">${i + 1}</span><span class="ut">${esc(u.title)}</span><span class="arr">→</span></a>`).join('');
+  const links = unitGroups(id, s);
   $(`<div class="crumb"><a href="#/">Home</a> / ${esc(s.title)}</div>
      <section class="banner"><span class="bico">${ICON[id] || '📘'}</span>
        <div><h1>${esc(s.title)}</h1><p>${esc(BLURB[id] || '')} · ${count(s)}</p></div>
        <div class="bact">${quizBtn}</div></section>
      ${s.mcqs.length ? '<div id="scoreboard"></div>' : ''}<div id="qa"></div>
-     ${links ? `<h2 class="sec">Notes</h2><div class="ugrid">${links}</div>` : ''}
+     ${links}
      ${!links && !quizBtn ? '<p>Content coming soon.</p>' : ''}`);
+  document.querySelectorAll('.ujump a').forEach((a) => { a.onclick = (e) => { e.preventDefault(); const t = document.getElementById(a.dataset.j); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }; });
   if (s.mcqs.length) scoreboard(id);
 }
 

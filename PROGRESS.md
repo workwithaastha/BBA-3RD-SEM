@@ -142,3 +142,10 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 ### Phase 34 - Marketing Units I-III upgraded to detailed answers
 - `site/data/examqa-marketing6.js` (Unit I), `-7.js` (Unit II), `-8.js` (Unit III): 51 detailed 5/6/10-mark answers (intro, headed points, tables, flows, example, conclusion) that REPLACE the earlier short ones. `ExamQA.add` now replaces an earlier item with the same marks + question text.
 - 2- and 3-mark Marketing answers stay short (right size for those marks). Marketing Q&A stays 138; PDFs rebuilt.
+
+### Phase 35 - Unit-wise notes for Office Management and Business Environment + unit-wise subject page
+- `site/data/office-mgmt-notes.js`: 10 unit pages (U1 A-D, U2 A-B, U3 A-B, U4 A-B) + Exam Master. Sources: OFFICE MANG PDFs (OM Unit 1, Office Automation, Forms and Records, Unit 4). A few quorum / office-manual points marked [extra].
+- `site/data/business-env-notes.js`: 9 unit pages (U1 A-C, U2 A-C, U3 A-B, U4 revision) + Exam Master. Unit 3 from UNIT 3 BE.pdf; Units 1, 2, 4 from syllabus topics, MCQ topics and standard textbooks ([extra]).
+- `site/js/app.js`: `unitGroups()` - subject page now lists notes grouped by unit (Start here / Unit I... / More) with a jump bar; `PATTERN` exam notes for Office Management and Business Environment. `site/css/ui2.css`: `.ujump`, `.ugh`.
+- `site/data/expected.js`: refs for Office Management groups; new Business Environment important-questions block. `site/data/sourcemap.js`: source links for all new pages.
+- Physical Education still has MCQs only (no unit notes) - open.

@@ -58,6 +58,8 @@
 
   const be = {
     concepts: mk('b1', 'b2', 'b3', 'b3s', 'b4'),
+    'u1-concept': mk('b1'), 'u1-pestle': mk('b1'), 'u1-ethics': mk('b1'), 'u2-systems': mk('b2'), 'u2-lpg': mk('b2'), 'u2-laws': mk('b2'),
+    'u3-codes': mk('b3s', 'b3'), 'u3-pillars': mk('b3s', 'b3'), 'u4-revision': mk('b4'), 'exam-master': mk('b1', 'b2', 'b3', 'b4'),
     'q:Unit 1': mk('b1'), 'q:Unit 2': mk('b2'), 'q:Unit 3': mk('b3', 'b3s'), 'q:Unit 4': mk('b4'),
   };
   const hrm = {
@@ -67,6 +69,9 @@
   };
   const office = {
     concepts: mk('o_u1', 'o_ppt', 'o_auto', 'o_forms', 'o_formsd', 'o_u4'),
+    'u1-office': mk('o_u1', 'o_ppt'), 'u1-modern': mk('o_u1', 'o_ppt'), 'u1-layout': mk('o_u1', 'o_ppt'), 'u1-filing': mk('o_u1', 'o_ppt'),
+    'u2-secretary': mk('o_auto', 'o_a2'), 'u2-reception': mk('o_auto', 'o_a2'), 'u3-forms': mk('o_forms', 'o_formsd'), 'u3-records': mk('o_forms', 'o_formsd'),
+    'u4-company': mk('o_u4'), 'u4-meetings': mk('o_u4'), 'exam-master': mk('o_u1', 'o_auto', 'o_forms', 'o_u4'),
     'q:Unit 1': mk('o_u1', 'o_ppt'), 'q:Unit 2': mk('o_auto', 'o_a2'), 'q:Unit 3': mk('o_forms', 'o_formsd'), 'q:Unit 4': mk('o_u4'),
   };
 

@@ -119,7 +119,7 @@ window.EXPECTED = {
       'Application questions: start-up with ten jobs (method?); fringe benefit vs salary; strike over bonus (machinery?); unfair promotion (grievance steps).'] },
   ],
   'office-mgmt': [
-    { h: 'Unit 1 · Office & office management', t: 'Meaning of Office', q: [
+    { ref: 'u1-office', h: 'Unit 1 · Office & office management', t: 'Meaning of Office', q: [
       'Define office; explain its functions and importance.',
       'Explain office management as an art and a science.',
       'Traditional vs modern office; paperless office; virtual office.',
@@ -128,12 +128,12 @@ window.EXPECTED = {
       'Filing: objectives, essentials of a good filing system, methods; centralised vs decentralised filing.',
       'Indexing: types of indexes; relationship between filing and indexing.',
       'Office etiquette (do\'s and don\'ts).'] },
-    { h: 'Unit 2 · Office automation & secretarial practices', t: 'Secretary', q: [
+    { ref: 'u2-secretary', h: 'Unit 2 · Office automation & secretarial practices', t: 'Secretary', q: [
       'Qualities and duties of a secretary.',
       'Draft a business letter, notice, agenda, memo and circular.',
       'Mail handling: inward and outward; reception of visitors; telephone etiquette.',
       'Assignment: smart-office plan using AI; AI tools used in modern offices; study of a leading company\'s office.'] },
-    { h: 'Unit 3 · Office forms & record management', t: 'Office Forms', q: [
+    { ref: 'u3-forms', h: 'Unit 3 · Office forms & record management', t: 'Office Forms', q: [
       'Meaning, importance, types and objectives of office forms.',
       'Principles of forms design; control of forms; preparation of common forms.',
       'Record management: need, methods, classification, preservation.',
@@ -172,5 +172,22 @@ window.EXPECTED = {
       'Team sizes, marathon distance, Arjuna Award, National Sports Day, LNIPE / NIS / SAI.',
       'Anatomy and health facts: muscles (3 types), heart rate 72, body temperature 37 C, CPR 10 seconds.'] },
   ],
-  'business-env': [],
+  'business-env': [
+    { ref: 'u1-concept', h: 'Unit 1 · Business environment, PESTLE, government, ethics and CSR', t: 'Concept of Business Environment', q: [
+      'Meaning and features of business environment; internal vs external factors; SWOT.',
+      'PESTLE analysis with examples; role of government in business.',
+      'Business ethics, ethical values, and CSR (Section 135: 2% of average net profit).'] },
+    { ref: 'u2-systems', h: 'Unit 2 · Economic systems, policies, LPG, environment laws and consumers', t: 'Economic Systems', q: [
+      'Capitalism, socialism, mixed economy; fiscal vs monetary policy; industrial and EXIM policy.',
+      'LPG reforms 1991: causes, measures, impact on economy and society.',
+      'Environment laws (1974, 1981, 1986, NGT 2010); unethical business practices and regulation.',
+      'Consumerism, six consumer rights, Consumer Protection Act 2019 and the three-tier commissions.'] },
+    { ref: 'u3-codes', h: 'Unit 3 · Ethical codes and the pillars of ethical conduct', t: 'Ethical Codes and Their Relevance in Business', q: [
+      'Code of ethics: meaning, types and importance; evolution of business ethics.',
+      'Honesty, integrity and fairness with cases (Patagonia, Volkswagen, Tata, Ben and Jerry\'s).',
+      'Environmental sustainability, triple bottom line, community engagement (IKEA, Unilever, Tata Steel, Infosys).',
+      'Rights and transparency in business conduct (Enron, Buffer).'] },
+    { ref: 'u4-revision', h: 'Unit 4 · Whole-syllabus revision', t: 'PESTLE Analysis', q: [
+      'Revise all concepts: environment, PESTLE, LPG, laws, consumer rights, ethical codes - use the Unit 4 revision table and the Exam Master.'] },
+  ],
 };

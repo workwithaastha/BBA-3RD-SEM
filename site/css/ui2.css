@@ -140,3 +140,10 @@ body{letter-spacing:.005em}
 .notes .nextsteps a.nbtn{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:14px;border:0;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--a1),var(--a2));box-shadow:0 10px 20px -12px var(--a1);transition:transform .15s,box-shadow .2s}
 .notes .nextsteps a.nbtn:hover{transform:translateY(-2px);box-shadow:0 14px 24px -12px var(--a1)}
 .notes .nextsteps a.nbtn:visited{color:#fff}
+
+/* unit-wise notes list */
+.ujump{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 14px}
+.ujump a{padding:6px 14px;border-radius:999px;border:1px solid var(--bd,#cbd5e1);font-weight:600;font-size:.88rem;text-decoration:none;color:inherit}
+.ujump a:hover{border-color:var(--ac,#6366f1);color:var(--ac,#6366f1)}
+.ugh{margin:20px 0 8px;font-size:1.15rem}
+.ugh small{font-weight:500;opacity:.6;margin-left:6px;font-size:.8rem}
