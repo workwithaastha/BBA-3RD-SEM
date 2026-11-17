@@ -175,3 +175,10 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - Buddy: no more "virtual" / "imaginary" wording; food replies start with "Wait, let me order for you!".
 - Buddy: "virtual" wording removed only for food/chocolate lines; virtual hug lines restored.
 - Buddy: the word "virtual" is removed completely from the popup texts.
+
+### Phase 38 - PUT papers (college test) added
+- `PUT/` folder: 19 photos of the Allenhouse Business School PUT papers (BBA 3rd Sem, 2026-27): Business Environment F010304TN (90 min, attempt 75 of 100) and Office Automation and Secretarial Practices VOC169 (60 min, attempt 75 of 100).
+- Typed out all 200 questions: `tools/data_put_be.py`, `tools/data_put_om.py` -> `python -I tools/build_put.py` -> `site/data/put-be.js`, `put-om.js` (unit "PUT Paper", 100 MCQs each, original option order, reasons, tag "PUT paper"). Answer spread is exactly 25/25/25/25 for both papers.
+- Quiz: unit chip "PUT Paper"; Mock exam on that chip uses the real format (75 of 100; BE 90 min, OM 60 min) - `PUTP` in `site/js/quiz2.js`.
+- PDFs: `MCQ pdf/Business_Environment_PUT_Paper_100_MCQ_with_Answers.pdf` and `Office_Management_PUT_Paper_100_MCQ_with_Answers.pdf` (`make_mcq_book_pdf.py` got unit-filter and suffix arguments; the all-units books now exclude the PUT paper).
+- Answers were worked out from standard knowledge and checked against the pen ticks in the photos; a few ticks looked different (BE Q12, Q16, Q21, Q40, Q41, Q48, Q54, Q63, Q69 - see `TICK_DIFF` in data_put_be.py).

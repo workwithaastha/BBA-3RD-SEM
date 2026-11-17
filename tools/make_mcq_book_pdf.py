@@ -1,5 +1,5 @@
 """ONE PDF with ALL MCQs of a subject, grouped by unit/topic, each with answer + why (and why the others are wrong).
-Usage: python -I tools/make_mcq_book_pdf.py <subject-id> <File prefix> "<Title>"   e.g.  office-mgmt Office_Management "Office Management"
+Usage: python -I tools/make_mcq_book_pdf.py <subject-id> <File prefix> "<Title>" [unit-filter] [file-suffix]   e.g.  office-mgmt Office_Management "Office Management"
 Output: MCQ pdf/<prefix>_All_Units_MCQ_with_Answers.pdf
 """
 import json
@@ -12,6 +12,8 @@ import pymupdf
 
 ROOT = Path(__file__).resolve().parent.parent
 SID, PREFIX, TITLE = sys.argv[1], sys.argv[2], sys.argv[3]
+UNIT = sys.argv[4] if len(sys.argv) > 4 else ""      # only questions of this unit (e.g. "PUT Paper")
+SUFFIX = sys.argv[5] if len(sys.argv) > 5 else "All_Units_MCQ_with_Answers"
 NODE = (
     "const fs=require('fs'),path=require('path');global.window={};"
     "const html=fs.readFileSync('site/index.html','utf8');"
@@ -19,7 +21,11 @@ NODE = (
     "console.log(JSON.stringify(window.SUBJECTS['" + SID + "'].mcqs));"
 )
 Q = json.loads(subprocess.run(["node", "-e", NODE], cwd=ROOT, capture_output=True, text=True, encoding="utf-8").stdout)
-OUT = ROOT / "MCQ pdf" / f"{PREFIX}_All_Units_MCQ_with_Answers.pdf"
+if UNIT:
+    Q = [q for q in Q if q["u"] == UNIT]
+else:
+    Q = [q for q in Q if q["u"] != "PUT Paper"]   # the PUT paper has its own PDF
+OUT = ROOT / "MCQ pdf" / f"{PREFIX}_{SUFFIX}.pdf"
 TMP = OUT.with_suffix(".tmp.pdf")
 L = "ABCD"
 CSS = """

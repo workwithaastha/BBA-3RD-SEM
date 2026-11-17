@@ -9,6 +9,8 @@
   const qkey = (sid, m) => sid + '|' + m.n + '|' + m.q.slice(0, 40);
   const sidOf = () => location.hash.split('/')[1];
   // full-paper size per subject (objective papers): [questions, seconds per question, label]
+  // real college PUT paper: attempt 75 of the 100 questions - [questions, seconds per question, label]
+  const PUTP = { 'business-env': [75, 72, '90 minutes'], 'office-mgmt': [75, 48, '60 minutes'] };
   const PAPER = { 'office-mgmt': [60, 60, '1 hour'], 'business-env': [90, 60, '1.5 hours'], 'physical-education': [75, 72, '90 minutes'] };
 
   // ---------- revise-later marks ----------
@@ -81,9 +83,10 @@
       $id('qt').innerHTML = '<option value="">All topics</option>' + topics.map((t) => `<option${t === cur ? ' selected' : ''}>${esc(t)}</option>`).join('');
       st.topic = $id('qt').value;
       const n = pool().length;
-      const want = st.mode === 'mock' ? paper[0] : st.mode === 'unit' ? 25 : +$id('qn').value || n;
+      const pp = st.unit === 'PUT Paper' && PUTP[id];
+      const want = st.mode === 'mock' ? (pp ? pp[0] : paper[0]) : st.mode === 'unit' ? 25 : +$id('qn').value || n;
       const real = Math.min(n, want);
-      $id('qc').textContent = n + ' questions available' + (st.mode === 'mock' ? ' · full paper ' + paper[0] + ' questions in ' + paper[2] : '');
+      $id('qc').textContent = n + ' questions available' + (st.mode === 'mock' ? (pp ? ' · PUT format: attempt ' + pp[0] + ' of 100 in ' + pp[2] : ' · full paper ' + paper[0] + ' questions in ' + paper[2]) : '');
       $id('go').textContent = '▶ Start ' + label() + (st.unit ? ' · ' + st.unit : ' · all units') + ' · ' + real + ' questions';
       $id('go').disabled = !n;
       document.querySelectorAll('.uchip').forEach((b) => b.classList.toggle('on', b.dataset.u === st.unit));
@@ -105,7 +108,8 @@
     $id('go').onclick = () => {
       let qs = pool();
       if ($id('qs').checked || st.mode !== 'practice') qs = qs.slice().sort(() => Math.random() - 0.5);
-      if (st.mode === 'mock') mock(qs.slice(0, paper[0]), paper[1]);
+      const pq = st.unit === 'PUT Paper' && PUTP[id];
+      if (st.mode === 'mock') mock(qs.slice(0, pq ? pq[0] : paper[0]), pq ? pq[1] : paper[1]);
       else if (st.mode === 'unit') mock(qs.slice(0, 25), +$id('qd').value, 'unit');
       else if (st.mode === 'weak') run(qs.slice(0, +$id('qn').value || qs.length), id, false, 'wrongset');
       else { const n = +$id('qn').value; run(n ? qs.slice(0, n) : qs); }
