@@ -42,6 +42,7 @@
     const paper = PAPER[id] || [30, 60, '30 minutes'];
     const weak = weakPool(id).length;
     const st = { mode: 'practice', unit: '', topic: topic || '' };
+    if (topic === 'PUT Paper') { st.unit = 'PUT Paper'; topic = ''; st.topic = ''; }
     if (topic) { const hit = s.mcqs.find((m) => m.t === topic); if (hit) st.unit = hit.u; }
     $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${esc(s.title)}</a> / Quiz</div>
       <section class="qsetup">

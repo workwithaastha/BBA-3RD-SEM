@@ -288,7 +288,7 @@ function subject(id) {
   const s = S[id];
   if (!s) return home();
   setTheme(id);
-  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>` + (s.units.some((u) => u.id === 'qa') ? ` <a class="btn solid" href="#/${id}/qa">✍️ Exam Q&amp;A</a> <a class="btn solid" href="#/sheet/${id}">🌙 Last-night sheet</a>` : '') + (window.SOURCES && window.SOURCES[id] ? ` <a class="btn solid" href="#/${id}/files">📂 Source files (${window.SOURCES[id].files.length})</a>` : '');
+  const quizBtn = (s.mcqs.length ? `<a class="btn solid" href="#/${id}/quiz">▶ Start quiz / mock exam · ${s.mcqs.length} Qs</a> ` : '') + (s.mcqs.some((m) => m.u === 'PUT Paper') ? `<a class="btn solid" href="#/${id}/quiz/PUT%20Paper">📝 PUT paper · 100 Qs</a> ` : '') + `<a class="btn solid" href="#/revision/${id}">📄 Revision sheet</a> <a class="btn solid" href="#/expected/${id}">🎯 Expected questions</a>` + (s.units.some((u) => u.id === 'qa') ? ` <a class="btn solid" href="#/${id}/qa">✍️ Exam Q&amp;A</a> <a class="btn solid" href="#/sheet/${id}">🌙 Last-night sheet</a>` : '') + (window.SOURCES && window.SOURCES[id] ? ` <a class="btn solid" href="#/${id}/files">📂 Source files (${window.SOURCES[id].files.length})</a>` : '');
   const links = unitGroups(id, s);
   $(`<div class="crumb"><a href="#/">Home</a> / ${esc(s.title)}</div>
      <section class="banner"><span class="bico">${ICON[id] || '📘'}</span>
