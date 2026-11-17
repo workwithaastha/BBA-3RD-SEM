@@ -61,12 +61,17 @@
           <button class="uchip on" data-u=""><span class="rg" style="--p:0"><b>All</b></span><span class="ut">All units<small>${s.mcqs.length} questions</small></span></button>
           ${units.map((u) => { const x = unitStats(id, u); return `<button class="uchip" data-u="${esc(u)}"><span class="rg" style="--p:${x.acc}"><b>${x.t ? x.acc + '%' : '–'}</b></span><span class="ut">${esc(u)}<small>${x.n} Qs${x.wrong ? ' · ' + x.wrong + ' wrong' : ''}</small></span></button>`; }).join('')}
         </div>
-        <details class="qopts"><summary>⚙ Customise (topic, number of questions, shuffle, time)</summary>
-          <div class="row">
-            <select id="qt" aria-label="Topic"><option value="">All topics</option></select>
-            <select id="qn" aria-label="Number of questions"><option value="10">10 Qs</option><option value="20" selected>20 Qs</option><option value="50">50 Qs</option><option value="0">All</option></select>
-            <label><input type="checkbox" id="qs" checked> Shuffle</label>
-            <select id="qd" aria-label="Time per question"><option value="30">30 s / Q</option><option value="45">45 s / Q</option><option value="60" selected>60 s / Q</option><option value="72">72 s / Q</option><option value="90">90 s / Q</option></select>
+        <details class="qopts">
+          <summary><span class="qo-ic">⚙️</span><span class="qo-t"><b>Customise</b><small>Topic · number of questions · time · shuffle</small></span><i class="qo-arr">›</i></summary>
+          <div class="qo-grid">
+            <label class="qo-f"><span class="qo-l">📌 Topic</span><select id="qt" aria-label="Topic"><option value="">All topics</option></select></label>
+            <div class="qo-f"><span class="qo-l">🔢 Number of questions</span>
+              <div class="seg" data-for="qn"><button type="button" data-v="10">10</button><button type="button" data-v="20" class="on">20</button><button type="button" data-v="50">50</button><button type="button" data-v="0">All</button></div>
+              <select id="qn" aria-label="Number of questions" hidden><option value="10">10 Qs</option><option value="20" selected>20 Qs</option><option value="50">50 Qs</option><option value="0">All</option></select></div>
+            <div class="qo-f"><span class="qo-l">⏱ Time per question <small>(mock exam and unit test)</small></span>
+              <div class="seg" data-for="qd"><button type="button" data-v="30">30 s</button><button type="button" data-v="45">45 s</button><button type="button" data-v="60" class="on">60 s</button><button type="button" data-v="72">72 s</button><button type="button" data-v="90">90 s</button></div>
+              <select id="qd" aria-label="Time per question" hidden><option value="30">30 s / Q</option><option value="45">45 s / Q</option><option value="60" selected>60 s / Q</option><option value="72">72 s / Q</option><option value="90">90 s / Q</option></select></div>
+            <label class="qo-f qo-sw"><span class="qo-l">🔀 Shuffle questions<small>Mix the order every time</small></span><input type="checkbox" id="qs" checked><i class="tg" aria-hidden="true"></i></label>
           </div>
         </details>
         <p class="expl" id="qc"></p>
@@ -105,6 +110,16 @@
     $id('uchips').querySelectorAll('.uchip').forEach((b) => { b.onclick = () => { st.unit = b.dataset.u; st.topic = ''; refresh(); }; });
     $id('qt').onchange = () => { st.topic = $id('qt').value; refresh(); };
     $id('qn').onchange = refresh;
+    document.querySelectorAll('.seg').forEach((g) => {
+      g.querySelectorAll('button').forEach((b2) => {
+        b2.onclick = () => {
+          g.querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b2));
+          const sel = document.getElementById(g.dataset.for);
+          sel.value = b2.dataset.v;
+          sel.dispatchEvent(new Event('change'));
+        };
+      });
+    });
     refresh();
     $id('go').onclick = () => {
       let qs = pool();

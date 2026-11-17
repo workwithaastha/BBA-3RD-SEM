@@ -183,3 +183,4 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - PDFs: `MCQ pdf/Business_Environment_PUT_Paper_100_MCQ_with_Answers.pdf` and `Office_Management_PUT_Paper_100_MCQ_with_Answers.pdf` (`make_mcq_book_pdf.py` got unit-filter and suffix arguments; the all-units books now exclude the PUT paper).
 - Answers were worked out from standard knowledge and checked against the pen ticks in the photos; a few ticks looked different (BE Q12, Q16, Q21, Q40, Q41, Q48, Q54, Q63, Q69 - see `TICK_DIFF` in data_put_be.py).
 - PUT paper shortcut: subject page button "📝 PUT paper · 100 Qs" opens the quiz with the PUT Paper chip already selected (#/<subject>/quiz/PUT%20Paper).
+- Quiz setup: Customise is now a card (gear icon header, topic dropdown, segmented buttons for number of questions and time per question, shuffle switch); same hidden selects/checkbox drive the logic.
