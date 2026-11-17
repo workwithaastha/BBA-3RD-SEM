@@ -133,3 +133,16 @@ body.focusq #buddy{display:none!important}
 .qo-sw input:checked + .tg{background:linear-gradient(135deg,var(--a1),var(--a2))}
 .qo-sw input:checked + .tg::after{transform:translateX(20px)}
 .qo-sw input:focus-visible + .tg{outline:2px solid var(--a1);outline-offset:2px}
+
+/* skip option + skipped questions screen */
+.skiprow{display:flex;justify-content:flex-end;margin-top:10px}
+.btn.skipq{border-style:dashed;color:var(--mute);font-weight:600}
+.btn.skipq:hover{color:var(--ink);border-color:var(--a1)}
+.qmeta small{color:var(--mute);font-weight:500}
+.skipscr h2{margin-bottom:6px}
+.sklist{margin:6px 0 14px 4px;padding-left:22px;display:grid;gap:6px;line-height:1.4}
+.sklist li::marker{content:none}
+.sklist li{list-style:none;padding:8px 12px;border-radius:12px;border:1px dashed #f59e0b;background:rgba(245,158,11,.08)}
+.nb.skp{border:2px dashed #f59e0b;background:rgba(245,158,11,.14)}
+.nb.skp.cur{background:var(--a1);border-style:solid;color:#fff}
+.legend i.s{border:2px dashed #f59e0b;background:rgba(245,158,11,.14)}

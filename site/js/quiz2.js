@@ -205,26 +205,46 @@
     if (!qs.length) { box.innerHTML = '<p class="expl">No questions to practise here yet.</p>'; return; }
     focus(false);
     const ans = new Array(qs.length).fill(-1);
-    let i = 0, score = 0;
+    let queue = qs.map((_, k) => k), p = 0, score = 0, answered = 0, pass = 1;
+    const skipped = [];
     const t0 = Date.now();
+    const finishRun = () => {
+      sessionDone(sid, score, qs.length, kind);
+      results(box, { qs, ans, sid, kind, mixed, secs: Math.round((Date.now() - t0) / 1000) });
+    };
+    // after the first pass: tell the user which questions were skipped and ask: solve now or leave them
+    const skipScreen = () => {
+      box.innerHTML = `<section class="qres skipscr"><h2>⏭ You skipped ${skipped.length} question${skipped.length > 1 ? 's' : ''}</h2>
+        <p class="expl">These are the questions you skipped:</p>
+        <ol class="sklist">${skipped.map((k) => `<li value="${k + 1}"><b>Q${k + 1}.</b> ${esc(qs[k].q.length > 110 ? qs[k].q.slice(0, 110) + '…' : qs[k].q)}</li>`).join('')}</ol>
+        <p><b>What do you want to do with them?</b></p>
+        <div class="row"><button class="btn primary" id="solveSk">✍️ Solve them now</button><button class="btn" id="leaveSk">Leave them skipped and see my result</button></div></section>`;
+      document.getElementById('solveSk').onclick = () => { queue = skipped.slice(); p = 0; pass = 2; show(); window.scrollTo(0, 0); };
+      document.getElementById('leaveSk').onclick = finishRun;
+      box.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
     const show = () => {
-      if (i >= qs.length) {
-        sessionDone(sid, score, qs.length, kind);
-        return results(box, { qs, ans, sid, kind, mixed, secs: Math.round((Date.now() - t0) / 1000) });
+      if (p >= queue.length) {
+        if (pass === 1 && skipped.length) return skipScreen();
+        return finishRun();
       }
+      const i = queue[p];
       const m = qs[i];
       const rid = mixed ? m._id : sid;
       const meta = (S[rid] && mixed ? S[rid].title + ' · ' : '');
-      box.innerHTML = `<div class="qhead"><div class="bar"><i style="width:${(i / qs.length) * 100}%"></i></div>
-        <div class="qmeta"><b>Question ${i + 1} of ${qs.length}</b><button class="btn backq" id="bq">← Change mode</button><span class="sc"><span class="ok">✅ ${score}</span><span class="bad">❌ ${i - score}</span></span></div></div>
+      box.innerHTML = `<div class="qhead"><div class="bar"><i style="width:${(p / queue.length) * 100}%"></i></div>
+        <div class="qmeta"><b>${pass === 2 ? `Skipped question ${p + 1} of ${queue.length} <small>(originally Q${i + 1})</small>` : `Question ${i + 1} of ${qs.length}`}</b><button class="btn backq" id="bq">← Change mode</button><span class="sc"><span class="ok">✅ ${score}</span><span class="bad">❌ ${answered - score}</span></span></div></div>
         <div class="q"><span class="tag where">📚 ${esc(meta)}${esc(m.u)}${m.t ? ' · ' + esc(m.t) : ''}</span>${m.x ? ' <span class="tag gen">extra: not in PDFs</span>' : m.g ? ' <span class="tag gen">generated from PDF notes</span>' : ''}${m.p ? ` <span class="tag gen">📝 ${esc(m.p)}</span>` : ''}${m.k ? ' <span class="tag gen">⚠ answer not sure</span>' : ''}
         ${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}
-        <p class="qtext"><b>${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt" data-k="${k}"><span class="ol">${L4[k]}</span><span class="ot">${esc(o)}</span></button>`).join('')}<div class="expl" id="ex"></div></div>`;
+        <p class="qtext"><b>${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt" data-k="${k}"><span class="ol">${L4[k]}</span><span class="ot">${esc(o)}</span></button>`).join('')}<div class="skiprow"><button class="btn skipq" id="sk">${pass === 2 ? '⏭ Leave it unanswered' : '⏭ Skip for now'}</button></div><div class="expl" id="ex"></div></div>`;
+      document.getElementById('sk').onclick = () => { if (pass === 1) skipped.push(i); p++; show(); window.scrollTo({ top: box.offsetTop - 70, behavior: 'smooth' }); };
       document.getElementById('bq').onclick = () => { if (mixed || kind === 'daily') route(); else quiz(sid); };
       box.querySelectorAll('.opt').forEach((b) => {
         b.onclick = () => {
           const k = +b.dataset.k;
           ans[i] = k;
+          answered++;
+          const skb = document.getElementById('sk'); if (skb) skb.remove();
           box.querySelectorAll('.opt').forEach((x) => { x.disabled = true; if (+x.dataset.k === m.a) x.classList.add('ok'); });
           if (k === m.a) score++; else b.classList.add('bad');
           record(rid, m, k === m.a);
@@ -248,8 +268,8 @@
           ex.appendChild(rv);
           const n = document.createElement('button');
           n.className = 'btn primary';
-          n.textContent = i + 1 < qs.length ? 'Next →' : 'Finish ✓';
-          n.onclick = () => { i++; show(); window.scrollTo({ top: box.offsetTop - 70, behavior: 'smooth' }); };
+          n.textContent = p + 1 < queue.length ? 'Next →' : (pass === 1 && skipped.length ? 'Next: your skipped questions →' : 'Finish ✓');
+          n.onclick = () => { p++; show(); window.scrollTo({ top: box.offsetTop - 70, behavior: 'smooth' }); };
           box.appendChild(n);
           n.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         };
@@ -266,6 +286,8 @@
     const box = document.getElementById('qa');
     const ans = new Array(qs.length).fill(-1);
     const flag = new Array(qs.length).fill(false);
+    const skip = new Array(qs.length).fill(false);   // skipped = moved on without answering
+    let solving = false, sq = [];                    // "solve skipped now" walks through these
     const total = qs.length * secPerQ;
     let cur = 0, left = total, done = false, summary = false;
     focus(true);
@@ -287,17 +309,24 @@
       if (summary) return showSummary();
       const m = qs[cur];
       const answered = ans.filter((a) => a >= 0).length;
-      const nav = qs.map((_, i) => `<button class="nb${i === cur ? ' cur' : ''}${ans[i] >= 0 ? ' ans' : ''}${flag[i] ? ' flg' : ''}" data-i="${i}" aria-label="Question ${i + 1}">${i + 1}</button>`).join('');
-      box.innerHTML = `<div class="mockbar"><span class="timer${left <= 300 ? ' low' : ''}" id="tm">⏱ ${fmt(left)}</span><span class="mp"><b>${answered}</b>/${qs.length} answered${flag.some(Boolean) ? ' · 🚩 ' + flag.filter(Boolean).length : ''}</span><button class="btn" id="ex2">Exit</button><button class="btn primary" id="sub">Submit</button></div>
+      const nav = qs.map((_, i) => `<button class="nb${i === cur ? ' cur' : ''}${ans[i] >= 0 ? ' ans' : ''}${flag[i] ? ' flg' : ''}${skip[i] && ans[i] < 0 ? ' skp' : ''}" data-i="${i}" aria-label="Question ${i + 1}">${i + 1}</button>`).join('');
+      box.innerHTML = `<div class="mockbar"><span class="timer${left <= 300 ? ' low' : ''}" id="tm">⏱ ${fmt(left)}</span><span class="mp"><b>${answered}</b>/${qs.length} answered${skip.some((x, i) => x && ans[i] < 0) ? ' · ⏭ ' + skip.filter((x, i) => x && ans[i] < 0).length + ' skipped' : ''}${flag.some(Boolean) ? ' · 🚩 ' + flag.filter(Boolean).length : ''}</span><button class="btn" id="ex2">Exit</button><button class="btn primary" id="sub">Submit</button></div>
         <div class="bar"><i style="width:${(answered / qs.length) * 100}%"></i></div>
         <div class="q"><span class="tag where">📚 ${esc(m.u)}${m.t ? ' · ' + esc(m.t) : ''}</span> <span class="qno">Question ${cur + 1} of ${qs.length}</span>${m.c ? `<div class="box">${esc(m.c)}</div>` : ''}
           <p class="qtext"><b>${esc(m.q)}</b></p>${m.o.map((o, k) => `<button class="opt${ans[cur] === k ? ' sel' : ''}" data-k="${k}"><span class="ol">${L4[k]}</span><span class="ot">${esc(o)}</span></button>`).join('')}</div>
-        <div class="mnav"><button class="btn" id="pv"${cur === 0 ? ' disabled' : ''}>← Previous</button><button class="btn${flag[cur] ? ' on' : ''}" id="fl">${flag[cur] ? '🚩 Flagged' : '🚩 Flag for review'}</button><button class="btn" id="cl">Clear</button><button class="btn primary" id="nx">${cur === qs.length - 1 ? 'Review & submit' : 'Next →'}</button></div>
-        <details class="navwrap"${innerWidth > 700 ? ' open' : ''}><summary>Question navigator</summary><div class="navg">${nav}</div><p class="legend"><i class="a"></i> answered <i class="f"></i> flagged <i class="c"></i> current</p></details>`;
-      box.querySelectorAll('.opt').forEach((b) => { b.onclick = () => { ans[cur] = +b.dataset.k; show(); }; });
+        <div class="mnav"><button class="btn" id="pv"${cur === 0 ? ' disabled' : ''}>← Previous</button><button class="btn${flag[cur] ? ' on' : ''}" id="fl">${flag[cur] ? '🚩 Flagged' : '🚩 Flag for review'}</button><button class="btn" id="sk">⏭ Skip</button><button class="btn" id="cl">Clear</button><button class="btn primary" id="nx">${solving ? (sq.length ? 'Next skipped →' : 'Review & submit') : (cur === qs.length - 1 ? 'Review & submit' : 'Next →')}</button></div>
+        <details class="navwrap"${innerWidth > 700 ? ' open' : ''}><summary>Question navigator</summary><div class="navg">${nav}</div><p class="legend"><i class="a"></i> answered <i class="f"></i> flagged <i class="s"></i> skipped <i class="c"></i> current</p></details>`;
+      box.querySelectorAll('.opt').forEach((b) => { b.onclick = () => { ans[cur] = +b.dataset.k; skip[cur] = false; show(); }; });
       box.querySelectorAll('.nb').forEach((b) => { b.onclick = () => { cur = +b.dataset.i; show(); }; });
       document.getElementById('pv').onclick = () => { cur--; show(); };
-      document.getElementById('nx').onclick = () => { if (cur === qs.length - 1) { summary = true; show(); } else { cur++; show(); } };
+      const goNext = () => {
+        if (solving) { if (sq.length) cur = sq.shift(); else { solving = false; summary = true; } }
+        else if (cur === qs.length - 1) summary = true;
+        else cur++;
+        show();
+      };
+      document.getElementById('nx').onclick = () => { if (ans[cur] < 0) skip[cur] = true; goNext(); };
+      document.getElementById('sk').onclick = () => { if (ans[cur] < 0) skip[cur] = true; goNext(); };
       document.getElementById('fl').onclick = () => { flag[cur] = !flag[cur]; show(); };
       document.getElementById('cl').onclick = () => { ans[cur] = -1; show(); };
       document.getElementById('sub').onclick = () => { summary = true; show(); };
@@ -305,22 +334,27 @@
     };
 
     const showSummary = () => {
-      const un = qs.map((_, i) => i).filter((i) => ans[i] < 0);
-      const fl = qs.map((_, i) => i).filter((i) => flag[i]);
+      const un = qs.map((_, k) => k).filter((k) => ans[k] < 0);
+      const sk = un.filter((k) => skip[k]);
+      const nv = un.filter((k) => !skip[k]);      // never opened / left without pressing skip
+      const fl = qs.map((_, k) => k).filter((k) => flag[k]);
       box.innerHTML = `<div class="mockbar"><span class="timer${left <= 300 ? ' low' : ''}" id="tm">⏱ ${fmt(left)}</span><span class="mp">Review before submitting</span></div>
-        <section class="qres"><h2>Ready to submit?</h2>
-          <div class="rchips"><span class="c ok">✅ ${qs.length - un.length} answered</span><span class="c bad">⭕ ${un.length} unanswered</span><span class="c">🚩 ${fl.length} flagged</span></div>
-          ${un.length ? `<p>Unanswered: ${un.map((i) => `<button class="nb" data-i="${i}">${i + 1}</button>`).join(' ')}</p>` : ''}
-          ${fl.length ? `<p>Flagged: ${fl.map((i) => `<button class="nb flg" data-i="${i}">${i + 1}</button>`).join(' ')}</p>` : ''}
-          <div class="row"><button class="btn" id="back">← Back to questions</button><button class="btn primary" id="fin">Submit exam now</button></div></section>`;
-      box.querySelectorAll('.nb').forEach((b) => { b.onclick = () => { cur = +b.dataset.i; summary = false; show(); }; });
-      document.getElementById('back').onclick = () => { summary = false; show(); };
+        <section class="qres skipscr"><h2>${un.length ? `⏭ You skipped ${un.length} question${un.length > 1 ? 's' : ''}` : '✅ All questions answered'}</h2>
+          <div class="rchips"><span class="c ok">✅ ${qs.length - un.length} answered</span><span class="c">⏭ ${sk.length} skipped</span><span class="c bad">⭕ ${nv.length} not opened</span><span class="c">🚩 ${fl.length} flagged</span></div>
+          ${un.length ? `<p class="expl">These are the questions you skipped or left unanswered - tap a number to open it:</p><p>${un.map((k) => `<button class="nb${skip[k] ? ' skp' : ''}" data-i="${k}">${k + 1}</button>`).join(' ')}</p>` : ''}
+          ${fl.length ? `<p>Flagged for review: ${fl.map((k) => `<button class="nb flg" data-i="${k}">${k + 1}</button>`).join(' ')}</p>` : ''}
+          ${un.length ? '<p><b>What do you want to do with them?</b></p>' : ''}
+          <div class="row">${un.length ? '<button class="btn primary" id="solveSk">✍️ Solve skipped questions now</button>' : ''}<button class="btn" id="back">← Back to questions</button><button class="btn ${un.length ? '' : 'primary'}" id="fin">${un.length ? 'Submit and leave them skipped' : 'Submit exam now'}</button></div></section>`;
+      box.querySelectorAll('.nb').forEach((b) => { b.onclick = () => { cur = +b.dataset.i; summary = false; solving = false; show(); }; });
+      const sv = document.getElementById('solveSk');
+      if (sv) sv.onclick = () => { solving = true; sq = un.slice(); cur = sq.shift(); summary = false; show(); window.scrollTo(0, 0); };
+      document.getElementById('back').onclick = () => { summary = false; solving = false; show(); };
       document.getElementById('fin').onclick = () => finish(false);
     };
 
     // keyboard: arrows move, F flags (1-4 / A-D answered by the shared handler in ui2.js)
     window.__mockKeys = (e) => {
-      if (summary || done) return;
+      if (summary || done || solving) return;
       if (e.key === 'ArrowRight' && cur < qs.length - 1) { cur++; show(); }
       else if (e.key === 'ArrowLeft' && cur > 0) { cur--; show(); }
       else if (e.key.toLowerCase() === 'f') { flag[cur] = !flag[cur]; show(); }
