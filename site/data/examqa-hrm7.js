@@ -76,7 +76,7 @@
       a: P(`The <b>horn effect</b> is an appraisal bias in which <b>one negative trait or incident unfairly drags down</b> the rater's view of the employee's overall performance. The <b>halo effect</b> is the opposite: one strong positive impression lifts ratings in unrelated areas.`) +
         T(['Basis', 'Halo effect', 'Horn effect'], [['Direction', 'Inflates the rating', 'Deflates the rating'], ['Cause', 'One good trait (e.g. punctuality)', 'One bad trait or incident'], ['Remedy', 'Rater training, multiple raters, documented evidence', 'Same']]),
       ms: `Horn effect 1.5 · difference 1.5`, src: SY },
-    { m: 6, u: 'Unit IV', t: 'Career Planning', p: 3, q: `Explain the five stages of a career with the main focus of each.`,
+    { m: 6, u: 'Unit III', t: 'Career Planning', p: 3, q: `Explain the five stages of a career with the main focus of each.`,
       a: T(['Stage', 'Roughly', 'Focus'], [
           ['Exploration', 'Early 20s', 'Discovering interests, abilities and values; trying roles'],
           ['Establishment', 'Mid-20s to mid-30s', 'Choose a path, build competence and credibility'],

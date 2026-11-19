@@ -8,6 +8,7 @@ from pathlib import Path
 import pymupdf
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import hrm_study_content3  # noqa: E402,F401  (extends the units with the extra topics)
 from hrm_study_content1 import UNIT1, UNIT2  # noqa: E402
 from hrm_study_content2 import UNIT3, UNIT4  # noqa: E402
 
