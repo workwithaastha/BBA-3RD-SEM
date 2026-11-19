@@ -18,6 +18,7 @@ from expl_hrm_2 import H2
 from expl_hrm_3 import H3
 HRM_EXPL = {**H1, **H2, **H3}
 from data_hrm_syl import HRM_SYL, HRM_SYL_REASONS
+from data_hrm_new import HRM_NEW, HRM_NEW_REASONS
 from expl_om_1 import O1
 from expl_om_2 import O2
 from expl_om_3 import O3
@@ -32,6 +33,8 @@ from overrides_om2 import OM_OVR2
 HRM_OVR.update(HRM_OVR2)
 from overrides_hrm3 import HRM_OVR3
 HRM_OVR.update(HRM_OVR3)
+from overrides_hrm4 import HRM_OVR4
+HRM_OVR.update(HRM_OVR4)
 OM_OVR.update(OM_OVR2)
 from overrides_mkt_syl import MKT_OVR4
 try:
@@ -92,7 +95,14 @@ HRM_SYL = [HRM_SYL[i] for i in _keep]
 HRM_SYL_REASONS = [HRM_SYL_REASONS[i] for i in _keep]
 _n0 = len(HRM) + len(HRM_MORE)
 HRM_EXPL.update({_n0 + i + 1: r for i, r in enumerate(HRM_SYL_REASONS)})
-build(HRM + HRM_MORE + HRM_SYL, "hrm", "Human Resource Management", 11, ovr=HRM_OVR, expl=HRM_EXPL)
+_have2 = {r[2] for r in HRM + HRM_MORE + HRM_SYL}
+_kn = [i for i, r in enumerate(HRM_NEW) if r[2] not in _have2]
+print("HRM new-file MCQs skipped as duplicates:", len(HRM_NEW) - len(_kn))
+HRM_NEW = [HRM_NEW[i] for i in _kn]
+HRM_NEW_REASONS = [HRM_NEW_REASONS[i] for i in _kn]
+_n1 = len(HRM) + len(HRM_MORE) + len(HRM_SYL)
+HRM_EXPL.update({_n1 + i + 1: r for i, r in enumerate(HRM_NEW_REASONS)})
+build(HRM + HRM_MORE + HRM_SYL + HRM_NEW, "hrm", "Human Resource Management", 11, ovr=HRM_OVR, expl=HRM_EXPL)
 build(OM + OM_MORE, "office-mgmt", "Office Management", 22, ovr=OM_OVR, expl=OM_EXPL)
 build(FIN + FIN_MORE, "finance", "Business Finance", 33, append=True, ovr=FIN_OVR, expl=FIN_EXPL)
 _mh = {r[2] for r in MKT}
