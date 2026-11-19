@@ -1,4 +1,4 @@
-# Marketing Unit IV (Marketing Mix 4Ps) MCQs from Syllabus/marketing.jpeg. No notes PDF exists for this unit -> standard textbook knowledge (extra flag = True).
+# Marketing Unit IV (Marketing Mix 4Ps) MCQs from Syllabus/marketing.jpeg. Unit IV source: Marketing Complete Notes + Unit IV slides + textbooks.
 # RAW row: (unit, topic, question, CORRECT, wrong1, wrong2, wrong3, why correct, why wrong1, why wrong2, why wrong3)
 IV = "Unit IV"
 RAW = [

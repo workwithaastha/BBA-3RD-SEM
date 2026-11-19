@@ -1,8 +1,8 @@
 // Marketing written Q&A - part 5: detailed answers for Unit IV (Marketing Mix: product, price, place, promotion).
-// Source: Syllabus/marketing.jpeg (topics) + standard textbooks (Kotler & Keller; Saxena). No notes PDF exists for this unit -> [extra].
+// Source: Syllabus/marketing.jpeg (topics) + standard textbooks (Kotler & Keller; Saxena). Unit IV notes: Marketing Complete Notes + Unit IV slides.
 (function () {
   const { L, O, E, T, D, F } = window.ExamQA;
-  const SY = 'Syllabus image (Unit IV topics) + standard textbooks [extra - check with class notes]';
+  const SY = 'Marketing Complete Notes (Unit IV) + Unit IV slides + standard textbooks (Kotler & Keller; Saxena)';
   const P = (s) => `<p>${s}</p>`;
   const H = (s) => `<h4>${s}</h4>`;
   const FL = (...a) => `<p><b>Flow:</b> ${a.join(' → ')}</p>`;

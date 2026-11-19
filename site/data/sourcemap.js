@@ -16,6 +16,7 @@
     m_mis: 'Marketing Information System.pdf', m_misb: 'Marketing Information System (1).pdf', m_misp: 'MIS_Presentation.pdf',
     m_img: 'marketing.jpeg', m_mrp: 'Marketing Research Process 1.pdf', m_tools: 'TOOLS OF MARKETING RESEARCH.pdf', m_book: 'marketing esearch.pdf',
     m_seg: 'SEGMENTATION.pdf', m_target: 'Market_Targeting.pdf', m_pos: 'Positioning_and_Repositioning.pdf', m_india: 'Indian_Brands_Positioning_Repositioning (1).pdf',
+    m_cn: 'Marketing_Complete_Notes-CFFj7g-g.pdf', m_mix: 'Marketing_Mix_and_Product_Mix.pptx.pdf', m_cls: 'Classification of Products.pptx.pdf', m_npd: 'New_Product_Development_Theory (1).pptx.pdf', m_plc: 'Product_Life_Cycle (1).pptx.pdf', m_brand: 'Branding.docx.pdf', m_bp: 'Branding_and_Packaging.pptx.pdf', m_place: 'Place_Distribution_Simple.pptx.pdf', m_promo: 'Promotion_Unit_IV.pptx.pdf',
     m_vp: 'Value_Proposition.pdf', m_vp2: 'value proposition.pdf', m_a3: 'Marketing_Management_Unit3_Assignment.pdf',
     // Business Environment
     b1: 'UNIT 1 MCQ (4).pdf', b2: 'UNIT 2 MCQ (1).pdf', b3: 'UNIT 3 MCQ (5).pdf', b3s: 'UNIT 3 BE.pdf', b4: 'UNIT 4 MCQ (2).pdf',
@@ -63,9 +64,9 @@
     'u2-cb': mk('m_cb', 'm_factors', 'm_u2', 'm_u2b'), 'u2-mis': mk('m_mis', 'm_misb', 'm_misp', 'm_book'),
     'u2-mr1': mk('m_mrp', 'm_book', 'm_u2', 'm_tools'), 'u2-mr2': mk('m_book', 'm_tools'),
     'u3-seg': mk('m_seg', 'm_a3'), 'u3-target': mk('m_target'), 'u3-pos': mk('m_pos', 'm_india'), 'u3-india': mk('m_india'), 'u3-vp': mk('m_vp', 'm_vp2'),
-    'u4-product': mk('m_img'), 'u4-price': mk('m_img'), 'u4-place': mk('m_img'), 'u4-promo': mk('m_img'), 'exam-master': mk('m_img'),
+    'u4-product': mk('m_cn', 'm_mix', 'm_cls', 'm_npd', 'm_plc', 'm_brand', 'm_bp', 'm_img'), 'u4-price': mk('m_cn', 'm_mix', 'm_plc', 'm_img'), 'u4-place': mk('m_cn', 'm_place', 'm_img'), 'u4-promo': mk('m_cn', 'm_promo', 'm_img'), 'exam-master': mk('m_img', 'm_cn'),
     assign: mk('m_a3', 'm_ai'), qa: mk('m_img', 'm_a3', 'm_ai', 'm_book'), concepts: mU1.concat(mU2, mU3, mk('m_img')),
-    'q:Unit I': mU1, 'q:Unit II': mU2, 'q:Unit III': mU3, 'q:Unit IV': mk('m_img'),
+    'q:Unit I': mU1, 'q:Unit II': mU2, 'q:Unit III': mU3, 'q:Unit IV': mk('m_cn', 'm_mix', 'm_cls', 'm_npd', 'm_plc', 'm_brand', 'm_bp', 'm_place', 'm_promo', 'm_img'),
   };
 
   const be = {
