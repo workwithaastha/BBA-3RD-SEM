@@ -96,7 +96,8 @@
   }
 
   function html(id, all) {
-    const units = [...new Set(all.map((q) => q.u))];
+    const ukey = (u) => (/^Unit/.test(u) ? ({ I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6 }[u.replace('Unit ', '')] || +u.replace('Unit ', '') || 98) : 99);
+    const units = [...new Set(all.map((q) => q.u))].sort((a, b) => ukey(a) - ukey(b));
     const cnt = (m) => all.filter((q) => m.includes(q.m)).length;
     const chips = [['', '📚', 'All', all.length], ['2', '⚡', '2 marks', cnt([2])], ['3', '✏️', '3 marks', cnt([3])], ['5,6', '📝', '5-6 marks', cnt([5, 6])], ['10', '📖', '10 marks', cnt([10])], ['p3', '🔮', 'Most predicted', all.filter((q) => q.p === 3).length]];
     return `

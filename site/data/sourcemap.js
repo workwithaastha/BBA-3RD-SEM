@@ -6,6 +6,8 @@
     // Finance
     f_unit1: 'Business Finance Unit 1 Notes.pdf', f_notes: 'Business_Finance_Notes.pdf', f_formulae: 'Business_Finance_Formulae_Sheet.pdf',
     f_coc: 'Cost_of_Capital_Financial_Leverage_Formula_Sheet 123.pdf', f_a1: 'Business_Finance_Assignment1_TVM.pdf', f_a2: 'Business Finance Assignment 2.pdf',
+    f_syl: 'syllabus.jpeg', f_cn: 'Finance_Complete_Notes-DqzwLbnH.pdf', f_s1: 'Business finance unit 1.pdf', f_s2: 'Business finance unit 2.pdf', f_s3: 'Business finance unit 3.pdf', f_s4: 'Business finance unit 4.pdf',
+    f_n1: 'Business Finance Notes Unit 1.docx.pdf', f_n2: 'Business Finance Unit 2 Notes.docx.pdf', f_n3: 'Business Finance Unit 3 Notes.docx.pdf',
     f_opt: 'BUSINESS FINANCE OPT PAPER 123.pdf', f_lev: 'Operating_and_Financial_Leverage_Questions by PKS.pdf',
     // Marketing
     m_unit1: 'MM UNIT-1.pdf', m_mtp: 'MTP UNIT1.pdf', m_orient: 'Marketing_Orientations.pdf', m_green: 'Green_Marketing.pdf',
@@ -29,20 +31,28 @@
   const mk = (...k) => k.map((x) => F[x]);
 
   const finance = {
-    u1: mk('f_notes', 'f_unit1', 'f_a1'),
-    u2: mk('f_unit1', 'f_notes', 'f_a1', 'f_formulae', 'f_opt'),
-    u3: mk('f_notes', 'f_a1', 'f_formulae'),
-    u4: mk('f_notes', 'f_a2', 'f_opt', 'f_formulae'),
-    u5: mk('f_notes', 'f_lev', 'f_coc', 'f_formulae'),
-    coc: mk('f_coc', 'f_opt'),
+    'u1-intro': mk('f_syl', 'f_cn', 'f_s1', 'f_n1', 'f_notes', 'f_unit1', 'f_a1'),
+    'u1-new': mk('f_syl', 'f_cn', 'f_s1', 'f_n1'),
+    'u1-tvm': mk('f_syl', 'f_n1', 'f_unit1', 'f_notes', 'f_a1', 'f_formulae', 'f_opt'),
+    'u1-bonds': mk('f_syl', 'f_cn', 'f_notes', 'f_a1', 'f_formulae'),
+    'u2-capbud': mk('f_syl', 'f_n2', 'f_s2', 'f_notes', 'f_a2', 'f_opt', 'f_formulae'),
+    'u2-new': mk('f_syl', 'f_cn', 'f_s2', 'f_n2'),
+    'u3-leverage': mk('f_syl', 'f_n3', 'f_notes', 'f_lev', 'f_coc', 'f_formulae'),
+    'u3-new': mk('f_syl', 'f_cn', 'f_s3', 'f_n3'),
+    'u3-coc': mk('f_syl', 'f_s3', 'f_coc', 'f_opt'),
+    'u3-levqs': mk('f_lev'),
+    'u4-new': mk('f_syl', 'f_cn', 'f_s4'),
     formulas: mk('f_formulae', 'f_coc'),
     solved: mk('f_a1', 'f_a2', 'f_opt'),
-    'leverage-qs': mk('f_lev'),
-    qa: mk('f_opt', 'f_a1', 'f_a2', 'f_lev'),
-    concepts: mk('f_notes', 'f_formulae'),
-    'q:Unit I': mk('f_notes', 'f_unit1'), 'q:Unit II': mk('f_notes', 'f_unit1', 'f_a1'), 'q:Unit III': mk('f_notes', 'f_a1'),
-    'q:Unit IV': mk('f_notes', 'f_a2', 'f_opt'), 'q:Unit V': mk('f_notes', 'f_lev', 'f_coc'), 'q:Formulas': mk('f_formulae', 'f_coc'),
+    qa: mk('f_syl', 'f_cn', 'f_opt', 'f_a1', 'f_a2', 'f_lev', 'f_s4'),
+    concepts: mk('f_syl', 'f_cn', 'f_notes', 'f_formulae'),
+    'q:Unit I': mk('f_syl', 'f_cn', 'f_s1', 'f_n1', 'f_notes', 'f_unit1', 'f_a1'),
+    'q:Unit II': mk('f_syl', 'f_cn', 'f_s2', 'f_n2', 'f_notes', 'f_a2', 'f_opt'),
+    'q:Unit III': mk('f_syl', 'f_cn', 'f_s3', 'f_n3', 'f_notes', 'f_lev', 'f_coc'),
+    'q:Unit IV': mk('f_syl', 'f_cn', 'f_s4'),
+    'q:Formulas': mk('f_formulae', 'f_coc'),
   };
+
 
   const mU1 = mk('m_mtp', 'm_unit1', 'm_orient', 'm_green', 'm_digital');
   const mU2 = mk('m_u2', 'm_cb', 'm_factors', 'm_mis', 'm_misp', 'm_mrp', 'm_tools', 'm_book');

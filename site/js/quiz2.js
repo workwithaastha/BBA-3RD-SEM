@@ -38,7 +38,7 @@
     const s = S[id];
     if (!s || !s.mcqs.length) return subject(id);
     setTheme(id);
-    const units = [...new Set(s.mcqs.map((m) => m.u))];
+    const units = [...new Set(s.mcqs.map((m) => m.u))].sort((a, b) => (unitNo(a) || 99) - (unitNo(b) || 99));
     const paper = PAPER[id] || [30, 60, '30 minutes'];
     const weak = weakPool(id).length;
     const st = { mode: 'practice', unit: '', topic: topic || '' };
