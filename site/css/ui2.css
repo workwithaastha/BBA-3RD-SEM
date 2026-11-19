@@ -147,3 +147,7 @@ body{letter-spacing:.005em}
 .ujump a:hover{border-color:var(--ac,#6366f1);color:var(--ac,#6366f1)}
 .ugh{margin:20px 0 8px;font-size:1.15rem}
 .ugh small{font-weight:500;opacity:.6;margin-left:6px;font-size:.8rem}
+
+/* notes tables fill the card width on wide screens (display:block made them shrink to content); phones keep the scrollable block */
+.notes table{display:table;width:100%}
+@media (max-width:700px){.notes table{display:block;overflow-x:auto}}
