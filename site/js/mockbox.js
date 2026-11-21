@@ -133,6 +133,33 @@
     return writtenRun(set, sid);
   }
 
+  // "Are you ready?" gate: the paper stays blurred until the student says yes; yes starts the timer
+  function ready(info, onYes) {
+    const paper = document.querySelector('.mbpaper');
+    if (paper) paper.classList.add('mbhide');
+    const m = document.createElement('div');
+    m.className = 'mbmodal';
+    m.setAttribute('role', 'dialog');
+    m.setAttribute('aria-modal', 'true');
+    m.innerHTML = `<div class="mbbox"><div class="mbemoji">📝</div><h2>Are you ready for the exam?</h2>
+      <p class="mbinfo"><b>${info.title}</b></p>
+      <div class="mbfacts"><span>${info.q}<small>questions</small></span><span>${info.mins}<small>minutes</small></span><span>${info.marks}<small>marks</small></span></div>
+      <p class="expl">${info.rule}</p>
+      <p class="expl">The timer starts the moment you press <b>Yes</b>. You can pause it later from the top bar.</p>
+      <div class="row"><button type="button" class="btn primary" id="mbyes">✅ Yes, I am ready - start</button><button type="button" class="btn" id="mbno">Not yet - go back</button></div></div>`;
+    document.body.appendChild(m);
+    const close = () => { m.remove(); document.removeEventListener('keydown', key); if (paper) paper.classList.remove('mbhide'); };
+    const key = (e) => { if (e.key === 'Enter') { e.preventDefault(); yes(); } else if (e.key === 'Escape') no(); };
+    const yes = () => { close(); onYes(); };
+    const no = () => { close(); location.hash = '#/mocks'; };
+    m.querySelector('#mbyes').onclick = yes;
+    m.querySelector('#mbno').onclick = no;
+    document.addEventListener('keydown', key);
+    m.querySelector('#mbyes').focus();
+    const gone = () => { if (!/^#\/mocks\//.test(location.hash)) { m.remove(); document.removeEventListener('keydown', key); removeEventListener('hashchange', gone); } };
+    addEventListener('hashchange', gone);
+  }
+
   const back = '<p class="crumb"><a href="#/mocks">← Mock Exam Box</a></p>';
 
   function startTimer(secs, el, onEnd) {
@@ -176,6 +203,7 @@
     document.getElementById('mbgo').onclick = (e) => { e.target.textContent = t.toggle() ? '⏸ Pause' : '▶ Resume'; };
     document.getElementById('mball').onclick = (e) => { const a = root.querySelectorAll('.mbans'); const open = e.target.dataset.o !== '1'; a.forEach((x) => { x.hidden = !open; }); e.target.dataset.o = open ? '1' : '0'; e.target.textContent = open ? 'Hide all answers' : 'Show all answers'; };
     document.getElementById('mbprint').onclick = () => window.print();
+    ready({ title: S[sid].title.replace(/&amp;/g, '&') + ' - ' + title, q: sections.reduce((a, x) => a + x.qs.length, 0), mins: minutes, marks: total, rule: sections.map((x) => x.name + ': ' + x.rule).join(' · ') }, () => document.getElementById('mbgo').click());
     root.querySelectorAll('.mbq').forEach((q) => {
       q.querySelector('.show').onclick = () => { const a = q.querySelector('.mbans'); a.hidden = !a.hidden; q.querySelector('.show').textContent = a.hidden ? 'Show model answer' : 'Hide model answer'; };
     });
@@ -199,6 +227,7 @@
     const t = startTimer(3600, document.getElementById('mbt'), () => { document.getElementById('mbt').textContent = 'Time up!'; });
     document.getElementById('mbgo').onclick = (e) => { e.target.textContent = t.toggle() ? '⏸ Pause' : '▶ Resume'; };
     document.getElementById('mball').onclick = (e) => { const open = e.target.dataset.o !== '1'; root.querySelectorAll('.mbans').forEach((x) => { x.hidden = !open; }); e.target.dataset.o = open ? '1' : '0'; e.target.textContent = open ? 'Hide all solutions' : 'Show all solutions'; };
+    ready({ title: 'Finance - ' + set.title, q: set.qs.length, mins: 60, marks: set.qs.length + ' numericals', rule: 'Solve each numerical on paper first; open "How to solve" afterwards to compare.' }, () => document.getElementById('mbgo').click());
     root.querySelectorAll('.mbq').forEach((q) => { q.querySelector('.try').parentElement.remove(); q.querySelector('.show').onclick = () => { const a = q.querySelector('.mbans'); a.hidden = !a.hidden; q.querySelector('.show').textContent = a.hidden ? 'How to solve' : 'Hide solution'; }; });
     document.getElementById('mbfin').onchange = (e) => { if (e.target.checked) save(set.key, { best: 'finished', when: new Date().toLocaleDateString() }); };
   }
@@ -254,6 +283,7 @@
     }
     document.getElementById('mbsub').onclick = () => finish(false);
     document.getElementById('mbsub2').onclick = () => finish(false);
+    ready({ title: S[sid].title.replace(/&amp;/g, '&') + ' - ' + set.title, q: qs.length, mins: set.mins, marks: qs.length, rule: 'One mark per question, one correct option. The paper is submitted automatically when the time is over.' }, () => document.getElementById('mbgo').click());
   }
 
   window.MockBox = { page, allSets };

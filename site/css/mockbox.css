@@ -59,3 +59,17 @@
 .mbscore h2{margin:0 0 4px}
 @media print{.mbbar .btn,.mbact,#subnav,.top,#tabbar,#totop{display:none!important}.mbans[hidden]{display:block!important}}
 @media (max-width:640px){.mbgrid{grid-template-columns:repeat(2,1fr)}.mbbar{position:static}}
+/* "Are you ready?" gate */
+.mbhide{filter:blur(9px);pointer-events:none;user-select:none}
+.mbmodal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px;background:rgba(15,23,42,.62);backdrop-filter:blur(4px);animation:mbfade .2s both}
+.mbbox{width:min(480px,100%);padding:24px 22px;border-radius:24px;background:var(--card);color:var(--ink);border:2px solid var(--a1,#6366f1);text-align:center;box-shadow:0 30px 70px -20px #000;animation:mbpop .3s cubic-bezier(.2,1.4,.4,1) both}
+.mbbox h2{margin:4px 0 6px}
+.mbemoji{font-size:2.6rem}
+.mbinfo{margin:0 0 10px}
+.mbfacts{display:flex;justify-content:center;gap:10px;margin:10px 0}
+.mbfacts span{flex:1;display:grid;padding:8px 6px;border-radius:14px;background:var(--bg);border:1px solid var(--line);font-size:1.5rem;font-weight:800;color:var(--a1,#6366f1)}
+.mbfacts small{font-size:.5em;font-weight:600;color:var(--mute)}
+.mbbox .row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
+@keyframes mbfade{from{opacity:0}to{opacity:1}}
+@keyframes mbpop{from{opacity:0;transform:scale(.85) translateY(14px)}to{opacity:1;transform:none}}
+@media print{.mbmodal{display:none!important}.mbhide{filter:none}}
