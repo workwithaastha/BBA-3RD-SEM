@@ -83,3 +83,16 @@
 @keyframes mbfade{from{opacity:0}to{opacity:1}}
 @keyframes mbpop{from{opacity:0;transform:scale(.85) translateY(14px)}to{opacity:1;transform:none}}
 @media print{.mbmodal{display:none!important}.mbhide{filter:none}}
+
+/* cute dino */
+.mbhero{position:relative}
+.mbdino{position:absolute;right:clamp(8px,3vw,36px);top:50%;transform:translateY(-50%);width:clamp(90px,14vw,160px);height:auto;filter:drop-shadow(0 10px 14px rgba(0,0,0,.18));animation:mbbob 3s ease-in-out infinite}
+.mbhero h1,.mbhero p{max-width:min(760px,calc(100% - clamp(110px,17vw,200px)))}
+.mbdino2{display:block;margin:0 auto 4px;animation:mbbob 2.6s ease-in-out infinite}
+@keyframes mbbob{0%,100%{transform:translateY(-50%) rotate(-2deg)}50%{transform:translateY(-54%) rotate(2deg)}}
+.mbdino2{animation-name:mbbob2}
+@keyframes mbbob2{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+@media (max-width:640px){.mbdino{position:static;display:block;margin:0 auto 8px;transform:none;animation:none}.mbhero h1,.mbhero p{max-width:none}}
+@media (prefers-reduced-motion:reduce){.mbdino,.mbdino2{animation:none}}
+.mbhero .mbjump{max-width:calc(100% - clamp(120px,18vw,210px))}
+@media (max-width:640px){.mbhero .mbjump{max-width:none}}

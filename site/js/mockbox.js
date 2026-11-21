@@ -103,7 +103,7 @@
       <p class="expl">Every numerical question in the Finance bank - the old ones and the new practice sets (Capital Budgeting, Leverage, Numerical Questions, PUT paper) - in sets of 6. Each answer shows the formula, the working table and the final result.</p>
       <div class="mbgrid">${num.map(card).join('')}</div></section>`;
     const chips = ['<a href="#mb-numerical">🧮 Numericals</a>'].concat(ORDER.filter((id) => S[id]).map((id) => `<a href="#mb-${id}" class="t-${id}">${ICON[id] || '📘'} ${S[id].title.split(' ').slice(0, 2).join(' ')}</a>`)).join('');
-    root.innerHTML = `<section class="mbhero"><h1>🎯 Mock Exam Box</h1>
+    root.innerHTML = `<section class="mbhero"><img class="mbdino" src="img/cute-dino.svg" alt="" width="150" height="150"><h1>🎯 Mock Exam Box</h1>
       <p>${total} practice sets for all six subjects. Pick a subject, take a set under exam conditions, then check the model answers. Sets are fixed, so you can come back and repeat them; your best score is remembered on this device.</p>
       <nav class="mbjump" id="mbjump">${chips}</nav></section>${numSec}${sections}`;
     document.getElementById('mbjump').onclick = (e) => {
@@ -141,7 +141,7 @@
     m.className = 'mbmodal';
     m.setAttribute('role', 'dialog');
     m.setAttribute('aria-modal', 'true');
-    m.innerHTML = `<div class="mbbox"><div class="mbemoji">📝</div><h2>Are you ready for the exam?</h2>
+    m.innerHTML = `<div class="mbbox"><img class="mbdino2" src="img/cute-dino.svg" alt="" width="84" height="84"><h2>Are you ready for the exam?</h2>
       <p class="mbinfo"><b>${info.title}</b></p>
       <div class="mbfacts"><span>${info.q}<small>questions</small></span><span>${info.mins}<small>minutes</small></span><span>${info.marks}<small>marks</small></span></div>
       <p class="expl">${info.rule}</p>
