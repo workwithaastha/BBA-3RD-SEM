@@ -223,3 +223,6 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - Finance, HRM, Marketing: the actual PUT paper + PUT-pattern sets (75 marks: A 9 choose 4 x 6.25, B and C 4 choose 2 x 12.5), 8-10 sets each, covering every question of the Q&A bank at least once; Marketing also has the online test. Model answers on demand, attempt counter per section, timer, print.
 - Business Environment, Office Management, Physical Education: real PUT paper (BE, OM), 50-question timed sets and 100-question full-paper sets covering every MCQ; score, unit table and review with the reason for each answer.
 - Finance Numerical Mock Box: 95 numerical questions (old + new, marked NEW / earlier bank) in 16 sets of 6, each with a "How to solve" answer (formula, working table, result).
+
+### Phase 46 - Encouragement pop-up
+- `site/js/cheer.js` + `css/cheer.css`: after every 10-15 (random) questions solved a card says "Good going, sweetheart! ... Keep it up" (6 wordings, happy image, auto-closes in about 5 s, never pauses a timer). Works in practice, mock exam, Daily 20, Mock Exam Box MCQ sets and written sets (counts answers chosen / model answers opened / Q&A marked revised); the counter is remembered across pages.
