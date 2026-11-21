@@ -10,7 +10,7 @@
   tabs.id = 'tabbar';
   tabs.setAttribute('aria-label', 'Main');
   tabs.innerHTML = '<a href="#/" data-h="#/"><i>🏠</i>Home</a><a href="#/daily" data-h="#/daily"><i>🔥</i>Daily 20</a>' +
-    '<a href="#/progress" data-h="#/progress"><i>📊</i>Progress</a><a href="#/badges" data-h="#/badges"><i>🏅</i>Badges</a>' +
+    '<a href="#/mocks" data-h="#/mocks"><i>🎯</i>Mocks</a><a href="#/progress" data-h="#/progress"><i>📊</i>Progress</a><a href="#/badges" data-h="#/badges"><i>🏅</i>Badges</a>' +
     '<button type="button" id="tabsearch"><i>🔍</i>Search</button>';
   document.body.appendChild(tabs);
   document.getElementById('tabsearch').onclick = () => { const s = document.getElementById('search'); s.scrollIntoView({ block: 'center' }); s.focus(); };
@@ -22,11 +22,12 @@
     const old = document.getElementById('subnav');
     if (old) old.remove();
     const cur = subjectOf(location.hash);
-    if (!cur) return;
+    const onMock = /^#\/mocks/.test(location.hash);
+    if (!cur && !onMock) return;
     const n = document.createElement('nav');
     n.id = 'subnav';
     n.setAttribute('aria-label', 'Subjects');
-    n.innerHTML = Object.entries(S).map(([id, s]) =>
+    n.innerHTML = `<a class="mockpill${onMock ? ' on' : ''}" href="#/mocks">🎯 Mock Exam Box</a>` + Object.entries(S).map(([id, s]) =>
       `<a class="t-${id}${id === cur ? ' on' : ''}" href="#/${id}">${ICON[id] || '📘'} ${esc(s.title.split(' ').slice(0, 2).join(' '))}</a>`).join('');
     document.getElementById('app').before(n);
     const on = n.querySelector('.on');
@@ -56,6 +57,7 @@
     tiles.id = 'qtiles';
     tiles.innerHTML =
       (last && last.hash ? `<a class="qt" href="${esc(last.hash)}"><i>▶️</i><b>Continue</b><span>${esc(last.label || 'where you left off')}</span></a>` : '') +
+      '<a class="qt" href="#/mocks"><i>🎯</i><b>Mock Exam Box</b><span>Sets for every subject + numericals</span></a>' +
       '<a class="qt" href="#/daily"><i>🔥</i><b>Daily 20</b><span>Smart mixed practice</span></a>' +
       '<a class="qt" href="#/progress"><i>📊</i><b>My progress</b><span>Weak topics &amp; weekly chart</span></a>' +
       '<a class="qt" href="#/badges"><i>🏅</i><b>Badges</b><span>Rewards you have earned</span></a>';

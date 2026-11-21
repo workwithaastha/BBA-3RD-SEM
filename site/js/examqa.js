@@ -30,6 +30,7 @@
       { id: 'full', name: 'Full paper - 50 marks (2 h)', parts: [['Section A (very short)', 2, 5], ['Section B (short)', 3, 4], ['Section C (medium)', 6, 3], ['Section D (long)', 10, 1]] },
     ],
   };
+  window.ExamQA.presets = PRESETS;
 
 
   function plain(el) { return el.textContent.replace(/\s+/g, ' ').trim(); }

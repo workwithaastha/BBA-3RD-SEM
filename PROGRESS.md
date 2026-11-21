@@ -217,3 +217,9 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 
 ### Phase 44 - Physical Education unit-wise PDFs
 - New folder `Unit wise subject notes/Physical Education/`: 5 PDFs (Unit I Physical Education, II Fitness-diet-obesity, III Yoga and meditation, IV Recreation and traditional games, Sports and General facts), 5-10 pages each. Part A notes in `tools/pe_study_content.py` (written from the topics in the three past papers and standard PE and yoga knowledge - no syllabus was supplied); Part B = all 300 MCQs with answer and reason, by topic (`tools/make_pe_unit_notes.py`). Answers flagged as less certain in the bank are marked "check with your teacher".
+
+### Phase 45 - Mock Exam Box
+- New page `#/mocks` (`site/js/mockbox.js`, `site/css/mockbox.css`), linked from the header (orange pill), the subject strip on every subject page, the home quick tiles and the mobile tab bar. 87 fixed practice sets generated from the data at run time (seeded shuffles, so a set is the same every visit; best score / finished state stored in the browser).
+- Finance, HRM, Marketing: the actual PUT paper + PUT-pattern sets (75 marks: A 9 choose 4 x 6.25, B and C 4 choose 2 x 12.5), 8-10 sets each, covering every question of the Q&A bank at least once; Marketing also has the online test. Model answers on demand, attempt counter per section, timer, print.
+- Business Environment, Office Management, Physical Education: real PUT paper (BE, OM), 50-question timed sets and 100-question full-paper sets covering every MCQ; score, unit table and review with the reason for each answer.
+- Finance Numerical Mock Box: 95 numerical questions (old + new, marked NEW / earlier bank) in 16 sets of 6, each with a "How to solve" answer (formula, working table, result).
