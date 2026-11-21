@@ -10,6 +10,9 @@
   const D = (x) => '<div class="diag">' + x + '</div>';
   window.ExamQA = { L, O, F, E, T, D, data: {}, add };
 
+  function putPaper(id, def) { (PRESETS[id] = PRESETS[id] || []).push(def); }
+  window.ExamQA.putPaper = putPaper;
+
   const STAR = { 3: '★★★', 2: '★★', 1: '★' };
   const LIKE = { 3: 'Very likely (asked in your PDFs)', 2: 'Likely (core syllabus)', 1: 'Possible' };
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -67,7 +70,7 @@
     }).join('');
     const rest = top.filter((q) => (q.m === 3 && !/class="formula"/.test(q.a)) || q.m >= 5).sort((a, b) => a.m - b.m || b.p - a.p).map((q) => {
       const sk = skeleton(q.a);
-      return `<div class="sq"><span class="mk m${q.m}">${q.m}</span><div><b>${q.q}</b>${sk.length ? `<div class="skel">${sk.map((x) => `<span>${esc(x)}</span>`).join('')}</div>` : ''}</div></div>`;
+      return `<div class="sq"><span class="mk m${mcls(q.m)}">${q.m}</span><div><b>${q.q}</b>${sk.length ? `<div class="skel">${sk.map((x) => `<span>${esc(x)}</span>`).join('')}</div>` : ''}</div></div>`;
     }).join('');
     const egs = all.filter((q) => q.m >= 6 && q.p >= 2).map((q) => { const el = mk(q.a).querySelector('.eg'); return el ? `<li>${esc(plain(el).replace(/^Example:\s*/, '').slice(0, 170))}</li>` : ''; }).join('');
     $(`<div class="crumb"><a href="#/">Home</a> / <a href="#/${id}">${e2(sub.title)}</a> / Last-night sheet</div>
@@ -95,11 +98,13 @@
     if (old >= 0) sub.units[old] = unit; else sub.units.unshift(unit);
   }
 
+  const mcls = (m) => String(m).replace('.', '_');
+
   function html(id, all) {
     const ukey = (u) => (/^Unit/.test(u) ? ({ I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6 }[u.replace('Unit ', '')] || +u.replace('Unit ', '') || 98) : 99);
     const units = [...new Set(all.map((q) => q.u))].sort((a, b) => ukey(a) - ukey(b));
     const cnt = (m) => all.filter((q) => m.includes(q.m)).length;
-    const chips = [['', '📚', 'All', all.length], ['2', '⚡', '2 marks', cnt([2])], ['3', '✏️', '3 marks', cnt([3])], ['5,6', '📝', '5-6 marks', cnt([5, 6])], ['10', '📖', '10 marks', cnt([10])], ['p3', '🔮', 'Most predicted', all.filter((q) => q.p === 3).length]];
+    const chips = [['', '📚', 'All', all.length], ['2', '⚡', '2 marks', cnt([2])], ['3', '✏️', '3 marks', cnt([3])], ['5,6', '📝', '5-6 marks', cnt([5, 6])], ['10', '📖', '10 marks', cnt([10])], ['p3', '🔮', 'Most predicted', all.filter((q) => q.p === 3).length], ...(all.some((q) => q.put) ? [['put', '📋', 'PUT paper', all.filter((q) => q.put).length]] : []), ...(all.some((q) => q.num) ? [['num', '🧮', 'Numericals', all.filter((q) => q.num || /numerical/i.test(q.t)).length]] : [])];
     return `
     <section class="qahero">
       <div class="qaring" id="qaring" style="--p:0"><b id="qapct">0%</b><span>revised</span></div>
@@ -123,8 +128,8 @@
   }
 
   function item(q, i) {
-    return `<details class="qa m${q.m}" data-i="${i}" data-m="${q.m}" data-u="${esc(q.u)}" data-p="${q.p}" data-s="${esc((q.q + ' ' + q.u + ' ' + q.t).toLowerCase())}">
-      <summary><span class="qn">${i + 1}</span><span class="mk m${q.m}"><b>${q.m}</b><small>marks</small></span>
+    return `<details class="qa m${mcls(q.m)}" data-i="${i}" data-m="${q.m}" data-u="${esc(q.u)}" data-p="${q.p}" data-s="${esc((q.q + ' ' + q.u + ' ' + q.t).toLowerCase())}">
+      <summary><span class="qn">${i + 1}</span><span class="mk m${mcls(q.m)}"><b>${q.m}</b><small>marks</small></span>
         <span class="qbody"><span class="qt">${q.q}</span><span class="qmeta"><span class="qtopic">${esc(q.u)} · ${esc(q.t)}</span><span class="st" title="${LIKE[q.p]}">${STAR[q.p]}</span><span class="qdone">✔ revised</span></span></span></summary>
       <div class="ans">${q.a}
         ${q.ms ? `<div class="msch"><b>📝 Marking scheme:</b> ${q.ms}</div>` : ''}
@@ -149,7 +154,7 @@
         const isDone = !!done[sig(el.dataset.i)];
         el.classList.toggle('revised', isDone);
         if (isDone) d++;
-        const okM = !f.marks || (f.marks === 'p3' ? q.p === 3 : f.marks.split(',').map(Number).includes(q.m));
+        const okM = !f.marks || (f.marks === 'p3' ? q.p === 3 : f.marks === 'put' ? !!q.put : f.marks === 'num' ? !!(q.num || /numerical/i.test(q.t)) : f.marks.split(',').map(Number).includes(q.m));
         const show = okM && (!f.unit || q.u === f.unit) && (!f.term || el.dataset.s.includes(f.term)) && !(f.hide && isDone);
         el.hidden = !show;
         el.style.display = show ? '' : 'none';
@@ -206,15 +211,28 @@
         p = { parts: parts.length ? parts : [['Section A', 3, 4]] };
       }
       const used = new Set();
-      let n = 0, total = 0;
-      const out = p.parts.map(([name, m, c]) => {
-        const pool = all.map((q, i) => ({ q, i })).filter((x) => x.q.m === m && !used.has(x.i)).sort((a, b) => (b.q.p + Math.random()) - (a.q.p + Math.random()));
-        const pick = pool.slice(0, c);
-        pick.forEach((x) => used.add(x.i));
-        total += pick.length * m;
-        return `<h4>${name} - ${pick.length} × ${m} marks</h4>` + pick.map((x) => { n++; return `<div class="mq"><b>Q${n}.</b> ${x.q.q} <span class="mkr">[${m}]</span><div class="mans" hidden>${x.q.a}</div></div>`; }).join('');
-      }).join('');
-      document.getElementById('mpaper').innerHTML = `<div class="paperhead"><b>Total marks: ${total}</b> · Attempt all · Write the formula and steps for numericals</div>${out}`;
+      let n = 0, total = 0, rules = '';
+      let out;
+      if (p.real) {
+        // the actual paper: fixed questions, each linked to a model answer through its `put` id
+        out = p.real.map((sec) => {
+          const qs = sec.ids.map((k) => all.find((x) => x.put === k)).filter(Boolean);
+          total += sec.attempt * sec.marks;
+          return `<h4>${sec.name} - ${sec.rule}</h4>` + qs.map((q) => { n++; return `<div class="mq"><b>Q${n}.</b> ${q.q} <span class="mkr">[${q.m}]</span><div class="mans" hidden>${q.a}</div></div>`; }).join('');
+        }).join('');
+        rules = ' · ' + (p.note || '');
+      } else {
+        out = p.parts.map(([name, m, c, mset, attempt]) => {
+          const set = mset || [m];
+          const pool = all.map((q, i) => ({ q, i })).filter((x) => set.includes(x.q.m) && !used.has(x.i)).sort((a2, b2) => (b2.q.p + Math.random()) - (a2.q.p + Math.random()));
+          const pick = pool.slice(0, c);
+          pick.forEach((x) => used.add(x.i));
+          total += (attempt || pick.length) * m;
+          const head = attempt ? `${name} - attempt any ${attempt} of ${pick.length} × ${m} marks` : `${name} - ${pick.length} × ${m} marks`;
+          return `<h4>${head}</h4>` + pick.map((x) => { n++; return `<div class="mq"><b>Q${n}.</b> ${x.q.q} <span class="mkr">[${m}]</span><div class="mans" hidden>${x.q.a}</div></div>`; }).join('');
+        }).join('');
+      }
+      document.getElementById('mpaper').innerHTML = `<div class="paperhead"><b>Total marks to attempt: ${total}</b> · ${p.real ? 'Actual PUT paper' : p.parts.some((x) => x[4]) ? 'Choose the questions as stated in each section' : 'Attempt all'} · Write the formula and steps for numericals${rules}</div>${out}`;
       document.getElementById('mreveal').hidden = false;
       document.getElementById('mprint').hidden = false;
     };

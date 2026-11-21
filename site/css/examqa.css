@@ -124,3 +124,6 @@ details.qa .ans tr:nth-child(even) td{background:color-mix(in srgb,var(--a1) 4%,
 
 /* filter bars scroll with the page (not sticky) */
 .qabar,.ftools{position:static!important;top:auto!important}
+.mk.m6_25{background:linear-gradient(135deg,#f59e0b,#ef4444)}.mk.m12_5{background:linear-gradient(135deg,#ec4899,#8b5cf6)}
+details.qa.m6_25{border-left-color:#f59e0b}details.qa.m12_5{border-left-color:#ec4899}
+.qchip.cput i{filter:none}
