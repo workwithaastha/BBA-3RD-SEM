@@ -253,6 +253,7 @@ function home() {
       </div>
       <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="scene hero-cube" aria-hidden="true">${cubeHtml()}</div>
+      <img class="hero-dino" src="img/cute-dino.svg" alt="" width="190" height="190">
     </section>
     <h2 class="sec">Pick a subject</h2>
     <div class="grid">${subs.map(([id, s], i) =>
