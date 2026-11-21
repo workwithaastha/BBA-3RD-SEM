@@ -57,7 +57,17 @@
 .mbexp{margin-top:8px;padding:8px 12px;border-radius:10px;background:var(--bg);font-size:.92em}
 .mbscore{padding:16px;margin:16px 0;border-radius:18px;border:2px solid var(--a1,#6366f1);background:var(--card)}
 .mbscore h2{margin:0 0 4px}
-@media print{.mbbar .btn,.mbact,#subnav,.top,#tabbar,#totop{display:none!important}.mbans[hidden]{display:block!important}}
+@media print{
+  :root,body{--bg:#fff;--card:#fff;--ink:#000;--mute:#333;--line:#999;--a1:#333;--grad:#333}
+  html,body{background:#fff!important;color:#000!important}
+  .top,#subnav,#tabbar,#totop,#prog,#cheer,.mbmodal,.mbtimer,.mbact,.mbfoot,.mbcnt,.crumb,.mbbar .btn,.btn{display:none!important}
+  .mbans[hidden]{display:none!important}
+  .mbhide{filter:none!important}
+  .mbbar,.mbq,.mbm,.mbsh,.mbans,.mbpaper{background:#fff!important;color:#000!important;box-shadow:none!important;border-color:#999!important}
+  .mbq,.mbm{break-inside:avoid;page-break-inside:avoid}
+  .mbmk{background:none!important;color:#000!important;border:1px solid #000}
+  *{animation:none!important}
+}
 @media (max-width:640px){.mbgrid{grid-template-columns:repeat(2,1fr)}.mbbar{position:static}}
 /* "Are you ready?" gate */
 .mbhide{filter:blur(9px);pointer-events:none;user-select:none}

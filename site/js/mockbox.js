@@ -197,12 +197,20 @@
     let n = 0;
     const body = sections.map((sec, si) => `<h3 class="mbsh">${esc(sec.name)} <small>${esc(sec.rule)}</small></h3><p class="mbcnt" data-s="${si}"></p>` + sec.qs.map((q) => { n++; return qBlock(q, 'Q' + n, sec.marks, { sec: si, tag: `<span class="mbsrc">${esc((q.t || '') + (q.u ? ' · ' + q.u : ''))}</span>` }); }).join('')).join('');
     root.innerHTML = `${back}<section class="mbpaper"><div class="mbbar"><div><h2>${S[sid].title} - ${esc(title)}</h2><p class="expl">Maximum marks: ${total} · Time: ${minutes} minutes · ${esc(note)}</p></div>
-      <div class="mbtimer"><b id="mbt">--:--:--</b><button class="btn solid" id="mbgo">▶ Start timer</button><button class="btn" id="mball">Show all answers</button><button class="btn" id="mbprint">🖨 Print</button></div></div>${body}
+      <div class="mbtimer"><b id="mbt">--:--:--</b><button class="btn solid" id="mbgo">▶ Start timer</button><button class="btn" id="mball">Show all answers</button><button class="btn" id="mbprint">🖨 Print paper (no answers)</button><button class="btn" id="mbprint2">🖨 Print with answers</button></div></div>${body}
       <div class="mbfoot"><p class="expl">Done? Write each answer on paper first, then open the model answer and compare - tick what you covered.</p><label class="mbtry"><input type="checkbox" id="mbfin"> I finished this set</label></div></section>`;
     const t = startTimer(minutes * 60, document.getElementById('mbt'), () => { document.getElementById('mbt').textContent = 'Time up!'; });
     document.getElementById('mbgo').onclick = (e) => { e.target.textContent = t.toggle() ? '⏸ Pause' : '▶ Resume'; };
     document.getElementById('mball').onclick = (e) => { const a = root.querySelectorAll('.mbans'); const open = e.target.dataset.o !== '1'; a.forEach((x) => { x.hidden = !open; }); e.target.dataset.o = open ? '1' : '0'; e.target.textContent = open ? 'Hide all answers' : 'Show all answers'; };
-    document.getElementById('mbprint').onclick = () => window.print();
+    const printWith = (withAns) => {
+      const all = [...root.querySelectorAll('.mbans')];
+      const was = all.map((x) => x.hidden);
+      all.forEach((x) => { x.hidden = !withAns; });
+      window.print();
+      all.forEach((x, i) => { x.hidden = was[i]; });
+    };
+    document.getElementById('mbprint').onclick = () => printWith(false);
+    document.getElementById('mbprint2').onclick = () => printWith(true);
     ready({ title: S[sid].title.replace(/&amp;/g, '&') + ' - ' + title, q: sections.reduce((a, x) => a + x.qs.length, 0), mins: minutes, marks: total, rule: sections.map((x) => x.name + ': ' + x.rule).join(' · ') }, () => document.getElementById('mbgo').click());
     root.querySelectorAll('.mbq').forEach((q) => {
       q.querySelector('.show').onclick = () => { const a = q.querySelector('.mbans'); a.hidden = !a.hidden; q.querySelector('.show').textContent = a.hidden ? 'Show model answer' : 'Hide model answer'; };
