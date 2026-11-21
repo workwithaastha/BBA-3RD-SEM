@@ -261,7 +261,7 @@ function home() {
         </div>
       </div>
       <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-      <img class="hero-dino" src="img/dinos/couple-${dinoPose()}.svg" alt="" width="480" height="253">
+      <img class="hero-dino" src="img/dinos/couple-${dinoPose()}.svg" alt="" width="480" height="312">
     </section>
     <h2 class="sec">Pick a subject</h2>
     <div class="grid">${subs.map(([id, s], i) =>
