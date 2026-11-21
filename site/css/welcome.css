@@ -207,3 +207,6 @@
 @keyframes dinoHop{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
 @media (max-width:760px){.hero-dino{width:84px;right:10px;bottom:auto;top:10px;animation:none}}
 @media (prefers-reduced-motion:reduce){.hero-dino{animation:none}}
+
+/* cube removed from the banner: the dino takes its place */
+.hero-dino{width:clamp(150px,19vw,270px);right:clamp(16px,6%,90px);bottom:10px}
