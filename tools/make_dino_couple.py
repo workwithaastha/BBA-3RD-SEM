@@ -82,7 +82,7 @@ poses[1] = svg(BOY_N, GIRL_N, "open", "open", hearts([(380, -26, 3.4, PINK, 0), 
 poses[2] = svg("translate(30 6) scale(.98)", "translate(736 6) scale(-.98 .98)", "happy", "happy", hearts([(380, -30, 3.8, PINK, 0), (322, -62, 2, RED, .5), (440, -64, 2.2, ROSE, 1), (380, -82, 1.3, SOFT, 1.6), (262, -36, 1.3, ROSE, .8), (500, -38, 1.3, SOFT, 1.3), (214, -66, 1, PINK, 2), (548, -68, 1, RED, .4), (190, -14, 1, SOFT, 1.9), (572, -16, 1, ROSE, .7)]) + sparkle(60, 170, 1.2) + sparkle(704, 160, 1.2))
 
 # 3 study buddies - graduation cap, books, light bulb
-CAP = '  <g transform="translate(284 70) rotate(-8)"><path d="M-46 0 L0 -22 L46 0 L0 22 Z" fill="#26324a" stroke="#111a2e" stroke-width="3" stroke-linejoin="round"/><path d="M-26 12 v20 q26 14 52 0 v-20" fill="#33425f"/><path d="M40 4 v34" stroke="#ffb347" stroke-width="4" stroke-linecap="round"/><circle cx="40" cy="40" r="6" fill="#ffb347"/></g>\n'
+CAP = '  <g transform="translate(290 40) rotate(-8) scale(.9)"><path d="M-46 0 L0 -22 L46 0 L0 22 Z" fill="#26324a" stroke="#111a2e" stroke-width="3" stroke-linejoin="round"/><path d="M-26 12 v20 q26 14 52 0 v-20" fill="#33425f"/><path d="M40 4 v34" stroke="#ffb347" stroke-width="4" stroke-linecap="round"/><circle cx="40" cy="40" r="6" fill="#ffb347"/></g>\n'
 
 
 def book(x, y, c):
@@ -90,7 +90,7 @@ def book(x, y, c):
 
 
 BULB = '<g transform="translate(380 -8)"><circle r="22" fill="#ffe27a" stroke="#f0b429" stroke-width="3"/><rect x="-9" y="20" width="18" height="12" rx="4" fill="#c7cfdd" stroke="#8b97ad" stroke-width="2.5"/><path d="M-6 -4 q6 8 12 0" fill="none" stroke="#f0b429" stroke-width="3" stroke-linecap="round"/><path d="M0 -34 v-10 M-30 -20 l-8 -6 M30 -20 l8 -6" stroke="#f0b429" stroke-width="3.5" stroke-linecap="round"/></g>'
-poses[3] = svg(BOY_N, GIRL_N, "open", "open", book(110, 296, "#7aa7ff") + book(570, 296, "#ffb3d1") + BULB + hearts([(300, -40, 1.6, PINK, 0), (460, -40, 1.6, ROSE, .8), (380, -66, 1.4, RED, 1.4), (236, -48, 1, SOFT, .5), (524, -50, 1, SOFT, 1.1), (210, -12, .9, ROSE, 1.7), (552, -14, .9, PINK, .3)]) + sparkle(46, 150) + sparkle(716, 150), boy_extra=CAP)
+poses[3] = svg(BOY_N, GIRL_N, "open", "open", book(158, 238, "#7aa7ff") + book(522, 238, "#ffb3d1") + BULB + hearts([(300, -40, 1.6, PINK, 0), (460, -40, 1.6, ROSE, .8), (380, -66, 1.4, RED, 1.4), (236, -48, 1, SOFT, .5), (524, -50, 1, SOFT, 1.1), (210, -12, .9, ROSE, 1.7), (552, -14, .9, PINK, .3)]) + sparkle(46, 150) + sparkle(716, 150), boy_extra=CAP)
 
 # 4 cheer - jumping with confetti
 rnd = random.Random(4)
