@@ -1,5 +1,5 @@
 // Friendly "buddy" bubble: every time the site opens it greets "Hi Astha" with a random question (random entrance + exit animation),
-// then shows a second popup with the days left for a random upcoming exam. Also records the study-day streak and keeps the 3D tilt / hero parallax.
+// (the second 'days left' popup is switched off). Also records the study-day streak and keeps the 3D tilt / hero parallax.
 (function () {
   const { store, esc, ICON } = window.App;
   const NAME = store.get('name', 'Astha');
@@ -226,7 +226,8 @@
   // leaving the first screen closes it
   addEventListener('hashchange', () => { clearAll(); const x = document.getElementById('buddy'); if (x) x.remove(); });
 
-  function sequence() { greet(() => later(daysPopup, 700)); }
+  // only the greeting popup is shown now (the second 'days left' popup was removed on request)
+  function sequence() { greet(() => {}); }
 
   // header button replays the greeting + days popup
   const top = document.querySelector('.top');
