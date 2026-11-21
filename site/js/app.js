@@ -194,6 +194,15 @@ function expected(id) {
 }
 
 
+// a different cute dino-couple pose on every reload (never the same twice in a row)
+function dinoPose() {
+  const last = +store.get('dinopose', 0) || 0;
+  let n;
+  do { n = 1 + Math.floor(Math.random() * 6); } while (n === last);
+  store.set('dinopose', n);
+  return n;
+}
+
 function cubeHtml() {
   return '<div class="cube">' + ['💰', '📣', '🌍', '👥', '🗂️', '🎯'].map((e) => '<i>' + e + '</i>').join('') + '</div>';
 }
@@ -252,7 +261,7 @@ function home() {
         </div>
       </div>
       <div class="orbs" aria-hidden="true"><i></i><i></i><i></i></div>
-      <img class="hero-dino" src="img/cute-dino-couple.svg" alt="" width="480" height="253">
+      <img class="hero-dino" src="img/dinos/couple-${dinoPose()}.svg" alt="" width="480" height="253">
     </section>
     <h2 class="sec">Pick a subject</h2>
     <div class="grid">${subs.map(([id, s], i) =>

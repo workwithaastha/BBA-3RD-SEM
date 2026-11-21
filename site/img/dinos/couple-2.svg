@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 400" width="760" height="400" role="img" aria-label="Two cute cartoon dinosaurs, a green boy and a pink girl with a bow">
+<defs>
+    <linearGradient id="bodyB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7ee8a2"/>
+      <stop offset="1" stop-color="#3fc57a"/>
+    </linearGradient>
+    <linearGradient id="bellyB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff6c9"/>
+      <stop offset="1" stop-color="#ffe08a"/>
+    </linearGradient>
+    <radialGradient id="cheekB" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff7fa8" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ff7fa8" stop-opacity="0"/>
+    </radialGradient>
+  </defs><defs>
+    <linearGradient id="bodyG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffc0da"/>
+      <stop offset="1" stop-color="#ff86b4"/>
+    </linearGradient>
+    <linearGradient id="bellyG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff4f9"/>
+      <stop offset="1" stop-color="#ffd3e6"/>
+    </linearGradient>
+    <radialGradient id="cheekG" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff7fa8" stop-opacity=".9"/>
+      <stop offset="1" stop-color="#ff7fa8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="380" cy="364" rx="300" ry="14" fill="#000" opacity=".13"/>
+  
+  <g transform="translate(30 6) scale(.98)">
+
+
+
+  <!-- tail -->
+  <path d="M96 292 C48 296 24 270 18 238 C34 252 50 254 70 244 C82 240 96 262 112 262 Z" fill="#3fc57a"/>
+  <path d="M30 246 C42 256 58 258 74 250" fill="none" stroke="#2fa564" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+
+  <!-- back spikes -->
+  <g fill="#ffb347" stroke="#f08f1c" stroke-width="3" stroke-linejoin="round">
+    <path d="M118 188 L98 150 L142 168 Z"/>
+    <path d="M150 156 L140 112 L180 140 Z"/>
+    <path d="M184 140 L186 96 L218 130 Z"/>
+    <path d="M222 138 L236 98 L258 138 Z"/>
+  </g>
+
+  <!-- back leg (far) -->
+  <rect x="226" y="300" width="46" height="52" rx="22" fill="#34b56d"/>
+  <ellipse cx="252" cy="352" rx="30" ry="14" fill="#34b56d"/>
+
+  <!-- body -->
+  <ellipse cx="190" cy="262" rx="104" ry="92" fill="url(#bodyB)"/>
+  <!-- belly -->
+  <ellipse cx="206" cy="284" rx="62" ry="64" fill="url(#bellyB)"/>
+  <path d="M160 270 q46 14 92 0 M156 292 q50 16 100 0 M164 314 q42 12 84 0" fill="none" stroke="#f3cb6a" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+
+  <!-- front leg -->
+  <rect x="140" y="304" width="48" height="50" rx="22" fill="#3fc57a"/>
+  <ellipse cx="166" cy="354" rx="32" ry="15" fill="#3fc57a"/>
+  <g fill="#fff" stroke="#2fa564" stroke-width="2">
+    <ellipse cx="146" cy="358" rx="6" ry="7"/>
+    <ellipse cx="166" cy="362" rx="6" ry="7"/>
+    <ellipse cx="186" cy="358" rx="6" ry="7"/>
+  </g>
+
+  <!-- tiny arm -->
+  <path d="M258 252 C282 248 292 262 286 274 C280 284 264 278 258 270 Z" fill="#3fc57a" stroke="#2fa564" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- neck + head -->
+  <path d="M236 206 C250 170 262 150 282 138 L322 154 C314 196 296 226 262 238 Z" fill="url(#bodyB)"/>
+  <ellipse cx="296" cy="124" rx="76" ry="66" fill="url(#bodyB)"/>
+  <!-- head spikes / frill -->
+  <g fill="#ffb347" stroke="#f08f1c" stroke-width="3" stroke-linejoin="round">
+    <path d="M236 88 L222 54 L256 70 Z"/>
+    <path d="M262 66 L258 28 L290 52 Z"/>
+  </g>
+  <!-- snout -->
+  <ellipse cx="344" cy="142" rx="38" ry="30" fill="#7ee8a2"/>
+  <!-- nostrils -->
+  <ellipse cx="358" cy="130" rx="3.6" ry="4.6" fill="#2fa564"/>
+  <ellipse cx="342" cy="128" rx="3.2" ry="4.2" fill="#2fa564"/>
+
+  <path d="M281 116 q19 -26 38 0" fill="none" stroke="#26324a" stroke-width="5.5" stroke-linecap="round"/>
+  <!-- eyebrow -->
+  <path d="M282 84 q18 -12 36 -2" fill="none" stroke="#2fa564" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- cheek blush -->
+  <ellipse cx="318" cy="150" rx="22" ry="14" fill="url(#cheekB)"/>
+
+  <!-- smile -->
+  <path d="M326 158 q16 16 36 0" fill="none" stroke="#26324a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M340 166 q8 10 16 0 z" fill="#ff8aa6"/>
+
+  </g>
+  <g transform="translate(736 6) scale(-.98 .98)">
+
+
+
+  <!-- tail -->
+  <path d="M96 292 C48 296 24 270 18 238 C34 252 50 254 70 244 C82 240 96 262 112 262 Z" fill="#ff86b4"/>
+  <path d="M30 246 C42 256 58 258 74 250" fill="none" stroke="#e2528c" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+
+  <!-- back spikes -->
+  <g fill="#c6a4ff" stroke="#9d74e6" stroke-width="3" stroke-linejoin="round">
+    <path d="M118 188 L98 150 L142 168 Z"/>
+    <path d="M150 156 L140 112 L180 140 Z"/>
+    <path d="M184 140 L186 96 L218 130 Z"/>
+    <path d="M222 138 L236 98 L258 138 Z"/>
+  </g>
+
+  <!-- back leg (far) -->
+  <rect x="226" y="300" width="46" height="52" rx="22" fill="#f873a8"/>
+  <ellipse cx="252" cy="352" rx="30" ry="14" fill="#f873a8"/>
+
+  <!-- body -->
+  <ellipse cx="190" cy="262" rx="104" ry="92" fill="url(#bodyG)"/>
+  <!-- belly -->
+  <ellipse cx="206" cy="284" rx="62" ry="64" fill="url(#bellyG)"/>
+  <path d="M160 270 q46 14 92 0 M156 292 q50 16 100 0 M164 314 q42 12 84 0" fill="none" stroke="#f5b3cf" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+
+  <!-- front leg -->
+  <rect x="140" y="304" width="48" height="50" rx="22" fill="#ff86b4"/>
+  <ellipse cx="166" cy="354" rx="32" ry="15" fill="#ff86b4"/>
+  <g fill="#fff" stroke="#e2528c" stroke-width="2">
+    <ellipse cx="146" cy="358" rx="6" ry="7"/>
+    <ellipse cx="166" cy="362" rx="6" ry="7"/>
+    <ellipse cx="186" cy="358" rx="6" ry="7"/>
+  </g>
+
+  <!-- tiny arm -->
+  <path d="M258 252 C282 248 292 262 286 274 C280 284 264 278 258 270 Z" fill="#ff86b4" stroke="#e2528c" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- neck + head -->
+  <path d="M236 206 C250 170 262 150 282 138 L322 154 C314 196 296 226 262 238 Z" fill="url(#bodyG)"/>
+  <ellipse cx="296" cy="124" rx="76" ry="66" fill="url(#bodyG)"/>
+  <!-- head spikes / frill -->
+  <g fill="#c6a4ff" stroke="#9d74e6" stroke-width="3" stroke-linejoin="round">
+    <path d="M236 88 L222 54 L256 70 Z"/>
+    <path d="M262 66 L258 28 L290 52 Z"/>
+  </g>
+  <!-- snout -->
+  <ellipse cx="344" cy="142" rx="38" ry="30" fill="#ffc0da"/>
+  <!-- nostrils -->
+  <ellipse cx="358" cy="130" rx="3.6" ry="4.6" fill="#e2528c"/>
+  <ellipse cx="342" cy="128" rx="3.2" ry="4.2" fill="#e2528c"/>
+
+  <path d="M281 116 q19 -26 38 0" fill="none" stroke="#26324a" stroke-width="5.5" stroke-linecap="round"/>
+  <!-- eyebrow -->
+  <path d="M282 84 q18 -12 36 -2" fill="none" stroke="#e2528c" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- cheek blush -->
+  <ellipse cx="318" cy="150" rx="22" ry="14" fill="url(#cheekG)"/>
+
+  <!-- smile -->
+  <path d="M326 158 q16 16 36 0" fill="none" stroke="#26324a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M340 166 q8 10 16 0 z" fill="#ff8aa6"/>
+
+  <g transform="translate(262 56) rotate(-12)"><path d="M0 0 L-30 -18 Q-38 0 -30 18 Z" fill="#ff5c9a" stroke="#d93a7a" stroke-width="3" stroke-linejoin="round"/><path d="M0 0 L30 -18 Q38 0 30 18 Z" fill="#ff5c9a" stroke="#d93a7a" stroke-width="3" stroke-linejoin="round"/><circle r="9" fill="#ff8fba" stroke="#d93a7a" stroke-width="3"/></g>
+  <path d="M283 94 l-9 -6 M290 88 l-6 -9 M300 86 l-1 -11" stroke="#26324a" stroke-width="3.2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(380 120)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="2.4s" begin="-0s" repeatCount="indefinite"/><g transform="scale(3.6)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ff5c9a"/></g></g></g>
+  <g transform="translate(330 56)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="2.9s" begin="-0.5s" repeatCount="indefinite"/><g transform="scale(2)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ff3d7f"/></g></g></g>
+  <g transform="translate(432 52)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="3.4s" begin="-1s" repeatCount="indefinite"/><g transform="scale(2.2)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ff8fba"/></g></g></g>
+  <g transform="translate(380 28)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="2.4s" begin="-1.6s" repeatCount="indefinite"/><g transform="scale(1.4)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ffb3d1"/></g></g></g>
+  <g transform="translate(290 96)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="2.9s" begin="-0.8s" repeatCount="indefinite"/><g transform="scale(1.3)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ff8fba"/></g></g></g>
+  <g transform="translate(474 96)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="3.4s" begin="-1.3s" repeatCount="indefinite"/><g transform="scale(1.3)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ffb3d1"/></g></g></g>
+  <g transform="translate(250 60)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="2.4s" begin="-2s" repeatCount="indefinite"/><g transform="scale(1)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ff5c9a"/></g></g></g>
+  <g transform="translate(512 62)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="2.9s" begin="-0.4s" repeatCount="indefinite"/><g transform="scale(1)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ff3d7f"/></g></g></g>
+  <g transform="translate(360 190)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="3.4s" begin="-1.9s" repeatCount="indefinite"/><g transform="scale(1.2)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ffb3d1"/></g></g></g>
+  <g transform="translate(402 200)"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -14;0 0" dur="2.4s" begin="-0.7s" repeatCount="indefinite"/><g transform="scale(1)"><path d="M0 10 C-18 -4 -14 -22 0 -12 C14 -22 18 -4 0 10 Z" fill="#ff8fba"/></g></g></g><path transform="translate(60 170) scale(1.2)" d="M0 -12 l4 8 l8 4 l-8 4 l-4 8 l-4 -8 l-8 -4 l8 -4 z" fill="#fff" opacity=".95"/><path transform="translate(704 160) scale(1.2)" d="M0 -12 l4 8 l8 4 l-8 4 l-4 8 l-4 -8 l-8 -4 l8 -4 z" fill="#fff" opacity=".95"/>
+</svg>
