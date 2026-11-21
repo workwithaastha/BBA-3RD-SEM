@@ -21,10 +21,10 @@ document.getElementById('search').addEventListener('input', (e) => {
 
 const ICON = { finance: '💰', marketing: '📣', 'business-env': '🌍', hrm: '👥', 'office-mgmt': '🗂️', 'physical-education': '🧘' };
 const BLURB = {
-  finance: 'TVM, bonds & stocks, capital budgeting, leverage',
-  marketing: 'Core concepts, consumer behaviour, research, STP',
+  finance: 'TVM, bonds & stocks, capital budgeting, leverage <b>Paper pattern (PUT 2026-27):</b> 75 marks, 17 questions - Section A: 9 questions of 6.25 marks, attempt any 4 · Section B: 4 questions of 12.5 marks, attempt any 2 · Section C: 4 questions of 12.5 marks, attempt any 2. Use the 🎲 Mock paper button in the Q&amp;A bank (actual PUT paper or a new random PUT-pattern paper).',
+  marketing: 'Core concepts, consumer behaviour, research, STP <b>Paper pattern (PUT 2026-27):</b> 75 marks, 17 questions - Section A: 9 questions of 6.25 marks, attempt any 4 · Section B: 4 questions of 12.5 marks, attempt any 2 · Section C: 4 questions of 12.5 marks, attempt any 2. Use the 🎲 Mock paper button in the Q&amp;A bank (actual PUT paper or a new random PUT-pattern paper).',
   'business-env': 'PESTLE, LPG, ethics, CSR, case-based questions',
-  hrm: 'HRP, appraisal, compensation, industrial relations',
+  hrm: 'HRP, appraisal, compensation, industrial relations <b>Paper pattern (PUT 2026-27):</b> 75 marks, 17 questions - Section A: 9 questions of 6.25 marks, attempt any 4 · Section B: 4 questions of 12.5 marks, attempt any 2 · Section C: 4 questions of 12.5 marks, attempt any 2. Use the 🎲 Mock paper button in the Q&amp;A bank (actual PUT paper or a new random PUT-pattern paper).',
   'office-mgmt': 'Filing, secretarial practice, forms, meetings',
   'physical-education': 'Fitness, obesity, yoga & asanas, traditional games, recreation',
 };
