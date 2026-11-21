@@ -45,6 +45,36 @@
     ["Do you miss our silly talks? 🥹", [["Every day 💕", "Me too, I save every silly word 🫶"], ["Tell me a joke first 😜", "Why did the cutie cross the road? To get to me! 😂💗"]]],
     ["Who loves who more? 👀", [["Me, obviously 😎", "Wrong. Me. Final answer. Case closed 😤💗"], ["You 🥰", "Okay, you win this one... for today 😘"]]],
     ["Can I borrow your smile for the rest of my life? 😇", [["Keep it forever 💞", "Deal! Returning it only with interest 😘"], ["Only on rent 😜", "Fine, I will pay in hugs every day 🤗💗"]]],
+    ["If I was a pizza, which topping would I be? 🍕😏", [["Extra cheese 🧀", "Cheesy and irresistible, just like me 😎💗"], ["Chocolate chips 🍫", "Weird, but you are the sweetest topping anyway 😍"]]],
+    ["Guess what I am thinking about right now? 🤔💭", [["About me 😏", "Correct! You win a hug and one extra chocolate 🤗🍫"], ["About food 🍟", "Also correct, because you are always on my mind next to food 😂💗"]]],
+    ["Do you want a little surprise today? 🎁", [["Yes please! 🎁", "Close your eyes and count to three... surprise! My biggest smile for you 😁💗"], ["Tell me what 🥺", "If I tell you it is not a surprise, silly 😜🎁"]]],
+    ["Cute or beautiful - what should I call you? 🥰", [["Both 💕", "Cutiful it is! I just invented a new word for you 😍"], ["Cutie only 😜", "Cutie, forever and ever 🫶"]]],
+    ["Are you my lucky charm? 🍀", [["Yes, always 🍀", "Then I will never take you off my keychain 😄💗"], ["Maybe 😜", "I will test it by keeping you around for life 😎🍀"]]],
+    ["Rain or sunshine - which date would you pick? 🌧️☀️", [["Rain with chai ☕", "Chai in the rain with you, perfect plan 🌧️💞"], ["Sunshine walk 🌞", "Sunshine and your hand in mine, deal 🌞💗"]]],
+    ["Do I look good today? 😎", [["Super handsome 😍", "Hehe, I only dressed up so you would say that 😌💗"], ["Hmm, so-so 😜", "So-so?! I am going to fix my hair just to annoy you 😤😂"]]],
+    ["Can I steal one fry from your plate? 🍟", [["Take it 🍟", "You are the best, I will give you my last fry someday 🥹🍟"], ["No way! 🙅", "Fine, then I will steal your smile instead 😜💗"]]],
+    ["Say something sweet to me 🍬", [["You are my sunshine ☀️", "Aww! You are my whole sky, sunshine included 🌈💗"], ["You make me smile 😊", "That is exactly my job, and I love it 😎💞"]]],
+    ["How many hugs do you want today? 🫂", [["A hundred 🥹", "Counting... one, two, three... this will take all day 🫂💗"], ["Just one big one 🤗", "One extra-large hug, packed with love 🤗💞"]]],
+    ["Are you my teddy bear or my pillow? 🧸", [["Teddy bear 🧸", "A cuddly teddy bear who gives free hugs 🧸💗"], ["Pillow 😴", "Okay, then I will sleep on you every night 😂💤"]]],
+    ["What is our song today? 🎵", [["A love song 🎶", "Playing it in my heart on repeat 🎵💗"], ["A funny song 😜", "Dancing badly to it, only for you 💃😂"]]],
+    ["Can you keep a secret? 🤫", [["Yes, tell me 🤭", "My secret: you are the best part of my day 🤫💗"], ["Maybe not 😜", "Then I will whisper it only to your heart 💞"]]],
+    ["Who makes the better tea - you or me? 🍵", [["Me, of course 😎", "Okay chef, I will drink yours and pretend it is perfect 🍵😂"], ["You 🥰", "Then I will make it with extra love and extra sugar 🍵💞"]]],
+    ["Did you do something nice for yourself today? 🌷", [["Yes, I rested 😊", "That is lovely, you deserve all the rest 🌷💗"], ["Not yet 🥲", "Then do one thing right now: drink water and smile 💧😊"]]],
+    ["What shall we do on a lazy Sunday? 🛋️", [["Watch movies 🎬", "With blankets, snacks and you, best Sunday ever 🛋️💗"], ["Sleep all day 😴", "Then I will sleep next to you and guard the snacks 😴🍿"]]],
+    ["Do you believe in love at first sight? 👀💘", [["Yes, I do 💘", "Me too, it happened to me the day I met you 😍"], ["Show me again 🥰", "Look into my eyes... see? It happens every time 👀💗"]]],
+    ["Pick one: a puppy or a kitten? 🐶🐱", [["Puppy 🐶", "Puppies it is! I will be the biggest puppy for you 🐶💗"], ["Kitten 🐱", "Kittens it is! I will purr whenever you are near 🐱💞"]]],
+    ["Is it okay if I annoy you a little today? 😜", [["Of course 😄", "Yay! Prepare for 100 silly messages 🤪💗"], ["No, not today 🙅", "Okay okay, only 99 messages then 😂"]]],
+    ["Who is your favourite person in this whole world? 🌍", [["You 😘", "Correct! Stay right there, I am coming to hug you 🫂💗"], ["My family 💕", "Good answer! I love them too because of you 🥰"]]],
+    ["Are you thinking of me while studying? 📚😏", [["Always 💕", "Then I must be a great distraction, I am sorry not sorry 😎💗"], ["Not now 🙈", "Then think of me during break time, deal? 😜☕"]]],
+    ["Do you want a head massage? 💆", [["Yes please 😌", "Closing my eyes... magic fingers activated 💆✨"], ["Foot massage too 😜", "Do not push your luck, cutie 😂💗"]]],
+    ["Which colour looks best on you today? 🎨", [["Pink 🩷", "Pink! Obviously. You are my rose 🌸💗"], ["Blue 💙", "Blue like the sky, big and endless like my love 💙"]]],
+    ["If you could go anywhere with me, where would we go? ✈️", [["Mountains ⛰️", "Mountains it is! Hot chocolate and your hand in mine ⛰️🍫"], ["Beach 🏖️", "Beach it is! Sand, waves and you stealing my fries 🏖️🍟"]]],
+    ["How was your day, my cutie? 🌸", [["It was good 😊", "Yay! Tell me every little detail later 🥰"], ["A bit rough 😔", "Come here, I am sending you the biggest hug right now 🤗💗"]]],
+    ["Do you want to hear a cheesy line? 🧀", [["Yes! 😂", "Are you a magnet? Because I am so attracted to you 🧲💗"], ["No please 🙈", "Too late! You are the cheese to my pizza 🍕🧀😘"]]],
+    ["Who is more stubborn - you or me? 😤", [["You 😜", "Excuse me?! Stubborn is my other name, nice to meet you 😎"], ["Me 😌", "Good, then we are the perfect stubborn pair 😂💗"]]],
+    ["Can I be the reason you smile today? 😊", [["You already are 💕", "Then my mission is complete for today 🥹🌟"], ["Try harder 😜", "Challenge accepted! Starting a funny dance now 💃😂"]]],
+    ["What is your favourite thing about us? 💞", [["Our silly talks 😄", "Mine too! I will keep them in my heart forever 🫶"], ["Our little fights 😜", "Because we always make up with a hug 🤗💗"]]],
+    ["Time for a mini break? Stretch your arms up! 🙆", [["Done 🙆", "Great! Now your body and my heart are both relaxed 💗"], ["Too lazy 😴", "Fine, I will stretch for you. See? Stretching... done 🥱😂"]]],
   ];
   const MORE = [
     ["Are you okay? 🤗", [["Yes, I'm good 😊", "Yay! That makes me really happy 💪"], ["A bit tired 😴", "Take a deep breath and a little rest, you deserve it 🫶"]]],
@@ -58,7 +88,7 @@
     ["How is your mood right now? 🌈", [["Super happy 🥳", "Yay! Keep shining 🌟"], ["Not great 😔", "Sending you a big hug 🤗"]]],
   ];
   // answers that start with one of these show the SAD image, all others the HAPPY image
-  const SAD = ['Sorry, forgot', 'Still sleepy', 'Chocolate 😜', 'Ask me later', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great'];
+  const SAD = ['Sorry, forgot', 'Still sleepy', 'Chocolate 😜', 'Ask me later', 'A little bit', 'No, I', 'A bit tired', 'Nothing much', 'Not yet', 'Not really', 'No thanks', 'Not great', 'A bit rough', 'Too lazy', 'Not now', 'No way'];
   // extra funny / cute answers: question -> { reply index: [more answers] } (one is picked at random on each tap)
   const ORDER = ["Wait, let me order for you! 🛵 Tell me what you want - is it pizza? 🍕", "Wait, let me order for you, cutie! 🛵 What should I get - pizza? 🍕", "Wait wait, let me order it right now 🛵 Is it your favourite pizza? 🍕"];
   const PIZZA = ORDER;
