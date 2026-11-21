@@ -51,6 +51,23 @@ W = pymupdf.paper_rect("a4")
 EXAM = "Mon 23 Nov 2026, 11:30 AM - 1:30 PM, written, 2 hours"
 
 
+
+def part_c(qs, subject):
+    """Part C: the PUT paper 2026-27 questions, practice numericals and theory-bank questions of this unit with their full model answers."""
+    extra = [q for q in qs if q.get("put") or q.get("num") or str(q.get("src", "")).startswith("Theory")]
+    if not extra:
+        return []
+    order = {"put": 0, "num": 1}
+    extra.sort(key=lambda q: (0 if q.get("put") else 1 if q.get("num") else 2, str(q.get("put") or q.get("src"))))
+    out = ["<p class='part' style='page-break-before:always'>Part C - PUT paper 2026-27, practice numericals and theory bank, with model answers</p>",
+           "<div class='box'>New paper pattern (75 marks): Section A 9 questions of 6.25 marks (attempt 4) · Section B 4 of 12.5 (attempt 2) · Section C 4 of 12.5 (attempt 2). "
+           "Below: every question of this unit from the PUT paper, the practice sets and the theory bank, with the full answer. For 6.25 marks write about 250-300 words, for 12.5 marks about 500-600 words.</div>"]
+    for q in extra:
+        ans = re.sub(r"<svg.*?</svg>", "<p><i>[Draw the curve as in the website answer: sales rising then falling, profit peaking earlier, with the four stages marked.]</i></p>", q["a"], flags=re.S)
+        ans = re.sub(r"<div class=.diag.>\s*</div>", "", ans)
+        out.append(f"<h3>{re.sub(r'<[^>]+>', '', q['q'])} [{q['m']} marks]</h3><p class='lect'>{e(str(q.get('src', '')))}</p>{ans}")
+    return out
+
 def words(t):
     return {w for w in re.findall(r"[a-z]{4,}", re.sub(r"<[^>]+>", " ", t.lower())) if w not in STOP}
 
@@ -128,6 +145,7 @@ for idx, unit in enumerate(UNITS):
             continue
         parts.append(f"<h4>{m}-mark questions ({len(group)})</h4><table><tr><th>No.</th><th>Question</th><th>Topic</th><th>Asked</th><th>Read in Part A</th></tr>"
                      + "".join(f"<tr><td>{k}</td><td>{re.sub(r'<[^>]+>', '', q['q'])}</td><td>{e(q['t'])}</td><td>{STAR.get(q['p'], '')}</td><td>{where(q, secs)}</td></tr>" for k, q in enumerate(group, 1)) + "</table>")
+    parts.extend(part_c(qs, 'finance'))
     name = f"Finance_Unit_{idx + 1}_Detailed_Notes_and_Important_Questions"
     n = render("".join(parts), udir / (name + ".pdf"), f"Business Finance {label} - Detailed Notes and Important Questions")
     print(name + ".pdf", n, "pages,", len(qs), "questions")
