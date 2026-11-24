@@ -75,13 +75,36 @@
   }
 
   // ---------------------------------------------------------------- landing page
-  function card(set, extra) {
-    const s = saved()[set.key] || {};
-    const done = s.best != null ? `<span class="mbdone">Best ${esc(String(s.best))}${s.when ? ' · ' + esc(s.when) : ''}</span>` : '';
-    const n = set.kind === 'pattern' ? 17 : set.kind === 'newpat' ? 17 : set.kind === 'real' ? (set.preset.real.reduce((a, x) => a + x.ids.length, 0)) : set.qs ? set.qs.length : 0;
-    const k = encodeURIComponent(set.key);
-    return `<div class="mbwrap"><a class="mbset ${set.kind}" href="#/mocks/${k}"><b>${esc(set.title)}</b><span>${esc(set.tag)}</span><em>${n} questions</em>${done}</a><a class="mbview" href="#/mocks/${k}/view" title="Read the questions without starting the exam">👁 View questions</a></div>`;
+  function countOf(set) {
+    return set.kind === 'pattern' || set.kind === 'newpat' ? 17 : set.kind === 'real' ? set.preset.real.reduce((a, x) => a + x.ids.length, 0) : set.qs ? set.qs.length : 0;
   }
+  const triedOf = (set) => (saved()[set.key] || {}).best != null;
+
+  function card(set, upNext) {
+    const s = saved()[set.key] || {};
+    const k = encodeURIComponent(set.key);
+    const no = /(\d+)$/.exec(set.title);
+    const badge = set.kind === 'real' ? (set.group === 'new' ? '📜' : '📋') : no ? no[1] : '•';
+    const status = s.best != null ? `<span class="mbc-st done">✔ ${esc(String(s.best))}</span>` : upNext ? '<span class="mbc-st next">Up next</span>' : '<span class="mbc-st">New</span>';
+    const marks = '';
+    return `<article class="mbc ${set.kind}${set.group ? ' g-' + set.group : ''}${upNext ? ' upnext' : ''}">
+      <div class="mbc-top"><span class="mbc-no">${badge}</span><div class="mbc-t"><b>${esc(set.title)}</b><small>${esc(set.tag)}</small></div>${status}</div>
+      <div class="mbc-meta"><span>${countOf(set)} questions</span>${marks}${s.when ? '<span>' + esc(s.when) + '</span>' : ''}</div>
+      <div class="mbc-act"><a class="btn primary" href="#/mocks/${k}">▶ Start</a><a class="btn" href="#/mocks/${k}/view" title="Read the questions without starting the exam">👁 View</a></div></article>`;
+  }
+
+  function nextExamId() {
+    const E = window.EXAMS || [];
+    const now = new Date();
+    const end = (ex) => { const [y, m, d] = ex.date.split('-').map(Number); const g = /(\d+):(\d+)\s*(AM|PM)/i.exec(ex.time.split('-')[1]); let h = +g[1] % 12; if (/PM/i.test(g[3])) h += 12; return new Date(y, m - 1, d, h, +g[2]); };
+    const ex = E.slice().sort((x, y) => x.date.localeCompare(y.date)).find((x) => end(x) > now);
+    return ex ? ex.id : null;
+  }
+
+  const TABS = () => ['finance-num'].concat(ORDER).filter((id) => id === 'finance-num' || S[id]);
+  const tabName = (id) => (id === 'finance-num' ? '🧮 Finance numericals' : (ICON[id] || '📘') + ' ' + S[id].title.replace(/&amp;/g, '&').split(' ').slice(0, 2).join(' '));
+  const FILTERS = (id) => (id === 'finance-num' ? [['all', 'All sets'], ['todo', 'Not tried']] : OBJECTIVE[id] ? [['all', 'All sets'], ['real', 'Real paper'], ['50', '50 questions'], ['100', '100 questions'], ['todo', 'Not tried']] : [['all', 'All sets'], ['new', 'New pattern'], ['old', 'Old PUT pattern'], ['todo', 'Not tried']]);
+  const matches = (set, f) => f === 'all' || (f === 'todo' ? !triedOf(set) : f === 'real' ? (set.kind === 'real' || set.key.endsWith(':put')) : f === 'new' ? set.group === 'new' : f === 'old' ? set.group === 'old' : set.group === f);
 
   function page(key, mode) {
     const root = document.getElementById('app');
@@ -90,33 +113,36 @@
     setTheme('');
     const sets = allSets();
     const total = Object.values(sets).reduce((n, a) => n + a.length, 0);
-    const sections = ORDER.filter((id) => S[id]).map((id) => {
-      const list = sets[id] || [];
-      let body;
-      if (OBJECTIVE[id]) {
-        const g = (name, f) => { const x = list.filter(f); return x.length ? `<h4>${name}</h4><div class="mbgrid">${x.map(card).join('')}</div>` : ''; };
-        body = g('Real paper', (s) => s.key.endsWith(':put')) + g('Timed 50-question sets', (s) => s.group === '50') + g('Full-paper 100-question sets', (s) => s.group === '100');
-      } else {
-        const gr = (name, f) => { const x = list.filter(f); return x.length ? `<h4>${name}</h4><div class="mbgrid">${x.map(card).join('')}</div>` : ''; };
-        body = gr('NEW PATTERN - Section A: 9 short x 5 · Section B: any 1 of 4 x 15 · Section C: any 1 of 4 x 15', (s2) => s2.group === 'new') + gr('Old PUT pattern (A 9 x 6.25 · B and C 4 x 12.5)', (s2) => s2.group === 'old');
-      }
-      const attempted = list.filter((s) => (saved()[s.key] || {}).best != null).length;
-      return `<section class="mbsec t-${id}" id="mb-${id}"><h3><span>${ICON[id] || '📘'}</span> ${S[id].title} <small>${list.length} sets${attempted ? ' · ' + attempted + ' tried' : ''}</small></h3>${body}</section>`;
-    }).join('');
-    const num = sets['finance-num'] || [];
-    const numSec = `<section class="mbsec t-finance mbnum" id="mb-numerical"><h3><span>🧮</span> Finance Numerical Mock Box <small>${num.length} sets · old + new numericals with how to solve</small></h3>
-      <p class="expl">Every numerical question in the Finance bank - the old ones and the new practice sets (Capital Budgeting, Leverage, Numerical Questions, PUT paper) - in sets of 6. Each answer shows the formula, the working table and the final result.</p>
-      <div class="mbgrid">${num.map(card).join('')}</div></section>`;
-    const chips = ['<a href="#mb-numerical">🧮 Numericals</a>'].concat(ORDER.filter((id) => S[id]).map((id) => `<a href="#mb-${id}" class="t-${id}">${ICON[id] || '📘'} ${S[id].title.split(' ').slice(0, 2).join(' ')}</a>`)).join('');
+    const tabs = TABS();
+    let cur = store.get('mbtab', null);
+    if (!cur || !tabs.includes(cur)) cur = nextExamId() || tabs[1];
+    let filter = 'all';
     root.innerHTML = `<section class="mbhero"><img class="mbdino" src="img/cute-dino.svg" alt="" width="150" height="150"><h1>🎯 Mock Exam Box</h1>
-      <p>${total} practice sets for all six subjects. Pick a subject, take a set under exam conditions, then check the model answers. Sets are fixed, so you can come back and repeat them; your best score is remembered on this device.</p>
-      <nav class="mbjump" id="mbjump">${chips}</nav></section>${numSec}${sections}`;
-    document.getElementById('mbjump').onclick = (e) => {
-      const a = e.target.closest('a');
-      if (!a) return;
-      e.preventDefault();
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      <p>${total} practice sets for all six subjects. Pick a subject below, take a set under exam conditions - or just <b>view the questions</b> first. Sets are fixed, so you can repeat them; your best score is remembered on this device.</p></section>
+      <nav class="mbtabs" id="mbtabs" aria-label="Subjects"></nav><div id="mbbody"></div>`;
+    const draw = () => {
+      const list = sets[cur] || [];
+      const tried = list.filter(triedOf).length;
+      const pct = list.length ? Math.round((tried / list.length) * 100) : 0;
+      document.getElementById('mbtabs').innerHTML = tabs.map((id) => `<button type="button" class="mbtab t-${id === 'finance-num' ? 'finance' : id}${id === cur ? ' on' : ''}" data-t="${id}">${tabName(id)}<em>${(sets[id] || []).filter(triedOf).length}/${(sets[id] || []).length}</em></button>`).join('');
+      const visible = list.filter((x) => matches(x, filter));
+      const firstTodo = list.find((x) => x.kind !== 'real' && !triedOf(x));
+      const groups = (OBJECTIVE[cur] || cur === 'finance-num') ? [[null, visible]] : [['NEW PATTERN - A: 9 short answers x 5 · B: any 1 of 4 x 15 · C: any 1 of 4 x 15', visible.filter((x) => x.group === 'new')], ['Old PUT pattern - A: 9 x 6.25 (any 4) · B and C: 4 x 12.5 (any 2)', visible.filter((x) => x.group === 'old')]];
+      const objGroups = OBJECTIVE[cur] ? [['Real paper', visible.filter((x) => x.kind === 'real' || x.key.endsWith(':put'))], ['Timed 50-question sets', visible.filter((x) => x.group === '50')], ['Full-paper 100-question sets', visible.filter((x) => x.group === '100')]] : null;
+      const use = objGroups || groups;
+      const body = use.map(([name, arr]) => arr.length ? (name ? `<h4 class="mbgh">${name}</h4>` : '') + `<div class="mbgrid2">${arr.map((x) => card(x, x === firstTodo)).join('')}</div>` : '').join('') || '<p class="expl">No sets match this filter.</p>';
+      const intro = cur === 'finance-num' ? '<p class="expl">Every numerical question in the Finance bank - the old ones and the new practice sets - in sets of 6, each with a step-by-step "How to solve".</p>' : (OBJECTIVE[cur] ? `<p class="expl">${esc(OBJECTIVE[cur].label)}</p>` : '');
+      const upn = firstTodo ? `<a class="mbupnext" href="#/mocks/${encodeURIComponent(firstTodo.key)}"><span>Up next</span><b>${esc(firstTodo.title)}</b><i>▶ Start</i></a>` : '';
+      document.getElementById('mbbody').innerHTML = `<section class="mbpanel t-${cur === 'finance-num' ? 'finance' : cur}">
+        <div class="mbsum"><div><h3>${cur === 'finance-num' ? '🧮 Finance numericals' : (ICON[cur] || '📘') + ' ' + S[cur].title}</h3><p>${list.length} sets · ${tried} tried</p><div class="mbprog"><i style="width:${pct}%"></i></div></div>${upn}</div>
+        ${intro}<div class="mbfilters">${FILTERS(cur).map(([f, n]) => `<button type="button" class="mbf${f === filter ? ' on' : ''}" data-f="${f}">${n}</button>`).join('')}</div>${body}</section>`;
+    };
+    draw();
+    root.onclick = (e) => {
+      const t = e.target.closest('.mbtab');
+      if (t) { cur = t.dataset.t; filter = 'all'; store.set('mbtab', cur); draw(); return; }
+      const f = e.target.closest('.mbf');
+      if (f) { filter = f.dataset.f; draw(); }
     };
   }
 
