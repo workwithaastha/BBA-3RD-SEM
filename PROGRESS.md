@@ -234,3 +234,6 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 - PDFs: `tools/make_new_pattern_pdfs.py` -> `MCQ pdf/HRM/HRM_New_Pattern_Set_1..8.pdf`, `MCQ pdf/Marketing/Marketing_New_Pattern_Set_1..8.pdf`, `MCQ pdf/Finance/Finance_New_Pattern_Actual.pdf` + `Finance_New_Pattern_Set_1..8.pdf` (paper in the real layout + model answers); same sets as the website. Old `*_PUT_Set_N.pdf` kept.
 
 - Sets 9-12 added for HRM, Marketing and Finance (12 New Pattern sets each; sets 1-8 unchanged) in the Mock Exam Box and as PDFs. New `tools/make_last_night_pdf.py` -> `MCQ pdf/<Subject>/<Subject>_New_Pattern_Last_Night_Sheet.pdf` (per unit: most-predicted short parts with key points, likely long questions with the answer skeleton).
+
+### Phase 48 - Exam Focus panel
+- `site/js/focus.js` + `css/focus.css`: dark "mission control" card under the home banner for the NEXT exam (auto-moves on after each exam ends): live days / hours / min / sec countdown to the start time, details, "Today game plan" tick-boxes remembered per day (last-night sheet, quick-recall card for HRM, next unfinished New Pattern set with PDF, Q&A, MCQs; objective subjects get timed sets, wrong-answer review, concept cards, Daily 20), progress bar, and a Focus-mode switch that dims the other subject cards. Turns amber and pulses in the last 3 days, green while the exam is on.
