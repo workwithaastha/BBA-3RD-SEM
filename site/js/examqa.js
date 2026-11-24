@@ -18,14 +18,17 @@
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const PRESETS = {
     finance: [
+      { id: 'newpat', name: 'NEW PATTERN - 75 marks (A: 9 short x 5 · B: any 1 of 4 x 15 · C: any 1 of 4 x 15)', parts: [['Section A (short answers, all compulsory)', 5, 9, [2, 3, 5, 6, 6.25], 9], ['Section B (long, attempt any one)', 15, 4, [10, 12.5, 15], 1], ['Section C (long, attempt any one)', 15, 4, [10, 12.5, 15], 1]] },
       { id: 'tp', name: 'Test-paper pattern - 30 marks (90 min)', parts: [['Section A', 3, 4], ['Section B', 6, 3]] },
       { id: 'full', name: 'Full paper - 50 marks (2 h)', parts: [['Section A (very short)', 2, 5], ['Section B (short)', 3, 4], ['Section C (medium)', 6, 3], ['Section D (long)', 10, 1]] },
     ],
     hrm: [
+      { id: 'newpat', name: 'NEW PATTERN - 75 marks (A: 9 short x 5 · B: any 1 of 4 x 15 · C: any 1 of 4 x 15)', parts: [['Section A (short answers, all compulsory)', 5, 9, [2, 3, 5, 6, 6.25], 9], ['Section B (long, attempt any one)', 15, 4, [10, 12.5, 15], 1], ['Section C (long, attempt any one)', 15, 4, [10, 12.5, 15], 1]] },
       { id: 'tp', name: 'Mid-term style - 30 marks (90 min)', parts: [['Section A', 3, 4], ['Section B', 6, 3]] },
       { id: 'full', name: 'Full paper - 50 marks (2 h)', parts: [['Section A (very short)', 2, 5], ['Section B (short)', 3, 4], ['Section C (medium)', 6, 3], ['Section D (long)', 10, 1]] },
     ],
     marketing: [
+      { id: 'newpat', name: 'NEW PATTERN - 75 marks (A: 9 short x 5 · B: any 1 of 4 x 15 · C: any 1 of 4 x 15)', parts: [['Section A (short answers, all compulsory)', 5, 9, [2, 3, 5, 6, 6.25], 9], ['Section B (long, attempt any one)', 15, 4, [10, 12.5, 15], 1], ['Section C (long, attempt any one)', 15, 4, [10, 12.5, 15], 1]] },
       { id: 'tp', name: 'Mid-term style - 30 marks (90 min)', parts: [['Section A', 3, 4], ['Section B', 6, 3]] },
       { id: 'full', name: 'Full paper - 50 marks (2 h)', parts: [['Section A (very short)', 2, 5], ['Section B (short)', 3, 4], ['Section C (medium)', 6, 3], ['Section D (long)', 10, 1]] },
     ],
@@ -105,7 +108,7 @@
     const ukey = (u) => (/^Unit/.test(u) ? ({ I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6 }[u.replace('Unit ', '')] || +u.replace('Unit ', '') || 98) : 99);
     const units = [...new Set(all.map((q) => q.u))].sort((a, b) => ukey(a) - ukey(b));
     const cnt = (m) => all.filter((q) => m.includes(q.m)).length;
-    const chips = [['', '📚', 'All', all.length], ['2', '⚡', '2 marks', cnt([2])], ['3', '✏️', '3 marks', cnt([3])], ['5,6', '📝', '5-6 marks', cnt([5, 6])], ['10', '📖', '10 marks', cnt([10])], ['p3', '🔮', 'Most predicted', all.filter((q) => q.p === 3).length], ...(all.some((q) => q.put) ? [['put', '📋', 'PUT paper', all.filter((q) => q.put).length]] : []), ...(all.some((q) => q.num) ? [['num', '🧮', 'Numericals', all.filter((q) => q.num || /numerical/i.test(q.t)).length]] : [])];
+    const chips = [['', '📚', 'All', all.length], ['2', '⚡', '2 marks', cnt([2])], ['3', '✏️', '3 marks', cnt([3])], ['5,6', '📝', '5-6 marks', cnt([5, 6])], ['10', '📖', '10 marks', cnt([10])], ...(all.some((q) => q.m === 15) ? [['15', '🏆', '15 marks', cnt([15])]] : []), ['p3', '🔮', 'Most predicted', all.filter((q) => q.p === 3).length], ...(all.some((q) => q.put) ? [['put', '📋', 'PUT paper', all.filter((q) => q.put).length]] : []), ...(all.some((q) => q.num) ? [['num', '🧮', 'Numericals', all.filter((q) => q.num || /numerical/i.test(q.t)).length]] : [])];
     return `
     <section class="qahero">
       <div class="qaring" id="qaring" style="--p:0"><b id="qapct">0%</b><span>revised</span></div>
@@ -219,7 +222,7 @@
         out = p.real.map((sec) => {
           const qs = sec.ids.map((k) => all.find((x) => x.put === k)).filter(Boolean);
           total += sec.attempt * sec.marks;
-          return `<h4>${sec.name} - ${sec.rule}</h4>` + qs.map((q) => { n++; return `<div class="mq"><b>Q${n}.</b> ${q.q} <span class="mkr">[${q.m}]</span><div class="mans" hidden>${q.a}</div></div>`; }).join('');
+          return `<h4>${sec.name} - ${sec.rule}</h4>` + qs.map((q) => { n++; return `<div class="mq"><b>Q${sec.sub ? '1(' + 'abcdefghi'[n - 1] + ')' : (sec.start ? sec.start + qs.indexOf(q) : n)}.</b> ${q.q} <span class="mkr">[${q.m}]</span><div class="mans" hidden>${q.a}</div></div>`; }).join('');
         }).join('');
         rules = ' · ' + (p.note || '');
       } else {

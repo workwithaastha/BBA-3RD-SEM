@@ -31,11 +31,14 @@
     const poolA = shuffled(bank.filter((q) => !q.put && !q.num && [5, 6, 6.25].includes(q.m)), hash(id + 'A'));
     const poolBC = shuffled(bank.filter((q) => !q.put && (!q.num || q.m === 12.5) && [10, 12.5].includes(q.m)), hash(id + 'B'));
     const n = Math.max(3, Math.min(10, Math.ceil(Math.max(poolA.length / 9, poolBC.length / 8))));
-    const sets = real.map((p) => ({ key: id + ':' + p.id, title: p.name.replace(/^ACTUAL /, 'Actual '), kind: 'real', preset: p, tag: 'Real paper' }));
+    const isNew = (p) => p.id === 'newpaper';
+    const realSets = real.map((p) => ({ key: id + ':' + p.id, title: p.name.replace(/^ACTUAL /, 'Actual '), kind: 'real', preset: p, tag: isNew(p) ? 'Real paper · 75 marks' : 'Old pattern paper', group: isNew(p) ? 'new' : 'old' }));
+    const newSets = window.MockGen ? window.MockGen.newPatternSets(id, bank, 8).map((s2, k) => ({ key: id + ':np' + (k + 1), title: s2.name, kind: 'newpat', secs: s2.secs, tag: '75 marks · 2 h', group: 'new' })) : [];
+    const sets = realSets.filter((x) => x.group === 'new').concat(newSets, realSets.filter((x) => x.group === 'old'));
     for (let k = 0; k < n; k++) {
       const a = chunk(poolA, k, 9);
       const bc = chunk(poolBC, k, 8);
-      sets.push({ key: id + ':set' + (k + 1), title: 'PUT-pattern Set ' + (k + 1), kind: 'pattern', tag: '75 marks · 2 h', a, b: bc.slice(0, 4), c: bc.slice(4, 8) });
+      sets.push({ key: id + ':set' + (k + 1), title: 'PUT-pattern Set ' + (k + 1), kind: 'pattern', tag: 'Old PUT pattern · 75 marks', group: 'old', a, b: bc.slice(0, 4), c: bc.slice(4, 8) });
     }
     return sets;
   }
@@ -75,7 +78,7 @@
   function card(set, extra) {
     const s = saved()[set.key] || {};
     const done = s.best != null ? `<span class="mbdone">Best ${esc(String(s.best))}${s.when ? ' · ' + esc(s.when) : ''}</span>` : '';
-    const n = set.kind === 'pattern' ? 17 : set.kind === 'real' ? 17 : set.qs ? set.qs.length : 0;
+    const n = set.kind === 'pattern' ? 17 : set.kind === 'newpat' ? 17 : set.kind === 'real' ? (set.preset.real.reduce((a, x) => a + x.ids.length, 0)) : set.qs ? set.qs.length : 0;
     return `<a class="mbset ${set.kind}" href="#/mocks/${encodeURIComponent(set.key)}"><b>${esc(set.title)}</b><span>${esc(set.tag)}</span><em>${n} questions</em>${done}</a>`;
   }
 
@@ -93,7 +96,8 @@
         const g = (name, f) => { const x = list.filter(f); return x.length ? `<h4>${name}</h4><div class="mbgrid">${x.map(card).join('')}</div>` : ''; };
         body = g('Real paper', (s) => s.key.endsWith(':put')) + g('Timed 50-question sets', (s) => s.group === '50') + g('Full-paper 100-question sets', (s) => s.group === '100');
       } else {
-        body = `<div class="mbgrid">${list.map(card).join('')}</div>`;
+        const gr = (name, f) => { const x = list.filter(f); return x.length ? `<h4>${name}</h4><div class="mbgrid">${x.map(card).join('')}</div>` : ''; };
+        body = gr('NEW PATTERN - Section A: 9 short x 5 · Section B: any 1 of 4 x 15 · Section C: any 1 of 4 x 15', (s2) => s2.group === 'new') + gr('Old PUT pattern (A 9 x 6.25 · B and C 4 x 12.5)', (s2) => s2.group === 'old');
       }
       const attempted = list.filter((s) => (saved()[s.key] || {}).best != null).length;
       return `<section class="mbsec t-${id}" id="mb-${id}"><h3><span>${ICON[id] || '📘'}</span> ${S[id].title} <small>${list.length} sets${attempted ? ' · ' + attempted + ' tried' : ''}</small></h3>${body}</section>`;
@@ -174,7 +178,7 @@
     const ans = `<div class="mbans" hidden>${q.a}${q.ms ? `<div class="msch"><b>📝 Marking scheme:</b> ${q.ms}</div>` : ''}</div>`;
     return `<div class="mbq" data-sec="${opts.sec || ''}"><div class="mbqh"><b>${label}</b><span class="mbmk">${marks}</span>${opts.tag || ''}</div>
       <div class="mbqt">${q.q}</div>
-      <div class="mbact"><label class="mbtry"><input type="checkbox" class="try"> I will attempt this</label><button type="button" class="btn show">Show model answer</button></div>${ans}</div>`;
+      <div class="mbact">${opts.compulsory ? '<span class="mbtry"><input type="checkbox" class="try" hidden>compulsory</span>' : '<label class="mbtry"><input type="checkbox" class="try"> I will attempt this</label>'}<button type="button" class="btn show">Show model answer</button></div>${ans}</div>`;
   }
 
   function writtenRun(set, sid) {
@@ -182,9 +186,12 @@
     let sections = [], minutes = 120, title = set.title, note = '';
     if (set.kind === 'real') {
       const bank = (window.ExamQA.data[sid] || []);
-      sections = set.preset.real.map((sec) => ({ name: sec.name, rule: sec.rule, marks: sec.marks, attempt: sec.attempt, qs: sec.ids.map((k) => bank.find((x) => x.put === k)).filter(Boolean) }));
+      sections = set.preset.real.map((sec) => ({ name: sec.name, rule: sec.rule, marks: sec.marks, attempt: sec.attempt, sub: sec.sub, start: sec.start, qs: sec.ids.map((k) => bank.find((x) => x.put === k)).filter(Boolean) }));
       minutes = /online/i.test(set.preset.id) ? 90 : 120;
       note = set.preset.note || '';
+    } else if (set.kind === 'newpat') {
+      sections = set.secs;
+      note = 'NEW PATTERN: Section A - Q1 (a)-(i), nine compulsory short answers of 5 marks (45) · Section B - attempt any ONE of 4 long questions (15) · Section C - attempt any ONE of 4 long questions (15).';
     } else {
       sections = [
         { name: 'Section A', rule: 'attempt any four (6.25 × 4 = 25 marks)', marks: 6.25, attempt: 4, qs: set.a },
@@ -195,7 +202,7 @@
     }
     const total = sections.reduce((n, s) => n + s.attempt * s.marks, 0);
     let n = 0;
-    const body = sections.map((sec, si) => `<h3 class="mbsh">${esc(sec.name)} <small>${esc(sec.rule)}</small></h3><p class="mbcnt" data-s="${si}"></p>` + sec.qs.map((q) => { n++; return qBlock(q, 'Q' + n, sec.marks, { sec: si, tag: `<span class="mbsrc">${esc((q.t || '') + (q.u ? ' · ' + q.u : ''))}</span>` }); }).join('')).join('');
+    const body = sections.map((sec, si) => `<h3 class="mbsh">${esc(sec.name)} <small>${esc(sec.rule)}</small></h3><p class="mbcnt" data-s="${si}"></p>` + sec.qs.map((q, qi) => { n++; return qBlock(q, sec.sub ? '1(' + 'abcdefghi'[qi] + ')' : sec.start ? 'Q' + (sec.start + qi) : 'Q' + n, sec.marks, { compulsory: sec.attempt >= sec.qs.length, sec: si, tag: `<span class="mbsrc">${esc((q.t || '') + (q.u ? ' · ' + q.u : ''))}</span>` }); }).join('')).join('');
     root.innerHTML = `${back}<section class="mbpaper"><div class="mbbar"><div><h2>${S[sid].title} - ${esc(title)}</h2><p class="expl">Maximum marks: ${total} · Time: ${minutes} minutes · ${esc(note)}</p></div>
       <div class="mbtimer"><b id="mbt">--:--:--</b><button class="btn solid" id="mbgo">▶ Start timer</button><button class="btn" id="mball">Show all answers</button><button class="btn" id="mbprint">🖨 Print paper (no answers)</button><button class="btn" id="mbprint2">🖨 Print with answers</button></div></div>${body}
       <div class="mbfoot"><p class="expl">Done? Write each answer on paper first, then open the model answer and compare - tick what you covered.</p><label class="mbtry"><input type="checkbox" id="mbfin"> I finished this set</label></div></section>`;
@@ -218,7 +225,7 @@
     const count = () => sections.forEach((sec, si) => {
       const c = root.querySelectorAll(`.mbq[data-sec="${si}"] .try:checked`).length;
       const el = root.querySelector(`.mbcnt[data-s="${si}"]`);
-      el.textContent = `Chosen ${c} of ${sec.attempt} to attempt` + (c > sec.attempt ? ' - too many, choose only ' + sec.attempt : '');
+      el.textContent = sec.attempt >= sec.qs.length ? 'All parts are compulsory' : `Chosen ${c} of ${sec.attempt} to attempt` + (c > sec.attempt ? ' - too many, choose only ' + sec.attempt : '');
       el.classList.toggle('bad', c > sec.attempt);
     });
     root.addEventListener('change', (e) => { if (e.target.classList.contains('try')) count(); });

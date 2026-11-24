@@ -226,3 +226,9 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 
 ### Phase 46 - Encouragement pop-up
 - `site/js/cheer.js` + `css/cheer.css`: after every 10-15 (random) questions solved a card says "Good going, sweetheart! ... Keep it up" (6 wordings, happy image, auto-closes in about 5 s, never pauses a timer). Works in practice, mock exam, Daily 20, Mock Exam Box MCQ sets and written sets (counts answers chosen / model answers opened / Q&A marked revised); the counter is remembered across pages.
+
+### Phase 47 - NEW exam pattern (question/new pattern, Finance paper of 23 Nov 2026)
+- Pattern: 75 marks, 2 h. Section A = Q1 (a)-(i), nine compulsory short answers of 5 marks (45); Section B = attempt any ONE of Q2-Q5 (15), Units I-II; Section C = attempt any ONE of Q6-Q9 (15), Units III-IV.
+- `examqa-finance12.js`: the actual Finance paper (Q1 a-i, Q2-Q9) with model answers (numericals computed: bond Rs 952, DOL 2, machine: inflow 1,60,000 / payback 3.125 yr / ARR 12% / NPV +1,06,560, firms X and Y leverage 1.33/1.2/1.6 and 2.67/3/8). Marks 15 supported (chip, colours, qa.js).
+- `site/js/mockgen.js` (shared by the browser and node): New Pattern sets = A 2 short from each unit + 1 rotating, B 2 long from each of Units I-II, C 2 long from each of Units III-IV, most-predicted questions first. Mock Exam Box shows "New Pattern Set 1-8" (and the actual Finance paper) first and keeps the old PUT-pattern sets below under "Old PUT pattern". The Q&A bank Mock paper menu has "NEW PATTERN" as the first preset. PATTERN notes on Finance/HRM/Marketing quiz pages updated.
+- PDFs: `tools/make_new_pattern_pdfs.py` -> `MCQ pdf/HRM/HRM_New_Pattern_Set_1..8.pdf`, `MCQ pdf/Marketing/Marketing_New_Pattern_Set_1..8.pdf`, `MCQ pdf/Finance/Finance_New_Pattern_Actual.pdf` + `Finance_New_Pattern_Set_1..8.pdf` (paper in the real layout + model answers); same sets as the website. Old `*_PUT_Set_N.pdf` kept.

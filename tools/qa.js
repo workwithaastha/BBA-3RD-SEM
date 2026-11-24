@@ -46,7 +46,7 @@ for (const [id, s] of Object.entries(S)) {
 for (const [id, list] of Object.entries((window.ExamQA && window.ExamQA.data) || {})) {
   list.forEach((q, i) => {
     const t = `${id} QA#${i + 1} (${q.m}m)`;
-    if (![2, 3, 5, 6, 6.25, 10, 12.5].includes(q.m)) bad(`${t}: odd marks`);
+    if (![2, 3, 5, 6, 6.25, 10, 12.5, 15].includes(q.m)) bad(`${t}: odd marks`);
     if (!q.q || !q.a || !q.u || !q.t) bad(`${t}: missing field`);
     const o = (q.a.match(/<(div|table|ul|ol|p|h4|tr|td|th|b|i|sup|sub)(?=[\s>])/g) || []).length;
     const c = (q.a.match(/<\/(div|table|ul|ol|p|h4|tr|td|th|b|i|sup|sub)>/g) || []).length;
