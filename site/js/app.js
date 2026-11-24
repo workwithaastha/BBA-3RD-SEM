@@ -574,7 +574,7 @@ function routeInner() {
   if (a === 'daily') return daily();
   if (a === 'revision') return revision(b);
   if (a === 'expected') return expected(b);
-  if (a === 'mocks' && window.MockBox) return window.MockBox.page(b);
+  if (a === 'mocks' && window.MockBox) return window.MockBox.page(b, parts[3]);
   if (a === 'sheet' && window.ExamQA) return window.ExamQA.sheet(b);
   if (b === 'files' && window.Sources) return window.Sources.page(a);
   if (b === 'quiz') return quiz(a, parts[3]);

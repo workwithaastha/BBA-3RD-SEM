@@ -96,3 +96,9 @@
 @media (prefers-reduced-motion:reduce){.mbdino,.mbdino2{animation:none}}
 .mbhero .mbjump{max-width:calc(100% - clamp(120px,18vw,210px))}
 @media (max-width:640px){.mbhero .mbjump{max-width:none}}
+/* "View questions" option on every set card */
+.mbwrap{display:grid;gap:4px}
+.mbwrap .mbset{height:100%}
+.mbview{justify-self:start;font-size:.78rem;font-weight:700;text-decoration:none;color:var(--a1,#6366f1);padding:3px 10px;border-radius:99px;border:1px dashed color-mix(in srgb,var(--a1,#6366f1) 60%,transparent);background:var(--bg)}
+.mbview:hover{background:var(--a1,#6366f1);color:#fff;border-style:solid}
+.mbm .mbo{cursor:default}

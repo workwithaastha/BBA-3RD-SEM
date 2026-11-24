@@ -79,13 +79,14 @@
     const s = saved()[set.key] || {};
     const done = s.best != null ? `<span class="mbdone">Best ${esc(String(s.best))}${s.when ? ' · ' + esc(s.when) : ''}</span>` : '';
     const n = set.kind === 'pattern' ? 17 : set.kind === 'newpat' ? 17 : set.kind === 'real' ? (set.preset.real.reduce((a, x) => a + x.ids.length, 0)) : set.qs ? set.qs.length : 0;
-    return `<a class="mbset ${set.kind}" href="#/mocks/${encodeURIComponent(set.key)}"><b>${esc(set.title)}</b><span>${esc(set.tag)}</span><em>${n} questions</em>${done}</a>`;
+    const k = encodeURIComponent(set.key);
+    return `<div class="mbwrap"><a class="mbset ${set.kind}" href="#/mocks/${k}"><b>${esc(set.title)}</b><span>${esc(set.tag)}</span><em>${n} questions</em>${done}</a><a class="mbview" href="#/mocks/${k}/view" title="Read the questions without starting the exam">👁 View questions</a></div>`;
   }
 
-  function page(key) {
+  function page(key, mode) {
     const root = document.getElementById('app');
     clearInterval(timer);
-    if (key) return runSet(decodeURIComponent(key));
+    if (key) return mode === 'view' ? viewSet(decodeURIComponent(key)) : runSet(decodeURIComponent(key));
     setTheme('');
     const sets = allSets();
     const total = Object.values(sets).reduce((n, a) => n + a.length, 0);
@@ -124,6 +125,62 @@
     const sets = allSets();
     for (const list of Object.values(sets)) { const s = list.find((x) => x.key === key); if (s) return s; }
     return null;
+  }
+
+  // ---------------------------------------------------------------- view the questions of a set (no timer, no exam)
+  function sectionsFor(set, sid) {
+    let sections = [], note = '';
+    if (set.kind === 'real') {
+      const bank = (window.ExamQA.data[sid] || []);
+      sections = set.preset.real.map((sec) => ({ name: sec.name, rule: sec.rule, marks: sec.marks, attempt: sec.attempt, sub: sec.sub, start: sec.start, qs: sec.ids.map((k) => bank.find((x) => x.put === k)).filter(Boolean) }));
+      note = set.preset.note || '';
+    } else if (set.kind === 'newpat') {
+      sections = set.secs;
+      note = 'NEW PATTERN: Section A - Q1 (a)-(i), nine compulsory short answers of 5 marks (45) · Section B - any ONE of 4 long questions (15) · Section C - any ONE of 4 long questions (15).';
+    } else {
+      sections = [
+        { name: 'Section A', rule: 'attempt any four (6.25 × 4 = 25 marks)', marks: 6.25, attempt: 4, qs: set.a },
+        { name: 'Section B', rule: 'attempt any two (12.5 × 2 = 25 marks)', marks: 12.5, attempt: 2, qs: set.b },
+        { name: 'Section C', rule: 'attempt any two (12.5 × 2 = 25 marks)', marks: 12.5, attempt: 2, qs: set.c },
+      ];
+      note = 'Old PUT pattern: Section A 9 x 6.25 (attempt 4) · Section B 4 x 12.5 (attempt 2) · Section C 4 x 12.5 (attempt 2).';
+    }
+    return { sections, note };
+  }
+
+  function viewSet(key) {
+    const set = findSet(key);
+    const root = document.getElementById('app');
+    if (!set) { root.innerHTML = '<p class="expl">Set not found. <a href="#/mocks">Back to the Mock Exam Box</a></p>'; return; }
+    const sid = key.split(':')[0];
+    setTheme(sid);
+    const start = `<a class="btn primary" href="#/mocks/${encodeURIComponent(key)}">▶ Start this set as an exam</a>`;
+    const head = (sub) => `${back}<section class="mbpaper"><div class="mbbar"><div><h2>👁 ${S[sid].title} - ${esc(set.title)}</h2><p class="expl">${sub}</p></div><div class="mbtimer">${start}<button class="btn" id="vall">Show all answers</button><button class="btn" id="vprint">🖨 Print</button></div></div>`;
+    let html;
+    if (set.kind === 'mcq') {
+      html = head(`Viewing ${set.qs.length} questions - no timer, nothing is recorded. Answers stay hidden until you open them.`) + set.qs.map((m, i) => `<div class="mbm" data-i="${i}"><div class="mbqh"><b>Q${i + 1}</b><span class="mbsrc">${esc(m.u)}${m.t ? ' · ' + esc(m.t) : ''}</span></div><div class="mbqt">${esc(m.q)}</div><div class="mbopts">${m.o.map((o, k) => `<div class="mbo" data-k="${k}"><b>${'ABCD'[k]}.</b> ${esc(o)}</div>`).join('')}</div><div class="mbact"><button type="button" class="btn show">Show answer</button></div><div class="mbexp" hidden><b>Answer ${'ABCD'[m.a]}.</b> ${esc(m.e || '')}</div></div>`).join('') + '</section>';
+      root.innerHTML = html;
+      root.querySelectorAll('.mbm').forEach((el) => { el.querySelector('.show').onclick = () => { const i = +el.dataset.i, ex = el.querySelector('.mbexp'); ex.hidden = !ex.hidden; el.querySelectorAll('.mbo').forEach((o) => o.classList.toggle('good', !ex.hidden && +o.dataset.k === set.qs[i].a)); el.querySelector('.show').textContent = ex.hidden ? 'Show answer' : 'Hide answer'; }; });
+      document.getElementById('vall').onclick = (e) => { const open = e.target.dataset.o !== '1'; root.querySelectorAll('.mbm').forEach((el) => { const i = +el.dataset.i; el.querySelector('.mbexp').hidden = !open; el.querySelectorAll('.mbo').forEach((o) => o.classList.toggle('good', open && +o.dataset.k === set.qs[i].a)); el.querySelector('.show').textContent = open ? 'Hide answer' : 'Show answer'; }); e.target.dataset.o = open ? '1' : '0'; e.target.textContent = open ? 'Hide all answers' : 'Show all answers'; };
+    } else if (set.kind === 'numerical') {
+      html = head('Viewing the numericals - no timer. Open "How to solve" for the formula, working and result.') + set.qs.map((q, i) => qBlock(q, 'Q' + (i + 1), q.m + ' marks', { compulsory: true }).replace('Show model answer', 'How to solve')).join('') + '</section>';
+      root.innerHTML = html;
+    } else {
+      const { sections, note } = sectionsFor(set, sid);
+      let n = 0;
+      html = head(esc(note)) + sections.map((sec) => `<h3 class="mbsh">${esc(sec.name)} <small>${esc(sec.rule)}</small></h3>` + sec.qs.map((q, qi) => { n++; return qBlock(q, sec.sub ? '1(' + 'abcdefghi'[qi] + ')' : sec.start ? 'Q' + (sec.start + qi) : 'Q' + n, sec.marks, { compulsory: true, tag: `<span class="mbsrc">${esc((q.t || '') + (q.u ? ' · ' + q.u : ''))}</span>` }); }).join('')).join('') + '</section>';
+      root.innerHTML = html;
+    }
+    if (set.kind !== 'mcq') {
+      root.querySelectorAll('.mbq').forEach((q) => { q.querySelector('.show').onclick = () => { const a = q.querySelector('.mbans'); a.hidden = !a.hidden; q.querySelector('.show').textContent = a.hidden ? (set.kind === 'numerical' ? 'How to solve' : 'Show model answer') : 'Hide'; }; });
+      document.getElementById('vall').onclick = (e) => { const open = e.target.dataset.o !== '1'; root.querySelectorAll('.mbans').forEach((x) => { x.hidden = !open; }); e.target.dataset.o = open ? '1' : '0'; e.target.textContent = open ? 'Hide all answers' : 'Show all answers'; };
+    }
+    document.getElementById('vprint').onclick = () => {
+      const all = [...root.querySelectorAll('.mbans, .mbexp')], was = all.map((x) => x.hidden);
+      all.forEach((x) => { x.hidden = true; });
+      window.print();
+      all.forEach((x, i) => { x.hidden = was[i]; });
+    };
   }
 
   function runSet(key) {
