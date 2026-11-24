@@ -33,7 +33,7 @@
     const n = Math.max(3, Math.min(10, Math.ceil(Math.max(poolA.length / 9, poolBC.length / 8))));
     const isNew = (p) => p.id === 'newpaper';
     const realSets = real.map((p) => ({ key: id + ':' + p.id, title: p.name.replace(/^ACTUAL /, 'Actual '), kind: 'real', preset: p, tag: isNew(p) ? 'Real paper · 75 marks' : 'Old pattern paper', group: isNew(p) ? 'new' : 'old' }));
-    const newSets = window.MockGen ? window.MockGen.newPatternSets(id, bank, 8).map((s2, k) => ({ key: id + ':np' + (k + 1), title: s2.name, kind: 'newpat', secs: s2.secs, tag: '75 marks · 2 h', group: 'new' })) : [];
+    const newSets = window.MockGen ? window.MockGen.newPatternSets(id, bank, 12).map((s2, k) => ({ key: id + ':np' + (k + 1), title: s2.name, kind: 'newpat', secs: s2.secs, tag: '75 marks · 2 h', group: 'new' })) : [];
     const sets = realSets.filter((x) => x.group === 'new').concat(newSets, realSets.filter((x) => x.group === 'old'));
     for (let k = 0; k < n; k++) {
       const a = chunk(poolA, k, 9);
