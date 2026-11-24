@@ -54,33 +54,52 @@
     return out;
   }
 
+  function panicSteps(ex) {
+    const id = ex.id;
+    const out = [];
+    if (ex.kind === 'written') {
+      const k = nextSetKey(id, 'np', 12), pre = FOLDER[id];
+      out.push({ k: 'p1', t: id === 'hrm' ? 'Read the one-page quick-recall card' : 'Read the last-night sheet once', links: id === 'hrm' ? [['PDF', pdf(id, 'HRM_Quick_Recall_Card.pdf')], ['Sheet', '#/sheet/' + id]] : [['Sheet', '#/sheet/' + id], ['PDF', pdf(id, pre + '_New_Pattern_Last_Night_Sheet.pdf')]] });
+      out.push({ k: 'p2', t: 'Optional: one New Pattern set, timed (Set ' + k + ')', links: [['Start', '#/mocks/' + encodeURIComponent(id + ':np' + k)]] });
+    } else {
+      const k = nextSetKey(id, 'q50-', 20);
+      out.push({ k: 'p1', t: 'Skim the concept cards once', links: [['Cards', '#/' + id + '/concepts']] });
+      out.push({ k: 'p2', t: 'Optional: one timed set (Set ' + k + ')', links: [['Start', '#/mocks/' + encodeURIComponent(id + ':q50-' + k)]] });
+    }
+    out.push({ k: 'p3', t: 'Bag ready: admit card / ID, pens, pencil, ruler, water bottle', links: [] });
+    out.push({ k: 'p4', t: 'Reach the centre 30 minutes early; sleep and eat well', links: [] });
+    out.push({ k: 'p5', t: 'Three slow breaths - you know more than you think', links: [] });
+    return out;
+  }
+
   const QUOTES = ['Small steps today, a big score tomorrow.', 'You have already done the hard part - now just revise and breathe.', 'One paper at a time. You are ready, sweetheart.', 'Calm mind, clear handwriting, full answers.', 'Every set you finish is a mark you will not lose.'];
 
   function draw() {
     const old = document.getElementById('focuspanel');
     if (old) old.remove();
     clearInterval(tick);
-    document.body.classList.remove('focusmode');
+    document.body.classList.remove('focusmode', 'panicmode');
     const hero = document.querySelector('.hero');
     if (!hero || location.hash.replace('#', '') !== '/' && location.hash !== '' && location.hash !== '#/') return;
     const ex = nextExam();
     if (!ex) return;
     const { start, end } = window3(ex);
     const id = ex.id;
-    const list = steps(ex);
+    const panic = !!store.get('panic', false), collapsed = !!store.get('focuscol', false);
+    const list = panic ? panicSteps(ex) : steps(ex);
     const on = store.get('focusmode', true);
     const box = document.createElement('section');
     box.id = 'focuspanel';
-    box.className = 't-' + id;
+    box.className = 't-' + id + (panic ? ' panic' : '') + (collapsed ? ' collapsed' : '');
     box.innerHTML = `<div class="fp-left">
-        <span class="fp-tag">🎯 NEXT EXAM</span>
+        <div class="fp-top"><span class="fp-tag">${panic ? '🚨 EXAM MORNING MODE' : '🎯 NEXT EXAM'}</span><span class="fp-ctl"><button type="button" id="fppanic" title="Only what matters on exam morning">${panic ? '↩ Normal view' : '🚨 Exam morning mode'}</button><button type="button" id="fpcol" aria-label="${collapsed ? 'Expand' : 'Collapse'} the panel">${collapsed ? '▾ Expand' : '▴ Collapse'}</button></span></div>
         <h2>${ICON[id] || '📘'} ${esc(ex.name)}</h2>
         <p class="fp-meta">${new Date(ex.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })} · ${esc(ex.time)} · ${ex.kind === 'objective' ? '✅ MCQ' : '✍️ Written'} · ${esc(ex.dur)}</p>
         <div class="fp-count" id="fpcount" aria-label="Time left"><div><b id="fpd">--</b><span>days</span></div><div><b id="fph">--</b><span>hours</span></div><div><b id="fpm">--</b><span>min</span></div><div><b id="fps">--</b><span>sec</span></div></div>
         <p class="fp-state" id="fpstate"></p>
         <p class="fp-quote">${esc(QUOTES[Math.floor(Math.random() * QUOTES.length)])}</p>
       </div>
-      <div class="fp-right"><div class="fp-plan"><h3>Today's game plan</h3><div class="fp-bar"><i id="fpbar"></i></div><p class="fp-prog" id="fpprog"></p>
+      <div class="fp-right"><div class="fp-plan"><h3>${panic ? 'Only these matter today' : "Today's game plan"}</h3><div class="fp-bar"><i id="fpbar"></i></div><p class="fp-prog" id="fpprog"></p>
         <ul>${list.map((s) => `<li><label><input type="checkbox" data-k="${s.k}" ${isDone(id + '|' + s.k) ? 'checked' : ''}><span>${esc(s.t)}</span></label><span class="fp-links">${s.links.map((l) => `<a href="${l[1]}"${/^\.\./.test(l[1]) ? ' target="_blank" rel="noopener"' : ''}>${esc(l[0])}</a>`).join('')}</span></li>`).join('')}</ul></div>
         <div class="fp-foot"><label class="fp-switch"><input type="checkbox" id="fpfocus" ${on ? 'checked' : ''}><span></span> Focus mode - dim the other subjects</label><a class="btn solid" href="#/mocks">🎯 Mock Exam Box</a></div></div>`;
     const exl = document.getElementById('examline');
@@ -102,6 +121,13 @@
       if (t.id === 'fpfocus') { store.set('focusmode', t.checked); apply(); return; }
       if (t.dataset && t.dataset.k) { setDone(id + '|' + t.dataset.k, t.checked); prog(); }
     });
+    box.addEventListener('click', (e) => {
+      const b = e.target.closest('button');
+      if (!b) return;
+      if (b.id === 'fpcol') { store.set('focuscol', !collapsed); draw(); }
+      if (b.id === 'fppanic') { store.set('panic', !panic); draw(); }
+    });
+    document.body.classList.toggle('panicmode', panic);
     const upd = () => {
       const now = new Date();
       let ms = start - now;
@@ -120,7 +146,7 @@
     tick = setInterval(upd, 1000);
   }
 
-  addEventListener('hashchange', () => { if (!/^#\/?$/.test(location.hash) && location.hash !== '') { clearInterval(tick); document.body.classList.remove('focusmode'); } });
+  addEventListener('hashchange', () => { if (!/^#\/?$/.test(location.hash) && location.hash !== '') { clearInterval(tick); document.body.classList.remove('focusmode', 'panicmode'); } });
   // the home banner is drawn by app.js on every route to "#/"; draw after it (and after ui2/exams decorate)
   const redraw = () => setTimeout(() => { if (/^#?\/?$/.test(location.hash) && !document.getElementById('focuspanel')) draw(); }, 60);
   addEventListener('hashchange', redraw);

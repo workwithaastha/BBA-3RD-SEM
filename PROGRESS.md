@@ -237,3 +237,4 @@ Note: the date sheet lists HRM as a Core paper (written, 2 h). Agent.md had HRM 
 
 ### Phase 48 - Exam Focus panel
 - `site/js/focus.js` + `css/focus.css`: dark "mission control" card under the home banner for the NEXT exam (auto-moves on after each exam ends): live days / hours / min / sec countdown to the start time, details, "Today game plan" tick-boxes remembered per day (last-night sheet, quick-recall card for HRM, next unfinished New Pattern set with PDF, Q&A, MCQs; objective subjects get timed sets, wrong-answer review, concept cards, Daily 20), progress bar, and a Focus-mode switch that dims the other subject cards. Turns amber and pulses in the last 3 days, green while the exam is on.
+- Focus panel: Collapse button (countdown strip only) and Exam morning mode (red panel with 5 items - quick-recall card / last-night sheet, one optional set, bag, early arrival, three breaths - and hides the subject cards, exam grid and tiles). Both choices are remembered.

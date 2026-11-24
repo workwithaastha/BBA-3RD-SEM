@@ -42,3 +42,20 @@ body.focusmode .grid .scard.fp-next{box-shadow:0 0 0 2px var(--a1,#6366f1),0 18p
 @media (max-width:860px){#focuspanel{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){#focuspanel.hot{animation:none}}
 @media print{#focuspanel{display:none}}
+/* collapsible + exam-morning (panic) mode */
+.fp-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.fp-ctl{display:inline-flex;gap:6px;flex-wrap:wrap}
+.fp-ctl button{font:inherit;font-size:.76rem;font-weight:700;color:#e8ecff;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.25);border-radius:99px;padding:3px 11px;cursor:pointer}
+.fp-ctl button:hover{background:rgba(255,255,255,.22)}
+#fpcol{background:rgba(255,255,255,.04)}
+#focuspanel.collapsed{grid-template-columns:1fr;padding-top:12px;padding-bottom:12px}
+#focuspanel.collapsed .fp-right,#focuspanel.collapsed .fp-quote,#focuspanel.collapsed .fp-meta,#focuspanel.collapsed .fp-state{display:none}
+#focuspanel.collapsed h2{font-size:1.15rem;margin:2px 0}
+#focuspanel.collapsed .fp-count{margin:4px 0 0}
+#focuspanel.collapsed .fp-count div{min-width:58px;padding:5px 8px}
+#focuspanel.collapsed .fp-count b{font-size:1.4rem}
+#focuspanel.panic{border-color:#fb7185;box-shadow:0 0 0 1px rgba(255,255,255,.05) inset,0 24px 60px -22px #fb7185}
+#focuspanel.panic .fp-tag{background:#fb7185;color:#2a0a10;border-color:#fb7185}
+#focuspanel.panic .fp-foot .fp-switch{display:none}
+body.panicmode #examline,body.panicmode #qtiles,body.panicmode .grid,body.panicmode .hero~h2.sec{display:none}
+@media (max-width:860px){#focuspanel.collapsed .fp-right{display:none}}
