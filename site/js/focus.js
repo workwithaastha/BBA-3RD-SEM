@@ -26,6 +26,15 @@
   const setDone = (k, v) => { const s = doneStore(); const key = dayKey() + '|' + k; if (v) s[key] = 1; else delete s[key]; store.set('focus', s); };
   const pdf = (id, file) => '../MCQ%20pdf/' + FOLDER[id] + '/' + encodeURIComponent(file);
 
+  // Exam morning mode switches itself on 6 hours before the exam starts (until it ends) - unless you chose a mode yourself for this exam
+  const AUTO_MS = 6 * 3600000;
+  function wantPanic(ex) {
+    const pref = store.get('panicpref', null);
+    if (pref && pref.ex === ex.id) return !!pref.v;
+    const { start, end } = window3(ex), now = new Date();
+    return start - now <= AUTO_MS && now < end;
+  }
+
   function nextSetKey(id, prefix, max) {
     const saved = store.get('mockbox', {});
     for (let k = 1; k <= max; k++) if (!saved[id + ':' + prefix + k] || saved[id + ':' + prefix + k].best == null) return k;
@@ -85,14 +94,14 @@
     if (!ex) return;
     const { start, end } = window3(ex);
     const id = ex.id;
-    const panic = !!store.get('panic', false), collapsed = !!store.get('focuscol', false);
+    const panic = wantPanic(ex), collapsed = !!store.get('focuscol', false);
     const list = panic ? panicSteps(ex) : steps(ex);
     const on = store.get('focusmode', true);
     const box = document.createElement('section');
     box.id = 'focuspanel';
     box.className = 't-' + id + (panic ? ' panic' : '') + (collapsed ? ' collapsed' : '');
     box.innerHTML = `<div class="fp-left">
-        <div class="fp-top"><span class="fp-tag">${panic ? '🚨 EXAM MORNING MODE' : '🎯 NEXT EXAM'}</span><span class="fp-ctl"><button type="button" id="fppanic" title="Only what matters on exam morning">${panic ? '↩ Normal view' : '🚨 Exam morning mode'}</button><button type="button" id="fpcol" aria-label="${collapsed ? 'Expand' : 'Collapse'} the panel">${collapsed ? '▾ Expand' : '▴ Collapse'}</button></span></div>
+        <div class="fp-top"><span class="fp-tag">${panic ? '🚨 EXAM MORNING MODE' : '🎯 NEXT EXAM'}</span>${panic && !(store.get('panicpref', null) || {}).ex ? '<span class="fp-auto">switched on automatically - 6 hours to go</span>' : ''}<span class="fp-ctl"><button type="button" id="fppanic" title="Only what matters on exam morning">${panic ? '↩ Normal view' : '🚨 Exam morning mode'}</button><button type="button" id="fpcol" aria-label="${collapsed ? 'Expand' : 'Collapse'} the panel">${collapsed ? '▾ Expand' : '▴ Collapse'}</button></span></div>
         <h2>${ICON[id] || '📘'} ${esc(ex.name)}</h2>
         <p class="fp-meta">${new Date(ex.date + 'T00:00:00').toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })} · ${esc(ex.time)} · ${ex.kind === 'objective' ? '✅ MCQ' : '✍️ Written'} · ${esc(ex.dur)}</p>
         <div class="fp-count" id="fpcount" aria-label="Time left"><div><b id="fpd">--</b><span>days</span></div><div><b id="fph">--</b><span>hours</span></div><div><b id="fpm">--</b><span>min</span></div><div><b id="fps">--</b><span>sec</span></div></div>
@@ -125,7 +134,7 @@
       const b = e.target.closest('button');
       if (!b) return;
       if (b.id === 'fpcol') { store.set('focuscol', !collapsed); draw(); }
-      if (b.id === 'fppanic') { store.set('panic', !panic); draw(); }
+      if (b.id === 'fppanic') { store.set('panicpref', { ex: id, v: !panic }); draw(); }
     });
     document.body.classList.toggle('panicmode', panic);
     const upd = () => {
@@ -135,6 +144,7 @@
       if (!st) { clearInterval(tick); return; }
       if (now >= start && now < end) { ms = 0; st.textContent = '📝 The exam is on now - all the best, sweetheart!'; box.classList.add('live'); }
       else { st.textContent = ms < 3600000 * 24 ? 'Less than a day - stay calm and revise lightly.' : ''; box.classList.toggle('hot', ms < 3600000 * 72); }
+      if (wantPanic(ex) !== panic) { draw(); return; }
       ms = Math.max(0, ms);
       const s = Math.floor(ms / 1000);
       document.getElementById('fpd').textContent = pad(Math.floor(s / 86400));

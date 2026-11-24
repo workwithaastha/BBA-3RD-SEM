@@ -59,3 +59,4 @@ body.focusmode .grid .scard.fp-next{box-shadow:0 0 0 2px var(--a1,#6366f1),0 18p
 #focuspanel.panic .fp-foot .fp-switch{display:none}
 body.panicmode #examline,body.panicmode #qtiles,body.panicmode .grid,body.panicmode .hero~h2.sec{display:none}
 @media (max-width:860px){#focuspanel.collapsed .fp-right{display:none}}
+.fp-auto{font-size:.74rem;color:#fecdd3;margin-left:8px}
