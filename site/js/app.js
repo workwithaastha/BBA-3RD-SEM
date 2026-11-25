@@ -216,6 +216,7 @@ function describe(hash) {
   if (a === 'badges') return 'Badges';
   if (a === 'daily') return 'Daily 20';
   if (a === 'mocks') return 'Mock Exam Box';
+  if (a === 'easy') return 'Easy Hinglish';
   if (a === 'revision' && S[b]) return S[b].title + ' · Revision sheet';
   if (a === 'expected' && S[b]) return S[b].title + ' · Expected questions';
   if (a === 'sheet' && S[b]) return S[b].title + ' · Last-night sheet';
@@ -575,6 +576,7 @@ function routeInner() {
   if (a === 'revision') return revision(b);
   if (a === 'expected') return expected(b);
   if (a === 'mocks' && window.MockBox) return window.MockBox.page(b, parts[3]);
+  if (a === 'easy' && window.Hinglish) return window.Hinglish.page(b);
   if (a === 'sheet' && window.ExamQA) return window.ExamQA.sheet(b);
   if (b === 'files' && window.Sources) return window.Sources.page(a);
   if (b === 'quiz') return quiz(a, parts[3]);
