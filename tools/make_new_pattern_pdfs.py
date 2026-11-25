@@ -25,8 +25,8 @@ const id=process.argv[1],count=+process.argv[2];
 const bank=window.ExamQA.data[id]||[];
 const pick=(q)=>({q:q.q,a:q.a});
 const sets=window.MockGen.newPatternSets(id,bank,count).map(s=>({name:s.name,secs:s.secs.map(x=>({name:x.name,rule:x.rule,marks:x.marks,sub:!!x.sub,start:x.start||0,qs:x.qs.map(pick)}))}));
-const real=((window.ExamQA.presets||{})[id]||[]).filter(p=>p.id==='newpaper')[0];
-if(real){sets.unshift({name:'Actual',secs:real.real.map(s=>({name:s.name,rule:s.rule,marks:s.marks,sub:!!s.sub,start:s.start||0,qs:s.ids.map(k=>bank.find(x=>x.put===k)).filter(Boolean).map(pick)}))});}
+const reals=((window.ExamQA.presets||{})[id]||[]).filter(p=>p.id==='newpaper'||/^case/.test(p.id)).reverse();
+for(const real of reals){sets.unshift({name:real.id==='newpaper'?'Actual':'Case Set '+real.id.slice(4),secs:real.real.map(s=>({name:s.name,rule:s.rule,marks:s.marks,sub:!!s.sub,start:s.start||0,qs:s.ids.map(k=>bank.find(x=>x.put===k)).filter(Boolean).map(pick)}))});}
 console.log(JSON.stringify(sets));
 """
 raw = subprocess.run(["node", "-e", NODE, SID, str(COUNT)], cwd=ROOT, capture_output=True, text=True, encoding="utf-8")

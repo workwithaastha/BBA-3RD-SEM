@@ -31,8 +31,8 @@
     const poolA = shuffled(bank.filter((q) => !q.put && !q.num && [5, 6, 6.25].includes(q.m)), hash(id + 'A'));
     const poolBC = shuffled(bank.filter((q) => !q.put && (!q.num || q.m === 12.5) && [10, 12.5].includes(q.m)), hash(id + 'B'));
     const n = Math.max(3, Math.min(10, Math.ceil(Math.max(poolA.length / 9, poolBC.length / 8))));
-    const isNew = (p) => p.id === 'newpaper';
-    const realSets = real.map((p) => ({ key: id + ':' + p.id, title: p.name.replace(/^ACTUAL /, 'Actual '), kind: 'real', preset: p, tag: isNew(p) ? 'Real paper · 75 marks' : 'Old pattern paper', group: isNew(p) ? 'new' : 'old' }));
+    const isNew = (p) => p.id === 'newpaper' || /^case/.test(p.id);
+    const realSets = real.map((p) => ({ key: id + ':' + p.id, title: p.name.replace(/^ACTUAL /, 'Actual '), kind: 'real', preset: p, tag: /^case/.test(p.id) ? 'Case-style practice · 75 marks' : isNew(p) ? 'Real paper · 75 marks' : 'Old pattern paper', group: isNew(p) ? 'new' : 'old' }));
     const newSets = window.MockGen ? window.MockGen.newPatternSets(id, bank, 12).map((s2, k) => ({ key: id + ':np' + (k + 1), title: s2.name, kind: 'newpat', secs: s2.secs, tag: '75 marks · 2 h', group: 'new' })) : [];
     const sets = realSets.filter((x) => x.group === 'new').concat(newSets, realSets.filter((x) => x.group === 'old'));
     for (let k = 0; k < n; k++) {
@@ -84,7 +84,7 @@
     const s = saved()[set.key] || {};
     const k = encodeURIComponent(set.key);
     const no = /(\d+)$/.exec(set.title);
-    const badge = set.kind === 'real' ? (set.group === 'new' ? '📜' : '📋') : no ? no[1] : '•';
+    const badge = set.kind === 'real' ? (/:case/.test(set.key) ? '🧩' : set.group === 'new' ? '📜' : '📋') : no ? no[1] : '•';
     const status = s.best != null ? `<span class="mbc-st done">✔ ${esc(String(s.best))}</span>` : upNext ? '<span class="mbc-st next">Up next</span>' : '<span class="mbc-st">New</span>';
     const marks = '';
     return `<article class="mbc ${set.kind}${set.group ? ' g-' + set.group : ''}${upNext ? ' upnext' : ''}">

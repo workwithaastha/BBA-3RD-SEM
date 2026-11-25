@@ -10,8 +10,8 @@
   const unitNo = (u) => ({ 'Unit I': 1, 'Unit II': 2, 'Unit III': 3, 'Unit IV': 4 }[u] || 0);
 
   function newPatternSets(id, bank, count) {
-    const shortOK = (q) => (q.np ? q.m === 5 : !q.put && [2, 3, 5, 6, 6.25].includes(q.m));
-    const longOK = (q) => [10, 12.5, 15].includes(q.m) && !/online test/i.test(q.src || '');
+    const shortOK = (q) => !q.cs && (q.np ? q.m === 5 : !q.put && [2, 3, 5, 6, 6.25].includes(q.m));
+    const longOK = (q) => !q.cs && [10, 12.5, 15].includes(q.m) && !/online test/i.test(q.src || '');
     const group = (list, seedKey) => { const g = { 1: [], 2: [], 3: [], 4: [] }; list.forEach((q) => { const u = unitNo(q.u); if (g[u]) g[u].push(q); }); Object.keys(g).forEach((u) => { g[u] = shuffled(g[u], hash(id + seedKey + u)).map((q, i) => ({ q, i })).sort((x, y) => (y.q.p || 0) - (x.q.p || 0) || x.i - y.i).map((x) => x.q); }); return g; };  // most-predicted questions first
     const S = group(bank.filter(shortOK), 'ns');
     const Lg = group(bank.filter(longOK), 'nl');

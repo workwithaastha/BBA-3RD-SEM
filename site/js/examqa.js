@@ -108,7 +108,7 @@
     const ukey = (u) => (/^Unit/.test(u) ? ({ I: 1, II: 2, III: 3, IV: 4, V: 5, VI: 6 }[u.replace('Unit ', '')] || +u.replace('Unit ', '') || 98) : 99);
     const units = [...new Set(all.map((q) => q.u))].sort((a, b) => ukey(a) - ukey(b));
     const cnt = (m) => all.filter((q) => m.includes(q.m)).length;
-    const chips = [['', '📚', 'All', all.length], ['2', '⚡', '2 marks', cnt([2])], ['3', '✏️', '3 marks', cnt([3])], ['5,6', '📝', '5-6 marks', cnt([5, 6])], ['10', '📖', '10 marks', cnt([10])], ...(all.some((q) => q.m === 15) ? [['15', '🏆', '15 marks', cnt([15])]] : []), ['p3', '🔮', 'Most predicted', all.filter((q) => q.p === 3).length], ...(all.some((q) => q.put) ? [['put', '📋', 'PUT paper', all.filter((q) => q.put).length]] : []), ...(all.some((q) => q.num) ? [['num', '🧮', 'Numericals', all.filter((q) => q.num || /numerical/i.test(q.t)).length]] : [])];
+    const chips = [['', '📚', 'All', all.length], ['2', '⚡', '2 marks', cnt([2])], ['3', '✏️', '3 marks', cnt([3])], ['5,6', '📝', '5-6 marks', cnt([5, 6])], ['10', '📖', '10 marks', cnt([10])], ...(all.some((q) => q.m === 15) ? [['15', '🏆', '15 marks', cnt([15])]] : []), ['p3', '🔮', 'Most predicted', all.filter((q) => q.p === 3).length], ...(all.some((q) => q.put) ? [['put', '📋', 'PUT paper', all.filter((q) => q.put && !q.cs).length]] : []), ...(all.some((q) => q.num) ? [['num', '🧮', 'Numericals', all.filter((q) => q.num || /numerical/i.test(q.t)).length]] : [])];
     return `
     <section class="qahero">
       <div class="qaring" id="qaring" style="--p:0"><b id="qapct">0%</b><span>revised</span></div>
@@ -158,7 +158,7 @@
         const isDone = !!done[sig(el.dataset.i)];
         el.classList.toggle('revised', isDone);
         if (isDone) d++;
-        const okM = !f.marks || (f.marks === 'p3' ? q.p === 3 : f.marks === 'put' ? !!q.put : f.marks === 'num' ? !!(q.num || /numerical/i.test(q.t)) : f.marks.split(',').map(Number).includes(q.m));
+        const okM = !f.marks || (f.marks === 'p3' ? q.p === 3 : f.marks === 'put' ? !!q.put && !q.cs : f.marks === 'num' ? !!(q.num || /numerical/i.test(q.t)) : f.marks.split(',').map(Number).includes(q.m));
         const show = okM && (!f.unit || q.u === f.unit) && (!f.term || el.dataset.s.includes(f.term)) && !(f.hide && isDone);
         el.hidden = !show;
         el.style.display = show ? '' : 'none';

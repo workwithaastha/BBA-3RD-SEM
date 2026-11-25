@@ -120,7 +120,7 @@ def render(html, out, footer):
 OUT = ROOT / "Unit wise subject notes" / PREFIX
 OUT.mkdir(parents=True, exist_ok=True)
 for idx, label in enumerate(["Unit I", "Unit II", "Unit III", "Unit IV"], 1):
-    unit = [q for q in Q if q["u"] == label and "online test" not in str(q.get("src", "")).lower()]
+    unit = [q for q in Q if q["u"] == label and not q.get("cs") and "online test" not in str(q.get("src", "")).lower()]
     seen = set()
     longs = pick([q for q in unit if q["m"] in (10, 12.5, 15)], LONG_MAX, seen)
     shorts = pick([q for q in unit if q["m"] in (2, 3, 5)], SHORT_MAX, seen, per_topic=2)
