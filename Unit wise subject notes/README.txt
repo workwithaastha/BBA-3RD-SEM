@@ -11,3 +11,5 @@ Expanded_Notes_and_Answers PDFs (added 20-21 Nov 2026, in each subject folder) =
 
 Physical Education/  PE_Unit_I..IV and PE_Sports_and_General ... _Notes_and_MCQs_with_Answers.pdf  (rebuild: python -I tools/make_pe_unit_notes.py)
    Part A = notes of the unit, Part B = every practice MCQ of the unit with the answer and the reason, by topic. No syllabus document exists for this subject, so the unit split follows the website and the three past papers.
+
+Marketing/ also holds Marketing_Unit_1..4_Important_Questions_with_Answers.pdf (added 25 Nov 2026, new exam pattern; rebuild: python -I tools/make_unit_important.py marketing Marketing).
