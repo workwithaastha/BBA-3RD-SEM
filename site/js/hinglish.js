@@ -12,8 +12,9 @@
   const voices = () => (synth ? synth.getVoices().filter((v) => /^(en-IN|hi-IN|en[-_]IN|hi[-_]IN)/i.test(v.lang)).concat(synth.getVoices().filter((v) => /^en/i.test(v.lang) && !/IN/i.test(v.lang))) : []);
   function chosenVoice() {
     const all = voices(), name = store.get('hvoice', '');
-    return all.find((v) => v.name === name) || all.find((v) => /en.IN/i.test(v.lang)) || all.find((v) => /hi.IN/i.test(v.lang)) || all[0] || null;
+    return all.find((v) => v.name === name) || all.find((v) => /hi.IN/i.test(v.lang)) || all.find((v) => /en.IN/i.test(v.lang)) || all[0] || null;
   }
+  const rate = () => +store.get('hrate', 1.25);
   function stop() {
     token++;
     if (synth) synth.cancel();
@@ -33,8 +34,8 @@
       if (i >= parts.length) { stop(); return; }
       const u = new SpeechSynthesisUtterance(parts[i++]);
       const v = chosenVoice();
-      if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'en-IN';
-      u.rate = +store.get('hrate', 0.95);
+      if (v) { u.voice = v; u.lang = v.lang; } else u.lang = 'hi-IN';
+      u.rate = rate();
       u.onend = next;
       u.onerror = () => { if (mine === token) stop(); };
       synth.speak(u);
@@ -53,7 +54,7 @@
     if (!synth) return '<p class="hg-note">Is browser mein voice support nahi hai.</p>';
     const v = chosenVoice();
     return `<span class="hg-voice"><label>Awaaz <select class="hg-vsel">${voices().map((x) => `<option value="${esc(x.name)}"${v && x.name === v.name ? ' selected' : ''}>${esc(x.name.replace(/Microsoft |Google /, ''))} (${esc(x.lang)})</option>`).join('') || '<option value="">Default</option>'}</select></label>
-      <label>Speed <select class="hg-rate">${[0.8, 0.95, 1.1, 1.25].map((r) => `<option value="${r}"${+store.get('hrate', 0.95) === r ? ' selected' : ''}>${r}x</option>`).join('')}</select></label></span>`;
+      <label>Speed <select class="hg-rate">${[0.8, 0.95, 1.1, 1.25].map((r) => `<option value="${r}"${rate() === r ? ' selected' : ''}>${r}x</option>`).join('')}</select></label></span>`;
   };
 
   // ---------------------------------------------------------------- button on answers
